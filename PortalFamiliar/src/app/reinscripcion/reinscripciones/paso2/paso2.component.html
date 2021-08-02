@@ -1,0 +1,500 @@
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modal-form" [config]="{'keyboard': false, 'download': 0}" aria-hidden="true"  bsModal #modal="bs-modal">
+    <div class="modal-dialog-centered " style="height: 100%;">
+       <div class="modal-content" style="height: 100%">
+           <div class="modal-header">
+               <h4 class="modal-title">Vista previa (Descargue en el 3er paso)</h4>
+           </div>
+           <div class="modal-body preview" *ngIf="preview">
+               <iframe src="" frameborder="0" width="100%" height="100%"
+               ></iframe>
+           </div>
+           <div class="modal-footer controls right">
+               <button type="button" class="btn btn-default" (click)="closeContrato(1)">Cerrar</button>
+           </div>
+       </div>
+   </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <div class="widget-body">
+                <fieldset>
+                    <div class="col-sm-12" style="margin-top: 15px;">
+                        <div style="float: left;">
+                            <h5 style="float: left"> Información para contrato de fondo de orfandad </h5>
+                        </div>
+                    </div>
+                    <fieldset style="margin-top: 30px;">
+                        <div class="col-sm-12">
+                            <b>Paso 2 de 3</b>
+                            <br>
+                            <div class="col-sm-6">                                
+                                    <div class="col-4 col-sm-5 col-md-4 col-lg-4" style=" float: right; margin-top: 7px;">        
+                                        <button class="btn btn-primary btn-block" type="button" (click)="openContrato(2)">VER CONTRATO</button>
+                                    </div>
+                            </div>
+                            <div class="col-sm-12 divseparador">
+                            </div>
+                            <li>Lea detenidamente el contrato de <b>fondo de orfandad</b></li>
+                            <li>Llene la siguiente información detenidamente, ya que esta información se tomará en cuenta para el contrato</li>
+                            <li>En el paso 3 podrá imprimirlos para después entregarlos físicamente</li>
+                        </div>
+                    </fieldset>
+                    <br>
+                    <!-- Información Madre -->
+                    <hr>
+                    <div class="col-sm-12 divseparador"></div>
+                    <form [formGroup]="FormGuardar" (ngSubmit)="buscar()">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <h4>
+                                Información General (Madre)
+                            </h4>
+                        </div>
+                        <div class="col-sm-12 divseparador"></div>
+                        <div class="col-4">Seleccione o ingrese información: </div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                            <div class="group inputResponsive">
+                                <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                                [options]="Padres"
+                                labelField="nombrecompleto"
+                                valueField="padresotutoresid"
+                                (selectedOptionChange)="seleccionPadre($event, 0 )"
+                                #padreotutor
+                              >
+                                  <sui-select-option *ngFor="let option of padreotutor.filteredOptions" [value]="option"></sui-select-option>
+                              </sui-select>
+                            </div>
+                        </div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="mnombre" (click)="_httpService.inputValidateSuccess('mnombre')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Nombre</label>
+                                    <p id="mnombremassageError" class="massageError"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="mapaterno" (click)="_httpService.inputValidateSuccess('mapaterno')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Apellido Paterno</label>    
+                                    <p id="mapaternomassageError" class="massageError"></p>            
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="mamaterno" (click)="_httpService.inputValidateSuccess('mamaterno')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Apellido Materno</label>                                           
+                                    <p id="mamaternomassageError" class="massageError"></p>     
+                                </div>
+                            </div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="number" id="medad" maxlength="2" formControlName="medad" (click)="_httpService.inputValidateSuccess('medad')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Edad</label>       
+                                    <p id="medadmassageError" class="massageError"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                <input formControlName="mtel" id="mtel" [phonenumber]='{lada: 0}' [pattern]="telefonoService.GetExpresionRegularTelefonoSinLada()" (click)="_httpService.inputValidateSuccess('mtel')"> <span
+                                    class="highlight"></span> <span class="bar"></span> <label
+                                    class="MaterialLabel">Teléfono</label>
+                                    <small [hidden]="FormGuardar.controls.mtel.valid || (!FormGuardar.controls.mtel.touched && !submitted)" class="massageError">
+                                        Ingrese un teléfono válido
+                                    </small>   
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input formControlName="mcelc"  id="mcelc" [phonenumber]='{lada: 0}' [pattern]="telefonoService.GetExpresionRegularTelefonoSinLada()" (click)="_httpService.inputValidateSuccess('mcelc')"> <span
+                                    class="highlight"></span> <span class="bar"></span> <label
+                                    class="MaterialLabel">Celular</label>
+                                    <small [hidden]="FormGuardar.controls.mcelc.valid || (!FormGuardar.controls.mcelc.touched && !submitted)" class="massageError">
+                                        Ingrese un celular válido
+                                    </small>              
+                                </div>
+                            </div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="mocupacion" (click)="_httpService.inputValidateSuccess('mocupacion')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Ocupación actual</label>  
+                                        <p id="mocupacionmassageError" class="massageError"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Domicilio Madre -->
+                        <div class="col-sm-12 divseparador"></div>                    
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <h4>
+                                        Domicilio Madre
+                                    </h4>
+                                </div>
+                                <div class="col-sm-12 divseparador"></div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <small>Usar domicilio del alumno</small>
+                                    <button class="btn btn-primary btn-block" type="button" (click)="domicilioAlumno()">Domicilio del Alumno</button>
+                                </div>                               
+                                <div class="col-sm-12 divseparador"></div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive">
+                                        <input type="number" autocomplete="off" formControlName="mcp"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" 
+                                            (change)="buscarCP($event, 0)" (click)="_httpService.inputValidateSuccess('mcp')"> <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">C.P</label>
+                                        <p id="mcpmassageError" class="massageError"></p>
+                                    </div>
+                                </div>   
+                                <small>Estado:</small>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                                    [options]="mEstados"
+                                    labelField="nombre"
+                                    valueField="estadoid"
+                                    #mEstadoId
+                                    formControlName="mestado"
+                                    (click)="_httpService.inputValidateSuccess('mestado')"
+                                    (selectedOptionChange)="CambiarEstado($event, 0)"
+                                   >
+                                      <sui-select-option *ngFor="let option of mEstadoId.filteredOptions" [value]="option"></sui-select-option>
+                                  </sui-select>
+                                    <p id="mestadomassageError" class="massageError"></p>
+                                </div>
+                                <small>Ciudad:</small>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                                        formControlName="mciudad"
+                                        [options]="mCiudades"
+                                        labelField="nombre"
+                                        valueField="municipioid"
+                                        #mCiudadId
+                                        (click)="_httpService.inputValidateSuccess('mciudad')"
+                                    >
+                                        <sui-select-option *ngFor="let option of mCiudadId.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+                                    <p id="mciudadmassageError" class="massageError"></p>
+                                </div>                               
+                                <div class="col-sm-12 divseparador"></div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <small>Colonia:</small>
+                                        <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                                        formControlName="mcolonia"
+                                        [options]="mColonias"
+                                        labelField="nombre"
+                                        (click)="_httpService.inputValidateSuccess('mcolonia')"
+                                        valueField="nombre"
+                                        #mColoniaId
+                                        (selectedOptionChange)="cambioColonia($event, 0)"
+                                    >
+                                        <sui-select-option *ngFor="let option of mColoniaId.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+                                    <p id="mcoloniamassageError" class="massageError"></p> 
+                                </div> 
+                                <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small> 
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive">
+                                        <input formControlName="mcalle" oninput="this.value = this.value.toLowerCase()" class='text-capitalize'  type="text" id="mcalleD" maxlength="44" (click)="_httpService.inputValidateSuccess('mcalle')"> <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">Calle</label>
+                                        <p id="mcallemassageError" class="massageError"></p>
+                                    </div>
+                                </div>  
+                                <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small> 
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive">
+                                        <input type="number" formControlName="mnumex" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5" 
+                                            (click)="_httpService.inputValidateSuccess('mnumex')"> <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">Número exterior</label>
+                                        <p id="mnumexmassageError" class="massageError"></p>                                    
+                                    </div>                                
+                                </div>                                 
+                                <div class="col-sm-12 divseparador"></div> 
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive" id="mdivColonia" style="display: none;">
+                                        <input oninput="this.value = this.value.toLowerCase()" class='text-capitalize' type="text" id="otraColonia" maxlength="44"
+                                            formControlName="motracolonia" (click)="_httpService.inputValidateSuccess('motracolonia')" > <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">Colonia</label>
+                                        <p id="motracoloniamassageError" class="massageError"></p>
+                                    </div>
+                                </div> 
+                                <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small> 
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive">
+                                        <input type="text" formControlName="mnumint" (click)="_httpService.inputValidateSuccess('mnumint')" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                            maxlength = "5" > <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">Número interior</label>
+                                        <p id="mnumintmassageError" class="massageError"></p>
+                                    </div>
+                                </div>                                                  
+                        </div>    
+                        <div class="col-sm-12 divseparador"></div>
+                        <div class="col-sm-12 divseparador"></div>
+                        <!-- Información Padre / Tutor -->
+                        <hr>
+                        <div class="col-sm-12 divseparador"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <h4>
+                                    Información General (Padre / Tutor)
+                                </h4>
+                            </div>
+                            <div class="col-2">Seleccione o ingrese información: </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                                    [options]="Padres"
+                                    labelField="nombrecompleto"
+                                    valueField="padresotutoresid"
+                                    (selectedOptionChange)="seleccionPadre($event, 1)"
+                                    #padreotutor2
+                                    >
+                                      <sui-select-option *ngFor="let option of padreotutor2.filteredOptions" [value]="option"></sui-select-option>
+                                  </sui-select>                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="potnombre" (click)="_httpService.inputValidateSuccess('potnombre')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Nombre</label>       
+                                        <p id="potnombremassageError" class="massageError"></p>
+                                                        
+                                </div>
+                            </div>   
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="potapaterno" (click)="_httpService.inputValidateSuccess('potapaterno')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Apellido Paterno</label>
+                                    <p id="potapaternomassageError" class="massageError"></p>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="potamaterno" (click)="_httpService.inputValidateSuccess('potamaterno')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Apellido Materno</label>
+                                    <p id="potamaternomassageError" class="massageError"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="number" id="potedad" maxlength="2" formControlName="potedad" (click)="_httpService.inputValidateSuccess('potedad')" > 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Edad</label>
+                                        <p id="potedadmassageError" class="massageError"></p>
+                                                
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input formControlName="pottel" id="pottel" [phonenumber]='{lada: 0}' [pattern]="telefonoService.GetExpresionRegularTelefonoSinLada()" (click)="_httpService.inputValidateSuccess('pottel')"> <span
+                                    class="highlight"></span> <span class="bar"></span> <label
+                                    class="MaterialLabel">Teléfono</label>
+                                    <small [hidden]="FormGuardar.controls.pottel.valid || (!FormGuardar.controls.pottel.touched && !submitted)" class="massageError">
+                                        Ingrese un teléfono válido
+                                    </small>                     
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input formControlName="potcelc" id="potcelc"  [phonenumber]='{lada:0}' [pattern]="telefonoService.GetExpresionRegularTelefonoSinLada()" (click)="_httpService.inputValidateSuccess('potcelc')" > <span
+                                    class="highlight"></span> <span class="bar"></span> <label
+                                    class="MaterialLabel">Celular</label>
+                                    <small [hidden]="FormGuardar.controls.potcelc.valid || (!FormGuardar.controls.potcelc.touched && !submitted)" class="massageError">                          
+                                        Ingrese un celular válido
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="potocupacion" (click)="_httpService.inputValidateSuccess('potocupacion')"> 
+                                    <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Ocupación actual</label>    
+                                    <p id="potocupacionmassageError" class="massageError"></p>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <sui-select style="width: 100%;" class="selection" placeholder="Parentesco"
+                                    name="potparentesco"
+                                    [options]="Parentesco"
+                                    labelField="descripcion"
+                                    valueField="tutorid"
+                                    #parentesco
+                                    formControlName="potparentesco"
+                                    (click)="_httpService.inputValidateSuccess('potparentesco')"
+                                >
+                                    <sui-select-option *ngFor="let option of parentesco.filteredOptions" [value]="option"></sui-select-option> 
+                                </sui-select>
+                                    <p id="potparentescomassageError" class="massageError"></p>
+                                </div>
+                            </div>                        
+                        </div>
+
+                        <!-- Domicilio Paadre / tutor -->
+                        <div class="col-sm-12 divseparador"></div>                    
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <h4>
+                                        Domicilio Padre / Tutor
+                                    </h4>
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <button class="btn btn-primary btn-block" type="button" (click)="copiarDomicilio()">COPIAR DOMICILIO</button>
+                                </div>                               
+                                <div class="col-sm-12 divseparador"></div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive">
+                                        <input type="number" autocomplete="off" (change)="buscarCP($event, 1)" formControlName="potcp" id="cpD2"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "6" 
+                                            (click)="_httpService.inputValidateSuccess('potcp')"> <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">C.P</label>
+                                        <p id="potcpmassageError" class="massageError"></p>
+                                    </div>
+                                </div>                               
+                                <small>Estado:</small>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                                    [options]="potEstados"
+                                    labelField="nombre"
+                                    valueField="estadoid"
+                                    #potEstadoId
+                                    formControlName="potestado"
+                                    (selectedOptionChange)="CambiarEstado($event, 1)"
+                                    (click)="_httpService.inputValidateSuccess('potestado')"
+                                   >
+                                      <sui-select-option *ngFor="let option of potEstadoId.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+                                    <p id="potestadomassageError" class="massageError"></p>
+                                </div>
+                                <small>Ciudad:</small>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                                        formControlName="potciudad"
+                                        [options]="potCiudades"
+                                        labelField="nombre"
+                                        valueField="municipioid"
+                                        #potCiudadId
+                                        (click)="_httpService.inputValidateSuccess('potciudad')"
+                                    >
+                                        <sui-select-option *ngFor="let option of potCiudadId.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+                                    <p id="potciudadmassageError" class="massageError"></p>
+                                </div>                               
+                                <div class="col-sm-12 divseparador"></div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <small>Colonia:</small>
+                                        <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                                        formControlName="potcolonia"
+                                        [options]="potColonias"
+                                        labelField="nombre"
+                                        valueField="nombre"
+                                        #potColoniaId
+                                        (selectedOptionChange)="cambioColonia($event, 1)"
+                                        (click)="_httpService.inputValidateSuccess('potcolonia')"
+                                    >
+                                        <sui-select-option *ngFor="let option of potColoniaId.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+                                    <p id="potcoloniamassageError" class="massageError"></p> 
+                                </div> 
+                                <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small> 
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive">
+                                        <input oninput="this.value = this.value.toLowerCase()" class='text-capitalize'  type="text" id="potcalleD" maxlength="44" formControlName="potcalle" (click)="_httpService.inputValidateSuccess('potcalle')"> <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">Calle</label>
+                                        <p id="potcallemassageError" class="massageError"></p>
+                                    </div>
+                                </div>  
+                                <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small> 
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive">
+                                        <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "5"
+                                            formControlName="potnumex" (click)="_httpService.inputValidateSuccess('potnumex')"> <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">Número exterior</label>
+                                        <p id="potnumexmassageError" class="massageError"></p>                                    
+                                    </div>                                
+                                </div>
+                                <div class="col-sm-12 divseparador"></div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive" id="potdivColonia" style="display: none;">
+                                        <input oninput="this.value = this.value.toLowerCase()" class='text-capitalize' id="otraColonia" type="text" maxlength="44"
+                                            formControlName="pototracolonia" (click)="_httpService.inputValidateSuccess('pototracolonia')" > <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">Colonia</label>
+                                        <p id="pototracoloniamassageError" class="massageError"></p>
+                                    </div>
+                                </div>
+                                <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small> 
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                    <div class="group inputResponsive">
+                                        <input type="text" id="potnumin" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                                            formControlName="potnumint"
+                                            maxlength = "5" (click)="_httpService.inputValidateSuccess('potnumint')"> <span
+                                            class="highlight"></span> <span class="bar"></span> <label
+                                            class="MaterialLabel">Número interior</label>
+                                        <p id="potnumintmassageError" class="massageError"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 divseparador">
+                                </div>
+                                <div class="col-sm-12 divseparador">
+                                </div>
+                                <div class="row">
+                                    <div class="col-2 col-sm-5 col-md-7 col-lg-7">
+                                    </div>
+                                    <div class="col-4 col-sm-3 col-md-2 col-lg-2" style=" float: left; margin-top: 7px;">
+                                        <button class="btn btn-default btn-block" type="button" (click)="cancelar()">ANTERIOR</button>
+                                    </div>
+                                    <div class="col-4 col-sm-3 col-md-2 col-lg-2" style="float: right; margin-top: 7px;">
+                                        <button class="btn principal btn-block" type="button" (click)="siguiente()">SIGUIENTE</button>
+                                    </div>                            
+                                </div>                              
+                    </div>
+                    </form>
+                </fieldset>
+            </div>
+            <div class="col-sm-12 divseparador">
+            </div>
+            <div class="col-sm-12 divseparador">
+            </div>
+            <hr>                    
+            <label class="footerhide" style="margin-bottom: .0rem !important; padding: 0px !important;">
+                Consulte el aviso de privacidad                        
+            </label>
+            <br>
+            <a class="footerhide" href="{{privacidad}}" target="_blank" style="margin-top: -10px !important;">https://www.pereyra.edu.mx/aviso-de-privacidad/</a>
+        </section>
+    </div>
+</div>

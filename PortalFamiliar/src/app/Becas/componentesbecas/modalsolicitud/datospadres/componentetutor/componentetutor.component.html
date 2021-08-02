@@ -1,0 +1,438 @@
+
+<legend></legend>
+
+<form [formGroup]="DatosPadres" >
+    <!-- Parentesco -->
+    <div class="row">
+        <div class="col-12" *ngIf="padres.parentesco">
+            <h4>{{padres.parentesco}}</h4>
+        </div>
+        
+            <div class="col-sm-4" *ngIf="!padres.parentesco">
+            <small>Parentesco</small>
+            <sui-select style="width: 100%; max-width: 100% !important;" class="selection" formControlName="parentescoid"
+                        placeholder="Parentesco" [options]="selectParentesco"  labelField="descripcion" valueField="parentescoid"
+                        #parentescoselect required>
+                <div class="divider" style="border-color: transparent"></div>
+                <div class="ui icon search input">
+                    <i class="search icon"></i>
+                    <input suiSelectSearch type="text">
+                </div>
+                <sui-select-option *ngFor="let option of parentescoselect.filteredOptions" [value]="option"></sui-select-option>
+            </sui-select>
+            <small [hidden]="DatosPadres.controls.parentescoid.valid || (DatosPadres.controls.parentescoid.pristine && !submitted)"
+                style="color: red">
+                Debe seleccionar parentesco
+            </small>
+        </div>
+
+
+
+    </div>
+
+    <div class="divider16"></div>
+
+    <div class="rowSeperadorSelect"></div>
+
+    <!-- Padre/tutor -->
+    <!-- nombre completo padre -->
+    <div class="row">
+
+        <!-- Nombre (label) -->
+        <div class="col-sm-8" style="margin-top: 22px;" *ngIf="sistema==2">
+            <div class="group">
+                <input type="text" required  formControlName="nombre" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(DatosPadres.controls.nombre)">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Nombre</label>
+            </div>
+            <small [hidden]="DatosPadres.controls.nombre.valid || (DatosPadres.controls.nombre.pristine && !submitted)"
+                style="color: red" *ngIf="DatosPadres.controls.disabled.value == false">
+                Introduzca un nombre
+        </small>
+    </div>
+
+    <div class="col-sm-4" style="margin-top: 22px;" *ngIf="sistema==1">
+        <div class="group">
+            <input type="text" required  formControlName="nombre" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(DatosPadres.controls.nombre)">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class="MaterialLabel">Nombre</label>
+        </div>
+        <small [hidden]="DatosPadres.controls.nombre.valid || (DatosPadres.controls.nombre.pristine && !submitted)"
+            style="color: red" *ngIf="DatosPadres.controls.disabled.value == false">
+            Introduzca un nombre
+    </small>
+</div>
+<div class="col-sm-4"  *ngIf="sistema==1">
+    <small>
+        Fecha de nacimiento
+    </small>
+    <div class="group">
+        <my-date-picker formControlName="fechanacimiento" placeholder="Fecha de nacimiento"></my-date-picker>
+        <small [hidden]="DatosPadres.controls.fechanacimiento.valid || (DatosPadres.controls.fechanacimiento.pristine && !submitted)"
+            style="color: red">
+            Seleccione fecha de nacimiento
+        </small>
+    </div>
+
+</div>
+
+
+<div class="rowSeperador hidden-sm-up"></div>
+
+<!-- Vive -->
+<div class="col-sm-4">
+    <small>Vive</small>
+    <sui-select style="width: 100%; max-width: 100% !important;" id="vive{{DatosPadres.controls.idvive.value}}" class="selection" formControlName="vive"
+                placeholder="Vive" [options]="selectOpciones" [isDisabled]="!DatosPadres.controls.disabled.value"  labelField="nombre" valueField="id"
+                #viveselect required>
+        <div class="divider" style="border-color: transparent"></div>
+        <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input suiSelectSearch type="text">
+        </div>
+        <sui-select-option *ngFor="let option of viveselect.filteredOptions" [value]="option"></sui-select-option>
+    </sui-select>
+    <small [hidden]="DatosPadres.controls.vive.valid || (DatosPadres.controls.vive.pristine && !submitted)"
+        style="color: red" *ngIf="DatosPadres.controls.disabled.value">
+        Debe seleccionar una opción
+    </small>
+</div>
+
+</div>
+
+<div class="rowSeperador hidden-md-up"></div>
+<div class="rowSeperadorSelect hidden-sm-dowm"></div>
+
+<div class="row">
+    <!-- lada celular -->
+    <div class="col-lg-2 col-md-2 col-4">
+
+        <div class="margenTopSelect hidden-sm-down"></div>
+        <table>
+            <tbody>
+                <tr>
+                    <td> 
+                        <div class="group">
+                            <input required formControlName="ladacelular" lada #lada1>
+                                   <span class="highlight">
+                            </span> <span class="bar"></span>
+                            <label class="MaterialLabel">Lada</label>
+                        </div>
+                        <small [hidden]="DatosPadres.controls.ladacelular.valid || (DatosPadres.controls.ladacelular.pristine && !submitted)"  style="color: red" >
+                            Introduzca una lada valida
+                        </small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- celular -->
+    <div class="col-lg-2 col-md-4 col-8">
+
+        <div class="margenTopSelect hidden-sm-down"></div>
+
+        <div class="group">
+            <input required [phonenumber]="{lada: lada1.value}" formControlName="celtemp">
+                   <span class="highlight"></span> <span class="bar"></span>
+            <label class="MaterialLabel">Celular</label>
+        </div>
+        <small [hidden]="DatosPadres.controls.celtemp.valid || (DatosPadres.controls.celtemp.pristine && !submitted)"  style="color: red" >
+            Introduzca un número de celular
+        </small>
+    </div>
+
+    <div class="rowSeperadorSelect hidden-md-up" ></div>
+
+    <!-- Estado civil -->
+    <div class="col-lg-4 col-md-6">
+
+        <label class="MaterialLabel labelSelect">
+            Estado civil
+        </label>
+
+        <div class="margenTopSelect"></div>
+
+        <div class="group">
+            <sui-select style="width: 100%; max-width: 100% !important;" class="selection" formControlName="situacionconyugalid"
+                        placeholder="Estado civil" [options]="estadocivil" labelField="descripcion" valueField="situacionconyugalid"
+                        #civilselect required>
+                <div class="divider" style="border-color: transparent"></div>
+                <div class="ui icon search input">
+                    <i class="search icon"></i>
+                    <input suiSelectSearch type="text">
+                </div>
+                <sui-select-option *ngFor="let option of civilselect.filteredOptions" [value]="option"></sui-select-option>
+            </sui-select>
+        </div>
+        <small [hidden]="DatosPadres.controls.situacionconyugalid.valid || (DatosPadres.controls.situacionconyugalid.pristine && !submitted)"  style="color: red" >
+            Debe seleccionar el estado civil
+        </small>
+    </div>
+</div>
+
+
+<div class="rowSeperador" [hidden]="sistema == 2" ></div>
+
+
+<div class="row" [hidden]="sistema == 2" >
+    <div class="col-sm-12">
+        <div >
+
+            <p style="color: #CB0036;">Ocupación</p>
+
+            <div class="row">
+
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group">
+                    <div class="group">
+                        <label class="radio">
+                            <input id="ocupaciontutor1" type="radio" name="ocupacion" value="Hogar"
+                                   formControlName="ocupacion">
+                            <span class="outer" style="margin-top: -5px;">
+                                <span class="inner"></span>
+                            </span>
+                            Hogar
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group">
+                    <div class="group">
+                        <label class="radio">
+                            <input id="ocupaciontutor2" type="radio" name="ocupacion" value="Desempleado"
+                                   formControlName="ocupacion">
+                            <span class="outer" style="margin-top: -5px;">
+                                <span class="inner"></span>
+                            </span>
+                            Desempleado
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group">
+                    <div class="group">
+                        <label class="radio">
+                            <input id="ocupaciontutor3" type="radio" name="ocupacion" value="Económicamente activo"
+                                   formControlName="ocupacion">
+                            <span class="outer" style="margin-top: -5px;">
+                                <span class="inner"></span>
+                            </span>
+                            Económicamente activo
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <small [hidden]="DatosPadres.controls.ocupacion.valid || (!submitted)" style="color: red">
+                Seleccione una opción
+            </small>
+        </div>
+    </div>
+</div>
+
+<!-- datos de la ocupación -->
+<div [hidden]="DatosPadres.controls.ocupacion.value != 'Económicamente activo' && sistema == 1">
+    <div class="rowSeperador"></div>
+    <div class="row">
+        <!-- ocupación -->
+        <div class="col-12 col-md-6 col-sm-12 col-lg-4">
+            <div class="group">
+                <input type="text" required formControlName="especificacionocupacion" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(DatosPadres.controls.especificacionocupacion)">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Ocupación</label>
+            </div>
+
+            <small [hidden]="DatosPadres.controls.especificacionocupacion.valid || (DatosPadres.controls.especificacionocupacion.pristine && !submitted)"  style="color: red" >
+                Introduzca una ocupación
+            </small>
+        </div>
+
+        <div class="rowSeperador hidden-md-up"></div>
+
+        <!-- Puesto -->
+        <div class="col-12 col-md-6 col-sm-12 col-lg-4">
+            <div class="group">
+                <input type="text" required formControlName="ramo" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(DatosPadres.controls.ramo)">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Puesto</label>
+            </div>
+
+            <small [hidden]="DatosPadres.controls.ramo.valid || (DatosPadres.controls.ramo.pristine && !submitted)"  style="color: red" >
+                Introduzca un puesto
+            </small>
+        </div>
+
+        <div class="rowSeperador hidden-lg-up"></div>
+
+        <!-- Lugar de trabajo -->
+        <div class="col-12 col-md-6 col-sm-12 col-lg-4" *ngIf="sistema == 1">
+            <div class="group">
+                <sui-select style="width: 100%; max-width: 100% !important;" class="selection" formControlName="escolaridadid"
+                            placeholder="Escolaridad" [options]="escolaridad" labelField="descripcion" valueField="escolaridadid"
+                            #schoolselect required>
+                    <div class="divider" style="border-color: transparent"></div>
+                    <div class="ui icon search input">
+                        <i class="search icon"></i>
+                        <input suiSelectSearch type="text">
+                    </div>
+                    <sui-select-option *ngFor="let option of schoolselect.filteredOptions" [value]="option"></sui-select-option>
+                </sui-select>
+            </div>
+            <small [hidden]="DatosPadres.controls.escolaridadid.valid || (DatosPadres.controls.escolaridadid.pristine && !submitted)"  style="color: red" >
+                Debe seleccionar una escolaridad
+            </small>
+        </div>
+
+        <div class="rowSeperador hidden-md-down"></div>
+        <div class="rowSeperador hidden-md-up"></div>
+
+        <div class="col-12 col-md-6 col-sm-12 col-lg-4 ">
+            <div class="group">
+                <input type="text" required formControlName="empresa" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(DatosPadres.controls.empresa)">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Empresa</label>
+            </div>
+            <small [hidden]="DatosPadres.controls.empresa.valid || (DatosPadres.controls.empresa.pristine && !submitted)"  style="color: red" >
+                Introduzca un lugar de trabajo
+            </small>
+        </div>
+
+        <div class="rowSeperador hidden-lg-up"></div>
+
+        <div class="col-12 col-md-6 col-sm-12 col-lg-4" *ngIf="sistema == 1">
+            <div class="group">
+                <input type="text" required formControlName="nombrejefeinmediato" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(DatosPadres.controls.nombrejefeinmediato)">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Jefe inmediato</label>
+            </div>
+            <small [hidden]="DatosPadres.controls.nombrejefeinmediato.valid || (DatosPadres.controls.nombrejefeinmediato.pristine && !submitted)"  style="color: red" >
+                Introduzca un nombre
+            </small>
+        </div>
+
+        <div class="rowSeperador hidden-md-up"></div>
+
+        <div class="col-12 col-md-6 col-sm-12 col-lg-4" *ngIf="sistema == 1">
+            <div class="group">
+                <input type="text" required formControlName="domicilioempresa" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(DatosPadres.controls.domicilioempresa)">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Domicilio empresa</label>
+            </div>
+            <small [hidden]="DatosPadres.controls.domicilioempresa.valid || (DatosPadres.controls.domicilioempresa.pristine && !submitted)"  style="color: red" >
+                Introduzca un domicilio
+            </small>
+        </div>
+
+    </div>
+
+
+    <div class="rowSeperador "></div>
+    <!-- horario, antigüedad y estado civil -->
+    <div class="row">
+        <!-- Horario -->
+        <div class="col-12 col-md-6 col-sm-12 col-lg-4 ">
+
+            <div class="group">
+                <input type="text" required formControlName="horariotrabajo">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Horario de trabajo</label>
+            </div>
+            <small [hidden]="DatosPadres.controls.horariotrabajo.valid || (DatosPadres.controls.horariotrabajo.pristine && !submitted)"  style="color: red" >
+                Introduzca un horario de trabajo
+            </small>
+        </div>
+
+        <div class="rowSeperador hidden-md-up"></div>
+
+        <!-- Antigüedad -->
+        <div class="col-12 col-md-6 col-sm-12 col-lg-4 ">
+
+            <div class="group">
+                <input type="text" required formControlName="antiguedad">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Antigüedad</label>
+            </div>
+            <small [hidden]="DatosPadres.controls.antiguedad.valid || (DatosPadres.controls.antiguedad.pristine && !submitted)"  style="color: red" >
+                Introduzca la antigüedad
+            </small>
+        </div>
+
+    </div>
+
+    <div class="rowSeperador"></div>
+
+    <!-- celular y teléfono de la oficina -->
+    <div class="row">
+
+        <!-- lada teléfono de oficina -->
+        <div class="col-lg-2 col-md-2 col-4">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> 
+                            <div class="group">
+                                <input required formControlName="ladatelempresa" lada #lada2>
+                                       <span class="highlight">
+                                </span> <span class="bar"></span>
+                                <label class="MaterialLabel">Lada</label>
+                            </div>
+                            <small [hidden]="DatosPadres.controls.ladatelempresa.valid || (DatosPadres.controls.ladatelempresa.pristine && !submitted)"  style="color: red" >
+                                Introduzca una lada valida
+                            </small></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- -->
+        </div>
+
+        <!-- tel oficina -->
+        <div class="col-lg-2 col-md-4 col-8">
+
+            <div class="group">
+                <input required [phonenumber]="{lada: lada2.value}" formControlName="telempresatemp">
+                       <span class="highlight"></span> <span class="bar"></span>
+                <label class="MaterialLabel">Tel.oficina</label>
+            </div>
+            <small [hidden]="DatosPadres.controls.telempresatemp.valid || (DatosPadres.controls.telempresatemp.pristine && !submitted)"  style="color: red" >
+                Introduzca un teléfono valido
+            </small>
+        </div>
+
+        <div class="rowSeperador hidden-md-up"></div>
+
+        <!-- extención -->
+        <div class="col-lg-4 col-md-6 col-4">
+
+            <div class="group">
+                <input type="text" required formControlName="extensionempresa">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel">Extensión</label>
+            </div>
+            <small [hidden]="DatosPadres.controls.extensionempresa.valid || (DatosPadres.controls.extensionempresa.pristine && !submitted)"  style="color: red" >
+                Introduzca una extensión
+            </small>
+        </div>
+    </div>
+
+
+</div>
+<p style="height: 5px"></p>
+<button class=" btnGeneral btn-sm"  (click)="datopadre.removePersonaAporta(index);" *ngIf="!DatosPadres.controls.disabled.value" >
+    <span class="fa fa-plus"></span>
+    <span style="margin-left: 5px"> Eliminar </span>
+</button>
+
+</form>
+
+<div class="divider16"></div>
+<div class="divider16"></div>

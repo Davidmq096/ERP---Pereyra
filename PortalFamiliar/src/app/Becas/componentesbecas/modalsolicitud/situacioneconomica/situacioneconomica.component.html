@@ -1,0 +1,883 @@
+<style>
+    .label-control {
+        padding-top: 7px;
+    }
+
+    .bordeado {
+        width: 110px;
+        border: 2px solid black;
+        text-align: center;
+        border-radius: 3px;
+        padding: 16px 8px;
+    }
+
+    .squarePDF {
+        width: 110px;
+        display: inline-block;
+        margin-bottom: 16px;
+    }
+
+    .pdfdictamen {
+        background-image: url('./assets/img/pdf.png');
+        width: 125px;
+        height: 100px;
+        background-repeat: no-repeat !important;
+        background-size: 50% 50%;
+        margin-top: 25px;
+        margin-left: 25px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget beca">
+            <div class="widget-body" [ngClass]="parametrosModal.configpestana.situacioneconomica.editable ? '' : 'soloLectura'">
+
+                <!-- título -->
+                <header>
+                    <h3>Situación económica</h3>
+                </header>
+                <div class="divider16"></div>
+                <div class="widget-body">
+                    <legend></legend>
+                    <form [formGroup]="formulario" (ngSubmit)="guardar()">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Ingresos familiares mensuales</h4>
+                                <label *ngIf="sistema==2" style="font-size: small">(Promedio mensual neto +
+                                    prestaciones)</label>
+                            </div>
+                        </div>
+                        <div class="divider16"></div>
+
+                        <div formGroupName="ingresos" *ngIf="sistema==2">
+                            <!-- Ingresos sistema 2-->
+                            <div class="row">
+                                <!-- Ingreso padre -->
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="group">
+                                        <input type="text" required formControlName="ingresospadre" currencyMask
+                                               [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                               <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Ingresos del Padre</label>
+                                    </div>
+                                    <small [hidden]="formulario.controls.ingresos.controls.ingresospadre.valid || (formulario.controls.ingresos.controls.ingresospadre.pristine && !submitted)"
+                                        style="   color: red">
+                                        Introducir el ingreso del padre
+                                    </small>
+                                </div>
+                                <div class="rowSeperador hidden-lg-up"></div>
+                                <!-- Ingreso madre -->
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="group">
+                                        <input type="text" required formControlName="ingresosmadre" currencyMask
+                                               [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                               <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Ingresos de la madre</label>
+                                    </div>
+                                    <small [hidden]="formulario.controls.ingresos.controls.ingresosmadre.valid || (formulario.controls.ingresos.controls.ingresosmadre.pristine && !submitted)"
+                                        style="   color: red">
+                                        Introducir el ingreso de la madre
+                                    </small>
+
+                                </div>
+                                <div class="rowSeperador hidden-sm-up"></div>
+                                <!-- Otros familiares -->
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="group">
+                                        <input type="text" required formControlName="otrosfamiliares" currencyMask
+                                               [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                               <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Otros familiares</label>
+                                    </div>
+                                    <small [hidden]="formulario.controls.ingresos.controls.otrosfamiliares.valid || (formulario.controls.ingresos.controls.otrosfamiliares.pristine && !submitted)"
+                                        style="   color: red">
+                                        Introducir el ingreso de otros familiares
+                                    </small>
+                                </div>
+                                <div class="rowSeperador hidden-sm-up"></div>
+                                <!-- Otros ingresos-->
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="group">
+                                        <input type="text" required formControlName="otrosingresos" currencyMask
+                                               [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                               <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Otros ingresos</label>
+                                    </div>
+                                    <small [hidden]="formulario.controls.ingresos.controls.otrosingresos.valid || (formulario.controls.ingresos.controls.otrosingresos.pristine && !submitted)"
+                                        style="   color: red">
+                                        Introducir otros ingresos
+                                    </small>
+                                </div>
+                            </div>
+                            <div *ngIf="sistema==2" class="divider16"></div>
+                            <div *ngIf="sistema==2" class="divider16"></div>
+                            <div *ngIf="sistema==2" class="row">
+                                <!-- total ingresos -->
+                                <div class="col col-md-6">
+                                    <div class="group" align="right" style="margin-top:15px">
+                                        <label align="right">TOTAL DE INGRESOS</label>
+                                    </div>
+                                </div>
+                                <div class="col col-md-2">
+                                    <div class="group">
+                                        <input type="text" [(ngModel)]="totalingreso" [ngModelOptions]="{standalone: true}"
+                                               currencyMask [options]="{prefix: '$ ', thousands: ',', decimal: '.', precision:0 }"
+                                               disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="divider16"></div>
+                            <div class="divider16"></div>
+                            <!-- Fin Ingresos sistema 2 -->
+                        </div>
+
+
+
+                        <div formGroupName="ingresos" *ngIf="sistema==1">
+                            <ingresosmensuales *ngFor="let item of formulario.controls.ingresos.controls; let i=index; trackBy: trackById;"
+                                [ingresos]=item [parametrosModal]="parametrosModal" [sistema]="sistema" [submitted]="submitted" [solicitudid]="parametrosModal.solicitudid"
+                                (output)="familiaresdirectos($event)">
+                        </ingresosmensuales>
+                    </div>
+                    <div class="divider16"></div>
+
+                    <div class="divider16" *ngIf="sistema==1"></div>
+
+                    <div *ngIf="sistema==1" class="row">
+                        <!-- total ingresos -->
+                        <div class="col col-md-6">
+                            <div class="group" align="right" style="margin-top:15px">
+                                <label align="right">TOTAL DE INGRESOS</label>
+                            </div>
+                        </div>
+                        <div class="col col-md-2">
+                            <div class="group">
+                                <input type="text" [(ngModel)]="totalingreso" [ngModelOptions]="{standalone: true}"
+                                       currencyMask [options]="{prefix: '$ ', thousands: ',', decimal: '.' }"
+                                       disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal" formGroupName="egresos">
+                        <!-- Egresos ciencias -->
+                        <div class="row" *ngIf="sistema==2">
+                            <div class="col-12">
+                                <h4>Egresos familiares</h4>
+                                <label style="font-size: small">(Promedio mensual)</label>
+                            </div>
+                        </div>
+
+                        <div class="divider16"></div>
+                        <div class="row" *ngIf="sistema==2">
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" required formControlName="egresosfamiliares" currencyMask
+                                           [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Egresos familiares</label>
+                                </div>
+                                <small [hidden]="formulario.controls.egresos.controls.egresosfamiliares.valid || (formulario.controls.egresos.controls.egresosfamiliares.pristine && !submitted)"
+                                    style="   color: red">
+                                    Introducir el egreso de otros familiares
+                                </small>
+                            </div>
+                        </div>
+                        <!--Fin Egresos ciencias -->
+                        <!-- sección título -->
+                        <div class="row" *ngIf="sistema==1">
+                            <div class="col-12">
+                                <h4>Egresos familiares mensuales</h4>
+                                <label style="font-size: small">(Promedio mensual)</label>
+                            </div>
+                        </div>
+                        <div class="divider16"></div>
+                        <div class="divider16"></div>
+                        <!--seccion para lux-->
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- Ingreso padre -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="alimentacion" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Alimentación</label>
+                                </div>
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- Otros ingresos padre -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="mantenimientoautos" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Mantenimiento auto(s)</label>
+                                </div>
+
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- Ingreso madre -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="gastosdiversion" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Gastos de diversión</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- Ingreso renta -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="renta" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Renta</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- Otros ingresos telefono fijo -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="telefonofijo" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Teléfono fijo</label>
+                                </div>
+
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- Ingreso inscripciones colegios -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="inscripcioncolegios" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Inscripciones colegios(dividir entre 12)</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- hipoteca -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="hipoteca" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Hipoteca</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- telefono mmovil -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="telefonomovil" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Teléfono móvil</label>
+                                </div>
+
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- colegiaturas-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="colegiaturas" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Colegiaturas</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- Ingreso padre -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="predial" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Predial (dividir entre 12)</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!--Sky, Dish, Megacable, etc -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="television" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Sky, Dish, Megacable, etc</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- Seguro de vida-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="segurovida" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Seguro de vida</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- Empleada domestica -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="empleadadomestica" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Empleada doméstica</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- Gas-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="gas" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Gas</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- Seguro de auto(s) -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="seguroautos" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Seguro de auto(s)</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- Gastos médicos -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="gastosmedicos" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Gastos médicos</label>
+                                </div>
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- Agua-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="agua" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Agua</label>
+                                </div>
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- Seguro de gastos médicos-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="segurogastosmedicos" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Seguro de gastos médicos</label>
+                                </div>
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!--Transporte urbano-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="transporteurbano" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Transporte urbano</label>
+                                </div>
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- Luz -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="luz" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Luz</label>
+                                </div>
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- clases extra-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="clasesextra" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Clases extra</label>
+                                </div>
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- Especifique clases extra -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="especifiqueclasesextra">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Especifique clases extra</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- Mantenimiento fraccionammiento -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="mantenimientofraccionamiento" currencyMask
+                                           [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Mantenimiento fraccionammiento</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- gasolina-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="gasolina" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Gasolina</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- otros -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="otros1" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0}">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Otros</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- OEspecifique otros -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="especifiqueotros1">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Especifique otros</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- club deportivo-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="clubdeportivogimnasio" currencyMask
+                                           [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Club deportivo/gimnasio</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- vesido-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="vestido" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Vestido</label>
+                                </div>
+
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- otros -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="otros2" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Otros</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- especifique otros -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="especifiqueotros2">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Especifique otros</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="row" *ngIf="sistema==1">
+                            <!-- Gimnasio
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="gimnasio" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Gimnasio</label>
+                                </div>
+
+
+                            </div> -->
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- Vacaciones -->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="vacaciones" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Vacaciones</label>
+                                </div>
+
+                            </div>
+
+                            <div class="rowSeperador hidden-lg-up"></div>
+
+                            <!-- otros 
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                                <div class="group">
+                                    <input type="text" formControlName="otros3" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Otros</label>
+                                </div>
+
+
+                            </div>-->
+
+                            <div class="rowSeperador hidden-sm-up"></div>
+
+                            <!-- especifique otros 
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="group">
+                                    <input type="text" formControlName="especifiqueotros3">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Especifique otros</label>
+                                </div>
+
+                            </div>-->
+
+                        </div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+                        <div class="divider16" *ngIf="sistema==1"></div>
+
+
+                    </div>
+
+
+                </form>
+
+
+
+
+                <deudas [editable]="parametrosModal.configpestana.situacioneconomica.editable" [parametrosModal]="parametrosModal"
+                    [solicitudid]="parametrosModal.solicitudid" [selectTipocredito]="selectTipocredito" [sistema]="sistema"
+                    [datosdeudasycreditos]="datosdeudasycreditos" (output)="actualizardeudas($event)" [total]="total">
+                </deudas>
+
+                <div class="divider16"></div>
+                <div class="divider16"></div>
+
+                <div class="row" *ngIf="sistema == 1">
+                    <!-- total ingresos -->
+                    <div class="col col-md-6">
+                        <div class="group" align="right" style="margin-top:15px">
+                            <label align="right">TOTAL DE EGRESOS</label>
+                        </div>
+
+                    </div>
+                    <div class="col col-md-2">
+                        <div class="group">
+                            <input type="text" [(ngModel)]="totalegresos" [ngModelOptions]="{standalone: true}"
+                                   disabled currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                        </div>
+
+                    </div>
+                </div>
+
+                <inmueble [editable]="parametrosModal.configpestana.situacioneconomica.editable" [parametrosModal]="parametrosModal"
+                    [solicitudid]="parametrosModal.solicitudid" [selectestatusinmueble]="selectestatusinmueble"
+                    [sistema]="sistema" [datospropiedades]="datospropiedades" (output)="datospropiedades=$event"
+                    [numberMask]="numberMask" [sistema]="sistema">
+                </inmueble>
+
+                <div class="divider16"></div>
+                <div class="divider16"></div>
+
+                <vehiculo [editable]="parametrosModal.configpestana.situacioneconomica.editable" [parametrosModal]="parametrosModal"
+                    [solicitudid]="parametrosModal.solicitudid" [selectEstatusvehiculo]="selectEstatusvehiculo"
+                    [datosvehiculos]="datosvehiculos" [yearMask]="yearMask" [sistema]="sistema">
+                </vehiculo>
+
+                <div class="divider16"></div>
+                <div class="divider16"></div>
+
+                <banco [editable]="parametrosModal.configpestana.situacioneconomica.editable" [parametrosModal]="parametrosModal"
+                    [solicitudid]="parametrosModal.solicitudid" [selectTipocuentabanco]="selectTipocuentabanco"
+                    [datosbancos]="datosbancos" [numberMaskNoComma]="numberMaskNoComma" [sistema]="sistema">
+                </banco>
+
+                <form [formGroup]="formulario" (ngSubmit)="guardar()">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>Situación familiar</h4>
+                        </div>
+                    </div>
+
+                    <div class="divider16"></div>
+
+                    <div class="row">
+                        <div class="col-12">
+
+                            <form formGroupName="situacion">
+                                <label class="MaterialLabel labelSelect" *ngIf="sistema==2">
+                                    Describa la situación que atraviesa la familia actualmente y que le impide
+                                    pagar colegiatura completa
+                                </label>
+                                <label class="MaterialLabel labelSelect" *ngIf="sistema==1">
+                                    Anote los motivos que le impiden pagar la colegiatura completa
+                                </label>
+                                <div class="margenTopSelect"></div>
+                                <div class="rowSeperador hidden-md-up"></div>
+
+                                <textarea rows="3" cols="50" required formControlName="descripcionsituacionfamiliar"
+                                          style="border: solid 1px #ccc;font-size: 13px;"></textarea>
+
+                                <small [hidden]="formulario.controls.situacion.controls.descripcionsituacionfamiliar.valid || (formulario.controls.situacion.controls.descripcionsituacionfamiliar.pristine && !submitted)"
+                                    style="   color: red">
+                                    Introducir la descripción de la situación familiar
+                                </small>
+                            </form>
+                        </div>
+
+                    </div>
+                </form>
+
+                <div class="divider16"></div>
+                <div class="divider16"></div>
+
+                <!-- sección título -->
+                <div class="row" *ngIf="sistema == 1">
+                    <div class="col-12">
+                        <h4>Impresión de solicitud y reglamento</h4>
+                    </div>
+                </div>
+
+                <div class="divider16"></div>
+
+                <!-- instrucciones -->
+                <div class="row" *ngIf="sistema == 1">
+                    <div class="col-12">
+                        <ul style="padding-left: 18px">
+                            <li *ngIf="sistema==2">
+                                <strong> Debe descargar e imprimir la solicitud y entregarla firmada.</strong>
+                            </li>
+
+                            <li *ngIf="sistema==1">
+                                <strong style="color: red">DEBE DESCARGAR E IMPRIMIR LA SOLICITUD Y ENTREGARLA
+                                    FIRMADA.</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="divider16"></div>
+        <!-- imprimer documentos -->
+        <div class="row" *ngIf="sistema == 1">
+            <div class="col-12">
+
+                <!-- Solicitud -->
+                <div class="squarePDF" style="margin-right: 16px">
+
+                    <div class="bordeado">
+                        <span class="fa fa-file-pdf-o fa-3x"></span>
+                        <div class="divider16"></div>
+                        <span>Solicitud</span>
+                    </div>
+
+                    <div class="divider16"></div>
+
+                    <!-- Descargar Solicitud -->
+                    <div class="text-center">
+                        <div style="margin-top: 0px; width: 110px">
+                            <button class=" btnGeneral btn-sm" (click)="descargarSolicitud()" style="width: 100%;"
+                                    >
+                                <span class="fa fa-arrow-circle-o-down"></span>
+                                <span style="margin-left: 5px"> Descargar </span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Reglamento -->
+                <div class="squarePDF" style="margin-right: 16px">
+
+                    <div class="bordeado">
+                        <span class="fa fa-file-pdf-o fa-3x"></span>
+                        <div class="divider16"></div>
+                        <span>Reglamento</span>
+                    </div>
+
+                    <div class="divider16"></div>
+
+                    <!-- Descargar Reglamento -->
+                    <div class="text-center">
+                        <div style="margin-top: 0px; width: 110px">
+                            <button class=" btnGeneral btn-sm" (click)="descargarReglamento()" style="width: 100%;"
+                                    >
+                                <span class="fa fa-arrow-circle-o-down"></span>
+                                <span style="margin-left: 5px"> Descargar </span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+</div>
+</div>

@@ -1,0 +1,736 @@
+<section class="widget">
+  <h5 class="text-uppercase">Área médica</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <h6>Contacto de emergencia</h6>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let contacto of contactoEmergencia; let i = index">
+    <!-- Nombre -->
+    <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="display: inline-block !important;">
+
+      <div class="margenTopSelect"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" required [(ngModel)]="contacto.ContactoEmergenciaNombre" #dmCENombre="ngModel" class="textoMayuscula">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Nombre</label>
+
+        <small [hidden]="dmCENombre.valid || (!dmCENombre.touched && !alumno.summittedGeneral)" class="massageError">
+          Indique un nombre
+        </small>
+
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="display: inline-block !important;">
+
+        <div class="margenTopSelect"></div>
+        <div class="group inputResponsive">
+  
+          <input type="email" required [(ngModel)]="contacto.ContactoEmergenciaEmail" #dmCEEmail="ngModel" class="textoMayuscula">
+  
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label class="MaterialLabel">Correo electrónico</label>
+  
+        </div>
+      </div>
+
+    <!-- Lada -->
+    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-4" style="display: inline-block !important;">
+
+      <div class="margenTopSelect "></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="ladadm"  required [(ngModel)]="contacto.ContactoEmergenciaLada" lada pattern="\([1-9][0-9]{1,2}\)" #cmCELada="ngModel">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Lada</label>
+
+        <small [hidden]="cmCELada.valid || (!cmCELada.touched && !alumno.summittedGeneral)" class="massageError">
+          Ingrese una lada válida
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-8" style="display: inline-block !important;">
+
+      <div class="margenTopSelect "></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="telefonodm"  required  [(ngModel)]="contacto.ContactoEmergenciaTelefono" [phonenumber]="{lada: contacto.ContactoEmergenciaLada}"  pattern="{{telefonoService.GetExpresionRegularTelefono(contacto.ContactoEmergenciaLada)}}"  #dmCETelefono="ngModel">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Teléfono</label>
+
+        <small [hidden]="dmCETelefono.valid || (!dmCETelefono.touched && !alumno.summittedGeneral)" class="massageError">
+          Ingrese un teléfono válido
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Parentesco  -->
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="display: inline-block !important;" >
+
+        <label class="MaterialLabel labelSelect" >Parentesco</label>
+        <div class="margenTopSelect"></div>
+  
+        <sui-select style="width: 100%; " class="selection" required
+                    placeholder="Parentesco"
+                    [options]="alumno.parentesco"
+                    labelField="descripcion"
+                    valueField="parentescoid"
+                    [(ngModel)]="contacto.ContactoEmergenciaParentesco"
+                    #dmCEparentescoselect #dmCEParentesco="ngModel">
+  
+          <div class="divider" style="border:none"></div>
+  
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input suiSelectSearch type="text">
+          </div>
+  
+          <sui-select-option *ngFor="let option of dmCEparentescoselect.filteredOptions" [value]="option"></sui-select-option >
+  
+        </sui-select>
+  
+        <small [hidden]="dmCEParentesco.valid || (!dmCEParentesco.touched && !alumno.summittedGeneral)" class="massageError">
+          Seleccione un parentesco
+        </small>
+  
+      </div>
+      <div class="col-lg-1 col-md-2 col-sm-2 col-xs-4" style="display: inline-block !important;">
+        <label class="MaterialLabel labelSelect" >Eliminar</label>
+        <div class="margenTopSelect"></div>
+        <a (click)="eliminarContacto(contacto, i)" style="margin-left:10px" class="iconBtn">
+            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+          </a>
+    </div>
+      
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="display: inline-block !important;">
+        <div style="margin-top: 15px">
+            <button class=" btnGeneral btn-sm" (click)="AgregarContacto()">
+              <span class="fa fa-plus"></span>
+              <span style="margin-left: 5px"> Agregar </span>
+            </button>
+          </div>
+      </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Padece alguna enfermedad o condición que requiera cuidados especiales?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input id="radio1" type="radio" name="renfermedadcronica" value="SI" [(ngModel)]="datoMedico.EnfermedadCronica">
+          <span class="outer" style="margin-top: -5px;">
+                            <span class="inner"></span>
+                        </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input id="radio2" type="radio" name="renfermedadcronica" value="NO" [(ngModel)]="datoMedico.EnfermedadCronica">
+          <span class="outer" style="margin-top: -5px;">
+                            <span class="inner"></span>
+                        </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row" [hidden]="datoMedico.EnfermedadCronica != 'SI'">
+    <div class="col-sm-12">
+      <textarea placeholder="Especificar" style="width: 100% !important; min-height: 100px; border: 1px solid lightgray" [(ngModel)]="datoMedico.PadeceEnfermedadDescripcion" required #endescripcion="ngModel" class="textoMayuscula"> </textarea>
+
+      <small [hidden]="endescripcion.valid|| (!endescripcion.touched && !alumno.summittedGeneral)" class="massageError">
+        Especifique su respuesta
+      </small>
+    </div>
+  </div>
+
+  <br [hidden]="datoMedico.EnfermedadCronica != 'SI'">
+
+  <div class="row" [hidden]="datoMedico.EnfermedadCronica != 'SI'">
+
+    <!-- Nombre -->
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="display: inline-block !important;">
+
+      <div class="group inputResponsive">
+
+        <input type="text" required [(ngModel)]="datoMedico.PadeceEnfermedadCuidaNombre" #dmNombreec="ngModel" class="textoMayuscula">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Nombre de quien atiende</label>
+
+        <small [hidden]="dmNombreec.valid || (!dmNombreec.touched && !alumno.summittedGeneral)" class="massageError">
+          Indique un nombre
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Lada -->
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" style="display: inline-block !important;">
+
+      <div class="group inputResponsive">
+
+        <input type="text" id="ladaec"  required [(ngModel)]="datoMedico.PadeceEnfermedadLada" lada pattern="\([1-9][0-9]{1,2}\)" #ecLada="ngModel">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Lada</label>
+
+        <small [hidden]="ecLada.valid || (!ecLada.touched && !alumno.summittedGeneral)" class="massageError">
+          Ingrese una lada válida
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8" style="display: inline-block !important;">
+
+      <div class="group inputResponsive">
+
+        <input type="text" id="telefonoec"  required  [(ngModel)]="datoMedico.PadeceEnfermedadTelefono" [phonenumber]="{lada: datoMedico.PadeceEnfermedadLada}"  pattern="{{telefonoService.GetExpresionRegularTelefono(datoMedico.PadeceEnfermedadLada)}}"  #ecTelefono="ngModel">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Teléfono</label>
+
+        <small [hidden]="ecTelefono.valid || (!ecTelefono.touched && !alumno.summittedGeneral)" class="massageError">
+          Ingrese un teléfono válido
+        </small>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div>
+    <small [hidden]="datoMedico.EnfermedadCronica || (!alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Su hijo(a) es alérgico a: </p>
+    </div>
+  </div>
+
+  <div style="margin-top: 15px"></div>
+  <div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6" *ngFor="let alergico of alumno.alergia">
+      <input class="labelCheckBox" type="checkbox" id="al{{alergico.alergiaid}}" [(ngModel)]="alergico.Seleccionado" (ngModelChange)="CambiarAlergia($event, alergico.alergiaid)"/>
+
+      <label class="checkLabel labelCheckBoxText" for="al{{alergico.alergiaid}}">
+        {{alergico.descripcion}}
+      </label>
+    </div>
+
+  </div>
+
+  <div class="row" [hidden]="!datosMedicosService.ValidarAlergia(alumno.alergia) ">
+    <div class="col-sm-12" style="height: 15px"></div>
+    <div class="col-sm-12">
+      <textarea placeholder="Especificar" style="width: 100% !important; min-height: 100px; border: 1px solid lightgray" [(ngModel)]="datoMedico.AlergicoDescripcion" required #alergicodescripciondm="ngModel" class="textoMayuscula"> </textarea>
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datosMedicosService.ValidarAlergiaRequired(alumno.alergia) || (!alumno.summittedGeneral)" class="massageError">
+      Elija al menos una respuesta
+    </small>
+
+    <small [hidden]="!datosMedicosService.ValidarAlergiaDescripcion(alumno.alergia) || !datosMedicosService.ValidarAlergia(alumno.alergia) ||  datoMedico.AlergicoDescripcion || (!alergicodescripciondm.touched && !alumno.summittedGeneral)" class="massageError">
+      Especifique su respuesta
+    </small>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Existe un antecedente familiar importante? </p>
+    </div>
+  </div>
+
+  <div style="margin-top: 15px"></div>
+  <div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6" *ngFor="let antecedente of alumno.antecedenteMedico">
+      <input class="labelCheckBox" type="checkbox" id="am{{antecedente.antecedentefamiliarimportanteid}}" [(ngModel)]="antecedente.Seleccionado" (ngModelChange)="CambiarAntecedenteMedico($event, antecedente.antecedentefamiliarimportanteid)"/>
+
+      <label class="checkLabel labelCheckBoxText" for="am{{antecedente.antecedentefamiliarimportanteid}}">
+        {{antecedente.descripcion}}
+      </label>
+    </div>
+
+  </div>
+
+  <div class="row" [hidden]="!datosMedicosService.ValidarAntecedenteMedicoDescripcion(alumno.antecedenteMedico) ">
+    <div class="col-sm-12" style="height: 15px"></div>
+
+    <div class="col-sm-12">
+      <textarea placeholder="Especificar" style="width: 100% !important; min-height: 100px; border: 1px solid lightgray" [(ngModel)]="datoMedico.AntecedenteFamiliarDescripcion" required #afdescripcion="ngModel" class="textoMayuscula"> </textarea>
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datosMedicosService.ValidarAntecedenteMedicoRequired(alumno.antecedenteMedico) || (!alumno.summittedGeneral)" class="massageError">
+      Elija al menos una respuesta
+    </small>
+
+    <small [hidden]="!datosMedicosService.ValidarAntecedenteMedicoDescripcion(alumno.antecedenteMedico) ||  datoMedico.AntecedenteFamiliarDescripcion || (!afdescripcion.touched && !alumno.summittedGeneral)" class="massageError">
+      Especifique su respuesta
+    </small>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Le han practicado algún examen auditivo?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input id="reexamenauditivo1" type="radio" name="reexamenauditivo" value="SI" [(ngModel)]="datoMedico.ExamenAuditivo">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input id="reexamenauditivo2" type="radio" name="reexamenauditivo" value="NO" [(ngModel)]="datoMedico.ExamenAuditivo">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datoMedico.ExamenAuditivo || (!alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Utiliza aparatos auditivos?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input id="reaparatoauditivo1" type="radio" name="reaparatoauditivo" value="SI" [(ngModel)]="datoMedico.AparatoAuditivo">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input id="reaparatoauditivo2" type="radio" name="reaparatoauditivo" value="NO" [(ngModel)]="datoMedico.AparatoAuditivo">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datoMedico.AparatoAuditivo || (!alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Le han practicado algún examen ortopédico?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input id="reexamenortopedico1" type="radio" name="reexamenortopedico" value="SI" [(ngModel)]="datoMedico.ExamenOrtopedico">
+          <span class="outer" style="margin-top: -5px;">
+            <span class="inner"></span>
+          </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input id="reexamenortopedico2" type="radio" name="reexamenortopedico" value="NO" [(ngModel)]="datoMedico.ExamenOrtopedico">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datoMedico.ExamenOrtopedico || (!alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Utiliza zapatos o aditamentos ortopédicos?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input id="reaparatoortopedico1" type="radio" name="reaparatoortopedico" value="SI" [(ngModel)]="datoMedico.AditamentoOrtopedico">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input id="reaparatoortopedico2" type="radio" name="reaparatoortopedico" value="NO" [(ngModel)]="datoMedico.AditamentoOrtopedico">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datoMedico.AditamentoOrtopedico || (!alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Le han practicado algún examen de la vista?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input id="reexamenovista1" type="radio" name="reexamenovista" value="SI" [(ngModel)]="datoMedico.ExamenVista">
+          <span class="outer" style="margin-top: -5px;">
+                            <span class="inner"></span>
+                        </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input id="reexamenovista2" type="radio" name="reexamenovista" value="NO" [(ngModel)]="datoMedico.ExamenVista">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datoMedico.ExamenVista || (!alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Utiliza lentes?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input id="relentes1" type="radio" name="relentes" value="SI" [(ngModel)]="datoMedico.Lentes">
+          <span class="outer" style="margin-top: -5px;">
+                            <span class="inner"></span>
+                        </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input id="relentes2" type="radio" name="relentes" value="NO" [(ngModel)]="datoMedico.Lentes">
+          <span class="outer" style="margin-top: -5px;">
+                            <span class="inner"></span>
+                        </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datoMedico.Lentes || (!alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Autorizo que se le administre algún antihistamínico de acuerdo a su peso y talla en caso de alguna URGENCIA por alergia</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input id="rautorizoanti1" type="radio" name="rautorizoanti" value="SI" [(ngModel)]="datoMedico.AutorizoAntihistaminico">
+          <span class="outer" style="margin-top: -5px;">
+                            <span class="inner"></span>
+                        </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input id="rautorizoanti2" type="radio" name="rautorizoanti" value="NO" [(ngModel)]="datoMedico.AutorizoAntihistaminico">
+          <span class="outer" style="margin-top: -5px;">
+                            <span class="inner"></span>
+                        </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <small [hidden]="datoMedico.AutorizoAntihistaminico || (!alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Estatura</p>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <div class="input-group" style="margin-top: 10px">
+
+        <div class="group inputResponsive">
+          <input  id="dmEstatuta" required class=""
+                 [(ngModel)]="datoMedico.Talla" #estaturadm="ngModel" [textMask]="{mask: numberMask}"  style="max-height: 33px">
+
+          <span class="highlight"></span>
+          <span class="bar"></span>
+
+        </div>
+
+        <div class="input-group-addon" style="max-height: 33px; background: white; border: none">
+          cm
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <small [hidden]="estaturadm.valid || (!estaturadm.touched && !alumno.summittedGeneral)" class="massageError">
+      Indique la estatura en cm
+    </small>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Peso</p>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <div class="input-group" style="margin-top: 10px">
+
+        <div class="group inputResponsive">
+          <input type="text" id="dmPeso" required class=""  
+                 [(ngModel)]="datoMedico.Peso" #pesodm="ngModel" [textMask]="{mask: numberMask}" style="max-height: 33px">
+
+          <span class="highlight"></span>
+          <span class="bar"></span>
+
+        </div>
+
+        <div class="input-group-addon" style="max-height: 33px; background: white; border: none">
+          kg
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <small [hidden]="pesodm.valid || (!pesodm.touched && !alumno.summittedGeneral)" class="massageError">
+      Indique el peso en kg
+    </small>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Tipo de sangre</p>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div style="margin-top: 10px"></div>
+
+      <sui-select style="width: 100%; " class="selection" required
+                  placeholder="Tipo de Sangre"
+                  [options]="alumno.tipoSanguineo"
+                  labelField="descripcion"
+                  valueField="tiposanguineoid"
+                  [(ngModel)]="datoMedico.TipoSangineo"
+                  #tiposanguineodmselect #tipoSanguineoDM="ngModel">
+
+        <sui-select-option *ngFor="let option of tiposanguineodmselect.filteredOptions" [value]="option"></sui-select-option >
+
+      </sui-select>
+
+    </div>
+
+  </div>
+
+  <div>
+    <small [hidden]="tipoSanguineoDM.valid || (!tipoSanguineoDM.touched && !alumno.summittedGeneral)" class="massageError">
+      Seleccione el tipo de sangre
+    </small>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Nombre del padre, madre o tutor que autoriza</p>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div style="margin-top: 10px"></div>
+
+      <input type="text" id="dmNombreautoriza" required class="textoMayuscula"
+             [(ngModel)]="datoMedico.NombreAutoriza" #nombreAutorizadm="ngModel">
+
+      <span class="highlight"></span>
+      <span class="bar"></span>
+
+    </div>
+
+  </div>
+
+  <div>
+    <small [hidden]="nombreAutorizadm.valid || (!nombreAutorizadm.touched && !alumno.summittedGeneral)" class="massageError">
+      Indique su respuesta
+    </small>
+  </div>
+
+  <div class="margenSeparador"></div>
+</section>

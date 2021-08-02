@@ -1,0 +1,217 @@
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #mensajePagoModal="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+
+    <div class="modalPantallaCompleta center-block" style=" height: auto">
+
+        <!-- Encabezado -->
+        <div class="modalHeader">
+            <h4 class="modal-title">
+                <h3 class="">Descuento por Pronto Pago</h3>
+            </h4>
+        </div>
+
+        <!-- body -->
+        <div class="modaBody" style="margin-top: 60px; margin-bottom: 60px">
+
+            <div style="padding: 32px;">
+
+                <div class="row">
+                    <div class="col-12">
+                        <span style="font-size: 16px">
+                            Los siguientes pagos cuentan con un descuento por pronto pago:
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr style="color: #fff;">
+
+                                        <th class=" headerTable-top-left">
+                                            Matrícula
+                                        </th>
+
+                                        <th class="text-center headerTable">
+                                            Alumno
+                                        </th>
+
+                                        <th class="text-center headerTable">
+                                            Concepto
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Saldo
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Descuento
+                                        </th>
+                                        <th class="text-center headerTable-top-right">
+                                            Total
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr style="font-size: 13px;" *ngFor="let d of documentos" >
+
+                                        <td class="">
+                                            <p>{{d.Matricula}}</p>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <p>{{d.Alumno}}</p>
+                                        </td>
+
+
+                                        <td class="text-center align-middle">
+                                            <p>{{d.Concepto}}</p>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <p>{{d.SaldoInteresTotal  | currency:'MXN':true:'2.2-4'}}</p>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <p>{{-d.DescuentoVal  | currency:'MXN':true:'2.2-4'}}</p>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <p>{{d.Total  | currency:'MXN':true:'2.2-4'}}</p>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <button class="btn btnPrincipal" type="button" (click)="TeminarMensaje()">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- footer -->
+            <div class="modalFooterAbsolute">
+                <div class="pull-right">
+                    <button class="btn btn-default  btnBase" type="button" (click)="CerrarModal()">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #mensajePagoFechaProrroga="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+
+    <div class="modalPantallaCompleta center-block"  style="height: auto">
+
+        <!-- Encabezado -->
+        <div class="modalHeader">
+            <h4 class="modal-title">
+                <h3 class="">Fecha Prórroga Vencida</h3>
+            </h4>
+        </div>
+
+        <!-- body -->
+        <div class="modaBody" style="margin-top: 60px; margin-bottom: 0px; ">
+
+            <div style="padding: 32px">
+
+                <div class="row">
+                    <div class="col-12">
+                        <span style="font-size: 16px">
+                            Los pagos con la fecha de prórroga vencida no se pueden realizar. Favor de acudir al instituo a realizar su pago.<br>
+                            A continuación se muestran los pagos con la fecha prórroga vencida.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr style="color: #fff;">
+
+                                    <th class=" headerTable-top-left">
+                                        Matrícula
+                                    </th>
+
+                                    <th class="text-center headerTable">
+                                        Alumno
+                                    </th>
+
+                                    <th class="text-center headerTable">
+                                        Concepto
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Saldo
+                                    </th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr style="font-size: 13px;" *ngFor="let d of fechavencida" >
+
+                                    <td class="">
+                                        <p>{{d.Matricula}}</p>
+                                    </td>
+
+                                    <td class="text-center align-middle">
+                                        <p>{{d.Alumno}}</p>
+                                    </td>
+
+
+                                    <td class="text-center align-middle">
+                                        <p>{{d.Concepto}}</p>
+                                    </td>
+
+                                    <td class="text-center align-middle">
+                                        <p>{{d.SaldoTotal  | currency:'MXN':true:'2.2-4'}}</p>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <button class="btn btnPrincipal" type="button" (click)="CerrarModalFechaVencida()">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+</div>
+

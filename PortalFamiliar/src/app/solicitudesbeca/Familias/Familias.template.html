@@ -1,0 +1,91 @@
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal
+     #modalFamilia="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <form >
+
+                <!-- Título -->
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <h3 class="text-uppercase">Seleccionar familia</h3>
+                    </h4>
+                </div>
+
+                <!-- contenido del modal -->
+                <div class="modal-body">
+
+                    <br>
+                    <div>
+                        Su usuario está vinculado a más de un registro de familia. Para crear la solicitud de beca, seleccione a continuación la familia deseada.
+                    </div>
+
+                    <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">
+                        <table  class="table table-hover" id="tablaFamilia">
+                            <thead>
+                            <tr style="color: #fff;">
+                                <th class="text-center headerTable">
+                                    Clave de familia
+                                </th>
+                                <th class="text-center headerTable">
+                                    Nombre de familia
+                                </th>
+                                <th class="text-center headerTable">
+                                    Alumnos
+                                </th>
+                                <th class="text-center headerTable">
+                                    Acciones
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  *ngFor="let familia of familias">
+                                <td class="text-center">
+                                    <p>{{familia.clave}}</p>
+                                </td>
+                                <td class="text-center ">
+                                    <p>{{familia.apellidopaterno}} {{familia.apellidomaterno}}</p>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-block botonTransparente" (click)="familia.veralumnos = !familia.veralumnos" [ngClass]="{'opened':familia.veralumnos}">
+                                        <span >{{familia.alumno.length}}</span>
+                                        <b style="margin-left: 8px; font-size: 14px" >
+                                            <span class="fa fa-chevron-down" *ngIf="!familia.veralumnos"></span>
+                                            <span class="fa fa-chevron-up" *ngIf="familia.veralumnos"></span>
+                                        </b>
+                                    </button>
+
+
+                                    <div class="text-left" [hidden]="!familia.veralumnos" style="white-space: nowrap">
+
+                                        <span *ngFor="let alumno of familia.alumno">
+                                            {{alumno.matricula}} - {{alumno.nombre}}<br>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <button *ngIf="familia.solicitado == '0'" class="btn principal"  type="button" (click)="FamiliaSeleccionada(familia)">Seleccionar</button>
+                                    <span *ngIf="familia.solicitado == '1'">Solicitud realizada</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- mensaje de solicitud por familia -->
+                    <br>
+                    <div>
+                        <b>*{{msnSolicitudFamilia}}</b>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default btnBase"  type="button" (click)="CerrarModal(null)">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

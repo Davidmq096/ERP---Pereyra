@@ -1,0 +1,108 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <section class="widget beca">
+
+            <div class="widget-body" [ngClass]="parametrosModal.configpestana.datospadres.editable ? '' : 'soloLectura'">
+
+                <!-- título -->
+                <header>
+                    <h3>Datos de los padres</h3>
+                </header>
+                <div class="divider16"></div>
+
+                <!-- tab información -->
+                <div class="widget-body">
+                    <form [formGroup]="Formpadres">
+                        <div form-group formArrayName="padres">
+                            <componentetutor *ngFor="let p of Formpadres.controls.padres.controls; let i = index; trackBy: trackById; "
+                                [DatosPadres]="p" 
+                                [cambio]="cambio"
+                                [submitted]="submitted" 
+                                [selectParentesco]="selectParentesco"
+                                [estadocivil]="estadocivil" 
+                                [escolaridad]="escolaridad"
+                                [lada2]="lada2"
+                                #padres>
+                        </componentetutor>
+                    </div>
+
+
+                    <!-- sección título -->
+                    <div [hidden]="padres.length < 2">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Situación familiar</h4>
+                            </div>
+                        </div>
+
+                        <div class="divider16"></div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <label class="MaterialLabel labelSelect">
+                                    Los padres o tutores viven
+                                </label>
+
+                                <div class="margenTopSelect"></div>
+
+                                <sui-select style="width: 100%;" class="selection" name="situacionfamiliar" placeholder="Padres o tutores viven"
+                                            [options]="padresviven" labelField="nombre" valueField="id" formControlName="situacionfamiliarid" #padresviven2 required>
+                                    <sui-select-option *ngFor="let option of padresviven2.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+
+                                <small [hidden]="Formpadres.controls.situacionfamiliarid.valid || (Formpadres.controls.situacionfamiliarid.pristine && !submitted)"
+                                    style="color: red" >
+                                    Debe seleccionar una opción
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="height: 15px;"></p>
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-6 col-12" *ngIf="sistema == 1 && parametrosModal.estatusid == 2">
+                            <label class="MaterialLabel labelSelect">
+                                Otras personas que aportan al presupuesto familiar
+                            </label>
+
+                            <div class="margenTopSelect"></div>
+
+                            <sui-select style="width: 100%;" class="selection" name="personasaportan" placeholder="Seleccione"
+                                        [options]="aporta" labelField="nombre" valueField="id" formControlName="personaaporta"
+                                        (selectedOptionChange)="addPersonaAporta($event)"
+                                        #aportaselect required>
+                                <sui-select-option *ngFor="let option of aportaselect.filteredOptions" [value]="option"></sui-select-option>
+                            </sui-select>
+
+                            <small [hidden]="Formpadres.controls.personaaporta.valid || (Formpadres.controls.personaaporta.pristine && !submitted)"
+                                style="color: red" >
+                                Debe seleccionar una opción
+                            </small>
+                        </div>
+                    </div>
+
+                    <p style="height: 10px;"></p>
+                    <div form-group formArrayName="otro">
+                        <componentetutor *ngFor="let p of Formpadres.controls.otro.controls; let i = index; trackBy: trackById; "
+                            [DatosPadres]="p" 
+                            [cambio]="cambio"
+                            [submitted]="submitted" 
+                            [estadocivil]="estadocivil" 
+                            [escolaridad]="escolaridad"
+                            [lada2]="lada2"
+                            [selectParentesco]="selectParentesco"
+                            [index]="i"
+                            #padres>
+                    </componentetutor>
+                </div>
+                <button class=" btnGeneral btn-sm"  (click)="addPersonaAporta(3);" *ngIf="otromas == 2">
+                    <span class="fa fa-plus"></span>
+                    <span style="margin-left: 5px"> Agregar uno mas </span>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+</div>
+</div>

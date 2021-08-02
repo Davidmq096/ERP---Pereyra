@@ -1,0 +1,440 @@
+<style>
+    .label-control {
+        padding-top: 7px;
+    }
+
+    .bordeado {
+        width: 110px;
+        border: 2px solid black;
+        text-align: center;
+        border-radius: 3px;
+        padding: 16px 8px;
+    }
+
+    .squarePDF {
+        width: 110px;
+        display: inline-block;
+        margin-bottom: 16px;
+    }
+
+    .pdfdictamen {
+        background-image: url('./assets/img/pdf.png');
+        width: 125px;
+        height: 100px;
+        background-repeat: no-repeat !important;
+        background-size: 50% 50%;
+        margin-top: 25px;
+        margin-left: 25px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <section class="widget beca">
+
+            <div class="widget-body" [ngClass]="parametrosModal.configpestana.referencias.editable ? '' : 'soloLectura'">
+
+                <!-- título -->
+                <header>
+                    <h3>Referencias</h3>
+                </header>
+                <div class="divider16"></div>
+
+                <div class="widget-body">
+
+                    <legend></legend>
+
+
+
+                    <!-- sección título -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>Personas que pueden dar referencias (no familiares)</h4>
+                        </div>
+                    </div>
+
+                    <div class="divider16"></div>
+
+                    <!-- tabla de personas que pueden dar referencias -->
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="tabllePaddingLTE no-padding dependientestab table-responsive dependientestab" style="padding: 0px !important; font-size: 13px;" >
+                                <table class="table table-hover" id="tablaHijo" style="width:100%">
+                                    <thead>
+                                        <tr class="text-center" style="color: white;">
+                                            <th class="text-center headerTable-top-left">
+                                                Nombre
+                                            </th>
+                                            <th class="text-center headerTable">
+                                                Celular
+                                            </th>
+                                            <th class="text-center headerTable">
+                                                Fijo
+                                            </th>
+                                            <th class="text-center headerTable">
+                                                Ocupación
+                                            </th>
+                                            <th class="text-center headerTable-top-right">
+                                                Acciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="font-size: 13px;" *ngFor="let h of datospersonas; let i = index">
+                                            <td class="text-center">
+                                                <p>{{h.pr_nombrecompleto}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p>{{h.pr_telefonocelular}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p>{{h.pr_telefonofijo}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p>{{h.pr_ocupacion}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <a>
+                                                    <i class="fa fa-trash fa-lg" aria-hidden="true" (click)="deletePersona(h)"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- botón para agregar una referencia -->
+                    <div class="text-center" [hidden]="!parametrosModal.configpestana.datospadres.editable">
+                        <div style="margin-top: 10px" [hidden]="persona">
+                            <button class=" btnGeneral btn-sm"  (click)="persona = true">
+                                    <span class="fa fa-plus"></span>
+                                <span style="margin-left: 5px"> Agregar </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Agregar referencia -->
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <div style="height: 8px"></div>
+                        </div>
+
+                        <div class="col-12">
+                            <form [formGroup]="Formreferencias" [hidden]="persona == false">
+
+                                <!-- datos de la referencia -->
+                                <div class="row">
+
+                                    <!-- nombre -->
+                                    <div class="col-sm-6">
+                                        <div class="group">
+                                            <input type="text" required formControlName="nombrecompleto" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(Formreferencias.controls.nombrecompleto)">
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label class="MaterialLabel">Nombre</label>
+                                        </div>
+
+                                        <small [hidden]="Formreferencias.controls.nombrecompleto.valid || (Formreferencias.controls.nombrecompleto.pristine && !submitted2)"
+                                            style="   color: red">
+                                            Introduzca el nombre completo
+                                        </small>
+                                    </div>
+
+                                    <div class="rowSeperador  hidden-sm-up"></div>
+
+                                    <!-- ocupación -->
+                                    <div class="col-sm-6 col-md-2">
+                                        <div class="group">
+                                            <input type="text" required formControlName="ocupacion" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(Formreferencias.controls.ocupacion)">
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label class="MaterialLabel">Ocupación</label>
+                                        </div>
+
+                                        <small [hidden]="Formreferencias.controls.ocupacion.valid || (Formreferencias.controls.ocupacion.pristine && !submitted2)"
+                                            style="   color: red">
+                                            Introduzca la ocupación
+                                        </small>
+                                    </div>
+
+                                    <div class="rowSeperador"></div>
+
+                                    <!-- lada celular -->
+                                    <div class="col-md-2 col-4">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td><div class="group">
+                                                            <input type="text" required formControlName="ladatelefonocelular" lada>
+                                                            <span class="highlight"></span>
+                                                            <span class="bar"></span>
+                                                            <label class="MaterialLabel">Lada</label>
+                                                        </div>
+
+                                                        <small [hidden]="Formreferencias.controls.ladatelefonocelular.valid || (!Formreferencias.controls.ladatelefonocelular.touched && !submitted2)" style="   color: red" >
+                                                            Introduzca la lada
+                                                        </small></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--  <div class="group">
+                                              <input type="text" required formControlName="ladatelefonocelular" [textMask]="{mask:ladaMask}" pattern="\([1-9][0-9]{1}\)">
+                                              <span class="highlight"></span>
+                                              <span class="bar"></span>
+                                              <label class="MaterialLabel">Lada</label>
+                                          </div>
+  
+                                          <small [hidden]="Formreferencias.controls.ladatelefonocelular.valid || (!Formreferencias.controls.ladatelefonocelular.touched && !submitted2)" style="   color: red" >
+                                              Introduzca la lada
+                                          </small>-->
+                                    </div>
+                                    <!--  celular -->
+                                    <div class="col-md-4 col-8">
+
+                                        <div class="group">    
+                                            <input [(ngModel)]="telefono" type="text" required formControlName="telefonocelular" [phonenumber]="{lada: lada1}">
+                                                <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label class="MaterialLabel">Teléfono</label>
+                                        </div>
+
+                                        <small [hidden]="Formreferencias.controls.telefonocelular.valid || (!Formreferencias.controls.telefonocelular.touched && !submitted2)"
+                                            style="   color: red">
+                                            Introduzca el teléfono celular
+                                        </small>
+                                        <!-- <div class="group">
+                                             <input type="text" required formControlName="telefonocelular" [textMask]="{mask:telefonoMask}" pattern="\d{4}.\d{4}">
+                                             <span class="highlight"></span>
+                                             <span class="bar"></span>
+                                             <label class="MaterialLabel">Celular</label>
+                                         </div>
+ 
+                                         <small [hidden]="Formreferencias.controls.telefonocelular.valid || (!Formreferencias.controls.telefonocelular.touched && !submitted2)"
+                                             style="   color: red">
+                                             Introduzca el teléfono celular
+                                         </small>-->
+                                    </div>
+
+                                    <div class="rowSeperador  hidden-md-up"></div>
+
+                                    <!-- lada fijo -->
+                                    <div class="col-md-2 col-4">
+
+                                        <table>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td><div class="group">
+                                                            <input type="text" required formControlName="ladatelefonofijo" lada>
+                                                            <span class="highlight"></span>
+                                                            <span class="bar"></span>
+                                                            <label class="MaterialLabel">Lada</label>
+                                                        </div>
+
+                                                        <small [hidden]="Formreferencias.controls.ladatelefonofijo.valid || (!Formreferencias.controls.ladatelefonofijo.touched && !submitted2)" style="   color: red" >
+                                                            Introduzca la lada
+                                                        </small></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- <div class="group">
+                                             <input type="text" required formControlName="ladatelefonofijo" [textMask]="{mask:ladaMask}" pattern="\([1-9][0-9]{1}\)">
+                                             <span class="highlight"></span>
+                                             <span class="bar"></span>
+                                             <label class="MaterialLabel">Lada</label>
+                                         </div>
+ 
+                                         <small [hidden]="Formreferencias.controls.ladatelefonofijo.valid || (!Formreferencias.controls.ladatelefonofijo.touched && !submitted2)" style="   color: red">
+                                             Introduzca la lada
+                                         </small>-->
+
+                                    </div>
+
+                                    <!--  tel fijo -->
+                                    <div class="col-md-4 col-8">
+                                        <div class="group">
+                                            <input [(ngModel)]="telefonocontacto" type="text" required formControlName="telefonofijo" [phonenumber]="{lada: ladacontacto}">
+                                                <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label class="MaterialLabel">Tel. fijo</label>
+                                        </div>
+
+                                        <small [hidden]="Formreferencias.controls.telefonofijo.valid || (!Formreferencias.controls.telefonofijo.touched && !submitted2)"
+                                            style="   color: red">
+                                            Introduzca el teléfono fijo
+                                        </small>
+                                    </div>
+
+                                </div>
+
+                                <div class="rowSeperador"></div>
+
+                                <!-- botones de operación  -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="pull-right">
+
+                                            <button class="btn btn-default btn-sm" type="button" style="margin-right: 8px" (click)="removepersona()">Cancelar</button>
+                                            <button class="btn principal btn-sm" type="button" (click)="savePersona()">Agregar</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="divider16"></div>
+                    <div class="divider16"></div>
+                    <form [formGroup]="Formguardar">
+                        <!-- sección título -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Estudio socioeconómico</h4>
+                            </div>
+                        </div>
+
+                        <div style="height: 5px"></div>
+
+                        <div class="row">
+                            <div class="col-12">
+
+                                <label>
+                                    *Sugiera los días y horario en que pueda ser visitado para la realización del estudio socieconómico.<br>
+                                    En la medida de lo posible se tratará de respetar los horarios sugeridos.<br>
+                                    Les pedimos apertura a cualquier cambio de horario que tenga que realizar el equipo de trabajadores sociales.
+                                </label>
+                                <textarea  rows="3" style="border: solid 1px #ccc;font-size: 13px;" formControlName="visitaestudiosocioeconomico"
+                                           required></textarea>
+                                <small [hidden]="Formguardar.controls.visitaestudiosocioeconomico.valid || (!Formguardar.controls.visitaestudiosocioeconomico.touched && !submitted)"
+                                    style="   color: red">
+                                    Debe introducir los días y fechas para poder ser visitado
+                                </small>
+
+                            </div>
+                        </div>
+
+                        <div class="divider16"></div>
+                        <div class="divider16"></div>
+
+                        <!-- sección título -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Impresión de solicitud y reglamento</h4>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="divider16"></div>
+
+
+            <!-- imprimer documentos -->
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- Solicitud -->
+                    <div class="squarePDF" style="margin-right: 16px">
+
+                        <div class="bordeado">
+                            <span class="fa fa-file-pdf-o fa-3x"></span>
+                            <div class="divider16"></div>
+                            <span>Solicitud</span>
+                        </div>
+
+                        <div class="divider16"></div>
+
+                        <!-- Descargar Solicitud -->
+                        <div class="text-center">
+                            <div style="margin-top: 0px; width: 110px" >
+                                <button class=" btnGeneral btn-sm"  (click)="descargarSolicitud()" style="width: 100%;">
+                                    <span class="fa fa-arrow-circle-o-down"></span>
+                                    <span style="margin-left: 5px"> Descargar </span>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Reglamento -->
+                    <div class="squarePDF" style="margin-right: 16px">
+
+                        <div class="bordeado">
+                            <span class="fa fa-file-pdf-o fa-3x"></span>
+                            <div class="divider16"></div>
+                            <span>Reglamento</span>
+                        </div>
+
+                        <div class="divider16"></div>
+
+                        <!-- Descargar Reglamento -->
+                        <div class="text-center">
+                            <div style="margin-top: 0px; width: 110px" >
+                                <button class=" btnGeneral btn-sm"  (click)="descargarReglamento()" style="width: 100%;">
+                                    <span class="fa fa-arrow-circle-o-down"></span>
+                                    <span style="margin-left: 5px"> Descargar </span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Estudio Socioeconomico -->
+                    <!--  <div class="squarePDF">
+    
+                      <div class="bordeado">
+                        <span class="fa fa-file-pdf-o fa-3x" ></span>
+                        <div class="divider16"></div>
+                        <span>Estudio soc..</span>
+                      </div>
+    
+                      <div class="divider16"></div>
+    
+                    <!-- Descargar Estudio Socioeconomico -->
+                    <!-- <div class="text-center">
+                     <div class="md-chip white" style="margin-top: 0px; width: 110px" >
+                       <a>
+                         <span class="md-chip-text" style="margin-top: 8px; ">
+                           <i class="glyphicon glyphicon-download" style="color: #898989;"></i>
+                         </span>
+    
+                         <p style="margin-top: 5px; margin-left: 30px;">Descargar</p>
+                       </a>
+                     </div>
+                   </div>
+    
+               </div>-->
+
+                </div>
+            </div>
+
+            <div class="divider16"></div>
+
+            <!-- instrucciones -->
+            <div class="row">
+                <div class="col-12">
+                    <ul style="padding-left: 18px">
+                        <li>
+                            Debe descargar e imprimir la solicitud y entregarla firmada.
+                        </li>
+                        <!-- <li>
+                          Debe descargar, imprimir y llenar el ejercicio de gastos para la visita de la trabajadora social.
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

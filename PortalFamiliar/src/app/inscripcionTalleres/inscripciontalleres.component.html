@@ -1,0 +1,448 @@
+<style>
+    body table tr.selectedRow {
+        background-color: #E8E8E8;
+        color: black;
+        font-weight: bold;
+    }
+
+    .sidebartitulosmall {
+        font-size: 12.5px;
+    }
+
+    .btn-reglamento {
+        -webkit-box-shadow: 2px -8px 47px 12px rgba(200, 198, 227, 0.61);
+        -moz-box-shadow: 2px -8px 47px 12px rgba(200, 198, 227, 0.61);
+        box-shadow: 2px -8px 47px 12px rgba(200, 198, 227, 0.61);
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h1> Pre-inscripción a talleres extracurriculares </h1>
+            </header>
+            <div class="widget-body">
+                <legend></legend>
+                <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                    <div class="row">
+                        <form [formGroup]="FormAlumno">
+                            <small>Alumno</small>
+                            <sui-select style="width: 100%;" class="selection" formControlName="alumnoid"
+                                placeholder="Alumno" (selectedOptionChange)="buscarTalleres($event)"
+                                [options]="selectAlumno" labelField="nombrecompleto" valueField="alumnoid"
+                                #alumnoselect>
+                                <sui-select-option *ngFor="let option of alumnoselect.filteredOptions" [value]="option">
+                                </sui-select-option>
+                            </sui-select>
+                        </form>
+                    </div>
+                </div>
+                <div class="mostrar" [hidden]="!mostrar">
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+
+                            <br>
+                            <img *ngIf="objetoalumno" src="{{objetoalumno.foto}}" width="150px" height="200px">
+                            <br>
+                            <div *ngIf="objetoalumno">
+                                <b>{{objetoalumno.primernombre  + ' ' + (objetoalumno.apellidopaterno? objetoalumno.apellidopaterno : '' ) 
+                                    + ' ' + (objetoalumno.apellidomaterno? objetoalumno.apellidomaterno : '' )}}</b>
+                                <br>
+                                <p>{{objetoalumno.nivel + ' '+ (objetoalumno.grado? objetoalumno.grado : '') + (objetoalumno.grupo? objetoalumno.grupo : '-')}}</p>
+                            </div>
+                            <br>
+                            <br>
+                            <b>{{leyenda}}</b>
+                        </div>
+
+                        <div class="col-sm-12 col-md-8 col-lg-9">
+                            <fieldset style="margin-top: 15px;">
+                                <div *ngIf="objetoalumno">
+                                    <div class="md-chip white" (click)="seleccionTaller();"
+                                        [hidden]="tallerespagador || !disponible" style="margin-top: 10px; width:auto;">
+                                        <a> <span class="md-chip-text"> <i style="color: #898989;"
+                                                    class="fa fa-plus"></i>
+                                            </span>
+                                            <p style="margin-top: 5px; margin-left: 30px;">SELECCIONAR TALLERES</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div *ngIf="!disponible">
+                                    <strong>El periodo de inscripción a talleres ha terminado o no se ha
+                                        configurado</strong>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="tabllePaddingLTE no-padding table-responsive"
+                                    style="margin-top: 20px; font-size: 13px;">
+                                    <table class="table table-hover" id="tabla">
+                                        <thead>
+                                            <tr style="color: #fff;">
+                                                <th class="text-center headerTable-top-left"
+                                                    style="margin-bottom: 5px;">
+                                                    Fecha vencimiento
+                                                </th>
+                                                <th class="text-center headerTable" style="margin-bottom: 5px;">
+                                                    Ciclo
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    Taller
+                                                </th>
+
+                                                <th class="text-center headerTable">
+                                                    Profesor
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    Costo
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    L
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    M
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    M
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    J
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    V
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    S
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    D
+                                                </th>
+                                                <th class="text-center headerTable-top-right">
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="font-size: 13px;" *ngFor="let c of datostabla; let i = index">
+                                                <td class="text-center"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{c.alumnoportaller? c.alumnoportaller.fechavencimiento : '-'}}
+                                                    </p>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{c.ciclo}}</p>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{c.taller}}</p>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{c.profesornombre}}</p>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{c.costo}}</p>
+                                                </td>
+                                                <td class="text-center" *ngFor="let h of c.horario; let i = index"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{(h.horainicio? h.horainicio : '')  + ' - ' + (h.horafin? h.horafin : '')}}
+                                                    </p>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <div *ngIf="objetoalumno && opcionregistro">
+                                                        <a (click)="eliminar(c.alumnoportaller.alumnocicloportallerextraid)"
+                                                            [hidden]="tallerespagador || !disponible "><i
+                                                                class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="importe" style="border: 1 px solid gainsboro">
+                                                <td colspan="4" style="text-align: right;"><b>Total a pagar:</b></td>
+                                                <td colspan="9">{{importe.toFixed(2)}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </fieldset>
+                            <div class="row" *ngIf="objetoalumno">
+                                <div class="col-lg-12 col-sm-12 col-12 form-group"
+                                    [hidden]="tallerespagador || !disponible">
+                                    <div class="md-chip white" *ngIf="mostrarboton" style="margin-top: 10px;">
+                                        <a> <span class="md-chip-text"> <i style="color: #898989;"
+                                                    class="fa fa-shopping-cart"></i>
+                                            </span>
+                                            <p style="margin-top: 5px; margin-left: 30px;" (click)="pagoenlinea();">
+                                                Pagar en linea</p>
+                                        </a>
+                                    </div>
+                                    <br>
+                                    <div *ngIf="opcionregistro && opcionregistro.tipopago != 1">
+                                        <button class="btn principal" type="button" (click)="pagoenlinea()"
+                                        style="float: right;">IR A PAGO EN LINEA</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal
+    #modalinscripcion="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}"
+    style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <strong>Selección de talleres</strong>
+                    </h4>
+                </div>
+                <!---->
+                <div class="modal-body">
+                    <div class="col-sm-12" *ngIf="opcionregistro && configuraciontaller">
+                        <h5 *ngIf="opcionregistro.tipopago == 2">
+                            <b>"Por cada {{opcionregistro.notalleres}} taller(es) seleccionado(s) se realizará un pago.
+                                <br>La selección de este taller es una pre inscripción y cuenta con
+                                {{configuraciontaller.horasreservacion}} días naturales
+                                para realizar el pago vía web, en caja o en su aplicación móvil.
+                                <br>Solamente puede asistir al taller después de realizar el pago".</b>
+                        </h5>
+                        <h5 *ngIf="opcionregistro.tipopago == 1">
+                            <b>Usted puede inscribirse a {{opcionregistro.notalleres}} taller(es) por pago.</b>
+                        </h5>
+                        <p>Al seleccionar el taller aparecerá la descripción del mismo.</p>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6 col-sm-12 col-12 form-group">
+                                <div class="tabllePaddingLTE no-padding table-responsive"
+                                    style="margin-top: 20px; font-size: 13px;">
+                                    <table id="data" class="tab table table-hover" cellpading="0" cellspacing="0"
+                                        style="border: 1px solid; border-color: #DADADA;">
+                                        <thead>
+                                            <tr style="color: #fff;">
+                                                <th class="text-center headerTable-top-left"
+                                                    style="margin-bottom: 5px;">
+
+                                                </th>
+                                                <th class="text-center headerTable" style="margin-bottom: 5px;">
+                                                    Taller
+                                                </th>
+                                                <th class="text-center headerTable" style="margin-bottom: 5px;">
+                                                    Costo
+                                                </th>
+                                                <th class="text-center headerTable" style="margin-bottom: 5px;">
+                                                    Lunes
+                                                </th>
+                                                <th class="text-center headerTable" style="margin-bottom: 5px;">
+                                                    Martes
+                                                </th>
+                                                <th class="text-center headerTable" style="margin-bottom: 5px;">
+                                                    Miércoles
+                                                </th>
+                                                <th class="text-center headerTable" style="margin-bottom: 5px;">
+                                                    Jueves
+                                                </th>
+                                                <th class="text-center headerTable-top-right"
+                                                    style="margin-bottom: 5px; ">
+                                                    Viernes
+                                                </th>
+                                                <th class="text-center headerTable-top-right"
+                                                    style="margin-bottom: 5px; ">
+                                                    Sabado
+                                                </th>
+                                                <th class="text-center headerTable-top-right"
+                                                    style="margin-bottom: 5px; ">
+                                                    Domingo
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="font-size: 13px;" *ngFor="let c of arraytaller; let i = index"
+                                                (click)="detalle(c.tallerextracurricularid)">
+                                                <td class="text-center">
+                                                    <input class="all labelCheckBox" type="checkbox" name="activo" *ngIf="opcionregistro"
+                                                        id="select{{c.tallerextracurricularid}}" [disabled]="c.pagado && opcionregistro.tipopago == 2"
+                                                        value=""
+                                                        (click)="detalles($event, c.tallerextracurricularid, c.pagado);" />
+                                                    <label class="checkLabel checkLabelMaterial"
+                                                        for="select{{c.tallerextracurricularid}}"
+                                                        style="color: #757575;">
+                                                    </label>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{c.taller}}</p>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{c.costo}}</p>
+                                                </td>
+                                                <td class="text-center" *ngFor="let h of c.horario; let i = index"
+                                                    style="border: 1px solid; border-color: #DADADA;">
+                                                    <p>{{(h.horainicio? h.horainicio : '')  + ' - ' + (h.horafin? h.horafin : '')}}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12 form-group">
+                                <div style="margin-top: 23px" *ngIf="temp">
+                                    <b>Descripción</b>
+                                    <p>{{temp.descripcion}}</p>
+                                </div>
+                                <div style="margin-top: 10px" *ngIf="temp">
+                                    <b>Profesor</b>
+                                    <p>{{temp.profesornombre}}</p>
+                                </div>
+                                <div style="margin-top: 25px" *ngIf="temp">
+                                    <button class="btn btn-default" type="button"
+                                        style="box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.16) !important; background:  #28a680!important; color: white"
+                                        (click)="descargar(temp.tallerextrareglamentoid)">
+                                        <i class="fa fa-word">&nbsp;Descargar reglamento</i>
+                                    </button>
+                                </div>
+                                <div class="row" [formGroup]="FormPersona">
+                                    <div class="col-sm-12" style="margin-top: 20px;">
+                                        <p align="left" style="margin-top: 10px;">
+                                            <input class="labelCheckBox" type="checkbox" id="aviso" />
+                                            <label class="checkLabel" for="aviso" (click)="DisPreinscribirse();"
+                                                style="color: #757575;">He leido y acepto
+                                                el/los reglamento(s)</label>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="!permiteinscripcion"
+                                        style="margin-top: 20px">
+                                        <div class="group">
+                                            <input type="text" required formControlName="nombrepersona"> <span
+                                                class="highlight"></span> <span class="bar"></span> <label
+                                                class="MaterialLabel">Nombre de la persona</label>
+                                            <small [hidden]="FormPersona.controls.nombrepersona.valid ||
+                                                (FormPersona.controls.nombrepersona.pristine && !submitted)"
+                                                style="color: red">
+                                                Introduzca el nombre de la persona
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" (click)="cancelardetalle();">Cerrar</button>
+                    <button class="btn principal" type="submit"
+                        (click)="VerificarGuardado(temp.tallerextrareglamentoid);"
+                        [disabled]="permiteinscripcion">Preinscribirse</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<solicitudCobro #solicitudCobro (ActualizarDocumentosPorPagar)="buscarTalleres(alumnoid)"></solicitudCobro>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal
+    style="background: rgba(0,0,0,0.5);" #modalPago="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-body" style="padding: 0px !important;">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <h3 class="text-uppercase">Proceso de pago</h3>
+                    </h4>
+                </div>
+                <div style="height: 32px"></div>
+                <div class="modal-body" style="padding: 0px !important;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="group text-center">
+                                    <h4>INSTRUCCIONES:</h4>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="col-12">
+                                <ol>
+                                    <li>
+                                        <span>Para realizar el pago de los cargos seleccionados, presione el botón
+                                            <strong>PAGAR</strong>.</span>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <span>Al hacerlo, se abrirá en una nueva pestaña del navegador el sitio web de
+                                            la institución bancaria.</span>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <span>Una vez completado el proceso de pago, valide el movimiento en la consulta
+                                            de documentos pagados.</span>
+                                    </li>
+                                </ol>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <button class="btn btnPrincipal" (click)="GoTobank()">PAGAR</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="height: 32px;"></div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default btnBase" type="button" (click)="cerrarModal()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal
+    style="background: rgba(0,0,0,0.5);" #modalReglamento="bs-modal"
+    [config]="{'backdrop':'static', 'keyboard': false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-body" style="padding: 0px !important;">
+                <div class="modal-header">
+                    <div class="col-sm-12">
+                        <h3 class="text-uppercase">Reglamento</h3>
+                        <div style="float: right;">
+                            <button class="btn btn-default btnBase" type="button"
+                                (click)="modalReglamento.hide()">Cerrar</button>
+                            <button class="btn principal" type="button" (click)="guardar()">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" style="padding: 0px !important;">
+                    <div style="height: 600px">
+                        <iframe [hidden]="!formato" style="height: 100%; width: 100%" frameborder="0" src=''>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default btnBase" type="button"
+                        (click)="modalReglamento.hide()">Cerrar</button>
+                    <button class="btn principal" type="button" (click)="guardar()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

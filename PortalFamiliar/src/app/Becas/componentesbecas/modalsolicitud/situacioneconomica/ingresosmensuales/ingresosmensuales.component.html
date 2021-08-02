@@ -1,0 +1,189 @@
+<div class="divider16"></div>
+<div><h4>{{nombre}}</h4></div>
+<!-- personas que aportan ingresos -->
+<div class="row">
+    <div class="col-sm-12">
+        <div style="height: 8px"></div>
+    </div>
+    <div class="col-sm-12">
+        <form [formGroup]="ingresos">
+            <!-- datos del vehículo -->
+            <div class="row">
+
+                <!-- Mingresos mensuales bruto-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="ingresomensualbruto" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Ingreso bruto (Mensual) </label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.ingresomensualbruto.valid || (ingresos.controls.ingresomensualbruto.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir ingreso bruto
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- rentas-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="rentas" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Rentas (Mensual)</label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.rentas.valid || (ingresos.controls.rentas.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir rentas
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- fondo de ahorro-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="fondodeahorro" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Fondo de ahorro (Anual)</label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.fondodeahorro.valid || (ingresos.controls.fondodeahorro.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir fondo de ahoro
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Aingreso mensual neto-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="ingresomensualneto" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Ingreso neto (Mensual)</label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.ingresomensualneto.valid || (ingresos.controls.ingresomensualneto.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir ingreso neto
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>     
+
+                <!-- donativo familiar mensual-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="donativo" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Donativo familiar (Mensual)</label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.donativo.valid || (ingresos.controls.donativo.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir donativo
+                    </small>
+                </div>
+
+
+                <div class="rowSeperador hidden-md-up"></div>
+                <!-- aguinaldo-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="aguinaldo" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Aguinaldo (Anual)</label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.aguinaldo.valid || (ingresos.controls.aguinaldo.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir aguinaldo
+                    </small>
+                </div>
+                
+                    
+         
+            </div>
+
+  <div class="row">
+      
+         <!-- otros ingresos-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="otrosingresos" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Otros ingresos(Mensual)</label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.otrosingresos.valid || (ingresos.controls.otrosingresos.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir otros ingresos
+                    </small>
+                </div>
+                
+        <div class="rowSeperador hidden-md-up"></div>
+          
+        
+              <!-- interesespor inversion-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="interesesporinversion" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Intereses por inversion</label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.interesesporinversion.valid || (ingresos.controls.interesesporinversion.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir interes por inversión
+                    </small>
+                </div>
+        
+            <div class="rowSeperador hidden-md-up"></div>
+            
+                <!-- utilidades-->
+                <div class="col-sm-12 col-md-6 col-lg-3 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="utilidades" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Utilidades (Anual)</label>
+                    </div>
+
+                    <small [hidden]="ingresos.controls.utilidades.valid || (ingresos.controls.utilidades.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir utilidades
+                    </small>
+                </div>
+  </div>
+
+
+
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,504 @@
+<div class="row">
+  <div class="col-lg-12">
+
+    <section class="widget beca">
+
+      <div class="widget-body" [ngClass]="parametrosModal.configpestana.datospadres.editable ? '' : 'soloLectura'">
+
+        <!-- título -->
+        <header>
+          <h3>Dependientes económicos</h3>
+        </header>
+        <div class="divider16"></div>
+
+        <!-- tab información -->
+        <div class="widget-body">
+
+          <legend></legend>
+
+
+          <!-- sección título -->
+          <div class="row">
+            <div class="col-12">
+              <h4>Hijos</h4>
+            </div>
+          </div>
+
+          <div class="divider16"></div>
+
+          <!-- tabla de hijo -->
+          <div class="row">
+            <div class="col-12">
+
+              <div class="tabllePaddingLTE no-padding dependientestab table-responsive dependientestab" style="padding-right: 0px !important; padding-left: 0px !important; padding-bottom: 0px !important; font-size: 13px;">
+                <table class="table table-hover" id="tablaHijo" style="width:100%">
+                  <thead>
+                    <tr class="text-center" style="color: white;">
+                      <th class="text-center headerTable-top-left">
+                        Nombre
+                      </th>
+                      <th class="text-center headerTable">
+                        Escuela
+                      </th>
+                      <th class="text-center headerTable">
+                        Nivel
+                      </th>
+                      <th class="text-center headerTable">
+                        Grado
+                      </th>
+                      <th class="text-center headerTable" *ngIf="sistema==1">
+                        Tiene beca
+                      </th>
+                      <th class="text-center headerTable" *ngIf="sistema==1">
+                        Porcentaje
+                      </th>
+                      <th class="text-center headerTable" *ngIf="sistema==1">
+                        Otorgado por
+                      </th>
+                      <th class="text-center headerTable">
+                        Costo anual (mensualidades + inscripción)
+                      </th>
+                      <th class="text-center headerTable-top-right">
+                        Acciones
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="font-size: 13px;" *ngFor="let h of datoshijos; let i = index">
+                      <td class="text-center">
+                        <p>{{h.nombrecompleto}}</p>
+                      </td>
+                      <td class="text-center">
+                        <p>{{h.nombreescuela? h.nombreescuela : '-'}}</p>
+                      </td>
+                      <td class="text-center">
+                        <p>{{h.nivel? h.nivel : '-'}}</p>
+                    </td>
+                    <td class="text-center">
+                        <p>{{h.grado? h.grado : '-'}}</p>
+                    </td>
+                      <td class="text-center" *ngIf="sistema==1">
+                        <i [ngClass]="(h.tienebeca == 1) ? 'fa fa-check-square-o fa-lg' : 'fa fa-square-o fa-lg'"></i>
+                      </td>
+                      <td class="text-center" *ngIf="sistema==1">
+                        <p>{{h.porcentaje? h.porcentaje:'-'}}</p>
+                      </td>
+                      <td class="text-center" *ngIf="sistema==1">
+                        <p>{{h.otorgadopor? h.otorgadopor:'-'}}</p>
+                      </td>
+                      <td class="text-center">
+                        <p *ngIf="h.costoanual">$ {{h.costoanual | number: '1.0': 'notEmpty': '0'}}</p>
+                        <p *ngIf="!h.costoanual">-</p>
+                      </td>
+                      <td class="text-center">
+                        <a><i class="fa fa-trash fa-lg" aria-hidden="true" (click)="deletehijo(h)"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- botón agregar hijo -->
+          <div class="text-center" [hidden]="!parametrosModal.configpestana.dependienteseconomicos.editable">
+            <div style="margin-top: 10px" [hidden]="newhijo">
+              <button class=" btnGeneral btn-sm" (click)="addhijo()">
+                <span class="fa fa-plus"></span>
+                <span style="margin-left: 5px"> Agregar </span>
+              </button>
+            </div>
+          </div>
+
+
+          <!-- Agregar hijo -->
+          <div class="row">
+
+            <div class="col-12">
+              <div style="height: 8px"></div>
+            </div>
+
+            <div class="col-sm-12">
+
+              <form [hidden]="newhijo == false" [formGroup]="newhijoform">
+
+                <!-- Nombre y escuela -->
+                <div class="row">
+                  <!-- Nombre -->
+                  <div class="col-sm-8">
+
+                    <div class="group">
+                      <input type="text" required formControlName="nombrecompleto" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(newhijoform.controls.nombrecompleto)">
+                      <span class="highlight"></span> <span class="bar"></span>
+                      <label class="MaterialLabel">Nombre</label>
+                    </div>
+
+                    <small [hidden]="newhijoform.controls.nombrecompleto.valid || (newhijoform.controls.nombrecompleto.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir un nombre
+                    </small>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- Escuela -->
+                  <div class="col-sm-4">
+
+                    <div class="group">
+                      <input type="text" required formControlName="nombreescuela" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(newhijoform.controls.nombreescuela)">
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Escuela</label>
+                    </div>
+                    <small [hidden]="newhijoform.controls.nombreescuela.valid || (newhijoform.controls.nombreescuela.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir una escuela
+                    </small>
+
+                  </div>
+
+                </div>
+
+                <div class="rowSeperador"></div>
+
+                <!-- Nilvel, grado y costo anual -->
+                <div class="row">
+
+                  <!-- nivel -->
+                  <div class="col-sm-4">
+
+                    <div class="group">
+                      <input type="text" required formControlName="nivel" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(newhijoform.controls.nivel)">
+                      <span class="highlight"></span> <span class="bar"></span>
+                      <label class="MaterialLabel">Nivel</label>
+                    </div>
+
+                    <small [hidden]="newhijoform.controls.nivel.valid || (newhijoform.controls.nivel.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir un nivel
+                    </small>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- grado -->
+                  <div class="col-sm-4">
+
+                    <div class="group">
+                      <input type="text" required formControlName="grado" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(newhijoform.controls.grado)">
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Grado</label>
+                    </div>
+
+                    <small [hidden]="newhijoform.controls.grado.valid || (newhijoform.controls.grado.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir un grado
+                    </small>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- costo anual -->
+                  <div class="col-sm-4">
+
+                    <div class="group">
+                      <input type="text" required formControlName="costoanual" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision: 0 }">
+                      <span class="highlight"></span> <span class="bar"></span>
+                      <label class="MaterialLabel">Costo anual</label>
+                    </div>
+
+                    <small [hidden]="newhijoform.controls.costoanual.valid || (newhijoform.controls.costoanual.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir el costo anual
+                    </small>
+
+                  </div>
+
+
+                  <div class="rowSeperador hidden-sm-up" *ngIf="sistema==1"></div>
+
+                  <!-- tiene beca -->
+                  <div class="col-sm-4" *ngIf="sistema==1">
+
+                    <div class="group">
+                      <small>Tiene beca</small>
+                      <sui-select style="width: 100%;" class="selection" placeholder="Tiene beca" required
+                        formControlName="tienebeca" [options]="selectTienebeca" labelField="nombre" valueField="id"
+                        #becatiene>
+                        <sui-select-option *ngFor="let option of becatiene.filteredOptions" [value]="option"></sui-select-option>
+                      </sui-select>
+                    </div>
+
+                    <small [hidden]="newhijoform.controls.tienebeca.valid || (newhijoform.controls.tienebeca.pristine && !submitted)"
+                      style="   color: red">
+                      Seleccionar tiene beca
+                    </small>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up" *ngIf="sistema==1 && mostrarcampo==true"></div>
+
+                  <!-- porcentaje -->
+                  <div class="col-sm-4" *ngIf="sistema==1 && mostrarcampo==true">
+
+                    <div class="group" style="margin-top:25px">
+                      <input type="text" required formControlName="porcentaje" [textMask]="{mask: spercentMask}"
+                       (keyup)="Limitporcentaje($event)">
+                      <span class="highlight"></span> <span class="bar"></span>
+                      <label class="MaterialLabel">Porcentaje</label>
+                    </div>
+
+                    <small [hidden]="newhijoform.controls.porcentaje.valid || (newhijoform.controls.porcentaje.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir porcentaje
+                    </small>
+
+                  </div>
+
+                  <!-- otorgado por -->
+                  <div class="col-sm-4" *ngIf="sistema==1  && mostrarcampo==true">
+
+                    <div class="group" style="margin-top:25px">
+                      <input type="text" required formControlName="otorgadopor" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(newhijoform.controls.otorgadopor)">
+                      <span class="highlight"></span> <span class="bar"></span>
+                      <label class="MaterialLabel">Otorgado por</label>
+                    </div>
+
+                    <small [hidden]="newhijoform.controls.otorgadopor.valid || (newhijoform.controls.otorgadopor.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir quien otorgó
+                    </small>
+
+                  </div>
+
+                </div>
+
+                <div class="rowSeperador"></div>
+
+                <!-- Botones de operación -->
+                <div class="row">
+                  <div class="col-12">
+                    <div class="pull-right">
+                      <button class="btn btn-default btn-sm" type="button" (click)="removehijo()" style="margin-right: 8px">Cancelar</button>
+                      <button class="btn principal btn-sm" type="button" (click)="guardarHijo()">Agregar</button>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <div class="divider16"></div>
+          <div class="divider16"></div>
+
+          <!-- título -->
+          <div class="row">
+            <div class="col-12">
+              <h4>Otras personas que dependan del ingreso familiar</h4>
+            </div>
+          </div>
+
+          <div class="divider16"></div>
+
+          <!-- tabla de personas -->
+          <div class="row">
+            <div class="col-12">
+              <div class="tabllePaddingLTE no-padding dependientestab table-responsive dependientestab" style="padding-bottom: 0px !important; padding-left: 0px !important; padding-right: 0px !important; font-size: 13px;">
+                <table class="table table-hover" id="tablaHijo" style="width:100%">
+                  <thead>
+                    <tr class="text-center" style="color: white;">
+                      <th class="text-center headerTable-top-left">
+                        Nombre
+                      </th>
+                      <th class="text-center headerTable">
+                        Ocupación
+                      </th>
+                      <th class="text-center headerTable">
+                        Relación
+                      </th>
+                      <th class="text-center headerTable" *ngIf="sistema==1">
+                        Edad
+                      </th>
+                      <th class="text-center headerTable" *ngIf="sistema==1">
+                        Estado civil
+                      </th>
+                      <th class="text-center headerTable-top-right">
+                        Acciones
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="font-size: 13px;" *ngFor="let c of datosotrosdp">
+                      <td class="text-center">
+                        <p>{{c.nombrecompleto}}</p>
+                      </td>
+                      <td class="text-center">
+                        <p>{{c.ocupacion}}</p>
+                      </td>
+                      <td class="text-center">
+                        <p>{{c.relacion}}</p>
+                      </td>
+                      <td class="text-center" *ngIf="sistema==1">
+                        <p>{{c.edad}}</p>
+                      </td>
+                      <td class="text-center" *ngIf="sistema==1">
+                        <p>{{c.situacionconyugalid? c.situacionconyugalid.descripcion: '-'}}</p>
+                      </td>
+                      <td class="text-center" >
+                        <a (click)="deleteDependiente(c)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- botón persona  -->
+          <div class="text-center" [hidden]="!parametrosModal.configpestana.datospadres.editable">
+            <div style="margin-top: 10px" [hidden]="newdependiente">
+              <button class=" btnGeneral btn-sm" (click)="adddependiente()">
+                <span class="fa fa-plus"></span>
+                <span style="margin-left: 5px"> Agregar </span>
+              </button>
+            </div>
+          </div>
+
+          <div class="divider16"></div>
+
+          <!-- agregar persona -->
+          <div class="row">
+
+            <div class="col-sm-12">
+              <div style="height: 8px"></div>
+            </div>
+
+            <div class="col-sm-12">
+
+              <form [hidden]="newdependiente == false" [formGroup]="hijosform">
+
+                <!-- Nombre, Ocupación y relación -->
+                <div class="row">
+
+                  <!-- Nombre -->
+                  <div class="col-sm-4">
+
+                    <div class="group">
+                      <input type="text" required formControlName="nombrecompleto" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(hijosform.controls.nombrecompleto)">
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Nombre</label>
+                    </div>
+
+                    <small [hidden]="hijosform.controls.nombrecompleto.valid || (hijosform.controls.nombrecompleto.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir un nombre
+                    </small>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- Ocupación -->
+                  <div class="col-sm-4">
+                    <div class="group">
+                      <input type="text" required formControlName="ocupacion" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(hijosform.controls.ocupacion)">
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+
+                      <label class="MaterialLabel">Ocupación</label>
+                    </div>
+
+                    <small [hidden]="hijosform.controls.ocupacion.valid || (hijosform.controls.ocupacion.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir una ocupación
+                    </small>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- Relacion -->
+                  <div class="col-sm-4">
+                    <div class="group">
+                      <input type="text" required formControlName="relacion" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(hijosform.controls.relacion)">
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Relación</label>
+                    </div>
+
+                    <small [hidden]="hijosform.controls.relacion.valid || (hijosform.controls.relacion.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir la relación
+                    </small>
+                  </div>
+
+                  
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- edad -->
+                  <div class="col-sm-4" *ngIf="sistema==1">
+                    <div class="group" style="margin-top: 25px">
+                      <input type="text" required formControlName="edad">
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Edad</label>
+                    </div>
+
+                    <small [hidden]="hijosform.controls.edad.valid || (hijosform.controls.edad.pristine && !submitted)"
+                      style="   color: red">
+                      Introducir edad
+                    </small>
+                  </div>
+
+                  
+                  <div class="rowSeperador hidden-sm-up"></div>
+                  <!-- estado civil -->
+                  <div class="col-sm-4"*ngIf="sistema==1"> 
+                    <div class="group">
+                      <small>Estado Civil</small>
+                      <sui-select style="width: 100%;" class="selection" placeholder="estado civil" required
+                        formControlName="situacionconyugalid" [options]="selecsituacionConyugal" labelField="descripcion" valueField="situacionconyugalid"
+                        #selectcivil>
+                        <sui-select-option *ngFor="let option of selectcivil.filteredOptions" [value]="option"></sui-select-option>
+                      </sui-select>
+                    </div>
+
+                    <small [hidden]="hijosform.controls.situacionconyugalid.valid || (hijosform.controls.situacionconyugalid.pristine && !submitted)"
+                      style="   color: red">
+                     Seleccionar estado civil
+                    </small>
+                  </div>
+                </div>
+
+                <div class="rowSeperador "></div>
+
+                <!-- Botones operación -->
+                <div class="row">
+                  <div class="col-12">
+                    <div class="pull-right">
+                      <button class="btn btn-default btn-sm" type="button" style="margin-right: 8px" (click)="removedependiente()">Cancelar</button>
+                      <button class="btn principal btn-sm" type="button" (click)="guardarDependiente()">Agregar</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rowSeperador "></div>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

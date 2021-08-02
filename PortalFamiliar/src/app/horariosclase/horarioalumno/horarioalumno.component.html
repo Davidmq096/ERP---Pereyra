@@ -1,0 +1,162 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h3> {{alumno.grado}} {{alumno.nivel}} {{alumno.grupo}} </h3>
+            </header>
+            <div class="widget-body">
+                <legend></legend>
+                <fieldset>
+                    <div class="tabllePaddingLTE no-padding table-responsive"
+                        style="margin-top: 20px; font-size: 13px;">
+                        <table  class="table table-hover"
+                            id="tablaHorariosDetalle">
+                            <thead>
+                                <tr style="color: #fff;">
+                                    <th class="text-center headerTable" class="no-sort text-center"
+                                        style="background: #443E42; color: white;">
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Lunes
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Martes
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Miércoles
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Jueves
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Viernes
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let cc of arrayentidad">
+                                <tr style="font-size: 13px;" *ngFor="let c of cc">
+                                    <td class="text-center" style="vertical-align: middle;">
+                                        <p>{{c.hora}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <div *ngFor="let h of c.Lunes">
+                                            <div *ngIf="h.taller == 0 && !h.subgrupo">
+                                                <strong>{{h.materia? h.materia : '-'}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.grupo}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.taller == 1">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.subgrupo">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div *ngFor="let h of c.Martes">
+                                            <div *ngIf="h.taller == 0 && !h.subgrupo">
+                                                <strong>{{h.materia? h.materia : '-'}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.grupo}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.taller == 1">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.subgrupo">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div *ngFor="let h of c.Miercoles">
+                                            <div *ngIf="h.taller == 0 && !h.subgrupo">
+                                                <strong>{{h.materia? h.materia : '-'}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.grupo}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.taller == 1">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.subgrupo">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div *ngFor="let h of c.Jueves">
+                                            <div *ngIf="h.taller == 0 && !h.subgrupo">
+                                                <strong>{{h.materia? h.materia : '-'}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.grupo}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.taller == 1">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.subgrupo">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div *ngFor="let h of c.Viernes">
+                                            <div *ngIf="h.taller == 0 && !h.subgrupo">
+                                                <strong>{{h.materia? h.materia : '-'}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.grupo}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.taller == 1">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                            <div *ngIf="h.subgrupo">
+                                                <strong>{{h.grupo}}</strong>
+                                                <br>
+                                                <small class="text-muted">{{h.profesor}} ({{h.materia? h.materia : '-'}})</small>
+                                                <br>{{h.materia? h.inicio : '-'}} - {{h.materia? h.fin : '-'}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" (click)="terminar()">Terminar</button>
+                    </div>
+                </fieldset>
+            </div>
+        </section>
+    </div>
+</div>

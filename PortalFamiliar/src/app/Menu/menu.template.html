@@ -1,0 +1,93 @@
+<nav sidebar id="sidebar" role="navigation" class="sidebar" *ngIf="router.url != 'Menu/Inicio' && router.url != '/Menu/Inicio'" [ngClass]="{hide: (router.url == 'Menu/Inicio' || router.url == '/Menu/Inicio')}">
+
+</nav>
+
+<nav navbar (toggleSidebarEvent)="toggleSidebarListener($event)" [barraLateral]="router.url != 'Menu/Inicio' && router.url != '/Menu/Inicio'"
+     (toggleChatEvent)="toggleChatListener()" class="page-controls navbar navbar-dashboard" [ngClass]="{'sinSideBar':  !(router.url != 'Menu/Inicio' && router.url != '/Menu/Inicio')}">
+</nav>
+
+<div class="content-wrap" id="content-wrap" [ngClass]="{'sinSideBar': !(router.url != 'Menu/Inicio' && router.url != '/Menu/Inicio')}">
+  <main id="content" class="content" role="main" style="padding-left: 32px; padding-right: 32px">
+
+    <div class="loading-overlay" #spinnerElement>
+      <div class="sk-fading-circle">
+        <div class="sk-circle1 sk-circle"></div>
+        <div class="sk-circle2 sk-circle"></div>
+        <div class="sk-circle3 sk-circle"></div>
+        <div class="sk-circle4 sk-circle"></div>
+        <div class="sk-circle5 sk-circle"></div>
+        <div class="sk-circle6 sk-circle"></div>
+        <div class="sk-circle7 sk-circle"></div>
+        <div class="sk-circle8 sk-circle"></div>
+        <div class="sk-circle9 sk-circle"></div>
+        <div class="sk-circle10 sk-circle"></div>
+        <div class="sk-circle11 sk-circle"></div>
+        <div class="sk-circle12 sk-circle"></div>
+      </div>
+    </div>
+
+    <div class="router-component" #routerComponent >
+      <div style="margin-top: 5px;">
+
+        <router-outlet></router-outlet>
+
+      </div>
+    </div>
+
+
+
+  </main>
+
+
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #modalProsa="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+
+    <div class="modal-dialog modal-sm" style=" height: auto">
+
+        <!-- body -->
+        <div class="modal-content">
+            <div class="modal-body">
+
+
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <span style="font-size: 16pt">
+                            Usted será redirigido al portal de PROSA
+                        </span>
+                    </div>
+                </div>
+                <br><br>
+                <div class="col-sm-12" *ngIf="bloqueopago" style="margin-top: 20px">
+                  <fieldset>
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          {{observacionespago}}
+                          <br> Observaciones: <b>{{observacionesbloqueo}}</b>
+                      </div>
+                  </fieldset>
+              </div>
+              <br><br>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <button class="btn btnPrincipal" type="button" (click)="IrProsa()">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+
+             </div>
+
+            <!-- footer -->
+            <div class="modal-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default  btnBase" type="button" (click)="modalProsa.hide()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

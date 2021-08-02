@@ -1,0 +1,62 @@
+<div class="container-fluid no-gutters" style="background: #007336;">
+
+    <!-- .navbar-header contains links seen on xs & sm screens -->
+    <div class="navbar-header hidden-md-up" [hidden]="!barraLateral" style="position: absolute; left: 9px">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item">
+
+                <ng-template #sidebarToggleTooltip>
+                    Oculta y muestra la barra lateral
+                </ng-template>
+
+
+                <!-- shown on xs & sm screen. collapses and expands navigation -->
+                <a (click)="toggleSidebar('collapse')" class="hidden-lg-up nav-link"  data-html="true" title="Oculta y muestra la barra lateral" data-placement="bottom" style="color: #fff !important; height: 70px">
+                    <i class="fa fa-bars" style="font-size: 24px; margin-top: 6px"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- portal familiar -->
+    <div class="row" >
+        <div class="col-12">
+
+            <!-- Nombre de usuario -->
+            <div  class="usuarioNavbar" >
+
+                <div class="input-group">
+                    <div  class="input-group-addon addonUsr" >
+                        <!-- foto -->
+                        <img src="{{foto}}" class="imgUsuario" *ngIf="foto">
+
+                        <!-- sin foto -->
+                        <div  *ngIf="!foto" class="usuarioNoFoto">
+                            <div class="usr">
+                                <span class="fa fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div  class="hidden-sm-down control-form nombreUsrCotainer">
+                        <div  class="nombreUsr">
+                          {{menu.GetNombreUsuario()}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" loginHeader" >
+                <h1  class="text-center" >
+                    BIENVENIDO (A)
+                </h1>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,307 @@
+<!-- sección título -->
+<div class="row">
+    <div class="col-12">
+        <h4>Propiedades inmuebles de la familia</h4>
+    </div>
+</div>
+
+<div class="divider16"></div>
+
+<!-- Tabla de inmuebles -->
+<div class="row">
+    <div class="col-12">
+
+        <div class="tabllePaddingLTE no-padding dependientestab table-responsive dependientestab" style="padding: 0px !important; font-size: 13px;">
+            <table class="table table-hover" id="tablaHijo" style="width:100%">
+                <thead>
+                    <tr class="text-center" style="color: white;">
+                        <th class=" headerTable-top-left">
+                            Tipo de propiedad
+                        </th>
+                        <th class="text-center headerTable">
+                            Mts de terreno
+                        </th>
+                        <th class="text-center headerTable">
+                            Mts de construcción
+                        </th>
+                        <th class="text-center headerTable">
+                            Valor aproximado
+                        </th>
+                        <th class="text-center headerTable">
+                            Estatus
+                        </th>
+                         <th class="text-center headerTable" *ngIf="sistema==1">
+                            Propiedad / Crédito a nombre de
+                        </th>
+                          <th class="text-center headerTable" *ngIf="sistema==2">
+                              Propiedad / Crédito /<br> Contrato a nombre de
+                        </th>
+                        <th class="text-center headerTable">
+                            Ubicación
+                        </th>
+                        <th class="text-center headerTable">
+                            Domicilio actual
+                        </th>
+                        <th class="text-center headerTable-top-right">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="font-size: 13px;" *ngFor="let h of datospropiedades; let i = index">
+                        <td class="">
+                            <p>{{h.tipopropiedad}}</p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{h.mtsterreno}}</p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{h.mtsconstruccion}}</p>
+                        </td>
+                        <td class="text-center">
+                            ${{h.valoraproximado | number: '1.0': 'notEmpty': '0'}}
+                        </td>
+                        <td class="text-center">
+                            <p>{{h.estatusid.descripcion}}</p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{(h.creditoanombrede==null) ? h.propiedadanombrede : h.creditoanombrede}}
+                            </p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{h.ubicacion}}</p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{(h.domicilioactual==1) ? 'SI' : 'NO'}}</p>
+                        </td>
+                        <td class="text-center">
+                            <a>
+                                <i class="fa fa-trash fa-lg" aria-hidden="true" (click)="deletePropiedad(h)"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<!-- Botón para agregar inmueble -->
+<div class="text-center" [hidden]="!editable">
+    <div style="margin-top: 10px" [hidden]="nuevo">
+        <button class=" btnGeneral btn-sm"  (click)="nuevo = true">
+                <span class="fa fa-plus"></span>
+            <span style="margin-left: 5px"> Agregar </span>
+        </button>
+    </div>
+</div>
+
+<!-- Agregar inmueble -->
+<div class="row">
+
+    <div class="col-sm-12">
+        <div style="height: 8px"></div>
+    </div>
+
+    <div class="col-sm-12">
+
+        <form class="form-horizontal" [formGroup]="forminmueble" [hidden]="!nuevo">
+
+            <div class="row">
+
+                <!-- tipo de inmueble -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+
+                    <div class="group">
+                        <input type="text" required formControlName="tipopropiedad" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(forminmueble.controls.tipopropiedad)">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Tipo de inmueble</label>
+                    </div>
+
+                    <small [hidden]="forminmueble.controls.tipopropiedad.valid || (forminmueble.controls.tipopropiedad.pristine && !submitted)" style="   color: red">
+                        Introducir el tipo de inmueble
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- tipo de terreno -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="margenTopSelect hidden-md-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="mtsterreno" [textMask]="{mask: numberMask, guide:false}">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Mts de terreno</label>
+                    </div>
+
+                    <small [hidden]="forminmueble.controls.mtsterreno.valid || (forminmueble.controls.mtsterreno.pristine && !submitted)" style="   color: red">
+                        Introducir mts de terreno
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- tipo de contruccion -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+
+                    <div class="group">
+                        <input type="text" required formControlName="mtsconstruccion" [textMask]="{mask: numberMask, guide:false}">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Mts de construcción</label>
+                    </div>
+
+                    <small *ngIf="sistema==1" [hidden]="forminmueble.controls.mtsconstruccion.valid || (forminmueble.controls.mtsconstruccion.pristine && !submitted)" style="   color: red">
+                        Introducir mts de construcción
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-down"></div>
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Valor aproximado -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+
+                    <div class="margenTopSelect hidden-md-down"></div>
+                    <div class="margenTopSelect hidden-sm-down"></div>
+
+                    <div class="group">
+                        <input type="text" required formControlName="valoraproximado" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Valor aproximado</label>
+                    </div>
+
+                    <small [hidden]="forminmueble.controls.valoraproximado.valid || (forminmueble.controls.valoraproximado.pristine && !submitted)" style="   color: red">
+                        Introducir el valor aproximado
+                    </small>
+
+                </div>
+
+                <div class="rowSeperador hidden-lg-up"></div>
+
+                <!-- Estatus del inmueble -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+
+                    <label class="MaterialLabel labelSelect">
+                        Estatus del inmueble
+                    </label>
+
+                    <div class="margenTopSelect"></div>
+
+
+                    <sui-select style="width: 100%;" class="selection" formControlName="estatusid" required placeholder="Estatus del inmueble"
+                                [options]="selectestatusinmueble" (selectedOptionChange)="validaEstatus()" labelField="descripcion"
+                                valueField="estatusid" #selectcasa>
+                        <div class="divider" style="border-color: transparent"></div>
+                        <div class="ui icon search input">
+                            <i class="search icon"></i>
+                            <input suiSelectSearch type="text">
+                        </div>
+                        <sui-select-option *ngFor="let option of selectcasa.filteredOptions" [value]="option"></sui-select-option>
+                    </sui-select>
+
+                    <small [hidden]="forminmueble.controls.estatusid.valid || (forminmueble.controls.estatusid.pristine && !submitted)" style="   color: red">
+                        Seleccione un estatus
+                    </small>
+
+                </div>
+
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Espacio para crédito o propiedad  -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12" [hidden]="estatus">
+                    <div class="margenTopSelect hidden-md-up"></div>
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <input type="text" [disabled]="true" style="background: lightgray">
+                </div>
+
+                <!-- Crédito a nombre de  -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12" [hidden]="sistema==1 ? (estatus == 1 || estatus == null ): (estatus == 1 || estatus == 3 || estatus == null)">
+                     <div class="margenTopSelect hidden-md-up"></div>
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" formControlName="creditoanombrede" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(forminmueble.controls.creditoanombrede)">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                         <label class="MaterialLabel" *ngIf="sistema==1">Crédito a nombre de:</label>
+                        <label class="MaterialLabel" [hidden]="estatus == 1 ||estatus == 2 ||estatus == 3 || estatus == null"  *ngIf="sistema==2">Crédito a nombre de:</label>
+                         <label class="MaterialLabel" [hidden]="estatus == 1 ||estatus == 3 ||estatus == 4 || estatus == null"  *ngIf="sistema==2">Contrato a nombre de:</label>
+                    </div>
+
+                    <small [hidden]="forminmueble.controls.creditoanombrede.valid || (forminmueble.controls.creditoanombrede.pristine && !submitted)" style="   color: red">
+                        Introducir el nombre
+                    </small>
+                </div>
+
+                <!-- Propiedad a nombre de  -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12" [hidden]="sistema==1 ? (estatus != 1 || estatus == null):(estatus != 1 && estatus !=3 || estatus == null)">
+                     <div class="margenTopSelect hidden-md-up"></div>
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" formControlName="propiedadanombrede" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(forminmueble.controls.propiedadanombrede)">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Propiedad a nombre de:</label>
+                    </div>
+
+                    <small [hidden]="forminmueble.controls.propiedadanombrede.valid || (forminmueble.controls.propiedadanombrede.pristine && !submitted)" style="   color: red">
+                        Introducir el nombre
+                    </small>
+                </div>
+
+
+                <div class="rowSeperador"></div>
+
+
+
+                <!-- Valor ubiacion -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+
+                    <div class="group">
+                        <input type="text" required formControlName="ubicacion" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(forminmueble.controls.ubicacion)">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Ubicación</label>
+                    </div>
+
+                    <small [hidden]="forminmueble.controls.ubicacion.valid || (forminmueble.controls.ubicacion.pristine && !submitted)" style="   color: red">
+                        Introducir ubicación
+                    </small>
+
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Domicilio actual -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-md-down"></div>
+                    <div class="" style="margin-top: 15px"></div>
+
+                    <div class="text-center">
+                        <input class="labelCheckBox" formControlName="domicilioactual" type="checkbox" id="markall">
+                        <label class="checkLabel checkLabelMaterial" style="color:black !important;" for="markall">{{sistema=="2"? 'Domicilio actual': 'Habitan en este domicilio'}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rowSeperador"></div>
+            <!-- botones de operación -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-sm" style="margin-right: 8px" type="button" (click)="removeinmueble()">Cancelar</button>
+                        <button class="btn principal btn-sm" type="button" (click)="guardarInmueble()">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

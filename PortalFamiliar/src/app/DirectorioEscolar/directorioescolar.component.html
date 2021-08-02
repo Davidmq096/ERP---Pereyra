@@ -1,0 +1,54 @@
+        <div class="row">
+        <div class="col-lg-12">
+            <section class="widget">
+                <header>
+                    <h1> Directorio escolar </h1>
+                </header>
+                <div class="widget-body">
+                    <fieldset>
+                        <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover" id="tablaDepartamento">
+                                   <thead>
+                                    <tr style="color: #fff;">
+                                        <th class="text-center headerTable" class="no-sort text-center" style="background: #443E42; color: white;">
+                                            Departamento
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Correo electrónico
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Teléfono
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Extensión
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="font-size: 13px;" *ngFor="let c of arrayentidad">
+
+                                        <td class="text-center">
+                                            <p>{{c.nombredepartamento}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                          <a href="mailto: {{c.correoelectronico}}">{{c.correoelectronico}}</a>
+                                        </td>
+                                        <td class="text-center">
+                                          <p>{{c.telefono}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                          <p>{{c.extension? c.extension : '-'}}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+    
+            </section>
+        </div>
+    </div>
+    
+
+    

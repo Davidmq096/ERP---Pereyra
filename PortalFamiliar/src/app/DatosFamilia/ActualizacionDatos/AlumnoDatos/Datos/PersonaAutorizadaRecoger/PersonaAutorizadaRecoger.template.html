@@ -1,0 +1,151 @@
+<section class="widget">
+  <h5 class="text-uppercase">Personas autorizadas para recoger al niño además de mamá y papá</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+  <div style="margin-top: 15px">
+    <button class=" btnGeneral btn-sm" (click)="AbrirAutorizadoRecoger('Agregar', null)">
+      <span class="fa fa-plus"></span>
+      <span style="margin-left: 5px"> Agregar </span>
+    </button>
+  </div>
+
+  <div class="margenSeparador"></div>
+
+  <div class="tabllePaddingLTE  table-responsive" style="margin-top: 20px; font-size: 13px;">
+
+    <table datatable [dtOptions]="dtOptionsPersonaAutorizada" [dtTrigger]="dtTriggerPersonaAutorizada" class="table table-hover" id="personaAutorizada">
+      <thead>
+      <tr style="color: #fff;">
+
+        <th class="headerTable-top-left">
+          Nombre Completo
+        </th>
+
+        <th class=" headerTable text-center">
+          Parentesco
+        </th>
+
+        <th class="text-center headerTable-top-right">
+          Acciones
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr style="font-size: 13px;" *ngFor="let autorizado of recoger">
+        <td >
+          <p>{{autorizado.Nombre}}</p>
+        </td>
+
+        <td class="text-center">
+          <p>{{autorizado.Descripcion}}</p>
+        </td>
+
+        <td class="text-center">
+          <a (click)="AbrirAutorizadoRecoger('Editar', autorizado)" class="iconBtn">
+            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+          </a>
+
+          <a (click)="BorrarAutorizadoRecoger(autorizado)" style="margin-left:10px" class="iconBtn">
+            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div>
+    <input class="labelCheckBox" type="checkbox" id="cbRecoger" [(ngModel)]="alumno.actualizarDatos.recoger"/>
+
+    <label class="checkLabel labelCheckBoxText" for="cbRecoger" >
+      Aplicar los datos de personas autorizadas para recoger a todos los alumnos de la familia.
+    </label>
+  </div>
+
+  <div class="margenSeparador"></div>
+</section>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #modalRecoge="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <h3 class="text-uppercase">Personas autorizadas para recoger al alumno</h3>
+        </h4>
+      </div>
+      <div class="modal-body" style="padding: 0px !important;">
+
+
+        <div class="row hidden-lg-up">
+          <div class="col-sm-12">
+            <div style="height: 15px"></div>
+          </div>
+        </div>
+
+        <div class="form-group row" style=" padding-left: 15px; padding-right: 15px;">
+
+          <!-- Nombre -->
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="display: inline-block !important;">
+
+            <div class="margenTopSelect hidden-md-down"></div>
+            <div class="group inputResponsive">
+              <input class="textoMayuscula" type="text"  required [(ngModel)]="nuevoRecoger.Nombre" #nombrePAR="ngModel" id="nombrePAR">
+
+              <span class="highlight"></span> <span class="bar"></span>
+              <label class="MaterialLabel">Nombre</label>
+
+              <small [hidden]="nombrePAR.valid || (!nombrePAR.touched && !summitted)" class="massageError">
+                Ingrese un nombre
+              </small>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6 col-xs-12 col-md-12 col-sm-12">
+
+            <label class="MaterialLabel labelSelect" >Parentesco</label>
+            <div class="margenTopSelect"></div>
+
+
+            <sui-select style="width: 100%; " class="selection" required
+                        id="parentesco"
+                        placeholder="Parentesco"
+                        [options]="alumno.parentesco"
+                        labelField="descripcion"
+                        valueField="parentescoid"
+                        [(ngModel)]="nuevoRecoger.ParentescoId"
+                        #parentescoselect #parentescoPAR="ngModel">
+              <div class="divider" style="border-color: transparent"></div>
+              <div class="ui icon search input" >
+                <i class="search icon"></i>
+                <input suiSelectSearch type="text">
+              </div>
+
+              <sui-select-option *ngFor="let option of parentescoselect.filteredOptions" [value]="option"></sui-select-option >
+
+            </sui-select>
+
+            <small [hidden]="parentescoPAR.valid || (!parentescoPAR.touched && !summitted)" class="massageError">
+              Seleccione un parentesco
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default btnBase" type="button" (click)="CerrarPersonaRecoge(nombrePAR, parentescoPAR);" id="btnCerrarPAR">Cancelar</button>
+        <button class="btn btnPrincipal" type="submit" (click)="GuardarPersonaAutorizadaRecoger()">Guardar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

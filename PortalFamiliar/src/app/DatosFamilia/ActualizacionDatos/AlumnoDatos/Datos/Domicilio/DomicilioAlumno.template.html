@@ -1,0 +1,229 @@
+<section class="widget">
+  <h5 class="text-uppercase">Domicilio</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+  <div class="row">
+
+    <!-- código postal -->
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="display: inline-block;">
+      <div class="margenTopSelect hidden-md-down"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" [textMask]="{mask: alumnoComponent.maskCP}" id="CPD" [disabled]="!alumnoComponent.ValidarCodigoPostal() && alumno.EstadoId"  required
+               [(ngModel)]="alumno.CodigoPostal" (click)="_httpService.inputValidateSuccess('cpD')" pattern="[0-9]{5}" (ngModelChange)="this.alumnoComponent.CambiarCP($event, true)" #cpd="ngModel" [ngClass]="{inputDisabled : !alumnoComponent.ValidarCodigoPostal() && alumno.EstadoId}">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">C.P.</label>
+
+        <small [hidden]="cpd.valid || (!cpd.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+          Indique un C.P. válido.
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Salto -->
+    <div class="col-md-6 hidden-sm-down hidden-lg-up">
+
+    </div>
+
+    <!-- Estado -->
+    <div class="col-lg-3 col-xs-12 col-md-6 col-sm-12">
+      <div class="">
+
+        <label class="MaterialLabel labelSelect" >Estado</label>
+        <div class="margenTopSelect"></div>
+
+
+        <sui-select style="width: 100%; " class="selection" required
+                    placeholder="Estado"
+                    [options]="alumnoComponent.estado"
+                    labelField="nombre"
+                    valueField="estadoid"
+                    [(ngModel)]="alumno.EstadoId"
+                    #estadoselect #estadoAlumno="ngModel"
+                    (ngModelChange)="alumnoComponent.CambiarEstado($event)"
+                    [isDisabled]="alumnoComponent.ValidarCodigoPostal() && !cpnoconocido">
+
+          <div class="divider" style="border:none"></div>
+          <div class="ui icon search input" >
+            <i class="search icon"></i>
+            <input suiSelectSearch type="text">
+          </div>
+
+          <sui-select-option *ngFor="let option of estadoselect.filteredOptions" [value]="option" [hidden]="!option.activo"></sui-select-option >
+
+        </sui-select>
+
+        <small [hidden]="alumno.EstadoId || (!estadoAlumno.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+          Seleccione un estado
+        </small>
+      </div>
+
+    </div>
+
+    <!-- Ciudad -->
+    <div class="col-lg-3 col-xs-12 col-md-6 col-sm-12">
+      <div class="">
+
+        <label class="MaterialLabel labelSelect" >Ciudad</label>
+        <div class="margenTopSelect"></div>
+
+        <sui-select style="width: 100%; " class="selection" required
+                    placeholder="Ciudad"
+                    [options]="alumnoComponent.ciudad"
+                    labelField="nombre"
+                    valueField="municipioid"
+                    [(ngModel)]="alumno.CiudadId"
+                    #ciudadselect #ciudadAlumno="ngModel"
+                    (ngModelChange)="alumnoComponent.CambiarCiudad($event)"
+                    [isDisabled]="(alumnoComponent.ValidarCodigoPostal() && !cpnoconocido) || !alumno.EstadoId || alumnoComponent.ciudad.length == 0">
+
+          <div class="divider" style="border:none"></div>
+
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input suiSelectSearch type="text">
+          </div>
+
+          <sui-select-option *ngFor="let option of ciudadselect.filteredOptions" [value]="option" [hidden]="!option.activo"></sui-select-option >
+
+        </sui-select>
+
+        <small [hidden]="alumno.CiudadId || (!ciudadAlumno.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+          Seleccione una ciudad
+        </small>
+      </div>
+
+    </div>
+
+  </div>
+
+  <br class="hidden-md-down">
+
+  <div class="row">
+    <!-- Colonia -->
+    <div class="col-lg-3 col-xs-12 col-md-6 col-sm-12">
+      <div class="">
+
+        <label class="MaterialLabel labelSelect" >Colonia</label>
+        <div class="margenTopSelect"></div>
+
+        <sui-select style="width: 100%; " class="selection" required
+                    placeholder="Colonia"
+                    [options]="alumnoComponent.colonia"
+                    labelField="nombre"
+                    valueField="nombre"
+                    [(ngModel)]="alumno.Colonia"
+                    #coloniaselect #coloniaAlumno="ngModel"
+                    (ngModelChange)="this.alumnoComponent.CambiarColonia($event)"
+                    [isDisabled]="!alumno.CiudadId || alumnoComponent.colonia.length == 0">
+
+          <div class="divider" style="border:none"></div>
+
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input suiSelectSearch type="text">
+          </div>
+
+          <sui-select-option *ngFor="let option of coloniaselect.filteredOptions" [value]="option"></sui-select-option >
+
+        </sui-select>
+
+        <small [hidden]="coloniaAlumno.valid || (!coloniaAlumno.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+          Seleccione una colonia
+        </small>
+      </div>
+
+    </div>
+
+
+    <!-- Otra Colonia -->
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="display: inline-block;" [hidden]="alumno.Colonia != 'Otra'">
+
+      <div class="margenTopSelect"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="otracolonia" required [(ngModel)]="alumno.OtraColonia" #otraColoniaAlumno="ngModel" class="textoMayuscula">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Otra Colonia</label>
+
+        <small [hidden]="otraColoniaAlumno.valid || (!otraColoniaAlumno.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+          Indique su colonia
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Calle -->
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="display: inline-block;">
+      <div class="margenTopSelect" [ngClass]="{'hidden-sm-down': alumno.Colonia == 'Otra'}"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="calle" required [(ngModel)]="alumno.Calle" #calleAlumno="ngModel" class="textoMayuscula">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Calle</label>
+
+        <small [hidden]="calleAlumno.valid || (!calleAlumno.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+          Indique su calle
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Número exterior -->
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="display: inline-block;">
+      <div class="margenTopSelect hidden-sm-down"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="numext" required [(ngModel)]="alumno.NumeroExterior" #numeroexteriorAlumno="ngModel" class="textoMayuscula">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Número exterior</label>
+
+        <small [hidden]="numeroexteriorAlumno.valid || (!numeroexteriorAlumno.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+          Indique su número exterior
+        </small>
+
+      </div>
+    </div>
+
+    <div class="col-sm-12 hidden-md-down"[hidden]="alumno.Colonia != 'Otra'">
+      <br>
+    </div>
+
+    <!-- Número interior -->
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="display: inline-block;">
+      <div class="margenTopSelect hidden-sm-down"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="numint" required [(ngModel)]="alumno.NumeroInterior" class="textoMayuscula">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Número interior</label>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div style="margin-top: 20px">
+    <input class="labelCheckBox" type="checkbox" id="cbDomicilio" [(ngModel)]="alumnoComponent.actualizarDatos.docilio"/>
+
+    <label class="checkLabel labelCheckBoxText" for="cbDomicilio">
+      Aplicar éste domicilio a todos los alumnos de la familila.
+    </label>
+  </div>
+
+  <div class="margenSeparador"></div>
+</section>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <base href="./">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
+
+        <% if (webpackConfig.htmlElements.headTags) { %>
+        <!-- Configured Head Tags  -->
+        <%= webpackConfig.htmlElements.headTags %>
+        <% } %>
+        <!-- base url -->
+        <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+
+        <link href="assets/dataPicker/datatables.min.css" rel="stylesheet" type="text/css"/>
+        <title></title>
+
+    </head>
+
+    <body>
+        <div class="load"></div>
+        <div id="mensaje"></div>
+
+    <app>
+        <style>
+            /*
+             * Inline css to add simple styles for loader.
+             * Is going to be replaced by angular after bootstrap.
+             */
+            app {
+                position: absolute;
+                top: 0; right: 0; bottom: 0; left: 0;
+                padding-top: 45vh;
+                text-align: center;
+                background-color: #eee;
+                font: 14px sans-serif;
+            }
+
+        </style>
+        Loading...
+
+
+    </app>
+
+    
+    <div class="mensajeInt" id="warning-alert">
+        <div class="alert alert-warning-strong">            
+            <center>
+                <!--<button type="button" class="close" data-dismiss="alert">x</button>-->
+                <strong style="display: inline-block; font-size: 20px !important; color: #343434;" >¡Atención! &nbsp</strong>
+                <div style="display: inline-block; font-size: 20px !important; color: #343434;" id="text-messageWarning"></div>
+            </center>
+        </div>
+    </div>
+
+
+    <div class="mensajeInt" id="danger-alert">
+        <div class="alert alert-danger-strong">            
+            <center>
+                <!--<button type="button" class="close" data-dismiss="alert">x</button>-->
+                <strong style="display: inline-block; font-size: 20px !important; color: #fff;" >Error! &nbsp</strong>
+                <div style="display: inline-block; font-size: 20px !important; color: #fff;" id="text-messageDanger"></div>
+            </center>
+        </div>
+    </div>
+
+    <div class="mensajeInt" id="success-alert" >
+        <div class="alert alert-success-strong">            
+            <center>
+                <!--<button type="button" class="close" data-dismiss="alert">x</button>-->
+                <strong style="display: inline-block; font-size: 20px !important; color: #343434;">Proceso Exitoso! &nbsp</strong>
+                <div style="display: inline-block; font-size: 20px !important; color: #343434;" id="text-messageSucess"></div>
+            </center>
+        </div>
+    </div>
+
+
+    <script data-pace-options='{ "target": ".load", "ghostTime": 1000,  "ajax": {"trackMethods": ["GET", "POST","PUT", "DELETE"]} }'></script>
+    <% if (process.env.NODE_ENV == 'prod' || process.env.NODE_ENV == 'production') { %>
+    <script>
+        if (location.protocol != 'https:')
+        {
+            location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        }
+    </script>
+    <% } %>
+    <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+    <!-- Webpack Dev Server reload -->
+    <script src="http://<%= htmlWebpackPlugin.options.metadata.host %>:<%= htmlWebpackPlugin.options.metadata.port %>/webpack-dev-server.js"></script>
+    <!--// <script src="/webpack-dev-server.js"></script>-->
+    <% } %>
+
+    <!-- alasql -->
+    <script src="assets/alasql.min.js" type="text/javascript"></script>
+
+
+    <script    src="assets/crypto-js.js" type="text/javascript"></script>
+</body>
+</html>

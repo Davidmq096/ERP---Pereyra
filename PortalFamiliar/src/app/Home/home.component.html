@@ -1,0 +1,15 @@
+<div class="container-fluid" style="padding: 0px">
+    <h1>INICIO</h1>
+    <div style="height: 24px"></div>
+    <div class="center-block panelOpcion">
+        <div *ngFor="let opt of opcionPadre" class="squareOpcion">
+            <a [routerLink]="(opt.linkforce ? opt.linkforce : null)"
+                class="btn btn-block btnOpcion {{opt.hover}}"
+                style="white-space: normal">
+                <span class="{{opt.icon}} icono"></span><br>
+                <div style="height: 16px"></div>
+                <span [innerHTML]="opt.title"></span>
+             </a>
+        </div>
+    </div>
+</div>

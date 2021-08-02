@@ -1,0 +1,262 @@
+<section class="widget">
+  <h5 class="text-uppercase">Dinámica familiar</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+
+  ¿Existe alguna situación especial en la dinámica familiar? (Seleccione cuando menos una opción)
+  <div class="table-responsive" style="border: none">
+    <table class="table " >
+
+      <thead class="sinBorde">
+      <tr><td style="width: 215px !important"></td> <td></td></tr>
+
+      </thead>
+
+      <tbody class="sinBorde">
+
+      <!-- Ninguno -->
+      <tr >
+        <td>
+          <input class="labelCheckBox" type="checkbox" id="dfNinguna" [(ngModel)]="dinamicaFamiliar.Ninguna"  (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Ninguna')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfNinguna">
+            Ninguna
+          </label>
+        </td>
+        <td></td>
+      </tr>
+
+      <!-- Divocio -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfDivorcio" [(ngModel)]="dinamicaFamiliar.Divorcio" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfDivorcio">
+            Divorcio
+          </label>
+        </td>
+        <td></td>
+      </tr>
+
+      <!-- Sepracion -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfSeparacion" [(ngModel)]="dinamicaFamiliar.Separacion" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfSeparacion">
+            Separación
+          </label>
+        </td>
+        <td></td>
+      </tr>
+
+      <!-- Custodia -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfCustodia" [(ngModel)]="dinamicaFamiliar.Custodia" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfCustodia">
+            Custodia
+          </label>
+        </td>
+        <td>
+          <div *ngIf="dinamicaFamiliar.Custodia">
+
+            <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12">
+              <label class="MaterialLabel labelSelect" style="margin-left: 5px">Parentesco</label>
+            </div>
+
+            <div class="margenTopSelect"></div>
+
+            <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12">
+              <sui-select style="width: 100%; " class="selection" required
+                          id="parentescoDF"
+                          placeholder="Parentesco"
+                          [options]="alumno.parentesco"
+                          labelField="descripcion"
+                          valueField="parentescoid"
+                          [(ngModel)]="dinamicaFamiliar.ParentescoId"
+                          #parentescodfselect #parentescoDF="ngModel">
+
+                <div class="divider" style="border: none"></div>
+
+                <div class="ui icon search input">
+                  <i class="search icon"></i>
+                  <input suiSelectSearch type="text">
+                </div>
+
+                <sui-select-option *ngFor="let option of parentescodfselect.filteredOptions" [value]="option"></sui-select-option >
+
+              </sui-select>
+
+              <small [hidden]="parentescoDF.valid || (!parentescoDF.touched && !alumno.summittedGeneral)" class="massageError">
+                Seleccione un parentesco
+              </small>
+
+            </div>
+
+          </div>
+
+        </td>
+      </tr>
+
+      <!-- Enfermedades graves -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfEnfermedadesgraves" [(ngModel)]="dinamicaFamiliar.EnfermedadGrave" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfEnfermedadesgraves">
+            Enfermedades graves
+          </label>
+        </td>
+        <td>
+          <div *ngIf="dinamicaFamiliar.EnfermedadGrave">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-block !important;">
+
+              <div style="margin-top:15px"></div>
+              <div class="group inputResponsive">
+
+                <input type="text" id="especificacionEnfermedadGrave" required [(ngModel)]="dinamicaFamiliar.EspecificacionEnfermedadGrave" #dfEspecificacionEG="ngModel" class="textoMayuscula">
+
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel labelSelect" style="margin-left: 0px">¿De qué miembro de la familia? ¿Qué enfermedad es?</label>
+
+                <small [hidden]="dfEspecificacionEG.valid || (!dfEspecificacionEG.touched && !alumno.summittedGeneral)" class="massageError">
+                  Indique su respuesta
+                </small>
+
+              </div>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+
+      <!-- Muertes o pérdidas -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfMuerte" [(ngModel)]="dinamicaFamiliar.Muerte" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfMuerte">
+            Muertes o pérdidas
+          </label>
+        </td>
+        <td>
+          <div *ngIf="dinamicaFamiliar.Muerte">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-block !important;">
+              <div style="margin-top:15px"></div>
+              <div class="group inputResponsive">
+
+                <input type="text" id="muerteperdida" required [(ngModel)]="dinamicaFamiliar.EspecificacionMuertes" #dfEspecificacionMuerte="ngModel" class="textoMayuscula">
+
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel labelSelect" style="margin-left: 0px">¿De quién(es)?</label>
+
+                <small [hidden]="dfEspecificacionMuerte.valid || (!dfEspecificacionMuerte.touched && !summittedGeneral)" class="massageError">
+                  Indique su respuesta
+                </small>
+
+              </div>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+
+      <!-- Cambios de residencia -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfCambioResidencia" [(ngModel)]="dinamicaFamiliar.CambioResidencia" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfCambioResidencia">
+            Cambios de residencia
+          </label>
+        </td>
+        <td></td>
+      </tr>
+
+      <!-- Medios Hermanos -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfMedioHermano" [(ngModel)]="dinamicaFamiliar.MedioHermano" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfMedioHermano">
+            Medios hermanos
+          </label>
+        </td>
+        <td></td>
+      </tr>
+
+      <!--  Segundos matrimonios -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfSegundoMatrimonio" [(ngModel)]="dinamicaFamiliar.SegundoMatrimonio" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfSegundoMatrimonio">
+            Segundos matrimonios
+          </label>
+        </td>
+        <td></td>
+      </tr>
+
+      <!--  Madre o padre soltero -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfMadrePadreSoltero" [(ngModel)]="dinamicaFamiliar.MadrePadreSoltero" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfMadrePadreSoltero">
+            Madre o padre soltero
+          </label>
+        </td>
+        <td></td>
+      </tr>
+
+      <!-- Otro -->
+      <tr >
+        <td >
+          <input class="labelCheckBox" type="checkbox" id="dfOtro" [(ngModel)]="dinamicaFamiliar.Otro" (ngModelChange)="CambiaValDinamicaFamiliar($event, 'Otro')"/>
+
+          <label class="checkLabel labelCheckBoxText" for="dfOtro">
+            Otro
+          </label>
+        </td>
+        <td>
+          <div *ngIf="dinamicaFamiliar.Otro">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-block !important;">
+
+              <div style="margin-top:15px"></div>
+              <div class="group inputResponsive">
+
+                <input type="text" id="especificacionOtro" required [(ngModel)]="dinamicaFamiliar.EspecificacionOtro" #dfEspecificacionOtro="ngModel" class="textoMayuscula">
+
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="MaterialLabel labelSelect" style="margin-left: 0px">Especifique</label>
+
+                <small [hidden]="dfEspecificacionOtro.valid || (!dfEspecificacionOtro.touched && !alumno.summittedGeneral)" class="massageError">
+                  Indique su respuesta
+                </small>
+
+              </div>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+
+  <small [hidden]="dfs.ValidarDinamicaFamiliar(dinamicaFamiliar) || (!alumno.summittedGeneral)" class="massageError">
+    Seleccione al menos una opción
+  </small>
+
+
+  <div class="margenSeparador"></div>
+</section>

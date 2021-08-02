@@ -1,0 +1,170 @@
+<div class="container ">
+    <main id="content" class="widget-login-container" role="main">
+        <div class="row" >
+            <div class="col-lg-5 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2 offset-1 col-10">
+                <section class="widget widget-login animated fadeInUp">
+                    <header >
+                        <img src="{{logo}}" width="100%" height="120" style="display: inline-block;"/>
+
+                    </header>
+                     <div class="widget-body form-group">
+                           <div style="height: 15px"></div>
+                        <form [formGroup]="Formregistro">
+                            <div class="row">
+                                <div class="col-12 col-md-4 col-lg-4 col-sm-4"> 
+                                    <div class="group">
+                                        <label class="radio">
+                                            <input id="mama1" type="radio" name="padremadreotutor" value="2"
+                                                   formControlName="padremadreotutor" >
+                                            <span class="outer" style="margin-top: -5px;">
+                                                <span class="inner"></span>
+                                            </span>
+                                            Soy mamá
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-4 col-sm-4">
+                                    <div class="group">
+                                        <label class="radio">
+                                            <input id="papa1" type="radio" name="padremadreotutor" value="1"
+                                                   formControlName="padremadreotutor" >
+                                            <span class="outer" style="margin-top: -5px;">
+                                                <span class="inner"></span>
+                                            </span>
+                                            Soy papá
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-4 col-sm-4">
+                                    <div class="group">
+                                        <label class="radio">
+                                            <input id="tutor1" type="radio" name="padremadreotutor" value="3"
+                                                   formControlName="padremadreotutor" >
+                                            <span class="outer" style="margin-top: -5px;">
+                                                <span class="inner"></span>
+                                            </span>
+                                            Tutor
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 15px"></div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-lg-12 col-sm-12  form-group">
+                                    <div class="group">
+                                        <input type="text" required formControlName="nombre"  class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(Formregistro.controls.nombre)">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Nombre(s)</label>
+                                    </div>
+                                    <small [hidden]="Formregistro.controls.nombre.valid || (Formregistro.controls.nombre.pristine && !submitted)"
+                                        style="   color: red">
+                                        Introducir nombre(s)
+                                    </small>
+                                </div>
+                                <div class="col-12 col-md-12 col-lg-12 col-sm-12 form-group">
+                                    <div class="group">
+                                        <input type="text" required formControlName="apellidopaterno"  class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(Formregistro.controls.apellidopaterno)">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Apellido Paterno</label>
+                                    </div>
+                                    <small [hidden]="Formregistro.controls.apellidopaterno.valid || (Formregistro.controls.apellidopaterno.pristine && !submitted)"
+                                        style="   color: red">
+                                        Intoducir apellido paterno
+                                    </small>
+                                </div>
+                                <div class="col-12 col-md-12 col-lg-12 col-sm-12 form-group">
+                                    <div class="group">
+                                        <input type="text" required formControlName="apellidomaterno"  class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(Formregistro.controls.apellidomaterno)">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Apellido Materno</label>
+                                    </div>
+                                    <small [hidden]="Formregistro.controls.apellidomaterno.valid || (Formregistro.controls.apellidomaterno.pristine && !submitted)"
+                                        style="   color: red">
+                                        Intoducir apellido materno
+                                    </small>
+                                </div>
+                                <div class="col-12 col-md-12 col-lg-12 col-sm-12 form-group">
+                                    <div class="group">
+                                        <input type="text" required formControlName="correo"  class="texto" oninput="this.value = this.value.toLowerCase()">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Correo</label>
+                                    </div>
+                                    <small [hidden]="Formregistro.controls.correo.valid || (Formregistro.controls.correo.pristine && !submitted)"
+                                        style="   color: red">
+                                        Intoducir correo
+                                    </small>
+                                </div>
+                            </div>
+                            <div style="height: 50px"></div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-lg-12 col-sm-12 form-group">
+                                    <h4>Matrícula(s) de mis hijos</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-6 col-sm-12 form-group">
+                                    <div class="group">
+                                        <input type="text" required name="buscarmatricula" formControlName="buscarmatricula"  class="texto" oninput="this.value = this.value.toLowerCase()">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="MaterialLabel">Matrícula</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6 col-sm-12">
+                                    <button class="btn principal" type="submit" (click)="agregarmatricula(Formregistro.controls.buscarmatricula)">Agregar</button>   
+                                </div>
+                            </div>
+                            <div style="height: 25px"></div>
+                            <div class="row">
+                                <div class="tabllePaddingLTE no-padding dependientestab table-responsive dependientestab" style="padding: 10px !important; font-size: 13px;">
+                                    <table class="table table-hover" id="tablabanco" style="width:100%">
+                                        <thead>
+                                            <tr class="text-center" style="color: white;">
+                                                <th class=" headerTable-top-left">
+                                                    Matrícula
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="font-size: 13px;" *ngFor="let h of matriculas; let i = index">
+                                                <td>
+                                                    <p>{{h}}</p>
+                                                </td>
+                                                <td style="width:20%" class="text-center">
+                                                    <a>
+                                                        <i class="fa fa-trash fa-lg" aria-hidden="true" (click)="eliminarmatricula(i)"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="height: 25px"></div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-6 col-sm-12">
+                                    <button type="button" class="btn btnBase" style="margin-top: 10px; width: 100% !important; border-color: #adadad;" (click)="cancelar()" >
+                                        Cancelar
+                                    </button>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6 col-sm-12">
+                                    <button type="button" class="btn principal" style="margin-top: 10px; width: 100% !important; border-color: #adadad;" (click)="guardar()" >
+                                        Registrar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>

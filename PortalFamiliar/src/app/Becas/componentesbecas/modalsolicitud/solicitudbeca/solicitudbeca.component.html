@@ -1,0 +1,488 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget beca" >
+            <div class="widget-body" [ngClass]="parametrosModal.configpestana.solicitudbeca.editable ? '' : 'soloLectura'">
+
+                <!-- título -->
+                <header>
+                    <h3>Solicitud</h3>
+                </header>
+                <div class="divider16"></div>
+
+                <div class="widget-body" >
+
+                    <legend></legend>
+
+                    <!-- información de la solicitud -->
+                    <form [formGroup]="Formalumnosfamilia" (ngSubmit)="guardar(Formalumnosfamilia)">
+
+                        <!-- Alumnos de la familia -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Alumnos de la familia {{familia}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="divider16"></div>
+
+                        <!-- datos alumnos  y beca actual --->
+                        <figure class="seccionDatos" *ngFor="let alumnos of familiaalumnos">
+
+
+                                <div class="row">
+
+                                <!-- datos del alumno -->
+                                <div class="col-md-8">
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <b>Datos del alumno</b>
+                                        </div>
+                                    </div>
+
+                                    <div class="divider16"></div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+
+                                            <table class="informacionTabla" cellspacing="10">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-right tdAlumno">Matrícula: </td>
+                                                        <td> {{alumnos.matricula}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-right tdAlumno">Nombre:</td>
+                                                        <td> {{alumnos.primernombre}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-right tdAlumno">CURP: </td>
+                                                        <td> {{alumnos.curp}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-right tdAlumno">Vive con: </td>
+                                                        <td> {{alumnos.vivecon}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+
+                                            <table class="informacionTabla">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-right tdAlumno">Nivel: </td>
+                                                        <td> {{alumnos.nombre}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-right tdAlumno">Grado: </td>
+                                                        <td> {{alumnos.grado}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-right tdAlumno">Cobranza: </td>
+                                                        <td> {{alumnos.cobranza}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-right tdAlumno">Promedio: </td>
+                                                        <td> - </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 hidden-md-up">
+                                    <div class="divider16 "></div>
+                                </div>
+
+
+                                <!-- beca actual -->
+                                <div class="col-md-4">
+                                    <b>Beca actual</b>
+
+                                    <div class="divider16"></div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <table class="informacionTabla" cellspacing="10">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-right tdBeca">Tipo: </td>
+                                                        <td> {{alumnos.tipodebeca}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-right tdBeca">Porcentaje:</td>
+                                                        <td> {{alumnos.porcentaje}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </figure>
+
+                        <div class="divider16 "></div>
+
+                        <!-- Domicilio del estudio socioeconómico -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Domicilio donde se realizará estudio socioeconómico</h4>
+                            </div>
+                        </div>
+
+                        <div class="divider16 "></div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>Si el domicilio es distinto al actual, modifique los campos mostrados a continuación:</h6>
+                            </div>
+                        </div>
+
+                        <div class="divider16 "></div>
+
+                        <!-- domicilio del alumno -->
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div style="display: inline-block;">
+                                    <h6>
+                                        Utilizar domicilio del alumno:
+                                    </h6>
+                                </div>
+
+                                <div  style="display: inline-block; margin-left: 16px" ></div>
+
+                                <div  style="display: inline-block;">
+
+                                    <sui-select style="width: 100%;" class="selection"
+                                                formControlName="alumno"
+                                                placeholder="Alumno"
+                                                [options]="selectAlumno"
+                                                labelField="primernombre"
+                                                valueField="alumnoid"
+                                                #selectalumno>
+
+                                        <div class="divider" style="border-color: transparent"></div>
+
+                                        <div class="ui icon search input">
+                                            <i class="search icon"></i>
+                                            <input suiSelectSearch type="text">
+                                        </div>
+
+                                        <sui-select-option *ngFor="let option of selectalumno.filteredOptions" [value]="option" (click)="seleccionhijo(option.alumnoid)"></sui-select-option>
+                                    </sui-select>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="divider16 "></div>
+                        <div style="height: 12px;" class="hidden-md-up"></div>
+
+                        <!-- domicilio -->
+                        <div class="row">
+
+                            <!-- código postal -->
+                            <div class="col-lg-4 col-md-6 col-12" >
+
+                                <div class="margenTopSelect hidden-sm-down"></div>
+
+                                <div class="group">
+                                    <input type="text" required formControlName="codigopostal" [textMask]="{mask: maskCP, guide:false}" (change)="busquedaPorCp(cp.value)" #cp pattern="[0-9]{5}">
+                                           <span class="highlight"></span>
+                                    <span class="bar"></span>
+
+                                    <label class="MaterialLabel"> Código postal </label>
+                                </div>
+
+                                <small [hidden]="Formalumnosfamilia.controls.codigopostal.valid || (Formalumnosfamilia.controls.codigopostal.pristine && !submitted)" style="color: red">
+                                    Debe introducir un código postal válido
+                                </small>
+
+                            </div>
+
+                            <div class="rowSeperadorSelect hidden-md-up"></div>
+
+                            <!-- Estado -->
+                            <div class="col-lg-4 col-md-6 col-12" >
+
+                                <label class="MaterialLabel labelSelect" >
+                                    Estado
+                                </label>
+
+                                <div class="margenTopSelect"></div>
+
+                                <sui-select style="width: 100%;" class="selection"  (selectedOptionChange)="loadMunicipios($event)"
+                                            formControlName="estadoid"
+                                            placeholder="Estado"
+                                            [options]="SelectEstado"
+                                            labelField="nombre"
+                                            valueField="estadoid"
+                                            [isDisabled]="SelectEstado.length == 0"
+                                            #estadosselect>
+
+                                    <div class="divider" style="border-color: transparent"></div>
+
+                                    <div class="ui icon search input" [hidden]="SelectEstado.length <= 1">
+                                         <i class="search icon"></i>
+                                        <input suiSelectSearch type="text" autocomplete="off">
+                                    </div>
+
+                                    <sui-select-option *ngFor="let option of estadosselect.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+
+                                <small [hidden]="Formalumnosfamilia.controls.estadoid.valid || (Formalumnosfamilia.controls.estadoid.pristine && !submitted)" style="color: red">
+                                    Debe seleccionar un estado
+                                </small>
+
+                            </div>
+
+                            <div class="rowSeperadorSelect hidden-lg-up"></div>
+
+                            <!-- Ciudad -->
+                            <div class="col-lg-4 col-md-6 col-12">
+
+                                <label class="MaterialLabel labelSelect" >
+                                    Ciudad
+                                </label>
+
+                                <div class="margenTopSelect"></div>
+
+                                <sui-select style="width: 100%;" class="selection"
+                                            formControlName="municipioid"
+                                            placeholder="Ciudad"
+                                            [options]="SelectCiudadModal"
+                                            (selectedOptionChange)="loadColonias($event)"
+                                            labelField="nombre"
+                                            valueField="municipioid"
+                                            [isDisabled]="!Formalumnosfamilia.controls.estadoid.valid || SelectCiudadModal.length == 0"
+                                            #selectmunicipio>
+
+                                    <div class="divider" style="border-color: transparent"></div>
+
+                                    <div class="ui icon search input" [hidden]="SelectCiudadModal.length <= 1">
+                                         <i class="search icon"></i>
+                                        <input suiSelectSearch type="text" autocomplete="off">
+                                    </div>
+
+
+                                    <sui-select-option *ngFor="let option of selectmunicipio.filteredOptions" [value]="option"></sui-select-option>
+
+                                </sui-select>
+
+                                <small [hidden]="Formalumnosfamilia.controls.municipioid.valid || (Formalumnosfamilia.controls.municipioid.pristine && !submitted)" style="color: red">
+                                    Debe seleccionar un municipio
+                                </small>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="divider16 "></div>
+                        <div style="height: 12px;" class="hidden-md-up"></div>
+
+                        <!-- colonia, otra colonia, calle, # exteriro, # interior -->
+                        <div class="row">
+
+                            <!-- Colonia -->
+                            <div class="col-lg-4 col-md-6 col-12">
+
+                                <div class="margenTopSelect"></div>
+
+                                <label class="MaterialLabel labelSelect" >
+                                    Colonia
+                                </label>
+
+                                <div class="margenTopSelect"></div>
+
+                                <sui-select style="width: 100%;" class="selection"
+                                            formControlName="coloniaid"
+                                            placeholder="Colonia"
+                                            (selectedOptionChange)="otraColonia($event)"
+                                            [options]="coloniaSelectfull"
+                                            labelField="nombre"
+                                            valueField="coloniaid"
+                                            [isDisabled]="!Formalumnosfamilia.controls.municipioid.valid || coloniaSelectfull.length == 0"
+                                            #selectcolonia>
+
+                                    <div class="divider" style="border-color: transparent"></div>
+
+                                    <div class="ui icon search input" [hidden]="coloniaSelectfull.length <= 1">
+                                         <i class="search icon"></i>
+                                        <input suiSelectSearch type="text" autocomplete="off">
+                                    </div>
+
+                                    <sui-select-option *ngFor="let option of selectcolonia.filteredOptions" [value]="option"></sui-select-option>
+
+                                </sui-select>
+
+                                <small [hidden]="Formalumnosfamilia.controls.coloniaid.valid || (Formalumnosfamilia.controls.coloniaid.pristine && !submitted)" style="color: red">
+                                    Debe seleccionar una colonia
+                                </small>
+                            </div>
+
+                            <div class="rowSeperadorSelect hidden-md-up"></div>
+
+                            <!--otra colonia-->
+                            <div class="col-lg-4 col-md-6 col-12" *ngIf="otracolonia" >
+
+                                <div class="margenTopSelect hidden-sm-down"></div>
+
+                                <div class="group">
+                                    <input type="text"  formControlName="otracolonia"> <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Otra Colonia</label>
+                                </div>
+                                <small [hidden]="Formalumnosfamilia.controls.otracolonia.valid || (Formalumnosfamilia.controls.otracolonia.pristine && !submitted)" style="color: red">
+                                    Ingrese la colonia
+                                </small>
+                            </div>
+
+
+                            <!-- calle-->
+                            <div class="col-lg-4 col-md-6 col-12">
+
+                                <div class="margenTopSelect"></div>
+
+                                <div class="group">
+                                    <input type="text" required formControlName="calle" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(Formalumnosfamilia.controls.calle)">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Calle</label>
+                                </div>
+
+                                <small [hidden]="Formalumnosfamilia.controls.calle.valid || (Formalumnosfamilia.controls.calle.pristine && !submitted)" style="color: red">
+                                    Debe introducir la calle
+                                </small>
+                            </div>
+
+
+                            <div class="rowSeperadorSelect hidden-md-up"></div>
+
+                            <!-- número exterior -->
+                            <div class="col-lg-4 col-md-6 col-12">
+
+                                <div class="margenTopSelect hidden-sm-down"></div>
+
+                                <div class="group">
+                                    <input type="text" required formControlName="numeroexterior" class="text-uppercase">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Número exterior</label>
+                                </div>
+
+                                <small [hidden]="Formalumnosfamilia.controls.numeroexterior.valid || (Formalumnosfamilia.controls.numeroexterior.pristine && !submitted)" style="color: red">
+                                    Debe introducir el número exterior
+                                </small>
+                            </div>
+
+
+                            <!-- número interior -->
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="margenTopSelect"></div>
+                                <div class="group">
+                                    <input type="text" formControlName="numerointerior" class="text-uppercase">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Número interior</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="rowSeperador"></div>
+                        <!-- entre calles y teléfono -->
+                        <div class="row">
+
+                            <!-- entre calles -->
+                            <div class="col-lg-6 col-md-6 col-12">
+
+                                <div class="group">
+                                    <input type="text" required formControlName="entrecalles" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(Formalumnosfamilia.controls.entrecalles)">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Entre que calles</label>
+                                </div>
+
+                                <small [hidden]="Formalumnosfamilia.controls.entrecalles.valid || (Formalumnosfamilia.controls.entrecalles.pristine && !submitted)" style="color: red">
+                                    Debe introducir las calles
+                                </small>
+                            </div>
+
+                            <div class="rowSeperador hidden-md-up"></div>
+
+                            <!-- lada -->
+                            <div class="col-lg-2 col-md-2 col-4">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="group">
+                                                    <input type="text" required formControlName="lada" lada #lada1>
+                                                           <span class="highlight"></span>
+                                                    <span class="bar"></span>
+                                                    <label class="MaterialLabel">Lada</label>
+                                                </div>
+                                                <small [hidden]="Formalumnosfamilia.controls.lada.valid || (Formalumnosfamilia.controls.lada.pristine && !submitted)" style="color: red;">
+                                                    Introducir una lada valida
+                                                </small>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <!-- teléfono -->
+                            <div class="col-lg-4 col-md-4 col-8">                                 
+                                <div class="group">    
+                                    <input [(ngModel)]="telefono" type="text" required formControlName="telefonocasa" [phonenumber]="{lada: lada1.value}">
+                                        <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Teléfono</label>
+                                </div>
+                                <small [hidden]="Formalumnosfamilia.controls.telefonocasa.valid || (Formalumnosfamilia.controls.telefonocasa.pristine && !submitted)" style="color: red;">
+                                    Introducir telefono valido
+                                </small>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+

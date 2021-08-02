@@ -1,0 +1,99 @@
+<style>
+    body table tr.selectedRow {
+        background-color: #E8E8E8;
+        color: black;
+        font-weight: bold;
+    }
+
+    .sidebartitulosmall {
+        font-size: 12.5px;
+    }
+    .itc_photo{ text-align: center; }
+</style>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h1> Pre-inscripción a talleres curriculares </h1>
+            </header>
+            <div class="widget-body">
+                <form [formGroup]="FormGuardar" (ngSubmit)="guardar()">
+                    <legend></legend>
+                    <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                        <div class="row">
+                            <small>Alumno</small>
+                            <sui-select style="width: 100%;" class="selection" formControlName="alumnoid"
+                                placeholder="Alumno" (selectedOptionChange)="buscarTalleres($event)"
+                                [options]="selectAlumno" labelField="nombrecompleto" valueField="alumnoid"
+                                #alumnoselect>
+                                <sui-select-option *ngFor="let option of alumnoselect.filteredOptions" [value]="option">
+                                </sui-select-option>
+                            </sui-select>
+                        </div>
+                    </div>
+                    <div class="mostrar" *ngIf="mostrar">
+                        <div class="row">
+                            <div class="col-12 col-md-5 col-lg-4 itc_photo">
+                                <img *ngIf="objetoalumno" src="{{objetoalumno.foto}}" width="150px" height="200px">
+                                <div *ngIf="objetoalumno">
+                                    <b>{{alumno.nombrecompleto}}</b><br>
+                                    <p>{{objetoalumno.nivel}} {{objetoalumno.grupo}}</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-7 col-lg-6">
+                                <div formArrayName="opciontaller">
+                                    <div class="col-lg-12 col-12 form-group" style="margin-top: 20px"
+                                        *ngFor="let c of FormGuardar.controls.opciontaller.controls; let i = index"
+                                        [formGroupName]="i">
+                                        <h5><strong>{{c.controls.materia.value}}</strong></h5>
+                                        <div class="row">
+                                            <div class="col-sm-12" formArrayName="opciones">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 form-group"
+                                                        *ngFor="let f of c.controls.opciones.controls; let j = index"
+                                                        [formGroupName]="j">
+                                                        <div>
+                                                            <div class="col-sm-12 group">
+                                                                <sui-select style="width: 100%;" class="selection"
+                                                                    (selectedOptionChange)="selectedTaller(i, j, $event)"
+                                                                    formControlName="tallercurricularid"
+                                                                    placeholder="Taller" [isDisabled]="editable"
+                                                                    [options]="f.controls.talleres.value"
+                                                                    labelField="nombre" valueField="tallercurricularid"
+                                                                    #tallerselect>
+                                                                    <div class="divider"></div>
+                                                                    <sui-select-option
+                                                                        *ngFor="let option of tallerselect.filteredOptions"
+                                                                        [value]="option"></sui-select-option>
+                                                                </sui-select>
+                                                                <small
+                                                                    [hidden]="f.controls.tallercurricularid.valid || (f.controls.tallercurricularid.pristine && !submitted)"
+                                                                    style="color: red">
+                                                                    Seleccione una opción
+                                                                </small>
+                                                                <div class="col-sm-12" style="margin-top: 5px;">
+                                                                    <div class="row">
+                                                                    <p>{{(f.controls.tallercurricularid ? tallerdescripcion[f.controls.tallercurricularid.value] : "")}}</p>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn principal" [hidden]="editable">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

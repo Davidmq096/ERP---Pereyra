@@ -1,0 +1,42 @@
+<div class="js-sidebar-content" style="background: #E0DCD6 !important;">
+  <header class="logo center-block">
+    <img src="{{logo}}" class="" style="width: 84px; height: auto">
+  </header>
+  <div style="height: 32px"></div>
+  <ng-container *ngIf="menu"
+    [ngTemplateOutletContext]="{item:false, source:menu.menu}"
+    [ngTemplateOutlet]="itemmenu"></ng-container>
+</div>
+
+<ng-template #itemmenu let-item="item" let-source="source">
+  <a *ngIf="item" class="collapsed" [attr.data-target]="'#'+item.id" [id]="'menu'+item.id" data-toggle="collapse" data-parent="#sidebar">
+    <ng-container [ngTemplateOutlet]="itemhead"
+      [ngTemplateOutletContext]="{item:item}"></ng-container>
+  </a>
+  <ul [id]="(item ? item.id : '')" [class]="(item ? 'collapse' : 'sidebar-nav')">
+    <li *ngFor="let subitem of source">
+      <ng-container [ngTemplateOutletContext]="{item:subitem, source:subitem.menu}"
+        [ngTemplateOutlet]="(subitem.isMenu ? itemmenu : (subitem.isLink ? itemenlace : itemfuncion))"></ng-container>
+    </li>
+  </ul>
+</ng-template>
+<ng-template #itemenlace let-item="item">
+  <a [routerLink]="[item.link]" data-parent="#sidebar">
+    <ng-container [ngTemplateOutlet]="itemhead"
+      [ngTemplateOutletContext]="{item:item}"></ng-container>
+  </a>
+</ng-template>
+<ng-template #itemfuncion let-item="item">
+  <a (click)="RealizarFuncion(item)" data-parent="#sidebar">
+    <ng-container [ngTemplateOutlet]="itemhead"
+      [ngTemplateOutletContext]="{item:item}"></ng-container>
+  </a>
+</ng-template>
+<ng-template #itemhead let-item="item">
+  <div class="input-group">
+    <div *ngIf="item.icon" class="input-group-addon addonBar">
+      <span [class]="item.icon"></span>
+    </div>
+    <div class="texto" [innerHTML]="item.title"></div>
+  </div>
+</ng-template>

@@ -1,0 +1,194 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget" >
+
+            <!-- título -->
+            <header>
+                <h1> Solicitudes de beca </h1>
+                <legend></legend>
+            </header>
+
+            <!-- Agregar -->
+            <div style="margin-top: 15px" *ngIf="periodobeca == 1 && (parambecas && parambecas == 2)">
+                <button class=" btnGeneral btn-sm"  (click)="AgregarSolicitudBeca()">
+                    <span class="fa fa-plus"></span>
+                    <span style="margin-left: 5px"> Agregar </span>
+                </button>
+            </div>
+
+            <div class="row" [hidden]="periodobeca != -1" style="margin-top: 15px">
+                <div class="col-12">
+                    <span style="color: gray">
+                        *El periodo de solicitudes de becas no esta activo. Espera el próximo periodo para generar tu solicitud.
+                    </span>
+                </div>
+            </div>
+
+
+            <!-- solicitudes -->
+            <div style=" max-height: 700px; overflow-y: scroll; overflow-x: hidden" *ngIf="datostabla.length > 0">
+                <div class=" no-padding table-responsive" style="margin-top: 20px; font-size: 13px; margin-bottom: 20px;">
+                    <table  class="table " id="tablaFormato">
+                        <thead>
+                            <tr style="color: white;">
+                                <!--<th class="text-center headerTable-top-left">
+                                    <input class="all labelCheckBox" type="checkbox"  id="all" [(ngModel)]="isChecked" (change)="checkValue(isChecked?'A':'B')" (click)="todosloscheck(datostabla)" >
+                                    <label class="checkLabel checkLabelMaterial" for="all"></label>
+                                </th>-->
+                                <th class="text-center headerTable">
+                                    Folio
+                                </th>
+                                <th class="text-center headerTable">
+                                    Clave Familiar
+                                </th>
+
+                                <th class="text-center headerTable">
+                                    Familia
+                                </th>
+
+                                <th class="text-center headerTable">
+                                    Ciclo
+                                </th>
+
+                                <th class="text-center headerTable">
+                                    Matrícula
+                                </th>
+                                <th class="text-center headerTable">
+                                    Alumno
+                                </th>
+                                <th class="text-center headerTable">
+                                    Grado actual
+                                </th>
+                                <th class="text-center headerTable">
+                                    Grado a aplicar
+                                </th>
+                                <th class="text-center headerTable">
+                                    Estatus
+                                </th>
+                                <th class="text-center headerTable-top-right">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let c of datostabla; let k=index"  [ngClass]="{'bordeBottom': (k == datostabla.length - 1), 'tabalbordeBottom':  datostabla.length == 1}">
+                            <tr style="font-size: 13px;" *ngFor="let alumno of c.alumno; let i=index">
+
+                            <td class="text-center" [attr.rowspan]="(c.alumno.length)"  style="vertical-align:middle; border-left: 1px solid #ddd" *ngIf="i === 0 ">
+                                    <p >{{c.solicitudid}}</p>
+                                </td>
+
+                                <td class="text-center" [attr.rowspan]="(c.alumno.length)" style="vertical-align:middle; border-left: 1px solid #ddd" *ngIf="i === 0 ">
+                                    <p>{{c.clave}}</p>
+                                </td>
+
+                                <td class="text-center" [attr.rowspan]="(c.alumno.length)" style="vertical-align:middle; border-left: 1px solid #ddd; " *ngIf="i === 0 ">
+                                    <span>{{c.apellidopaterno}} {{c.apellidomaterno}}</span>
+                                </td>
+
+                                <td class="text-center" [attr.rowspan]="(c.alumno.length)" style="vertical-align:middle; border-left: 1px solid #ddd; border-right: 1px solid #ddd" *ngIf="i === 0 ">
+                                    <span>{{c.ciclo}}</span>
+                                </td>
+
+                                <td class="text-center" style="border-top: 0px">
+                                    {{alumno.matricula ? alumno.matricula: '-'}}
+                                </td>
+
+                                <td class="text-center" style="border-top: 0px">
+                                    {{alumno.nombre ? alumno.nombre: '-'}}
+                                </td>
+
+                                <td class="text-center" style="border-top: 0px">
+                                    {{alumno.gradoactual ? alumno.gradoactual : '-'}}
+                                </td>
+
+                                <td class="text-center" style="border-top: 0px">
+                                    {{alumno.gradosiguiente ? alumno.gradosiguiente : '-'}}
+                                </td>
+
+                                <td class="text-center" style="border-top: 0px">
+                                    <span>{{alumno.estatusalumno? (alumno.estatusalumno=="Autorizada" || alumno.estatusalumno=="Rechazada" ? alumno.estatusalumno : alumno.estatus): alumno.estatus}}</span>
+                                </td>
+
+                                <td class="text-center" [attr.rowspan]="(c.alumno.length)" style="vertical-align:middle; border-left: 1px solid #ddd; border-right: 1px solid #ddd" *ngIf="i === 0 ">
+                                    <div *ngIf="parambecas== 2">
+                                        <div [hidden]="periodobeca == -1"><!--&& c.estatusid == 2-->
+                                            <a (click)="openmodalSolicitud(c)" *ngIf="c.alumno[0].estatusalumno ? (c.alumno[0].estatusalumno != 'En captura' && c.alumno[0].estatusalumno != 'Capturada'): (c.estatusid != 2 && c.estatusid != 3)">   <span class="fa fa-eye fa-lg"></span></a>
+                                            <a (click)="openmodalSolicitud(c)" *ngIf="c.alumno[0].estatusalumno ? (c.alumno[0].estatusalumno == 'En captura' || c.alumno[0].estatusalumno == 'Capturada') : (c.estatusid == 2 || c.estatusid == 3)">   <span class="fa fa-pencil fa-lg"></span></a>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="parambecas== 1">
+                                        <div [hidden]="(periodobeca == -1 && c.estatusid == 2)"><!--&& c.estatusid == 2-->
+                                            <a (click)="openmodalSolicitud(c)" *ngIf="c.estatusid != 2 && c.estatusid != 3">   <span class="fa fa-eye fa-lg"></span></a>
+                                            <a (click)="openmodalSolicitud(c)" *ngIf="c.estatusid == 2 || c.estatusid == 3">   <span class="fa fa-pencil fa-lg"></span></a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div #containermensaje *ngIf="datostabla.length == 0 && parambecas==1"></div>
+
+            <!-- -->
+            <div *ngIf = "datostabla.length == 0 && periodobeca == 1 && parambecas==2" style="margin-top: 15px">
+                <span style="color: gray; font-size: 14px; ">
+                    Aún no has realizado una solicitud de beca. Presiona el botón "Agregar" para generar una solicitud de beca.
+                </span>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal
+     #modal="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+     <div class="modal-dialog modal-md">
+        <div class="modal-content modal-md">
+            <form  [formGroup]="FormGuardar" novalidate (ngSubmit)="guardar()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <strong>Agregar solicitud beca</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <p>Indique la matrícula de alguno de sus hijos para obtener clave familiar e iniciar la solicitud de beca</p>
+                    </div>
+                    <br>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="offset-md-1"></div>
+                            <div class="col-sm-12 col-md-2">
+                                <label class="label-control">Matrícula</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5">
+                                <div class="group">
+                                    <input type="text" required formControlName="Matricula"> <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Matrícula</label>
+                                </div>
+                                <small [hidden]="FormGuardar.controls.Matricula.valid || (FormGuardar.controls.Matricula.pristine && !submitted)" style="color: red">
+                                    Ingrese la matricula
+                                </small>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" (click)="cancelar()">Cancelar</button>
+                    <button class="btn principal" type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal de datos de la solicitud-->
+<div #containerSolicitud></div>
+
+<!-- Modal para seleccionar una familia (familiaSeleccionada)=""-->
+<modalfamilia #modalfamilia (familiaSeleccionada)="guardar($event)"></modalfamilia>

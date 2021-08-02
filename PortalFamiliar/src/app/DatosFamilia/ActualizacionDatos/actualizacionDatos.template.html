@@ -1,0 +1,101 @@
+<!-- contenido -->
+<div class="row">
+  <div class="col-lg-12">
+    <section class="widget">
+
+      <header>
+        <h3> ACTUALIZACIÓN DE <b>DATOS</b> </h3>
+      </header>
+
+
+      <div class="widget-body">
+        <fieldset>
+
+          <legend></legend>
+
+          <!------------- alumnos ----------------->
+          <span>A continuación se muestran las claves de familia a las que está asignado. Actualice los datos de aquellos registros que estén desactualizados.</span><br>
+
+          <div class="margenSeparador"></div>
+
+          <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">
+
+            <table datatable [dtOptions]="dtOptionsAlumno" [dtTrigger]="dtTriggerAlumno" class="table table-hover" id="alumnoporpadre">
+              <thead>
+              <tr style="color: #fff;">
+
+                <th class="headerTable-top-left text-center">
+                  Clave de Familia
+                </th>
+
+                <th class=" headerTable">
+                  Familia
+                </th>
+
+                <th class=" headerTable text-center">
+                  Matrícula
+                </th>
+
+                <th class=" headerTable">
+                  Alumno
+                </th>
+
+                <th class="text-center headerTable text-center">
+                  Estatus
+                </th>
+
+                <th class=" headerTable text-center">
+                  Última Actualización
+                </th>
+
+                <th class="text-center headerTable-top-right" [hidden]="!periodoactualizacion">
+                  Acciones
+                </th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr style="font-size: 13px; " *ngFor="let a of alumno">
+                <td class="text-center">
+                  <p>{{a.Clave | uppercase}}</p>
+                </td>
+
+                <td >
+                  <p>{{a.ApellidoPaternoCF | uppercase}} {{a.ApellidoMaternoCF | uppercase}}</p>
+                </td>
+
+                <td class="text-center">
+                  <p>{{a.Matricula}}</p>
+                </td>
+
+                <td >
+                  <p >{{a.PrimerNombre | uppercase}} {{a.SegundoNombre | uppercase}} {{a.ApellidoPaterno | uppercase}} {{a.ApellidoMaterno | uppercase}}</p>
+                </td>
+
+                <td class="text-center">
+                  <p [ngClass]="{textoRojo:  a.Actualizar == '1' }">{{ a.Actualizar == '1'  ? 'Desactualizada': 'Actualizada' | uppercase}}</p>
+                </td>
+
+                <td class="text-center">
+                  <p>{{a.FechaActualizacion | fechaEsp | uppercase}}</p>
+                </td>
+
+                <td class="text-center" [hidden]="!periodoactualizacion">
+                  <button class=" btnGeneral btn-sm" (click)="ActualizarDatosAlumnos(a)" style="min-width:100px">
+                    <span> {{ a.Actualizar == '1' ? 'Actualizar': 'Editar'}} </span>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <div class="15px"></div>
+
+
+        </fieldset>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,211 @@
+<!-- -------- Datos Alumnos --------- -->
+<section class="widget">
+
+  <h5>DATOS DEL ALUMNO</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+  <div class="row">
+
+    <!-- Correo -->
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" [hidden]="alumno.NivelId == '1'">
+
+      <div class="margenTopSelect hidden-md-down"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="correoAlumno" maxlength="100" required [(ngModel)]="alumno.Correo" #correoAlumno="ngModel" pattern="^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$"  class="textoMinuscula">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Correo</label>
+
+        <small [hidden]="correoAlumno.valid || (!correoAlumno.touched && !alumnoComponent.summittedGeneral) || !alumno.Correo" class="massageError">
+          Ingrese un correo válido
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Lada -->
+    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-4" [hidden]="alumno.NivelId == '1'" >
+
+      <div class="margenTopSelect hidden-md-down"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="ladaAlumno"  required [(ngModel)]="alumno.Lada"  pattern="\([1-9][0-9]{1,2}\)" #ladaAlumno="ngModel" lada>
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Lada</label>
+
+        <small [hidden]="ladaAlumno.valid || (!ladaAlumno.touched && !alumnoComponent.summittedGeneral) || (!alumno.Lada && !alumno.Tel)" class="massageError">
+          Ingrese una lada válida
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-8" [hidden]="alumno.NivelId == '1'" >
+
+      <div class="margenTopSelect hidden-md-down"></div>
+      <div class="group inputResponsive">
+
+        <input   type="text" id="telefonoAlumno"  required [(ngModel)]="alumno.Tel" [pattern]="telefonoService.GetExpresionRegularTelefono(alumno.Lada)"  #telefonoAlumno="ngModel"   [phonenumber]="{ lada:alumno.Lada}">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Teléfono</label>
+
+        <small [hidden]="telefonoAlumno.valid || (!telefonoAlumno.touched && !alumnoComponent.summittedGeneral) || (!alumno.Lada && !alumno.Tel)" class="massageError">
+          Ingrese un teléfono válido
+        </small>
+
+      </div>
+    </div>
+
+
+    <!-- Vive Con  -->
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="display: inline-block !important;" >
+
+      <label class="MaterialLabel labelSelect" >Vive con</label>
+      <div class="margenTopSelect"></div>
+      <sui-select style="width: 100%;" class="selection" required
+                  placeholder="Vive Con"
+                  [options]="alumnoComponent.vivecon"
+                  labelField="nombre"
+                  valueField="viveconid"
+                  [(ngModel)]="alumno.ViveConId"
+                  #viveconselect
+                  #viveconAlumno="ngModel"
+      >
+
+        <sui-select-option *ngFor="let option of viveconselect.filteredOptions" [value]="option" [hidden]="!option.activo"></sui-select-option>
+
+      </sui-select>
+
+      <small [hidden]="alumno.ViveConId || (!viveconAlumno.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+        Indique con quien vive el alumno
+      </small>
+
+    </div>
+  </div>
+
+
+  <div class="margenSeparador"></div>
+</section>
+
+
+<!-- -------- Lugar de nacimiento --------- -->
+<section class="widget">
+  <h5 class="text-uppercase">Lugar de nacimiento</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+  <div class="row">
+
+    <!-- País -->
+    <div class="col-lg-4 col-xs-12 col-md-6 col-sm-12">
+
+      <label class="MaterialLabel labelSelect" >País</label>
+      <div class="margenTopSelect"></div>
+
+      <sui-select style="width: 100%; " class="selection" required
+                  placeholder="País"
+                  [options]="alumnoComponent.pais"
+                  labelField="nombre"
+                  valueField="paisid"
+                  [(ngModel)]="alumno.PaisNacimiento"
+                  #paisnacimientoselect #paisNacimientoAlumno="ngModel"
+                  (ngModelChange)="alumnoComponent.CambiarPaisNacimiento($event)"
+      >
+
+        <div class="divider" style="border: none"></div>
+        <div class="ui icon search input">
+          <i class="search icon"></i>
+          <input suiSelectSearch type="text">
+        </div>
+
+        <sui-select-option *ngFor="let option of paisnacimientoselect.filteredOptions" [value]="option"  [hidden]="option.Activo != '1'"></sui-select-option >
+
+      </sui-select>
+
+      <small [hidden]="alumno.PaisNacimiento || (!paisNacimientoAlumno.touched && !alumnoComponent.summittedGeneral)" class="massageError">
+        Seleccione un país
+      </small>
+
+
+    </div>
+
+    <div class="col-lg-4 col-xs-12 col-md-6 col-sm-12" style="display: inline-block !important;">
+
+      <label class="MaterialLabel labelSelect" >Estado</label>
+      <div class="margenTopSelect"></div>
+
+
+      <sui-select style="width: 100%; " class="selection" required
+                  placeholder="Estado"
+                  [options]="alumnoComponent.estadoNacimiento"
+                  labelField="nombre"
+                  valueField="estadoid"
+                  [(ngModel)]="alumno.EstadoNacimiento"
+                  #estadonacimientoselect #estadoNacimientoAlumno="ngModel"
+                  (ngModelChange)="alumnoComponent.CambiarEstadoNacimiento($event)"
+                  [isDisabled]="!alumno.PaisNacimiento || alumnoComponent.estadoNacimiento.length == 0" >
+
+        <div class="divider" style="border: none"></div>
+
+        <div class="ui icon search input">
+          <i class="search icon"></i>
+          <input suiSelectSearch type="text">
+        </div>
+
+        <sui-select-option *ngFor="let option of estadonacimientoselect.filteredOptions" [value]="option"  [hidden]="!option.activo"></sui-select-option >
+
+      </sui-select>
+
+      <small [hidden]="(alumno.EstadoNacimiento || (!estadoNacimientoAlumno.touched && !alumnoComponent.summittedGeneral)) || alumno.PaisNacimiento != '484'" class="massageError">
+        Seleccione un estado
+      </small>
+
+
+    </div>
+
+    <div class="col-lg-4 col-xs-12 col-md-6 col-sm-12" style="display: inline-block !important;">
+
+      <label class="MaterialLabel labelSelect" >Ciudad</label>
+      <div class="margenTopSelect"></div>
+
+      <sui-select style="width: 100%; " class="selection" required
+                  placeholder="Ciudad"
+                  [options]="alumnoComponent.ciudadNacimiento"
+                  labelField="nombre"
+                  valueField="municipioid"
+                  [(ngModel)]="alumno.CiudadNacimiento"
+                  #ciudadnacimientoselect #ciudadNacimientoAlumno="ngModel"
+                  [isDisabled]="!alumno.EstadoNacimiento || alumnoComponent.ciudadNacimiento.length == 0" >
+
+        <div class="divider" style="border:none"></div>
+        <div class="ui icon search input">
+          <i class="search icon"></i>
+          <input suiSelectSearch type="text">
+        </div>
+
+        <sui-select-option *ngFor="let option of ciudadnacimientoselect.filteredOptions" [value]="option"  [hidden]="!option.activo"></sui-select-option >
+
+      </sui-select>
+
+      <small [hidden]="(alumno.CiudadNacimiento  || (!ciudadNacimientoAlumno.touched && !alumnoComponent.summittedGeneral)) || alumno.PaisNacimiento != '484'" class="massageError">
+        Seleccione una ciudad
+      </small>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="margenSeparador"></div>
+</section>

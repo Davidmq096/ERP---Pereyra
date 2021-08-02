@@ -1,0 +1,703 @@
+<div class="row"  *ngIf="false">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h3 class="text-uppercase"> <b>Acuerdos</b> de pago </h3>
+            </header>
+            <div class="widget-body">
+                <fieldset>
+                    <legend></legend>
+                    <div class="col-lg-12">
+                        <h6>
+                            A continuación se muestra la lista de acuerdos pendientes de pago:
+                        </h6>                                
+                    </div>
+                    <div class="col-sm-12 divseparador"></div>
+
+                    <!-- tabla de convenios -->
+                    <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">    
+                        <table datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1" class="table table-hover" id="tablaConvenio">
+                               <thead>
+                                <tr style="color: #fff;">
+                                    <th class="text-center headerTable-top-left">
+                                        N° Acuerdo
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Fecha Límite
+                                    </th>    
+                                    <th class="text-center headerTable">
+                                        Saldo
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Cantidad a Pagar
+                                    </th>                                                             
+                                    <th class="text-center headerTable">
+                                        Pagar
+                                    </th>     
+                                    <!--<th class="text-center headerTable headerTable-top-right" [hidden]="sistema == 'ciencias'">
+                                        Imprimir recibo
+                                    </th>   -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 13px;" *ngFor="let d of arrayconvenios" >
+                                    <td class="text-center align-middle">
+                                        <p>{{d.nconvenio}}</p>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <p>{{d.fechalimite | fechaEspFormato | uppercase}}</p>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <p>{{d.saldototal | currency:'MXN':true:'2.0'}}</p>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <input currencyMask [(ngModel)]="d.pagoparcial" [options]="{ prefix: 'MXN $ ', thousands: ',', decimal: '.', precision: 0 }" min="0" max="{{d.saldototal}}"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-flat btnPrincipal"(click)="PagarConvenio(d)">
+                                            Pagar
+                                        </button>
+                                    </td>
+                                    <!--<td class="text-center align-middle"  [hidden]="sistema == 'ciencias'">
+                                        <a (click)="ImprimirConvenio(d)" class="iconBtn">
+                                            <i class="fa fa-print fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    </td>-->
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    </div>
+                    <hr>
+                </fieldset>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h3 class="text-uppercase" *ngIf="config.sistema == 1"> <b>Pago</b> de inscripciones y colegiaturas </h3>
+                <h3 class="text-uppercase" *ngIf="config.sistema == 2"> <b>Pagos</b> en línea </h3>
+            </header>
+            <div class="widget-body">
+                <fieldset>
+                    <legend></legend>
+                    <div class="col-lg-12">
+                        <h6 *ngIf="config.sistema == 1">
+                            A continuación se muestra la lista de la(s) inscripción(es) y/o colegiatura(s) pendiente(s) de pago  (en rosa se muestran los cargos vencidos):
+                        </h6>
+
+                        <h6 *ngIf="config.sistema == 2">
+                            <ul style="padding: 15px; padding-top: 0px">
+                                <li>
+                                    Por cuestiones de facturación no se permite realizar el pago de colegiaturas y otros conceptos en la misma transacción.
+                                </li>
+                                <li style="margin-top: 12px">
+                                    Por la validación del Banco, después de realizar un pago el proceso podría tardar varios minutos para que el cargo se vea reflejado en esta pantalla.
+                                </li>
+                            </ul>
+
+                            A continuación se muestra la lista de cargos pendientes (muestran en color rosa los cargos vencidos):
+                        </h6>
+                    </div>
+
+                    <div class="col-sm-12 divseparador"></div>
+
+                    <!-- filtro pagos -->
+                    <div  class="col-12">
+                        <div style="display: inline-block;">
+                            <h6>
+                                Alumno(s)
+                            </h6>
+                        </div>
+
+                        <!-- Alumno -->
+                        <div style="display: inline-block; margin-left: 15px">
+                            <sui-select class="selection" style=""
+                                        [(ngModel)]="myalumnoid"
+                                        placeholder="Seleccione un Alumno"
+                                        (selectedOptionChange)="FiltrarDocumento(mostrarVencido, myalumnoid)"
+                                        [options]="arrayalumnos"
+                                        labelField="nombrecompleto"
+                                        valueField="alumnoid"
+                                        #alumnosselectmodal>
+                                        <div class="divider" style="border-color: transparent"></div>
+                                <div class="ui icon search input">
+                                    <i class="search icon"></i>
+                                    <input suiSelectSearch type="text">
+                                </div>
+                                <div class="divider"></div>
+                                <sui-select-option *ngFor="let option of alumnosselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                            </sui-select>
+                        </div>
+
+                        <!-- pagos vencidos -->
+                        <div [hidden]="!ExistsVencidos" style="display: inline-block; margin-left: 10px">
+                            <p>
+                                <input class="labelCheckBox" type="checkbox" id="_IsVencido" [(ngModel)]="mostrarVencido"  (change)="FiltrarDocumento(mostrarVencido, myalumnoid)"/>
+                                       <label class="checkLabel" for="_IsVencido" style="color: #757575;">Solo conceptos vencidos</label>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-12" *ngIf="bloqueoimpresion" style="margin-top: 20px;">
+                        <fieldset>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                No puedes consultar calificaciones porque existe un bloqueo relacionado a tu matrícula. 
+                                <br> Observaciones: <b>{{observacionesimpresion}}</b>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!-- tabla de pagos  --->
+                    <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">    
+                        <table datatable [dtOptions]="dtOptionsDoc" [dtTrigger]="dtTriggerDoc" class="table table-hover" id="tablaColegiaturas">
+                               <thead>
+                                <tr style="color: #fff;">
+
+                                    <th [hidden]="true">
+
+                                    </th>
+
+                                    <th class="text-center headerTable-top-left" [hidden]="myalumnoid > 0">
+                                        Matrícula
+                                    </th>
+                                    <th class="text-center headerTable" [hidden]="myalumnoid > 0">
+                                        Nombre del alumno
+                                    </th>
+                                    <th class="text-center headerTable" [ngClass]="{'headerTable-top-left' : myalumnoid > 0}">
+                                        Concepto
+                                    </th>    
+                                    <th class="text-center headerTable">
+                                        Importe
+                                    </th>
+                                    <th class="text-center headerTable" [hidden]="sistema == 'lux'">
+                                        Descuento
+                                    </th>  
+                                    <th class="text-center headerTable">
+                                        Recargo
+                                    </th>   
+                                    <th class="text-center headerTable">
+                                        {{sistema == 'lux' ? 'Saldo' : 'Por pagar'}}
+                                    </th>   
+                                    <th class="text-center headerTable">
+                                        Límite de pago
+                                    </th>          
+
+                                    <th class="text-center headerTable" [hidden]="sistema == 'ciencias'">
+                                        Imprimir recibo
+                                    </th>             
+                                    <th class="text-center headerTable-top-right">
+                                        Pago WEB
+                                    </th>
+
+                                    <!--<th class="text-center headerTable">
+                                        Banco
+                                    </th>-->
+                                </tr>
+                            </thead>
+                            <tfoot [hidden]="arraydocumentos.length <=0">
+                                <tr>
+                                    <td [colSpan]="sistema == 'lux' && myalumnoid > 0 ? 6 : sistema == 'lux' && myalumnoid <= 0 ? 8 : sistema == 'ciencias' && myalumnoid > 0 ? 6 : sistema == 'ciencias' && myalumnoid <= 0 ?  8 : 7" class="push-right text-right font-weight-bold">
+                                        Total seleccionado:
+                                    </td>
+                                    <td class="push-right font-weight-bold">
+                                        {{ sumseleccionados | currency:'MXN':true:'2.2-4'}}
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            <ng-container  *ngFor="let d of arraydocumentos">
+                                <tr style="font-size: 13px;" [ngClass]="{'table-danger' : d.IsVencido}" >
+                                <td [hidden]="true" ></td>
+
+                                    <td class="text-center" [hidden]="myalumnoid > 0">
+                                        <p>{{d.Matricula}}</p>
+                                    </td>
+                                    <td class="text-center" [hidden]="myalumnoid > 0">
+                                        <p>{{d.Alumno | uppercase}}</p>
+                                    </td>
+                                    <td class="text-center">
+
+                                        <div class="input-group" (click)="(d.TipoDocumento == 1 || d.TipoDocumento == 2)  ? d.VerSubconcepto = !d.VerSubconcepto : return">
+                                             <button class="btn form-control botonTransparente"  [ngClass]="{'opened':d.VerSubconcepto}">
+                                                <span>{{d.Concepto | uppercase}}</span>
+                                            </button>
+
+                                            <div class="input-group-btn" *ngIf="(d.TipoDocumento == 1 || d.TipoDocumento == 2)">
+
+                                                <button class="btn form-control botonTransparente"  [ngClass]="{'opened':d.VerSubconcepto}">
+
+                                                    <b style="margin-left: 8px; font-size: 14px" >
+
+                                                        <span class="pull-right">
+                                                            <span class="fa fa-chevron-down" *ngIf="!d.VerSubconcepto"></span>
+                                                            <span class="fa fa-chevron-up" *ngIf="d.VerSubconcepto"></span>
+                                                        </span>
+                                                    </b>
+
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="text-left" [hidden]="!d.VerSubconcepto" style="white-space: nowrap">
+
+                                            <ul >
+
+                                                <li *ngIf="d.TipoDocumento == 1 || d.TipoDocumento == 2">
+                                                    {{d.TipoDocumento == 1 ? 'Pago de inscripción' : d.TipoDocumento == 2 ? 'Pago de colegiatura'  : '-'}}
+
+                                                    <span *ngIf="d.TipoDocumento == 2 && d.SaldoInscripcion > 0"> ({{d.Saldo | currency:'MXN':true:'2.2-4'}})</span>
+                                                    <span *ngIf="d.TipoDocumento == 1 && d.SaldoFondoOrfandad > 0"> ({{(d.SaldoTotal -  d.SaldoFondoOrfandad) | currency:'MXN':true:'2.2-4'}})</span>
+                                                </li>
+
+                                                <!-- inscripción para colegiatura -->
+                                                <li *ngIf="d.TipoDocumento == 2 && d.SaldoInscripcion > 0">Pago de inscripción ({{d.SaldoInscripcion | currency:'MXN':true:'2.2-4'}})</li>
+
+                                                <!-- fondo de orfandad para inscripcion -->
+                                                <li *ngIf="d.TipoDocumento == 1 && d.SaldoFondoOrfandad > 0">Fondo de orfandad ({{d.SaldoFondoOrfandad | currency:'MXN':true:'2.2-4'}})</li>
+
+                                            </ul>
+                                        </div>
+
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{(sistema == 'lux' ? d.ImporteTotal :
+                                            (1*d.Importe + 1*d.ImporteInscripcion)) | currency:'MXN':true:'2.2-4'}}</p>
+                                    </td>
+                                    <td class="text-center" [hidden]="sistema == 'lux'">
+                                        <p>{{-(d.descuentodoc ? d.descuentodoc : 0) | currency:'MXN':true:'2.2-4'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{(d.InteresTotal ? d.InteresTotal : 0) | currency:'MXN':true:'2.2-4'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{(sistema == 'lux' ? d.SaldoTotal :
+                                            (1*d.Saldo + 1*d.SaldoInscripcion + 1*d.InteresTotal + (-1*d.descuentodoc) )) | currency:'MXN':true:'2.2-4'}}</p>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <p>{{d.FechaLimite | fechaEsp  | uppercase}}</p>
+                                    </td>
+                                    <td class="text-center" [hidden]="sistema == 'ciencias'"
+                                        [attr.colspan]="(d.bloqueoadeudo || (d.bloqueoimpresion ) || d.bloqueodatos || d.bloqueodocumentos) ? '2' : '1'"
+                                        >
+
+                                        <a (click)="SolicitarImprimirRecibo(d)" class="iconBtn"><i class="fa fa-print fa-lg" 
+                                                                                               *ngIf="!d.bloqueoadeudo && (!d.bloqueoimpresion ) && !d.bloqueodatos && !d.bloqueodocumentos"
+                                                                                               aria-hidden="true"></i></a>
+
+                                        <div *ngIf="d.bloqueoadeudo || (d.bloqueoimpresion ) || d.bloqueodatos || d.bloqueodocumentos" class="text-left" colspan="2">
+
+                                            <b style="color: red">{{d.mensajeprincipal}}​</b>
+                                            <br>
+                                            <div *ngIf="d.bloqueodatos">
+                                                <b style="color: red" >
+                                                    {{d.observacionesdatos}}
+                                                </b>
+                                                <br>                                                
+                                            </div>
+                                            <div *ngIf="d.bloqueodocumentos">
+                                                <b style="color: red" >
+                                                    {{d.observacionesdocumentos}}
+                                                </b>
+                                                <br>
+                                            </div>
+                                            <div *ngIf="d.bloqueoadeudo">
+                                                <b  style="color: red;" > {{d.observacionesadeudo}}</b>
+                                                <br>
+                                            </div>
+
+                                            <b style="color: red;" *ngIf="d.bloqueoimpresion">
+                                                {{d.observacionesimpresion}}
+                                            </b>
+                                        </div> 
+                                    </td>
+                                    <td class="text-center" [hidden]="(d.bloqueoadeudo || (d.bloqueoimpresion ) || d.bloqueodatos || d.bloqueodocumentos) && sistema == 'lux'">
+
+                                        <p *ngIf="((!d.bloqueoimpresion) && !d.bloqueoadeudo && !d.bloqueodatos && !d.bloqueodocumentos)">
+                                            <input class="labelCheckBox" type="checkbox" id="{{d.DocumentoPorPagarId}}" [(ngModel)]="d.IsPagar"  (ngModelChange)="calcularpago()" [disabled]="DeshabilitarPagarPagoCheckBox(d)"/>
+                                            <label class="checkLabel" for="{{d.DocumentoPorPagarId}}" style="color: #757575;"></label>
+                                        </p> 
+                                    </td>
+
+                                    <!-- <td class="text-center">
+                                        <button class=" btnGeneral btn-sm" (click)="PagoBanco(d)" style="min-width:100px">
+                                            <span>Pagar </span>
+                                        </button>
+                                    </td> -->                                                             
+                                </tr>
+                                <tr [ngClass]="{'table-danger' : d.IsVencido}" *ngIf="(d.bloqueodatos || d.bloqueodocumentos ||
+                                    d.bloqueoadeudo || d.bloqueoimpresion) &&  sistema == 'ciencias'">
+                                    <td colspan="10">
+
+                                        <b style="color: red">{{d.mensajeprincipal}}​</b>
+                                        <br>
+                                        <div *ngIf="d.bloqueodatos">
+                                            <b style="color: red" >
+                                                {{d.observacionesdatos}}
+                                            </b>
+                                            <br>                                                
+                                        </div>
+                                        <div *ngIf="d.bloqueodocumentos">
+                                            <b style="color: red" >
+                                                {{d.observacionesdocumentos}}
+                                            </b>
+                                            <br>
+                                        </div>
+                                        <div *ngIf="d.bloqueoadeudo">
+                                            <b  style="color: red;" > {{d.observacionesadeudo}}</b>
+                                            <br>
+                                        </div>
+
+                                        <b style="color: red;" *ngIf="d.bloqueoimpresion">
+                                            {{d.observacionesimpresion}}
+                                        </b>
+                                    </td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
+                                </tr>
+                            </ng-container>
+                            </tbody>
+                        </table>                    
+                    </div>
+
+
+                    <hr><br>
+                    <button class="btn btn-sm pull-right btnPrincipal"  style="margin-top: -18px !important;" (click)="PagarSeleccionados()"  [disabled]="sumseleccionados <= 0">
+                            Pagar seleccionados
+                </button>
+
+            </fieldset>
+        </div>
+    </section>
+</div>
+</div>
+
+
+
+
+<div id="recibopago" [hidden]="true">
+    <section class="widget">
+        <div class="fri-contorno leyend">
+            <div class="container">
+                <div class="row" style="padding: 10px !important;">
+                    <table>
+                        <tr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <td>
+                                <img src="data:image/png;base64,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zx5yMBQKvf3223FxcU888YROp2MYJjExMS4ujiRVI5n73Xff/d3vfkfmGnVXFy9evHbtWj6fH5W4Sma5tbX1ueeeW7p06cMPPxwTExNVKpHH46WlpT377LOLFi166623ent7uXmf5CZms9lut08y4fmm0xQYDvn5+V//+tczMzMpilIqld/73veKi4sDgUBVVRWpZoGlK/IIsayx2WwHDhxgWba8vPzb3/425jEmJmb16tVz586FgIraUoEpBgseOHDgu9/97v79+wXj2iNQFCUQCMrLy//whz888MADNE1z02NIhH4KzbwpAIlhmNLS0mnTplEUxefzy8vLN23aNN7YiyK/3282mw0Gw9NPP11RUcGyLMMwhYWFCxcuBIoMwyBtKMRpMExxoBoeHt69e3dtbe2E1lo4HFYqlevXr7/nnntCoRDK1kTd5CZPxKRpakzwnJyclStXJiUloYjFI488kpGRkZqaerkUUZqmNRoNlFZ+fn5mZuacOXNUKtWSJUvKysqoiDmwadOm73znO6ibE7WeBYRms/nFF1985ZVXBgYGsFGenAAfq1ar/e53v/vuu+8uWLAAW5Fv9VRMhqYGJIZhZDKZWq1+8MEHCwoK3nvvva6uroceeiguLu5yl6hUqnXr1lkslj/96U+FhYXf+973sEGV2xNHKBQ++uijb7755tKlSwneUVAplcqjR48+9dRTu3fvttlsUfwBkyQ/P//ll1/+2c9+lpiYGOUfmhKaGpBIwYXp06eLxWK32x0Oh0+cOHHx4sXxxfRZlg0Gg93d3W+//XYoFELREhSLQXcl7slOpzMxMfFXv/rV888/n5eXN+FuCLjv3nrrrRdeeAENQqJOQBGntWvXvv766xs2bEC7wlsxD5OkqQFJpVItWLBgdHT05z//+WeffVZZWbls2bJXX3314Ycf7uzsHA9SX1/fv/3bv23ZsqWsrOyhhx46derU5s2bQ6HQihUrouoVw8/mcrkWLVr0+uuvP/jgg/Hx8djAQ12qWhAx+dnPfvbmm292dnaO55hgMGgwGJ588smXX365tLR0fNLZbaOpAUkoFN5///0PPvhgZ2fns88+i7LZq1evlkgk400vLFbcbvfq1at/85vfGI3GH//4x8ePH9+wYcPDDz98Oc806uZs3LjxP//zP4uLi6mJzDM+ny8SiQ4fPvyTn/xk7969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" alt="">
+                            </td>
+                            <td style="text-align: center;" class="col-lg-10 col-md-10 col-sm-10 col-xs-10" colspan="5">
+                                <h2>
+                                    <strong>
+                                        ESCUELA CARLOS PEREYRA
+                                    </strong>            
+                                </h2>
+                                <h5 style="margin-top: 10px !important;">
+                                    www.pereyra.edu.mx/
+                                </h5>
+                                <br>
+                                <h6>
+                                    Calz. San Ignacio de Loyola 250 Ejido La Unión C.P. 27420 Torreón, Coahuila, México.
+                                </h6>
+
+                                <h4>
+                                    <strong>
+                                        RECIBO DE PAGO
+                                    </strong>
+                                </h4>
+                            </td>
+                        </tr>
+                        <tr class="col-sm-12 divseparador">
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Matrícula: </strong>
+                            </td>
+                            <td>
+                                <strong>Nombre: </strong>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{datosimpresion.matricula}}
+                            </td>
+                            <td>
+                                {{datosimpresion.nombre | uppercase}}
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr> 
+                        <tr class="col-sm-12 divseparador">
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Ciclo escolar: </strong>
+                            </td>
+                            <td>
+                                <strong>Sección: </strong>
+                            </td>
+                            <td>
+                                <strong>Grado y grupo: </strong>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{datosimpresion.ciclo  | uppercase}}
+                            </td>
+                            <td>
+                                {{datosimpresion.seccion  | uppercase}}
+                            </td>
+                            <td>
+                                {{datosimpresion.grado}} {{(datosimpresion.grupo ? datosimpresion.grupo: '-')  | uppercase}}
+                            </td>
+                            <td>
+                            </td>
+                        </tr>                                                           
+                    </table>                                
+                </div>
+                <div class="row">
+                    <table class="table table-hover fri-contorno">
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Documento</th>                    
+                                <th>Vencimiento</th>
+                                <th>
+                                    <p class="pull-right">
+                                        Importe
+                                    </p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{datosimpresion.concepto}}</td>
+                                <td>{{datosimpresion.documento}}</td>
+                                <td>{{datosimpresion.fechavencimiento | fechaEsp}}</td>
+                                <td>
+                                    <p class="pull-right">
+                                        {{datosimpresion.importe | currency:'MXN':true:'2.2-4'}}
+                                    </p>
+                                </td>
+                            </tr>               
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="total-leyend">                    
+                                    <h4>
+                                        <strong>
+                                            Total a pagar
+                                        </strong>    
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h4 class="pull-right">
+                                        <strong>                                
+                                            {{datosimpresion.importe | currency:'MXN':true:'2.2-4'}}
+                                        </strong>    
+                                    </h4>
+
+                                </td>
+                            </tr>               
+                        </tfoot>
+                    </table>        
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <p style="font-size: 12px !important;"><strong>Favor de pagar en cualquier sucursal de: </strong></p>
+                        </div> 
+                        <div class="col-sm-12" style="text-align: center; margin-top: 12px">
+                            <h5>
+                                Banco del Bajío: {{datosimpresion.referencia | uppercase}}
+                            </h5>       
+                        </div>
+
+
+                    </div>        
+                </div>     
+            </div>      
+        </div>
+    </section>
+</div>
+<div id="reciboconvenio" [hidden]="true">
+    <section class="widget">
+        <div class="fri-contorno leyend">
+            <div class="container">
+                <div class="row" style="padding: 10px !important;">
+                    <table>
+                        <tr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <td>
+                                <img src="data:image/png;base64,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zx5yMBQKvf3223FxcU888YROp2MYJjExMS4ujiRVI5n73Xff/d3vfkfmGnVXFy9evHbtWj6fH5W4Sma5tbX1ueeeW7p06cMPPxwTExNVKpHH46WlpT377LOLFi166623ent7uXmf5CZms9lut08y4fmm0xQYDvn5+V//+tczMzMpilIqld/73veKi4sDgUBVVRWpZoGlK/IIsayx2WwHDhxgWba8vPzb3/425jEmJmb16tVz586FgIraUoEpBgseOHDgu9/97v79+wXj2iNQFCUQCMrLy//whz888MADNE1z02NIhH4KzbwpAIlhmNLS0mnTplEUxefzy8vLN23aNN7YiyK/3282mw0Gw9NPP11RUcGyLMMwhYWFCxcuBIoMwyBtKMRpMExxoBoeHt69e3dtbe2E1lo4HFYqlevXr7/nnntCoRDK1kTd5CZPxKRpakzwnJyclStXJiUloYjFI488kpGRkZqaerkUUZqmNRoNlFZ+fn5mZuacOXNUKtWSJUvKysqoiDmwadOm73znO6ibE7WeBYRms/nFF1985ZVXBgYGsFGenAAfq1ar/e53v/vuu+8uWLAAW5Fv9VRMhqYGJIZhZDKZWq1+8MEHCwoK3nvvva6uroceeiguLu5yl6hUqnXr1lkslj/96U+FhYXf+973sEGV2xNHKBQ++uijb7755tKlSwneUVAplcqjR48+9dRTu3fvttlsUfwBkyQ/P//ll1/+2c9+lpiYGOUfmhKaGpBIwYXp06eLxWK32x0Oh0+cOHHx4sXxxfRZlg0Gg93d3W+//XYoFELREhSLQXcl7slOpzMxMfFXv/rV888/n5eXN+FuCLjv3nrrrRdeeAENQqJOQBGntWvXvv766xs2bEC7wlsxD5OkqQFJpVItWLBgdHT05z//+WeffVZZWbls2bJXX3314Ycf7uzsHA9SX1/fv/3bv23ZsqWsrOyhhx46derU5s2bQ6HQihUrouoVw8/mcrkWLVr0+uuvP/jgg/Hx8djAQ12qWhAx+dnPfvbmm292dnaO55hgMGgwGJ588smXX365tLR0fNLZbaOpAUkoFN5///0PPvhgZ2fns88+i7LZq1evlkgk400vLFbcbvfq1at/85vfGI3GH//4x8ePH9+wYcPDDz98Oc806uZs3LjxP//zP4uLi6mJzDM+ny8SiQ4fPvyTn/xk7969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" alt="">
+                            </td>
+                            <td style="text-align: center;" class="col-lg-10 col-md-10 col-sm-10 col-xs-10" colspan="3">
+                                <h2>
+                                    <strong>
+                                        INSTITUTO LUX, A.C.
+                                    </strong>            
+                                </h2>
+                                <h5 style="margin-top: 10px !important;">
+                                    www.institutolux.edu.mx
+                                </h5>
+                                <br>
+                                <h6>
+                                    Blvd. Jorge Vértiz Campero No. 1618, Col. Predio Urbano el Crespo, León, Gto. C.P. 37280 Tel. 441-6200
+                                </h6>
+
+                                <h4>
+                                    <strong>
+                                        RECIBO DE PAGO
+                                    </strong>
+                                </h4>
+                            </td>
+                        </tr>
+                        <tr class="col-sm-12 divseparador">
+                        </tr>                                                          
+                    </table>                                
+                </div>
+                <div class="row">
+                    <table class="table table-hover fri-contorno">
+                        <thead>
+                            <tr>
+                                <th>Número de convenio</th>                   
+                                <th>Vencimiento</th>
+                                <th>
+                                    <p class="pull-right">
+                                        Importe
+                                    </p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{datosimpresion.noconvenio}}</td>
+                                <td>{{datosimpresion.fechalimitepago | fechaEspFormato}}</td>
+                                <td>
+                                    <p class="pull-right">
+                                        {{datosimpresion.importe | currency:'MXN':true:'2.2-4'}}
+                                    </p>
+                                </td>
+                            </tr>               
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="total-leyend">                    
+                                    <h4>
+                                        <strong>
+                                            Total a pagar
+                                        </strong>    
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h4 class="pull-right">
+                                        <strong>                                
+                                            {{datosimpresion.importe | currency:'MXN':true:'2.2-4'}}
+                                        </strong>    
+                                    </h4>
+
+                                </td>
+                            </tr>               
+                        </tfoot>
+                    </table>        
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <p style="font-size: 12px !important;"><strong>Favor de pagar en cualquier sucursal de: </strong></p>
+                        </div> 
+                        <div class="col-sm-12" style="text-align: center; margin-top: 12px">
+                            <h5>
+                                Banco del Bajío: {{datosimpresion.referencia | uppercase}}
+                            </h5>       
+                        </div>
+
+
+                    </div>        
+                </div>     
+            </div>      
+        </div>
+    </section>
+</div>
+
+<mensajePago #mensajePago></mensajePago>
+<solicitudCobro #solicitudCobro (ActualizarDocumentosPorPagar)="getDocumentos()"></solicitudCobro>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #modalPago="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}"  >
+     <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-body" style="padding: 0px !important;">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <h3 class="text-uppercase">Proceso de pago</h3>
+                    </h4>
+                </div>
+                <div style="height: 32px"></div>
+                <div class="modal-body" style="padding: 0px !important;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="group text-center">
+                                    <h4>INSTRUCCIONES:</h4>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="col-12">
+                                <ol>
+                                    <li>
+                                        <span>Para realizar el pago de los cargos seleccionados, presione el botón <strong>PAGAR</strong>.</span>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <span>Al hacerlo, se abrirá en una nueva pestaña del navegador el sitio web de la institución bancaria.</span>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <span>Una vez completado el proceso de pago, valide el movimiento en la consulta de documentos pagados.</span>
+                                    </li>
+                                </ol>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <button  class="btn btnPrincipal" (click)="GoTobank()" >PAGAR</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="height: 32px;"></div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default btnBase" type="button" (click)="cerrarModal()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

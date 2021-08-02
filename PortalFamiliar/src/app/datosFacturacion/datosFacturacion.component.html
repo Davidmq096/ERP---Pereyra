@@ -1,0 +1,467 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h3 class="text-uppercase"> Datos de <b>facturación</b> </h3>
+            </header>
+            <div class="widget-body">
+                <fieldset>
+                    <legend></legend>
+                    <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">
+                        <h5 ><b>RFC registrados</b></h5>
+
+
+                        <div style="margin-top: 15px">
+                            <button class=" btnGeneral btn-sm"  (click)="modalPadre.show(); accion=false; FormGuardar.get('rfc').enable(); Agregar()">
+                                <span class="fa fa-plus"></span>
+                                <span style="margin-left: 5px"> Agregar </span>
+                            </button>
+                        </div>
+
+                        <div class="margenSeparador"></div>
+
+                        <table datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1" class="table table-hover" id="tablaPadres">
+                               <thead>
+                                <tr style="color: #fff;">
+                                    <th class="text-center headerTable-top-left">
+                                        RFC
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Personalidad jurídica
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Nombre o razón social
+                                    </th>    
+                                    <th class="text-center headerTable">
+                                        Correo electrónico
+                                    </th>                                                       
+                                    <th class="text-center headerTable-top-right">
+                                        Acción
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 13px;" *ngFor="let d of arraydatosfacturacion">
+                                    <td class="text-center">
+                                        <p>{{d.rfc}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{!d.tipopersonaid ? 'FÍSICA' : 'MORAL'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{d.razonsocial}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{d.correo}}</p> 
+                                    </td>
+                                    <td class="text-center">
+                                        <a (click)="editar(d); accion = true;" class="iconBtn"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                                        &nbsp;
+                                        <a (click)="eliminar(d.padresotutoresfacturacionid)"  class="iconBtn" style="margin-left:10px"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    </div>
+
+                     <br class="hidden-md-up">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5  class="">
+                                <b>Facturación automática</b>
+                            </h5>
+                        </div>
+                        <br>
+                        <div class="col-lg-12">
+                            <h6>
+                                Indique el RFC activo y para que conceptos desea activar la facturación automática 
+                            </h6>
+                        </div>
+
+                        <!-- Colegiaturas automáticas -->
+                        <div class="col-sm-12 divseparador"></div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-6">
+                            <h6 class="pull-right">
+                                Colegiaturas e inscripciones
+                            </h6>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 col-6">
+
+                            <div style="margin-top: 10px; margin-left: 10px" class="text-center">
+
+                                <label class="radio">
+                                    <input id="radio1" type="radio" name="renfermedadcronica" value="SI" [(ngModel)]="myrfc.esautomaticacolegiatura"  (ngModelChange)="CambiarFacturaAutomatica($event)">
+
+                                    <span class="outer" style="margin-top: -5px;">
+                                        <span class="inner"></span>
+                                    </span>
+                                    Si
+                                </label>
+
+                                <label class="radio">
+                                    <input id="radio2" type="radio" name="renfermedadcronica" value="NO" [(ngModel)]="myrfc.esautomaticacolegiatura"  (ngModelChange)="CambiarFacturaAutomatica($event)">
+
+                                    <span class="outer" style="margin-top: -5px;">
+                                        <span class="inner"></span>
+                                    </span>
+                                    No
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                            <h6 class="pull-left">
+                                La facturación se realizará en forma automática tras autorizarse el cargo automático o domiciliación.
+                            </h6>
+                        </div>
+
+
+                        <!-- Seleeciona RFC -->
+                        <div class="col-sm-12 "><div class="divseparador" style="margin-bottom: 15px"></div></div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-6">
+                            <h6 class="pull-right" style="text-align: right !important;">
+                                RFC activo para todas las facturas
+                            </h6>
+                        </div>
+
+                         <div class="col-md-4 col-sm-6 col-6">
+                            <sui-select class="selection" style="width: 100%"
+                                        [ngModel]="myrfc.id"
+                                        placeholder="Seleccione un RFC"
+                                        (selectedOptionChange)="SelectRFC($event); chkchange = true;"
+                                        [options]="arraydatosfacturacion"
+                                        [isDisabled]="myrfc.esautomaticacolegiatura == 'NO'"
+                                        labelField="rfc"
+                                        valueField="padresotutoresfacturacionid"                                           
+                                        #rfcselectmodal>
+                                <div class="divider" style="border-color: transparent"></div>
+                                <div class="ui icon search input">
+                                    <i class="search icon"></i>
+                                    <input suiSelectSearch type="text">
+                                </div>
+                                <div class="divider"></div>
+                                <sui-select-option *ngFor="let option of rfcselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                            </sui-select>
+
+                             <small [hidden]="myrfc.esautomaticacolegiatura == 'NO' || myrfc.id > 0 || !summittedMyRFC" class="massageError">
+                                 Seleccione un RFC
+                             </small>
+                        </div>
+
+                        <!-- otros pagos -->
+                        <div class="col-sm-12 divseparador"></div>
+
+                        <div class="col-12">
+                            <h6 class="text-center">
+                                <span class="fa fa-asterisk" style="font-size: 10pt; "></span> Para pagos diversos deberá realizar la facturación de forma manual desde la sección <strong>Facturas</strong> en base a las fechas límites.
+                            </h6>
+                        </div>
+
+                        <div class="col-sm-12 divseparador"></div>
+                        <div class="col-sm-12 divseparador"></div>                                                
+                    </div>
+               
+                    <hr>
+                    <label style="margin-bottom: .0rem !important; padding: 0px !important;">
+                        Consulte el aviso de privacidad                        
+                    </label>
+                    <br>
+
+                    <a href="{{avisoPrivacidad}}" target="_blank" style="margin-top: -10px !important;" class="aLink">
+                        {{avisoPrivacidad}}
+                    </a>
+
+                    <div style="height: 40px" class="hidden-sm-up"></div>
+
+                     <div class="pull-right">
+                        <button class="btn btn-sm btn-default btnBase  btn-flat " [hidden]="!chkchange" style="margin-top: -18px !important; margin-right: 10px !important;" (click)="CancelarCambiosFaturaAutomatica()">
+                            Cancelar
+                        </button>
+
+                        <button class="btn btn-sm btnPrincipal  btn-flat " [hidden]="!chkchange" style="margin-top: -18px !important; margin-right: 10px !important;" (click)="SaveMyRFC()">
+                            Guardar cambios
+                        </button>
+                    </div>
+
+                </fieldset>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #modalPadre="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+
+     <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+
+            <form  [formGroup]="FormGuardar" novalidate>
+
+                <!-- Título -->
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <h3 class="text-uppercase">{{accion ? "Editar" : "Agregar"}} datos de facturación</h3>
+                    </h4>
+                </div>
+
+                <!-- Datos -->
+                <div class="modal-body" style="padding:16px 0px !important;">
+                    <div class="container">
+                         <div class="row">
+
+                            <div class="rowSeperador hidden-lg-up" [hidden]="sistema=='ciencias'" style="height: 20px" ></div>
+                            <div class="rowSeperador" [hidden]="sistema=='lux'" style="height: 20px" ></div>
+
+                             <!-- RFC -->
+                            <div class="col-lg-6 col-sm-12 col-12" style="display: inline-block;">
+
+                                <div class="margenTopSelect hidden-md-down" [hidden]="sistema == 'ciencias'" ></div>
+
+                                <div class="group">
+                                    <input type="text" required formControlName="rfc" maxlength="13" style="text-transform:uppercase" >
+                                    <span class="highlight"></span> <span class="bar"></span>
+                                    <label class="MaterialLabel" >RFC </label>
+                                </div>
+
+                                <small [hidden]="FormGuardar.controls.rfc.valid || (!FormGuardar.controls.rfc.touched && !submitted)" style="color: red">Ingrese un RFC</small>
+                            </div>
+
+                             <div class="rowSeperadorSelect hidden-lg-up" [hidden]="sistema == 'ciencias'" ></div>
+
+                             <!-- Persona Jurídica -->
+                            <div class="col-lg-6 col-sm-12 col-12 "  style="display: inline-block;" [hidden]="sistema == 'ciencias'">
+
+                                <label class="MaterialLabel labelSelect" >Personalidad jurídica</label>
+                                <div class="margenTopSelect"></div>
+
+                                <sui-select class="selection" style="width: 100%"
+                                                formControlName="tipopersonaid"
+                                                placeholder="Seleccione un tipo de personalidad jurídica"
+                                                [options]="SelectTipopersona"
+                                                labelField="persona"
+                                                valueField="tipopersonaid"
+                                                #tipopersonaselect>
+
+                                    <div class="divider" style="border-color: transparent"></div>
+
+
+                                    <sui-select-option *ngFor="let option of tipospersonas" [value]="option"></sui-select-option>
+
+                                </sui-select>
+                                <small [hidden]="FormGuardar.controls.tipopersonaid.valid || (!FormGuardar.controls.tipopersonaid.touched && !submitted)" style="color: red">Seleccione un tipo de personalidad jurídica</small>
+                            </div>
+
+
+                            <div class="rowSeperador" [hidden]="sistema == 'ciencias'" ></div>
+                            <div class="rowSeperador hidden-lg-up" [hidden]="sistema == 'lux'" ></div>
+
+                            <!-- Nombre o razón social -->
+                            <div class="col-lg-6 col-sm-12 col-12 ">
+                                <div class="group">
+                                    <input type="text" required formControlName="razonsocial" maxlength="200" style="text-transform:uppercase">
+                                    <span class="highlight"></span> <span class="bar"></span>
+                                    <label class="MaterialLabel"> Nombre o razón social</label>
+                                </div>
+                                <small [hidden]="FormGuardar.controls.razonsocial.valid || (!FormGuardar.controls.razonsocial.touched && !submitted)" style="color: red">Ingrese un nombre o razón social</small>
+                            </div>
+
+                             <div class="rowSeperador hidden-lg-up" [hidden]="sistema == 'ciencias'" ></div>
+                             <div class="rowSeperador" [hidden]="sistema == 'lux'" ></div>
+
+                            <!-- Correo -->
+                            <div class="col-lg-6 col-sm-12 col-12">
+                                <div class="group">
+                                    <input type="text" required formControlName="correo" maxlength="300" style="text-transform:lowercase">
+                                    <span class="highlight"></span> <span class="bar"></span>
+                                    <label class="MaterialLabel"> Correo electrónico</label>
+                                </div>
+                                <small [hidden]="FormGuardar.controls.correo.valid || (!FormGuardar.controls.correo.touched && !submitted)" style="color: red">Ingrese un correo electrónico</small>
+                            </div>
+
+                             <div class="rowSeperadorSelect hidden-xs-down" [hidden]="sistema == 'ciencias'"></div>
+                             <div class="rowSeperador hidden-sm-up" [hidden]="sistema == 'ciencias'"></div>
+                             <div class="rowSeperador hidden-lg-up" [hidden]="sistema == 'lux'"></div>
+
+                            <!-- código postal -->
+                            <div class="" [ngClass]="{'col-lg-4 col-sm-6 col-12': sistema == 'lux', 'col-lg-6 col-md-12 col-sm-12 col-12': sistema == 'ciencias'}" style="display: inline-block;">
+                                <div class="margenTopSelect hidden-xs-down" [hidden]="sistema == 'ciencias'"></div>
+                                <div class="group">
+                                    <input [textMask]="{mask: maskCP, guide:false}" type="text" required formControlName="codigopostal" (change)="busquedaPorCp(cp.value)" #cp>
+                                    <span class="highlight"></span> <span class="bar"></span>
+                                    <label class="MaterialLabel">Código postal</label>
+                                </div>
+                                <small [hidden]="FormGuardar.controls.codigopostal.valid || (!FormGuardar.controls.codigopostal.touched && !submitted)" style="color: red">Ingrese un código postal</small>
+                            </div>
+
+                             <div class="rowSeperadorSelect hidden-sm-up"></div>
+
+                            <!-- Estado -->
+                            <div class="col-lg-4 col-sm-6 col-12"  [hidden]="sistema == 'ciencias'" style="display: inline-block;">
+                                <label class="MaterialLabel labelSelect" >
+                                    Estado
+                                </label>
+                                <div class="margenTopSelect"></div>
+
+                                <sui-select class="selection" style="width: 100%" required
+                                            formControlName="estado"
+                                            placeholder="Seleccione un estado"
+                                            (selectedOptionChange)="loadMunicipios($event)"
+                                            [options]="estado"
+                                            labelField="nombre"
+                                            valueField="estadoid"
+                                            [isDisabled]="estado.length == 0"
+                                            #estadosselectmodal>
+
+                                    <div class="divider" style="border-color: transparent"></div>
+
+                                    <div class="ui icon search input" [hidden]="estado.length <= 1">
+                                        <i class="search icon"></i>
+                                        <input suiSelectSearch type="text">
+                                    </div>
+
+                                    <sui-select-option *ngFor="let option  of estadosselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+
+                                <small [hidden]="FormGuardar.controls.estado.valid || (!FormGuardar.controls.estado.touched && !submitted)" style="color: red">Seleccione un estado</small>
+                            </div>
+
+                             <div class="rowSeperadorSelect hidden-lg-up" [hidden]="sistema == 'ciencias'"></div>
+
+                            <!-- Ciudad -->
+                            <div class="col-lg-4 col-sm-6 col-12 "  [hidden]="sistema == 'ciencias'" style="display: inline-block;">
+                                <label class="MaterialLabel labelSelect" >
+                                    Ciudad
+                                </label>
+
+                                <div class="margenTopSelect"></div>
+
+                                <sui-select class="selection" style="width: 100%" required
+                                            formControlName="ciudad"
+                                            placeholder="Seleccione una ciudad"
+                                            (selectedOptionChange)="loadColonias($event)"
+                                            [options]="MunicipioFull"
+                                            labelField="nombre"
+                                            valueField="municipioid"
+                                            [isDisabled]="!FormGuardar.controls.estado.valid || MunicipioFull.length == 0"
+                                            #ciudadesselectmodal>
+
+                                    <div class="divider" style="border-color: transparent"></div>
+
+                                    <div class="ui icon search input" [hidden]="MunicipioFull.length <= 1">
+                                        <i class="search icon"></i>
+                                        <input suiSelectSearch type="text">
+                                    </div>
+
+                                    <sui-select-option *ngFor="let option  of ciudadesselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+
+                                <small [hidden]="FormGuardar.controls.ciudad.valid || (!FormGuardar.controls.ciudad.touched && !submitted)" style="color: red">Seleccione una ciudad</small>
+                            </div>
+
+                             <div class="rowSeperadorSelect" [hidden]="sistema == 'ciencias'"></div>
+
+                            <!-- Colonia -->
+                            <div class="col-sm-6 col-lg-4 col-12 "  [hidden]="sistema == 'ciencias'" style="display: inline-block;">
+                                <label class="MaterialLabel labelSelect" >
+                                    Colonia
+                                </label>
+                                <div class="margenTopSelect"></div>
+
+                                <sui-select class="selection " style="width: 100%"
+                                            formControlName="colonia"
+                                            placeholder="Seleccione una colonia"
+                                            (selectedOptionChange)="otraColonia($event)"
+                                            [options]="ColoniasFull"
+                                            labelField="nombre"
+                                            valueField="nombre"
+                                            [isDisabled]="!FormGuardar.controls.ciudad.valid || ColoniasFull.length == 0"
+                                            #coloniasselectmodal>
+                                    <div class="divider" style="border-color: transparent"></div>
+
+                                    <div class="ui icon search input" [hidden]="ColoniasFull.length <= 1">
+                                        <i class="search icon"></i>
+                                        <input suiSelectSearch type="text">
+                                    </div>
+
+                                    <sui-select-option *ngFor="let option  of coloniasselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+
+                                <small [hidden]="FormGuardar.controls.colonia.valid || (!FormGuardar.controls.colonia.touched && !submitted)" style="color: red">Seleccione una colonia</small>
+                            </div>
+
+                             <div class="rowSeperador hidden-sm-up" [hidden]="!_otracol || sistema == 'ciencias'"></div>
+
+                            <!-- Otra colonia -->
+                            <div class="col-lg-4 col-sm-6 col-12 " [hidden]="!_otracol || sistema == 'ciencias'" >
+                                <div class="margenTopSelect hidden-xs-down"></div>
+                                <div class="group" id="divColonia" style="display: none;">
+                                    <input type="text" required id="otraColonia" maxlength="44" formControlName="otracolonia" required style="text-transform:uppercase">
+                                    <span class="highlight"></span> <span class="bar"></span>
+                                    <label class="MaterialLabel">Otra colonia</label>
+                                    <p id="otraColoniamassageError" class="massageError"></p>
+                                </div>
+                            </div>
+
+
+                            <div class="rowSeperador hidden-lg-up hidden-xs-down" [hidden]="!_otracol || sistema == 'ciencias'"></div>
+                            <div class="rowSeperador hidden-sm-up" [hidden]="sistema == 'ciencias'"></div>
+
+                            <!-- Calle -->
+                            <div class="col-lg-4 col-12"  [hidden]="sistema == 'ciencias'" [ngClass]="{'col-sm-6':!_otracol, 'col-sm-12':_otracol}">
+
+                                <div class="margenTopSelect hidden-md-down" ></div> <!-- lg  no importa otra colonia-->
+                                <div class="margenTopSelect hidden-xs-down hidden-lg-up" [hidden]="_otracol"></div>   <!-- md - sm sin otra colonia -->
+
+                                <div class="group">
+                                    <input type="text" id="calle" maxlength="44" required formControlName="calle" style="text-transform:uppercase">
+                                    <span class="highlight"></span> <span class="bar"></span>
+                                    <label class="MaterialLabel">Calle</label>
+                                    <p id="callemassageError" class="massageError"></p>
+                                </div>
+
+                                <small [hidden]="FormGuardar.controls.calle.valid || (!FormGuardar.controls.calle.touched && !submitted)" style="color: red">Ingrese la calle</small>
+                            </div>
+
+                             <div class="rowSeperador" [hidden]="sistema == 'ciencias'"></div>
+
+                             <!-- Número exterior -->
+                            <div class="col-lg-4 col-sm-6 col-12 "  [hidden]="sistema == 'ciencias'">
+                                <div class="group ">
+                                    <input type="text" id="numex" maxlength = "10" required
+                                        formControlName="numeroexterior" style="text-transform:uppercase">
+                                   <span class="highlight"></span> <span class="bar"></span>
+                                   <label class="MaterialLabel">Número exterior</label>
+                                </div>
+                                <small [hidden]="FormGuardar.controls.numeroexterior.valid || (!FormGuardar.controls.numeroexterior.touched && !submitted)" style="color: red">Ingrese el número exterior</small>
+                            </div>
+
+                             <div class="rowSeperador hidden-sm-up" [hidden]="sistema == 'ciencias'"></div>
+
+                            <!-- Número Interior -->
+                            <div class="col-lg-4 col-sm-6 col-12 "  [hidden]="sistema == 'ciencias'">
+                                <div class="group">
+                                    <input type="text" id="numin" maxlength="5"  formControlName="numerointerior" class="text-uppercase" required>
+                                    <label class="MaterialLabel">Número interior</label>
+                                    <p id="numerointeriorerror" class="massageError"></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de operación -->
+                <div class="modal-footer">
+                    <button class="btn btn-default btnBase" type="button" (click)="cancelar()">Cancelar</button>
+                    <button class="btn btnPrincipal" type="submit" (click)="guardar()">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

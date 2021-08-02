@@ -1,0 +1,177 @@
+<!-- sección título -->
+<div class="row">
+    <div class="col-12">
+        <h4>Cuentas en banco</h4>
+    </div>
+</div>
+
+<div class="divider16"></div>
+
+<!-- tabla de banco -->
+<div class="row">
+    <div class="col-12">
+        <div class="tabllePaddingLTE no-padding dependientestab table-responsive dependientestab" style="padding: 0px !important; font-size: 13px;">
+            <table class="table table-hover" id="tablabanco" style="width:100%">
+                <thead>
+                    <tr class="text-center" style="color: white;">
+                        <th class=" headerTable-top-left">
+                            Tipo de cuenta
+                        </th>
+                        <th class="text-center headerTable">
+                            Banco/Institución
+                        </th>
+                        <!--<th class="text-center headerTable">
+                            Número de cuenta
+                        </th>-->
+                        <th class="text-center headerTable">
+                            Saldo actual
+                        </th>
+                        <th class="text-center headerTable-top-right">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="font-size: 13px;" *ngFor="let h of datosbancos; let i = index">
+                        <td>
+                            <p>{{h.tipocuentabancoid.descripcion}}</p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{h.bancoinstitucion}}</p>
+                        </td>
+                        <!--<td class="text-center">
+                            <p>{{h.numerocuenta}}</p>
+                        </td>-->
+                        <td class="text-center">
+                            <p>${{h.saldoactual | number: '1.0': 'notEmpty': '0'}}</p>
+                        </td>
+                        <td style="width:20%" class="text-center">
+                            <a>
+                                <i class="fa fa-trash fa-lg" aria-hidden="true" (click)="deletebanco(h)"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Botón para agregar banco -->
+<div class="text-center" [hidden]="!editable">
+    <div style="margin-top: 10px" [hidden]="nuevo">
+        <button class=" btnGeneral btn-sm"  (click)="nuevo = true;">
+                <span class="fa fa-plus"></span>
+            <span style="margin-left: 5px"> Agregar </span>
+        </button>
+    </div>
+</div>
+
+<!-- Agregar bancos -->
+<div class="row">
+    <div class="col-sm-12">
+        <div style="height: 8px"></div>
+    </div>
+    <div class="col-sm-12">
+        <form [formGroup]="formbanco" [hidden]="!nuevo">
+            <!-- datos del vehículo -->
+            <div class="row">
+
+                <!-- Marca y modelo -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <label class="MaterialLabel labelSelect">
+                        Tipo de cuenta
+                    </label>
+                    <div class="margenTopSelect"></div>
+
+                    <sui-select style="width: 100%;" class="selection" formControlName="tipocuentabancoid" placeholder="Tipo de cuenta" [options]="selectTipocuentabanco"
+                                required labelField="descripcion" valueField="tipocuentabancoid" #cuentaselect2>
+
+                        <div class="divider" style="border-color: transparent"></div>
+
+                        <div class="ui icon search input">
+                            <i class="search icon"></i>
+                            <input suiSelectSearch type="text">
+                        </div>
+
+                        <sui-select-option *ngFor="let option of cuentaselect2.filteredOptions" [value]="option"></sui-select-option>
+                    </sui-select>
+
+                    <small [hidden]="formbanco.controls.tipocuentabancoid.valid || (formbanco.controls.tipocuentabancoid.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir tipo de cuenta
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Año -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="bancoinstitucion" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(formbanco.controls.bancoinstitucion)">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Banco/Institución</label>
+                    </div>
+
+                    <small [hidden]="formbanco.controls.bancoinstitucion.valid || (formbanco.controls.bancoinstitucion.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir banco/institución
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Número de cuenta 
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="numerocuenta" [textMask]="{mask: numberMaskNoComma, guide:false}">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Número de cuenta</label>
+                    </div>
+
+                    <small [hidden]="formbanco.controls.numerocuenta.valid || (formbanco.controls.numerocuenta.pristine && !submitted)" style="   color: red">
+                        Introducir el número de cuenta
+                    </small>
+                </div>
+                <div class="rowSeperador hidden-md-up"></div>
+                -->
+                <!-- Año -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="saldoactual" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Saldo actual</label>
+                    </div>
+
+                    <small [hidden]="formbanco.controls.saldoactual.valid || (formbanco.controls.saldoactual.pristine && !submitted)" style="   color: red">
+                        Introducir el saldo actual
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="rowSeperador"></div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-sm" type="button" style="margin-right: 8px" (click)="cancelar()">Cancelar
+                        </button>
+                        <button class="btn principal btn-sm" type="button" (click)="savebanco()">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+

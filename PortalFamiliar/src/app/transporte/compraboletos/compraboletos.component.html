@@ -1,0 +1,210 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h1> Compra de boletos </h1>
+            </header>
+            <div class="widget-body">
+                <form [formGroup]="FormGuardar" (ngSubmit)="guardar()">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="col-lg-12 form-group">
+                                <small>Ingresa la fecha del viaje</small>
+                                <my-date-picker formControlName="fecha" [placeholder]="'Fecha'"> </my-date-picker>
+                                <small [hidden]="FormGuardar.controls.fecha.valid || (FormGuardar.controls.fecha.pristine && !submitted)" style="color: red">
+                                    Ingrese una fecha
+                                </small>
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6" >
+                            <div class="col-lg-12 form-group">
+                                <small>Selecciona una ruta de ida</small>
+                                <sui-select style="width: 100%;" class="selection" (selectedOptionChange)="paradas(1,$event)"
+                                            formControlName="rutaidida"
+                                            placeholder="Ruta"
+                                            [options]="RutaIdaSelect"
+                                            labelField="nombre"
+                                            valueField="rutaid"                                           
+                                            #rutaidaselect>
+                                    <sui-select-option *ngFor="let option of rutaidaselect.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+                            </div> 
+                            <div class="col-lg-12 form-group" formArrayName="ida" *ngIf="rutaidaselect.selectedOption" >
+                                 <p>Selecciona en donde te vas a subir</p>
+                                <div class="tabllePaddingLTE no-padding table-responsive" style="font-size: 13px;">
+                                    <table  class="table table-hover" id="tablaPardas">
+                                        <thead>
+                                            <tr style="color: #fff;">
+                                                <th class="text-center headerTable-top-left">
+
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    Parada 
+                                                </th>
+                                                <th class="text-center headerTable">
+                                                    Horario de parada
+                                                </th>
+                                                <th class="text-center headerTable-top-right" *ngIf="rutaidaselect.selectedOption.tipoprecioid == 2">
+                                                    Costo
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="font-size: 13px;" *ngFor="let c of FormGuardar.controls.ida.controls; let i = index;" [formGroupName]="i">
+                                                <td class="text-center">
+                                                    <input class="all labelCheckBox" type="checkbox" name="activo" id="ida{{i}}" formControlName="activo" (click)="select($event,1,i, rutaidaselect.selectedOption.tipoprecioid)"/> 
+                                                    <label class="checkLabel checkLabelMaterial" for="ida{{i}}" style="color: #757575;"> </label>
+                                                </td>
+                                                <td class="text-center">
+                                                    {{c.controls.parada.value}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{c.controls.tiempo.value}}
+                                                </td>
+                                                <td class="text-center" *ngIf="rutaidaselect.selectedOption.tipoprecioid == 2">
+                                                    {{c.controls.costo.value | currency:'USD':true:'1.2-2'}}
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="5" class="text-right">
+                                                    Total: {{totalida | currency:'USD':true:'1.2-2'}}
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                    </div>
+
+
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6" >
+                        <div class="col-lg-12 form-group">
+                            <small>Selecciona una ruta de regreso</small>
+                            <sui-select style="width: 100%;" class="selection" (selectedOptionChange)="paradas(2,$event)"
+                                        formControlName="rutaidregreso"
+                                        placeholder="Ruta"
+                                        [options]="RutaRegresoSelect"
+                                        labelField="nombre"
+                                        valueField="rutaid"                                           
+                                        #rutaregresoselect>
+                                <sui-select-option *ngFor="let option of rutaregresoselect.filteredOptions" [value]="option"></sui-select-option>
+                            </sui-select>
+                        </div> 
+                        <div class="col-lg-12 form-group" formArrayName="regreso" *ngIf="rutaregresoselect.selectedOption">
+                             <p>Selecciona en donde te vas a bajar</p>
+                            <div class="tabllePaddingLTE no-padding table-responsive" style="font-size: 13px;">
+                                <table  class="table table-hover" id="tablaPardas">
+                                    <thead>
+                                        <tr style="color: #fff;">
+                                            <th class="text-center headerTable-top-left">
+
+                                            </th>
+                                            <th class="text-center headerTable">
+                                                Parada 
+                                            </th>
+                                            <th class="text-center headerTable">
+                                                Horario de parada
+                                            </th>
+                                            <th class="text-center headerTable-top-right" *ngIf="rutaregresoselect.selectedOption.tipoprecioid == 2">
+                                                Costo
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="font-size: 13px;" *ngFor="let c of FormGuardar.controls.regreso.controls; let i = index;" [formGroupName]="i">
+                                            <td class="text-center">
+                                                <input class="all labelCheckBox" type="checkbox" name="activo" id="regreso{{i}}" formControlName="activo" (click)="select($event,2,i, rutaregresoselect.selectedOption.tipoprecioid )"/> 
+                                                <label class="checkLabel checkLabelMaterial" for="regreso{{i}}" style="color: #757575;"> </label>
+                                            </td>
+                                            <td class="text-center">
+                                                {{c.controls.parada.value}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{c.controls.tiempo.value}}
+                                            </td>
+                                            <td class="text-center" *ngIf="rutaregresoselect.selectedOption.tipoprecioid == 2">
+                                                {{c.controls.costo.value | currency:'USD':true:'1.2-2'}}
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="5" class="text-right">
+                                                Total: {{totalregreso | currency:'USD':true:'1.2-2'}}
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6" formArrayName="alumnos">
+                    <div class="col-lg-12 form-group">
+                        <small>Ingrese la cantidad de boletos por alumno</small>
+                        <div class="tabllePaddingLTE no-padding table-responsive" style=" font-size: 13px;">
+                            <table  class="table table-hover" id="tablaAlumnos">
+                                <thead>
+                                    <tr style="color: #fff;">
+                                        <th class="text-center headerTable-top-left">
+                                            Nivel
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Nombre
+                                        </th>
+                                        <th class="text-center headerTable-top-right">
+                                            Cantidad
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="font-size: 13px;" *ngFor="let c of FormGuardar.controls.alumnos.controls; let e = index;" [formGroupName]="e">
+                                         <td class="text-center">
+                                            {{c.controls.nivel.value}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{c.controls.nombre.value}}
+                                        </td>
+                                        <td class="text-center" width="10%">
+                                            <div class="group inputResponsive">
+                                                <input type="text" required formControlName="cantidad" [textMask]="{mask: numberMask, guide:false}">
+                                                       <span class="highlight"></span>
+                                                <span class="bar"></span>
+                                                <label class="MaterialLabel"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-lg-12 form-group">
+                        Total a pagar: {{cuentatotal | currency:'USD':true:'1.2-2'}}
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <button class="btn principal" type="submit"  >Generar boletos</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+</div>
+</div>
+
+

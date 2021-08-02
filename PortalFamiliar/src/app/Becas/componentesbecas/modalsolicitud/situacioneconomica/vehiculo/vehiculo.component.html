@@ -1,0 +1,172 @@
+<!-- sección título -->
+<div class="row">
+    <div class="col-12">
+        <h4>Vehículos</h4>
+    </div>
+</div>
+
+<div class="divider16"></div>
+
+<!-- tabla de vehículos -->
+<div class="row">
+    <div class="col-12">
+        <div class="tabllePaddingLTE no-padding dependientestab table-responsive dependientestab" style="padding: 0px !important; font-size: 13px;">
+            <table class="table table-hover" id="tablaHijo" style="width:100%">
+                <thead>
+                    <tr class="text-center" style="color: white;">
+                        <th class=" headerTable-top-left">
+                            Marca, Tipo, Color
+                        </th>
+                        <th class="text-center headerTable">
+                            Año
+                        </th>
+                        <th class="text-center headerTable">
+                            estatus
+                        </th>
+                        <th class="text-center headerTable">
+                            Nombre en tarjeta de circulación
+                        </th>
+                        <th class="text-center headerTable-top-right">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="font-size: 13px;" *ngFor="let h of datosvehiculos; let i = index">
+                        <td>
+                            <p>{{h.marcamodelo}}</p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{h.anio}}</p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{(h.estatus) ? h.estatus.nombre : ''}}</p>
+                        </td>
+                        <td class="text-center">
+                            <p>{{h.tarjetacirculacion}}</p>
+                        </td>
+                        <td style="width:20%" class="text-center">
+                            <a>
+                                <i class="fa fa-trash fa-lg" aria-hidden="true" (click)="deletevehiculo(h)"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Botón para agregar vehículo -->
+<div class="text-center" [hidden]="!editable">
+    <div style="margin-top: 10px" [hidden]="nuevo">
+        <button class=" btnGeneral btn-sm"  (click)="nuevo = true;">
+                <span class="fa fa-plus"></span>
+            <span style="margin-left: 5px"> Agregar </span>
+        </button>
+    </div>
+</div>
+
+<!-- Agregar vehículo -->
+<div class="row">
+
+    <div class="col-sm-12">
+        <div style="height: 8px"></div>
+    </div>
+
+    <div class="col-sm-12">
+
+        <form [formGroup]="formvehiculos" [hidden]="!nuevo">
+
+            <!-- datos del vehículo -->
+            <div class="row">
+
+                <!-- Marca y modelo -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-md-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="marcamodelo" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(formvehiculos.controls.marcamodelo)">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Marca, Tipo, Color</label>
+                    </div>
+
+                    <small [hidden]="formvehiculos.controls.marcamodelo.valid || (formvehiculos.controls.marcamodelo.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir la marca, el tipo y el color
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Año -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-md-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="anio" [textMask]="{mask: yearMask}">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Año</label>
+                    </div>
+
+                    <small [hidden]="formvehiculos.controls.anio.valid || (formvehiculos.controls.anio.pristine && !submitted)" style="   color: red">
+                        Introducir el Año
+                    </small>
+                </div>
+
+                <div class="rowSeperadorSelect hidden-lg-up"></div>
+
+                <!-- estatus -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-md-down"></div>
+                    <label class="MaterialLabel labelSelect">
+                        Estatus del vehículo
+                    </label>
+                    <div class="margenTopSelect"></div>
+                    <sui-select style="width: 100%;" class="selection" formControlName="estatus" placeholder="Estatus" [options]="selectEstatusvehiculo"
+                                labelField="nombre" required valueField="idestatusvehiculo" id="cicloBuscar" #selectciclov>
+
+                        <div class="divider" style="border-color: transparent"></div>
+
+                        <sui-select-option *ngFor="let option of selectciclov.filteredOptions" [value]="option"></sui-select-option>
+                    </sui-select>
+
+                    <small [hidden]="formvehiculos.controls.estatus.valid || (formvehiculos.controls.estatus.pristine && !submitted)" style="   color: red">
+                        Introducir estatus del vehículo
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Nombre en tarjeta de circulacion -->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-12">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="tarjetacirculacion" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(formvehiculos.controls.tarjetacirculacion)" >
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Nombre en tarjeta de circulación</label>
+                    </div>
+
+                    <small [hidden]="formvehiculos.controls.tarjetacirculacion.valid || (formvehiculos.controls.tarjetacirculacion.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir nombre en tarjeta de circulación
+                    </small>
+                </div>
+            </div>
+
+            <div class="rowSeperador"></div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-sm" type="button" style="margin-right: 8px" (click)="cancelar()">Cancelar</button>
+                        <button class="btn principal btn-sm" type="button" (click)="savevehiculo()">Agregar</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="row" [hidden]="vistahorario">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h1> Horarios de clase </h1>
+            </header>
+            <div class="widget-body">
+                <legend></legend>
+                <fieldset>
+                    <div class="tabllePaddingLTE no-padding table-responsive"
+                        style="margin-top: 20px; font-size: 13px;">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover"
+                            id="tablaHorarios">
+                            <thead>
+                                <tr style="color: #fff;">
+                                    <th class="text-center headerTable" class="no-sort text-center"
+                                        style="background: #443E42; color: white;">
+                                        Clave familiar
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Matricula
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Alumno
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Nivel
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Grado
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Grupo
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 13px;" *ngFor="let c of arrayentidad">
+
+                                    <td class="text-center">
+                                        <p>{{c.clave? c.clave : '-'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{c.matricula? c.matricula : '-'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{c.nombrecompleto}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{c.nivel}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{c.grado? c.grado : '-'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{c.grupo? c.grupo : '-'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-default" type="button" (click)="openmodalHorario(c)">Ver horario</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+<div #containerHorario [hidden]="!vistahorario"></div>

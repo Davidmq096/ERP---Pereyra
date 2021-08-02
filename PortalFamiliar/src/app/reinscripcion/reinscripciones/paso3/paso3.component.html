@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <div class="widget-body">
+                <fieldset>
+                    <div class="col-sm-12" style="margin-top: 15px;">
+                        <div style="float: left;" *ngIf="reinscripciones">
+                            <h5 style="float: left">Descargar documentos</h5>
+                        </div>
+                        <div style="float: right;" *ngIf="reinscripciones">
+                            <b style="float: right"> Ciclo: {{ reinscripciones.alumno.ciclo}}</b>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-sm-12" style="margin-top: 15px;">
+                        <div style="float: left;" *ngIf="reinscripciones">
+                            <b style="float: left">{{reinscripciones.alumno.matricula + ' - ' + reinscripciones.alumno.nombrecompleto}}</b>
+
+                        </div>
+                        <div style="float: right;" *ngIf="reinscripciones">
+                            <b style="float: right"> {{reinscripciones.alumno.grado ? reinscripciones.alumno.nivel + ' ' + reinscripciones.alumno.grado : ''}}</b>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset style="margin-top: 30px;">
+                    <div class="col-sm-12">
+                        <legend></legend>
+                        <b>Paso 3 de 3</b>
+                        <br>
+                        <li>Descargue los siguientes documentos, léalos con detenimiento y fímerlos con pluma de tinta azul.</li>
+                        <li>Una vez los documentos firmados entreguelos en el instituto. En recepción o depositelos en la caja instalada en la caseta.</li>
+                        <!-- <p>En los siguientes pasos se le solicitará cargar estos documentos llenos y firmados al sistema escaneados o en imágenes</p>-->
+                    </div>
+                        
+                    <div class="col-md-12" style="margin-top: 30px;">
+                        <ul class="list-group" style='margin-bottom: 10px; border-bottom: 1px solid #E1E1E1;'>
+                            <li class="list-group-item" *ngFor="let c of arrayDocumentos; let i = index">
+                                <div class="col-sm-12">
+                                    <div style="float: left;">
+                                        <b style="float: left; margin-top: 5px;">{{(i+1) + ') '}} {{c.nombre}}</b>
+                                    </div>
+                                    <div style="float: right;" >
+                                        <button class="btn btn-default btn-block" type="button" (click)="descargar(c.documentoid)">Descargar</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="col-sm-12">
+                                    <div style="float: left;">
+                                        <b style="float: left; margin-top: 5px;">i) Haga clic si desea contar con el servicio de cargo autómatico</b>
+                                    </div>
+                                    <div style="float: right;" >
+                                        <button class="btn btn-default btn-block" type="button" (click)="masInformacion(0)">Más información</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="col-sm-12">
+                                    <div style="float: left;">
+                                        <b style="float: left; margin-top: 5px;">i) Haga clic si desea contar con el servicio de domiciliación </b>
+                                    </div>
+                                    <div style="float: right;" >
+                                        <button class="btn btn-default btn-block" type="button" (click)="masInformacion(1)">Más información</button>
+                                    </div>
+                                </div>
+                            </li>                        
+                        </ul>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="mensaje">
+                            {{mensaje}}
+                        </div>
+                        <div class="col-sm-12 divseparador">
+                        </div>
+                        <div class="col-sm-12 divseparador">
+                        </div>
+                        <div class="row">
+                            <div class="col-2 col-sm-5 col-md-7 col-lg-7">
+                            </div>
+                            <div class="col-4 col-sm-3 col-md-2 col-lg-2" style=" float: left; margin-top: 7px;">
+                                <button class="btn btn-default btn-block" type="button" (click)="cancelar()">ANTERIOR</button>
+                            </div>
+                            <div class="col-4 col-sm-3 col-md-2 col-lg-2" style="float: right; margin-top: 7px;">
+                                <button class="btn principal btn-block" type="button" (click)="siguiente()">FINALIZAR</button>
+                            </div>                    
+                        </div>     
+                        </div> 
+
+                </fieldset>
+            </div>
+
+        </section>
+    </div>
+</div>

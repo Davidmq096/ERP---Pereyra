@@ -1,0 +1,765 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h3 class="text-uppercase"> <b>Facturas</b> </h3>
+            </header>
+            <div class="widget-body">
+                <fieldset>
+                    <legend></legend>
+
+                    <div class="col-lg-12">
+                        <h6>
+                            A continuación se muestran las facturas que se han generado o que pueden generarse.
+                        </h6>                                
+                    </div>
+                    <div class="col-lg-12">
+
+                        <label class="radio">
+                            <input id="radio2" type="radio" name="radios" value="-1"  (change)='FiltrarFactura()' [(ngModel)]="filtroFactura">
+                            <span class="outer" style="margin-top: -5px;">
+                                <span class="inner"></span>                                            
+                            </span>
+                            Ver movimientos pendientes a facturar
+                        </label>
+
+                        <br>
+
+                        <label class="radio">
+                            <input id="radio3" type="radio" name="radios" value="0"  (change)='FiltrarFactura()' [(ngModel)]="filtroFactura">
+                            <span class="outer" style="margin-top: -5px;">
+                                <span class="inner"></span>                                            
+                            </span>
+                            Ver movimientos facturados
+                        </label>
+                    </div>
+
+                    <div class="col-12">
+                        <div style="margin-top: 20px"></div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4" *ngIf="filtroFactura == 0">
+                        <my-date-range-picker  name="mydaterange" [options]="myDateRangePickerOptions" [(ngModel)]="filtroFecha" required (ngModelChange)="FiltrarFactura()"></my-date-range-picker>
+                    </div>
+
+                    <div class="col-12 " *ngIf="filtroFactura == -1">
+
+                        <div *ngIf="alumnospeg.length > 0">
+                            Los pagos realizados apartir de que los alumnos hayan iniciado con el Programa de Educación Garantizada (PEG) no se pueden facturar.
+                            Los alumnos que cuentan con el PEG son:
+                            <div style="height: 16px"></div>
+                            <!--<ul>
+                                <li *ngFor="let a of alumnospeg">
+                                    {{a.nombre}} ({{a.fechainicio | fechaEsp}})
+                                </li>
+                            </ul>-->
+
+                            <table style="width: 100%">
+                                <tr  *ngFor="let a of alumnospeg" style="padding: 8px">
+                                    <td>
+                                        <li>{{a.nombre}}</li>
+                                        <div style="height: 12px"></div>
+                                    </td>
+                                    <td class="pull-right">
+                                        {{a.fechainicio | fechaEsp}}
+                                        <div style="height: 12px"></div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style="height: 8px"></div>
+                        </div>
+
+                        <div *ngIf=" pago.length > 0">
+                            Tiene <b>{{diasfacturar}}</b> día(s) a partir de la fecha de pago para solicitar su factura.
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <div style="margin-top: 20px"></div>
+                    </div>
+                        
+                    <div class="tabllePaddingLTE no-padding table-responsive" style="font-size: 13px;">    
+                        <table datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1" class="table table-hover" id="tablaFactura">
+                               <thead>
+                                <tr style="color: #fff;">
+                                    <th class="text-center headerTable-top-left">
+                                        Matrícula
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Nombre del alumno
+                                    </th>
+                                    <th class="text-center headerTable">
+                                        Conceptos
+                                    </th>    
+                                    <th class="text-center headerTable">
+                                        Importe
+                                    </th>   
+
+                                    <th class="text-center headerTable">
+                                        Fecha de pago
+                                    </th>     
+                                    <th class="text-center headerTable">
+                                        Mes de Facturación
+                                    </th>
+
+                                    <th class="text-center headerTable-top-right">
+                                        <span *ngIf="filtroFactura == -1">Facturar</span>
+                                        <span *ngIf="filtroFactura == 0">Recuperar Factura</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 13px;" *ngFor="let p of pago">
+                                    <td class="text-center">
+                                        {{p.matricula}}
+                                    </td>
+
+                                    <td class="text-center">
+                                        {{p.alumno | uppercase}}
+                                    </td>
+
+                                    <td class="text-center">
+                                        {{p.concepto | uppercase}}
+                                    </td>
+
+                                    <td class="text-center">
+                                        {{p.importe | currency:'MXN':true:'2.2-4'}}
+                                    </td>
+
+                                    <td class="text-center">
+                                        {{p.fecha | fechaEsp}}
+                                    </td>
+
+                                    <td class="text-center">
+                                        {{meses[p.mesfacturacion-1] + '/' + p.yearfacturacion}}
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span *ngIf="filtroFactura == '-1'">
+                                            <button *ngIf="!p.facturaid || p.facturaestatusid == 3" class=" btnGeneral btn-sm" (click)="generarFactura(p)" style="min-width:100px">
+                                                <span>Facturar</span>
+                                            </button>
+
+                                            <span *ngIf="p.facturaestatusid == 1">En Proceso</span>
+                                        </span>
+
+                                        <span *ngIf="filtroFactura == '0'">
+                                            <button  *ngIf="p.facturaestatusid == 2"  class=" btnGeneral btn-sm" (click)="ReenviarFactura(p)" style="min-width:100px">
+                                                <span>Reenviar </span>
+                                            </button>
+
+                                            <span *ngIf="p.facturaestatusid == 5">Reenviando...</span>
+                                        </span>
+                                    </td>                              
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    </div>
+
+                    <hr>
+                    <label style="margin-bottom: .0rem !important; padding: 0px !important;">
+                        Consulte el aviso de privacidad                        
+                    </label>
+                    <br>
+                    <a href="{{avisoPrivacidad}}" target="_blank" style="margin-top: -10px !important;" class="aLink">
+                        {{avisoPrivacidad}}
+                    </a>
+                </fieldset>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #modalFactura="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" > 
+     <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+
+            <!-- título -->
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <h3 class="text-uppercase">{{reenviar ?  'Reenviar factura':'Generación de factura'}}</h3>
+                </h4>
+            </div>
+
+            <!-- datos -->
+            <div class="modal-body" style="padding: 0px !important;">
+                <div class="container">
+                    <div class="col-lg-12 col-sm-12 col-12 form-group" [hidden]="showconcept">
+                        <form  [formGroup]="FormGuardar" novalidate>
+
+                            <div class="rowSeperador" style="height: 20px" ></div>
+
+                            <div class="row" [hidden]="nuevoRFC">
+                                <div class="col-12">
+                                    <b style="font-size: 12pt">Seleccione el RFC para generar la factura</b>
+                                </div>
+                            </div>
+
+
+                            <div class="row" [hidden]="nuevoRFC" >
+                                <!-- RFC -->
+                                <div class="col-md-5 col-sm-12 col-12 ">
+
+                                    <label class="MaterialLabel labelSelect" >RFC</label>
+                                    <div class="margenTopSelect"></div>
+
+                                    <sui-select class="selection" style="width: 100%"
+                                                [(ngModel)]="myrfcid"
+                                                [ngModelOptions]="{standalone: true}"
+                                                placeholder="RFC"
+                                                (ngModelChange)="SelectRFC($event)"
+                                                [options]="arraydatosfacturacion"
+                                                labelField="rfc"
+                                                valueField="padresotutoresfacturacionid"
+                                                #rfcselectmodal>
+
+                                        <div class="divider" style="border-color: transparent"></div>
+
+                                        <div class="ui icon search input">
+                                            <i class="search icon"></i>
+                                            <input suiSelectSearch type="text">
+                                        </div>
+
+
+                                        <sui-select-option *ngFor="let option of rfcselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+
+                                </div>
+
+                                <div class=" hidden-md-up"  style="height: 8px; width: 100%"></div>
+
+                                <!-- Leyenda -->
+                                <div class="col-md-2 col-12 ">
+                                    <div class="margenTopSelect hidden-sm-down"></div>
+
+                                    <div style=" width: 100%; display: table" class="text-center" >
+                                        <div  style="height: 40px; display: table-cell; vertical-align: middle;">
+                                        <span class="text-center"> o también puede</span>
+                                    </div>
+                                    </div>
+
+                                </div>
+
+                                <div class=" hidden-md-up"  style="height: 8px; width: 100%"></div>
+
+                                <!-- Nuevo RFC -->
+                                <div class="col-md-5 col-sm-12 col-12 " >
+                                  <div class="margenTopSelect hidden-sm-down"></div>
+                                  <button class="btn btn-block btn btnPrincipal" style="height: 40px" (click)="nuevoRFC = true; SelectRFC(-1)">
+                                    Agregar Otro RFC
+                                   </button>
+                                </div>
+
+                                <div style="height: 20px; width: 100%"></div>
+
+                                <div class="col-12">
+                                 <div style="border: 1px solid black; width: 100%"></div>
+                                </div>
+                            </div>
+
+                            <div style="height: 20px; width: 100%"></div>
+
+                            <!-- Leyenda -->
+                            <div  class="row" [hidden]="!nuevoRFC && !myrfcid">
+                                <div class="col-12">
+                                    <b style="font-size: 12pt">
+                                        {{nuevoRFC ? 'Capture los datos del nuevo RFC' : 'Verifique y/o edite los datos del RFC'}}
+                                    </b>
+                                </div>
+                            </div>
+
+                            <div class="rowSeperador"></div>
+
+                            <!-- LUX -->
+                            <div class="row" *ngIf="sistema == 'lux' && (myrfcid || nuevoRFC)">
+
+                                <!-- RFC  -->
+                                <div class="col-md-6 col-sm-12 col-12" style="display: inline-block;" >
+
+                                    <div class="group">
+                                        <input type="text" required formControlName="rfc" style="text-transform:uppercase"  (change)="SetTipoPersonaRFC(FormGuardar.controls.rfc.value)">
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel">RFC</label>
+                                    </div>
+                                    <small [hidden]="FormGuardar.controls.rfc.valid || (!FormGuardar.controls.rfc.touched && !submitted)" style="color: red">Ingrese un RFC válido</small>
+
+                                </div>
+
+
+                                <div class="rowSeperador"></div>
+
+                                <!-- Nombre o razón social -->
+                                <div class="col-md-6 col-12 ">
+
+                                    <div class="group">
+                                        <input type="text" required formControlName="razonsocial" maxlength="200" style="text-transform:uppercase">
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel"> Nombre o razón social</label>
+                                    </div>
+                                    <small [hidden]="FormGuardar.controls.razonsocial.valid || (!FormGuardar.controls.razonsocial.touched && !submitted)" style="color: red">Ingrese un nombre o razón social</small>
+
+                                </div>
+
+                                <div class="rowSeperador hidden-md-up"></div>
+
+                                <!-- correo -->
+                                <div class="col-md-6 col-12">
+
+                                    <div class="group">
+                                        <input type="text" required formControlName="correo" maxlength="300" style="text-transform:lowercase">
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel"> Correo electrónico</label>
+                                    </div>
+                                    <small [hidden]="FormGuardar.controls.correo.valid || (!FormGuardar.controls.correo.touched && !submitted)" style="color: red">Ingrese un correo electrónico</small>
+
+                                </div>
+
+                                <div class="rowSeperadorSelect hidden-xs-down"></div>
+                                <div class="rowSeperador hidden-sm-up"></div>
+
+                                <!-- código postal -->
+                                <div class="col-lg-4 col-sm-6 col-12">
+
+                                    <div class="margenTopSelect hidden-xs-down"></div>
+                                    <div class="group">
+                                        <input type="text" required formControlName="codigopostal" [textMask]="{mask: maskCP, guide:false}" (change)="busquedaPorCp(cp.value)" #cp>
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel">Código postal</label>
+                                    </div>
+
+                                    <small [hidden]="FormGuardar.controls.codigopostal.valid || (!FormGuardar.controls.codigopostal.touched && !submitted)" style="color: red">Ingrese un código postal</small>
+                                </div>
+
+                                <div class="rowSeperadorSelect hidden-sm-up"></div>
+
+                                <!-- Estado -->
+                                <div class="col-lg-4 col-sm-6 col-12 ">
+
+                                    <label class="MaterialLabel labelSelect" >Estado</label>
+                                    <div class="margenTopSelect"></div>
+
+                                    <sui-select class="selection" style="width: 100%" required
+                                                formControlName="estado"
+                                                placeholder="Seleccione un estado"
+                                                (selectedOptionChange)="loadMunicipios($event)"
+                                                [options]="estado"
+                                                labelField="nombre"
+                                                valueField="estadoid"
+                                                [isDisabled]="!myrfcid || estado.length == 0"
+                                                #estadosselectmodal>
+
+                                        <div class="divider" style="border-color: transparent"></div>
+                                        <div class="ui icon search input">
+                                            <i class="search icon"></i>
+                                            <input suiSelectSearch type="text">
+                                        </div>
+
+                                        <sui-select-option *ngFor="let option  of estadosselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+
+                                    <small [hidden]="FormGuardar.controls.estado.valid || (!FormGuardar.controls.estado.touched && !submitted)" style="color: red">Seleccione un estado</small>
+                                </div>
+
+                                <div class="rowSeperadorSelect hidden-lg-up"></div>
+
+                                <!-- ciudad -->
+                                <div class="col-lg-4 col-sm-6 col-12">
+
+                                    <label class="MaterialLabel labelSelect" >Ciudad</label>
+                                    <div class="margenTopSelect"></div>
+
+                                    <sui-select class="selection" style="width: 100%" required
+                                                formControlName="ciudad"
+                                                placeholder="Seleccione una ciudad"
+                                                (selectedOptionChange)="loadColonias($event)"
+                                                [options]="MunicipioFull"
+                                                labelField="nombre"
+                                                valueField="municipioid"
+                                                #ciudadesselectmodal
+                                                [isDisabled]="!myrfcid || !FormGuardar.controls.estado.valid || MunicipioFull.length == 0"
+                                    >
+
+                                        <div class="divider" style="border-color: transparent"></div>
+                                        <div class="ui icon search input">
+                                            <i class="search icon"></i>
+                                            <input suiSelectSearch type="text">
+                                        </div>
+
+                                        <sui-select-option *ngFor="let option  of ciudadesselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+
+                                    <small [hidden]="FormGuardar.controls.ciudad.valid || (!FormGuardar.controls.ciudad.touched && !submitted)" style="color: red">Seleccione una ciudad</small>
+                                </div>
+
+                                <div class="rowSeperadorSelect"></div>
+
+                                <!-- colonia -->
+                                <div class="col-sm-6 col-lg-4 col-12 ">
+
+                                    <label class="MaterialLabel labelSelect" >Colonia</label>
+                                    <div class="margenTopSelect"></div>
+
+                                    <sui-select class="selection" style="width: 100%" required
+                                                formControlName="colonia"
+                                                placeholder="Seleccione una colonia"
+                                                (selectedOptionChange)="otraColonia($event)"
+                                                [options]="ColoniasFull"
+                                                labelField="nombre"
+                                                valueField="nombre"
+                                                [isDisabled]="!myrfcid || !FormGuardar.controls.ciudad.valid || ColoniasFull.length == 0"
+                                                #coloniasselectmodal>
+
+                                        <div class="divider" style="border-color: transparent"></div>
+
+                                        <div class="ui icon search input">
+                                            <i class="search icon"></i>
+                                            <input suiSelectSearch type="text">
+
+                                        </div>
+
+                                        <sui-select-option *ngFor="let option  of coloniasselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                                    </sui-select>
+
+                                    <small [hidden]="FormGuardar.controls.colonia.valid || (!FormGuardar.controls.colonia.touched && !submitted)" style="color: red">Seleccione una colonia</small>
+                                </div>
+
+                                <div class="rowSeperador hidden-sm-up" [hidden]="!_otracol" ></div>
+
+                                <!-- Otra colonia -->
+                                <div class="col-lg-4 col-sm-6 col-12 " [hidden]="!_otracol">
+                                    <div class="margenTopSelect hidden-xs-down"></div>
+
+                                    <div class="group" id="divColonia" style="display: none;">
+                                        <input required type="text" id="otraColonia" maxlength="44" formControlName="otracolonia" required style="text-transform:uppercase" class="text-uppercase">
+                                        <span class="highlight"></span> <span class="bar"></span>
+
+                                        <label class="MaterialLabel">Otra colonia</label>
+                                        <p id="otraColoniamassageError" class="massageError"></p>
+                                    </div>
+
+                                    <small [hidden]="FormGuardar.controls.otracolonia.valid || (!FormGuardar.controls.otracolonia.touched && !submitted)" style="color: red">Indica la colonia</small>
+                                </div>
+
+                                <!-- espacio de otra colonia -->
+                                <div class="rowSeperador hidden-xs-down hidden-lg-up" [hidden]="!_otracol" ></div>
+                                <div class="rowSeperador hidden-sm-up" ></div>
+
+                                <!-- calle -->
+                                <div class="col-lg-4 col-12" [ngClass]="{'col-sm-6':!_otracol, 'col-sm-12':_otracol}">
+
+                                    <div class="margenTopSelect hidden-md-down" ></div> <!-- lg  no importa otra colonia-->
+                                    <div class="margenTopSelect hidden-xs-down hidden-lg-up" [hidden]="_otracol"></div>   <!-- md - sm sin otra colonia -->
+
+                                    <div class="group ">
+                                        <input type="text" id="calle" maxlength="44" required formControlName="calle" style="text-transform:uppercase">
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel">Calle</label>
+                                        <p id="callemassageError" class="massageError"></p>
+                                    </div>
+                                    <small [hidden]="FormGuardar.controls.calle.valid || (!FormGuardar.controls.calle.touched && !submitted)" style="color: red">Ingrese la calle</small>
+
+                                </div>
+
+                                <div class="rowSeperador" ></div>
+                                <!-- número exterior -->
+                                <div class="col-sm-6 col-12 col-md-4">
+                                    <div class="group ">
+                                        <input type="text" id="numex" maxlength = "10" required
+                                            formControlName="numeroexterior" style="text-transform:uppercase">
+                                       <span class="highlight"></span> <span class="bar"></span>
+                                       <label class="MaterialLabel">Número exterior</label>
+                                    </div>
+                                    <small [hidden]="FormGuardar.controls.numeroexterior.valid || (!FormGuardar.controls.numeroexterior.touched && !submitted)" style="color: red">Ingrese el número exterior</small>
+                                </div>
+
+                                <div class="rowSeperador hidden-sm-up" ></div>
+
+                                <!-- número interior -->
+                                <div class="col-sm-6 col-12 col-md-4">
+                                    <div class="group">
+                                        <input type="text" id="numin" maxlength="5"  formControlName="numerointerior" required class="text-uppercase">
+                                        <label class="MaterialLabel">Número interior</label>
+                                        <p id="numerointeriorerror" class="massageError"></p>
+                                    </div>
+                                </div>
+
+                                <div style="height: 20px; width: 100%"></div>
+
+                                <div class="col-12">
+                                 <div style="height: 2px; background: black; width: 100%"></div>
+                                </div>
+                            </div>
+
+                            <!-- ------------------------------- CIENCIAS -------------------------------- -->
+                            <div class="row" *ngIf="sistema == 'ciencias'  && (myrfcid || nuevoRFC)">
+
+
+                                <!-- RFC  -->
+                                <div class="col-md-6 col-sm-12 col-12" style="display: inline-block;" >
+
+                                    <div class="group">
+                                        <input type="text" required formControlName="rfc" style="text-transform:uppercase"  (change)="SetTipoPersonaRFC(FormGuardar.controls.rfc.value)">
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel">RFC</label>
+                                    </div>
+                                    <small [hidden]="FormGuardar.controls.rfc.valid || (!FormGuardar.controls.rfc.touched && !submitted)" style="color: red">Ingrese un RFC válido</small>
+
+                                </div>
+
+                                 <div class="rowSeperador hidden-md-up"></div>
+
+                                <!-- Nombre o razón social -->
+                                <div class="col-md-6 col-sm-12 col-12" style="display: inline-block;" >
+
+                                    <div class="group">
+                                        <input type="text" required formControlName="razonsocial" maxlength="200" style="text-transform:uppercase">
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel">Nombre o razón social</label>
+                                    </div>
+                                    <small [hidden]="FormGuardar.controls.razonsocial.valid || (!FormGuardar.controls.razonsocial.touched && !submitted)" style="color: red">Ingrese un nombre o razón social</small>
+
+                                </div>
+
+                                <div class="rowSeperador"></div>
+
+                                <!-- correo -->
+                                <div class="col-md-6 col-sm-12 col-12" style="display: inline-block;">
+
+                                    <div class="group">
+                                        <input type="text" required formControlName="correo" maxlength="300" style="text-transform:lowercase" >
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel"> Correo electrónico</label>
+                                    </div>
+                                    <small [hidden]="FormGuardar.controls.correo.valid || (!FormGuardar.controls.correo.touched && !submitted)" style="color: red">Ingrese un correo electrónico</small>
+
+                                </div>
+
+                                 <div class="rowSeperador hidden-md-up"></div>
+
+                                <!-- código postal -->
+                                <div class="col-md-6 col-sm-12 col-12" style="display: inline-block;">
+
+                                    <div class="group">
+                                        <input  [textMask]="{mask: maskCP, guide:false}" type="text" required formControlName="codigopostal" >
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                        <label class="MaterialLabel">Código postal</label>
+                                    </div>
+
+                                    <small [hidden]="FormGuardar.controls.codigopostal.valid || (!FormGuardar.controls.codigopostal.touched && !submitted)" style="color: red">Ingrese un código postal</small>
+                                </div>
+
+                                <div style="height: 20px; width: 100%"></div>
+
+                                <div class="col-12">
+                                 <div style="height: 2px; background: black; width: 100%"></div>
+                                </div>
+
+                            </div>
+
+                            <div style="height: 20px; width: 100%"></div>
+
+                            <!-- Uso CFDI -->
+                            <div class="row" *ngIf="FormGuardar.controls.rfc.valid && FormGuardar.controls.usocfdiid.valid">
+
+                                <div class="col-12">
+                                    <b style="font-size: 12pt">
+                                        La factura se generará con el siguiente uso de CFDI
+                                    </b>
+                                </div>
+
+                                <div style="height: 16px; width: 100%"></div>
+
+                                <!-- Uso sel -->
+                                <div class="col-12" style="margin-left: 16px">
+                                    {{ GetUsuCFDISeleccionado(FormGuardar.controls.usocfdiid.value)}}
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- Concepto de factura -->
+                    <div class="col-lg-12 col-sm-12 col-12 form-group" [hidden]="!showconcept || facturado">
+                        <div class="container">
+
+                            <div class="row">
+
+                                <div class="rowSeperador" style="height: 20px" ></div>
+
+                                <div class="col-md-6 col-12">
+
+                                    <table class=" tablaDatos" >
+                                        <tbody >
+                                            <tr >
+                                                <td class="text-right" style="padding-right: 24px;" ><b>RFC:</b></td>
+                                                <td  class="text-right" >{{pagofacturar.rfc | uppercase}}</td>
+                                            </tr>
+
+                                            <tr style="padding-bottom: 8px">
+                                                <td class="text-right" style="padding-right: 24px;"><b>Nombre:</b></td>
+                                                <td  class="text-right" >{{pagofacturar.nombre | uppercase}}</td>
+                                            </tr>
+
+                                            <tr style="padding-bottom: 8px">
+                                                <td class="text-right" style="padding-right: 24px;"><b>Concepto:</b></td>
+                                                <td  class="text-right" >{{pagofacturar.concepto | uppercase}}</td>
+                                            </tr>
+
+                                            <tr style="padding-bottom: 8px" class="hidden-md-up">
+                                                <td class="text-right" style="padding-right: 24px;"><b>Importe:</b></td>
+                                                <td  class="text-right" >{{(pagofacturar.importe - pagofacturar.iva)  | currency:'MXN':true:'2.2-4'}}</td>
+                                            </tr>
+
+                                            <tr style="padding-bottom: 8px" class="hidden-md-up">
+                                                <td class="text-right" style="padding-right: 24px;"><b>IVA:</b></td>
+                                                <td  class="text-right" >{{pagofacturar.iva  | currency:'MXN':true:'2.2-4'}}</td>
+                                            </tr>
+
+                                            <tr style="padding-bottom: 8px" class="hidden-md-up">
+                                                <td class="text-right" style="padding-right: 24px;"><b>Total:</b></td>
+                                                <td  class="text-right" >{{pagofacturar.importe  | currency:'MXN':true:'2.2-4'}}</td>
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+
+                            </div>
+
+                            <div class="col-md-6 col-12 hidden-sm-down" >
+
+                                <table class=" tablaDatos" >
+                                    <tbody >
+
+                                        <tr style="padding-bottom: 8px" [hidden]="(pagofacturar.subtotal - pagofacturar.iva) == pagofacturar.importe">
+                                            <td class="text-right" style="padding-right: 24px;"><b>Importe:</b></td>
+                                            <td  class="text-right" >
+                                                MX ${{(pagofacturar.subtotal - pagofacturar.iva)  | number: '1.2': 'notEmpty': '0'}}
+                                            </td>
+                                        </tr>
+
+                                        <tr style="padding-bottom: 8px" [hidden]="pagofacturar.iva <= 0">
+                                            <td class="text-right" style="padding-right: 24px;"><b>IVA:</b></td>
+                                            <td  class="text-right" >
+                                                MX ${{pagofacturar.iva  | number: '1.2': 'notEmpty': '0'}}
+                                            </td>
+                                        </tr>
+
+                                        <tr style="padding-bottom: 8px" [hidden]="pagofacturar.intereses <= 0" >
+                                            <td class="text-right" style="padding-right: 24px;"><b>Intereses:</b></td>
+                                            <td  class="text-right" >
+                                                MX ${{pagofacturar.intereses  | number: '1.2': 'notEmpty': '0'}}</td>
+                                        </tr>
+
+                                        <tr style="padding-bottom: 8px" [hidden]="pagofacturar.descuento >= 0" >
+                                            <td class="text-right" style="padding-right: 24px;"><b>Descuento:</b></td>
+                                            <td  class="text-right" >
+                                                MX ${{pagofacturar.descuento  | number: '1.2': 'notEmpty': '0'}}</td>
+                                        </tr>
+
+                                        <tr style="padding-bottom: 8px">
+                                            <td class="text-right" style="padding-right: 24px;"><b>Total:</b></td>
+                                            <td  class="text-right" >
+                                                MX ${{pagofacturar.importe  | number: '1.2': 'notEmpty': '0'}}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Enviar a correos -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <label class="labelclasic">
+                                        ¿A que correos deseas que te enviemos la factura?
+                                    </label>
+                                </div>
+                                <div class="contenedorCorreo" (click)="correoInput.focus(); correoModificado=true">
+
+                                    <div *ngFor="let c of correoenvio; index as index" style="display: inline-block; padding: 4px 4px; max-width: 100%;">
+
+                                        <div class="input-group ">
+                                            <div class="input-group-addon correoCorreo">
+                                                {{c}}
+                                            </div>
+                                            <div class="input-group-btn">
+                                                <button class="btn correobtn" (click)="correoenvio.splice(index, 1) ">
+                                                    <span class="fa fa-times"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div style="display: inline-block; max-width: 100%; !important;">
+                                        <input  [ngStyle]="estilo.nuevaEntrada" (ngModelChange)="ajusarDimensionesNuevaEntrada()" [(ngModel)]="correoaux" id="correoInput"  class="correoinput text-lowercase amElementoEntrada" #correoInput (keydown.enter)="AgregarCorreo($event)" (keydown.space)="AgregarCorreo($event)" (keydown.,)="AgregarCorreo($event)" (blur)="AgregarCorreo($event)">
+
+                                        <div id="amContendorRegla">
+                                            <span id="amRegla" #amRegla></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <small [hidden]="correoenvio.length > 0" style="color: red">
+                                    Ingrese al menos un correo electrónico.
+                                </small>
+
+                                <small [hidden]="ValidarCorreo()" style="color: red">
+                                    El correo no es válido.
+                                </small>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Mensaje de facturado -->
+                <div class="col-lg-12 col-sm-12 col-12 form-group" [hidden]="!facturado">
+
+                    <br><br>
+
+                    <div class="text-center">
+                        <span class="fa fa-check-circle" style="color:#00a194; font-size: 100px"></span>
+                    </div>
+
+                    <br><br>
+                    <div style="font-size: 16px" class="text-center">
+                        La factura se te enviará a los correos electrónicos indicados en un período no mayor a 48 horas.
+                    </div>
+
+                </div>
+
+                <!-- mensaje -->
+                <!--<div class="col-lg-12 col-sm-12 col-12 form-group text-center" [hidden]="facturado" >
+                    <label><strong><i>Tiene {{diasfacturar}} días naturales para facturar a partir de la fecha de pago.</i></strong></label>
+                </div>    -->
+            </div>
+
+            <!-- botones de operación -->
+            <div class="modal-footer">
+                <div [hidden]="facturado">
+                    <button class="btn btn-default btnBase" type="button" (click)="cerrar()" >Cancelar</button>
+                    <!--<button class="btn btn-default btnBase" type="button" (click)="showconcept= false" *ngIf="showconcept">&lt;&lt; Anterior</button>-->
+                    <button [disabled]="!myrfcid" class="btn btnPrincipal" type="button" (click)="facturar()" style="margin-left: 8px"><span> {{ showconcept === true ? 'Generar factura' : 'Confirmar datos'}}</span></button>
+                </div>
+                <div [hidden]="!facturado">
+                    <button class="btn btn-default btnBase" type="button" (click)="cerrar()">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

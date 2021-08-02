@@ -1,0 +1,151 @@
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal  
+     #modal="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" > 
+     <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <form  [formGroup]="FormBuscarAlumno" novalidate (ngSubmit)="buscarAlumno()">  
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <strong>Seleccionar alumno</strong>
+
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">   
+                        <div class="col-lg-3 col-sm-3 col-12">                            
+                            <div class="col-lg-12 col-sm-12 col-12 form-group">
+                                <div class="group">
+                                    <input type="text" required formControlName="matricula"> <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Matricula</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-12 form-group">
+                                <div class="group">
+                                    <input type="text" required formControlName="nombre"> <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Nombre</label>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-12">
+                            <div class="col-lg-12 col-sm-12 col-12 form-group">
+                                <div class="group">
+                                    <input type="text" required formControlName="apellidopaterno"> <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Ap. paterno</label>
+                                </div> 
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-12 form-group">
+                                <div class="group">
+                                    <input type="text" required formControlName="apellidomaterno"> <span
+                                        class="highlight"></span> <span class="bar"></span> <label
+                                        class="MaterialLabel">Ap. materno</label>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-12">
+                            <div class="col-lg-12 col-sm-12 col-12 form-group">
+                                <sui-select style="width: 100%;" class="selection" (selectedOptionChange)="load($event)"
+                                            formControlName="nivelid"
+                                            placeholder="Nivel"
+                                            [options]="NivelSelect"
+                                            labelField="nombre"
+                                            valueField="nivelid"                                           
+                                            #nivelselect>
+                                    <sui-select-option *ngFor="let option of nivelselect.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-12 form-group">
+                                <sui-select style="width: 100%;" class="selection"
+                                            formControlName="gradoid"
+                                            placeholder="Grado"
+                                            [options]="GradoSelect"
+                                            labelField="grado"
+                                            valueField="gradoid"                                           
+                                            #gradoselect>
+                                    <sui-select-option *ngFor="let option of gradoselect.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-12">
+                            <div class="col-lg-12 col-sm-12 col-12"> 
+                                <button class="btn principal"  type="submit">Buscar</button>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-12"> 
+                                <small [hidden]="!submittedAlumno" style="color: red">
+                                    Debe seleccionar cuando menos un filtro de búsqueda
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <fieldset>
+                        <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">
+                            <table datatable [dtOptions]="dtOptionsalumno" [dtTrigger]="dtTriggeralumno" class="table table-hover" id="tablaConsultaAlumno">
+                                   <thead>
+                                    <tr style="color: #fff;">
+                                        <th class="text-center headerTable-top-left">
+                                            Matricula
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Nombre 
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Ap. paterno
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Ap. materno
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Nivel
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Grado
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Estatus
+                                        </th>
+                                        <th class="text-center headerTable-top-right">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="font-size: 13px;" *ngFor="let c of arrayentidadalumno">
+                                        <td class="text-center">
+                                            <p>{{c.matricula}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.primernombre}} {{c.segundonombre}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.apellidopaterno}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.apellidomaterno}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.nivel}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.grado}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.estatus}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn principal"  type="button" (click)="cerrar(c)">Seleccionar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default"  type="button" (click)="cerrar(null)">Cancelar</button>
+                </div>
+            </form>            
+        </div>
+    </div>
+</div>

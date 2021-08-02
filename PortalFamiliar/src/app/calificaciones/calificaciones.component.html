@@ -1,0 +1,230 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h1> Calificaciones </h1>
+            </header>
+            <div class="widget-body">
+                <fieldset>
+                    <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                        <div class="row">
+                            <form [formGroup]="FormAlumno">
+                                <small>Alumno</small>
+                                <sui-select style="width: 100%;" class="selection" formControlName="alumnoid"
+                                    placeholder="Alumno" (selectedOptionChange)="cagarInfo($event)"
+                                    [options]="selectAlumno" labelField="nombrecompleto" valueField="alumnoid"
+                                    #alumnoselect>
+                                    <sui-select-option *ngFor="let option of alumnoselect.filteredOptions"
+                                        [value]="option">
+                                    </sui-select-option>
+                                </sui-select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="alumno">
+                        <div class="row">
+                            <div style="float:left" style="padding-top: 15px">
+                                <b style="float: left">{{alumno.matricula + '  ' + alumno.primernombre + '  ' + (alumno.apellidopaterno? alumno.apellidopaterno
+                                    : "") + '  ' + (alumno.apellidomaterno? alumno.apellidomaterno : "")}}</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" [hidden]="!mostrar">
+                        <div class="row">
+                            <div class="tabllePaddingLTE no-padding table-responsive"
+                                style="margin-top: 20px; font-size: 13px;">
+                                <table class="table table-hover" id="tabla2">
+                                    <thead>
+                                        <tr style="color: white;">
+                                            <th class="text-center headerTable-top-left">
+                                                Ciclo
+                                            </th>
+                                            <th class="text-center headerTable">
+                                                Nivel
+                                            </th>
+                                            <th class="text-center headerTable ">
+                                                Grado
+                                            </th>
+                                            <th class="text-center headerTable ">
+                                                Grupo
+                                            </th>
+                                            <th class="text-center headerTable-top-right">
+                                                Calificaciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="font-size: 13px;" *ngFor="let c of arraytabla">
+                                            <td class="text-center">
+                                                <p>{{c.ciclo}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p>{{c.nivel}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p>{{c.grado}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p>{{c.grupo}}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <a>
+                                                    <li class="fa fa-eye" (click)="openCalificaciones(c)"></li>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal
+    #modalCalificacion="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <strong>Reporte de calificaciones</strong>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class="widget">
+                            <header>
+                                <h1> Calificaciones </h1>
+                            </header>
+                            <div class="widget-body">
+                                <fieldset>
+                                    <div class="col-sm-12">
+                                        <div style="float: right;" *ngIf="alumno && datosalumno">
+                                            <b style="float: right"> {{datosalumno.ciclo? datosalumno.ciclo : ''}}</b>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12" *ngIf="alumno && datosalumno">
+                                        <div class="row">
+                                            <div style="float:left" style="padding-top: 15px">
+                                                <b
+                                                    style="float: left">{{alumno.matricula + ' - ' + alumno.primernombre + ' ' + (alumno.apellidopaterno? alumno.apellidopaterno
+                                                    : "") + ' ' + (alumno.apellidomaterno? alumno.apellidomaterno : "")}}</b>
+                                            </div>
+                                        </div>
+                                        <div style="float: right;" style="padding-top: 15px;">
+                                            <b style="float: right">
+                                                {{this.datosalumno.grado ? this.datosalumno.nivel + ' ' + this.datosalumno.grado : ''}}</b>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button class="btn btn-default" *ngIf="alumno && mostrarCalificaciones && boletacalificacion" type="button"
+                                        (click)="imprimirboleta()">Imprimir boleta</button>
+                                    <br>
+                                    <div class="col-sm-12" [hidden]="!mostrarCalificaciones" *ngIf="portalcalificacion">
+                                        <div class="row">
+                                            <div class="tabllePaddingLTE no-padding table-responsive"
+                                                style="margin-top: 20px; font-size: 13px;">
+                                                <table class="table table-hover" id="tabla3">
+                                    <thead>
+                                        <tr style="color: #fff;">
+                                            <th class="text-center headerTable-top-left" style="margin-bottom: 5px;">
+                                                Materia
+                                            </th>
+                                            <th class="text-center headerTable"
+                                                *ngFor="let c of arraycolumnas; let i = index">
+                                                <label *ngIf="c.publicacion" style="font-size:0.9em">PUBLICACIÓN: {{c.publicacion}}</label>
+                                                <p>{{c.nombre}}</p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="font-size: 13px;" *ngFor="let c of arraymateriasr"  [ngStyle]="{'font-weight': c.id == '_prop_' ? 'bold' : '' }">
+                                            <td class="text-center">{{(!c.curricular && c.id != '_prop_' ? '* ' : '') + c.nombre}}</td>
+                                            <ng-container *ngFor="let x of arraycolumnas">
+                                                <td class="text-center" *ngIf="!x.visible">-</td>
+                                                <td class="text-center" (click)="detallecal(c,x)" *ngIf="x.visible">
+                                                    <p style="cursor: pointer;">
+                                                        {{getDataXY(c,x)}}
+                                                    </p>
+                                                </td>
+                                            </ng-container>
+                                        </tr>
+                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="widget-body" *ngIf="bloqueoalumno" style="margin-top: 25px">
+                                        <fieldset>
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                No se pueden consultar las calificaciones por los siguientes motivos:
+                                                <br> 
+                                                <div *ngIf="bloqueoadeudo">
+                                                    <b>
+                                                        {{observacionesadeudo}}
+                                                    ​</b>
+                                                    <br>
+                                                </div>
+                                                <div *ngIf="bloqueojunta">
+                                                    <b>
+                                                        {{observacionesjunta}}
+                                                    ​</b>
+                                                    <br>
+                                                </div>
+                                                <b>{{observacionesbloqueo}}</b>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" (click)="modalCalificacion.hide()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #modaldetallecal="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}">
+     <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-sm" *ngIf="detallecalificacion">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <strong>{{detallecalificacion.materia}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <b>{{detallecalificacion.periodo}}</b>
+                        <table class="table table-hover" style="margin-top: 20px; border-bottom: none;">
+                            <thead>
+                                <th>Aspecto</th>
+                                <th>Puntaje</th>
+                                <th>Calificación</th>
+                            </thead>
+                            <tbody *ngFor="let f of detallecalificacion.detalle">
+                                <td>{{f.aspecto}}</td>
+                                <td *ngIf="f._total">-</td>
+                                <td *ngIf="!f._total">{{f.puntaje}}/{{f.puntajemax}}</td>
+                                <td>{{f.calificacion}}</td>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" (click)="modaldetallecal.hide();">Aceptar</button>
+                </div>
+        </div>
+    </div>
+</div>

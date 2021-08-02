@@ -1,0 +1,214 @@
+
+<!-- sección título -->
+<div class="row">
+    <div class="col-12">
+        <h4>Deudas y créditos</h4>
+    </div>
+</div>
+
+<div class="divider16"></div>
+<div class="divider16"></div>
+
+<!-- tabla de deudas y créditos -->
+<div class="row">
+    <div class="col-12">
+        <div class="tabllePaddingLTE no-padding dependientestab table-responsive dependientestab" style="padding: 0px !important; font-size: 13px;">
+
+            <table class="table table-hover" id="tablaHijo" style="width:100%">
+                <thead>
+                    <tr class="text-center" style="color: white;">
+                        <th class="headerTable-top-left">
+                            Tipo de crédito
+                        </th>
+                        <th class="text-center headerTable">
+                            Banco / institución
+                        </th>
+
+                        <th class="text-center headerTable">
+                            Límite de crédito
+                        </th>
+                        <th class="text-center headerTable">
+                            Adeudo total
+                        </th>
+                        <th class="text-center headerTable">
+                            Pago mensual
+                        </th>
+                        <th class="text-center headerTable-top-right">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="font-size: 13px;" *ngFor="let h of datosdeudasycreditos; let i = index">
+                        <td>
+                            <p>{{h.tipocreditoid.descripcion}}</p>
+                        </td>
+                        <td class="text-center">
+                            {{h.bancoinstitucion}}
+                        </td>
+                        <td class="text-center">
+                            ${{h.limitecredito | number: '1.0': 'notEmpty': '0'}}
+                        </td>
+                        <td class="text-center">
+                            ${{h.importetotal | number: '1.0': 'notEmpty': '0'}}
+                        </td>
+                        <td class="text-center">
+                            ${{h.pagomensual | number: '1.0': 'notEmpty': '0'}}
+                        </td>
+                        <td style="width:20%" class="text-center">
+                            <a>
+                                <i class="fa fa-trash fa-lg" aria-hidden="true" (click)="deleteDeuda(h)"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td style="text-align:center">Total</td>
+                        <td>
+                            <input type="text" [(ngModel)]="total" [ngModelOptions]="{standalone: true}"
+                                   currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision: 0 }" disabled>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- botón para agregar deuda o crédito -->
+<div class="text-center" [hidden]="!editable">
+    <div style="margin-top: 10px" [hidden]="nuevo">
+        <button class=" btnGeneral btn-sm"  (click)="nuevo = true">
+                <span class="fa fa-plus"></span>
+            <span style="margin-left: 5px"> Agregar </span>
+        </button>
+    </div>
+</div>
+
+<!-- Agregar deuda o crédito -->
+<div class="row">
+    <div class="col-sm-12">
+        <div style="height: 8px"></div>
+    </div>
+
+    <div class="col-12">
+        <form [formGroup]="formdeudacredito" [hidden]="!nuevo">
+            <!-- Datos de la deuda -->
+            <div class="row">
+                <!-- Concepto -->
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <label class="MaterialLabel labelSelect">
+                        Tipo de crédito
+                    </label>
+
+                    <div class="margenTopSelect"></div>
+                    <sui-select style="width: 100%;" class="selection" formControlName="tipocreditoid" placeholder="Tipo de crédito" [options]="selectTipocredito"
+                                required labelField="descripcion" valueField="tipocreditoid" #creditoselect2>
+
+                        <div class="divider" style="border-color: transparent"></div>
+
+                        <div class="ui icon search input">
+                            <i class="search icon"></i>
+                            <input suiSelectSearch type="text">
+                        </div>
+
+                        <sui-select-option *ngFor="let option of creditoselect2.filteredOptions" [value]="option"></sui-select-option>
+                    </sui-select>
+
+                    <small [hidden]="formdeudacredito.controls.tipocreditoid.valid || (formdeudacredito.controls.tipocreditoid.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir el tipo de crédito
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- importe -->
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="bancoinstitucion" class="texto" oninput="this.value = this.value.toLowerCase()" [ngStyle]="{'text-transform': sistema == 1 ? 'uppercase' : 'capitalize'}" (focusout)="transformartexto(formdeudacredito.controls.bancoinstitucion)">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel"> Banco / institución</label>
+                    </div>
+
+                    <small [hidden]="formdeudacredito.controls.bancoinstitucion.valid || (formdeudacredito.controls.bancoinstitucion.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir el banco o institución
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-lg-up"></div>
+
+                <!-- pago -->
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="margenTopSelect hidden-md-down"></div>
+                    <div class="group">
+                        <input type="text" required formControlName="limitecredito" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Límite de crédito</label>
+                    </div>
+
+                    <small [hidden]="formdeudacredito.controls.limitecredito.valid || (formdeudacredito.controls.limitecredito.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir el límite de crédito
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-md-down"></div>
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="group">
+                        <input type="text" required formControlName="importetotal" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Adeudo total</label>
+                    </div>
+
+                    <small [hidden]="formdeudacredito.controls.importetotal.valid || (formdeudacredito.controls.importetotal.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir el adeudo total
+                    </small>
+                </div>
+
+                <div class="rowSeperador hidden-lg-up"></div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="group">
+                        <input type="text" required formControlName="pagomensual" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.', precision:0 }">
+                               <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="MaterialLabel">Pago mensual</label>
+                    </div>
+
+                    <small [hidden]="formdeudacredito.controls.pagomensual.valid || (formdeudacredito.controls.pagomensual.pristine && !submitted)"
+                        style="   color: red">
+                        Introducir el pago mensual
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="rowSeperador"></div>
+
+            <!-- botones de operación -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-sm" type="button" style="margin-right: 8px" (click)="removecredito()">Cancelar
+                        </button>
+                        <button class="btn principal btn-sm" type="button" (click)="savecredito()">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,739 @@
+<section class="widget">
+  <h5 class="text-uppercase">Padres y/o tutores</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+  <div class="tabllePaddingLTE no-padding table-responsive" style="margin-top: 20px; font-size: 13px;">
+
+    <table datatable [dtOptions]="dtOptionsTutor" [dtTrigger]="dtTriggerTutor" class="table table-hover" id="padreTutor">
+      <thead>
+      <tr style="color: #fff;">
+
+        <th class="headerTable-top-left">
+          Nombre
+        </th>
+
+        <th class=" headerTable">
+          Ap. paterno
+        </th>
+
+        <th class=" headerTable">
+          Ap. Materno
+        </th>
+
+        <th class=" text-center headerTable">
+          Teléfono
+        </th>
+
+        <th class="text-center headerTable">
+          Correo
+        </th>
+
+        <th class="text-center headerTable">
+          Parentesco
+        </th>
+
+        <th class="text-center headerTable-top-right">
+          Acciones
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr style="font-size: 13px;" *ngFor="let tutor of padretutor">
+        <td >
+          <p>{{tutor.nombre}}</p>
+        </td>
+
+        <td >
+          <p>{{tutor.apellidopaterno}}</p>
+        </td>
+
+        <td >
+          <p>{{tutor.apellidomaterno}}</p>
+        </td>
+
+        <td class="text-center">
+          <p >{{tutor.telefono ?  (tutor.telefono) : "-"}}</p>
+        </td>
+
+        <td class="text-center">
+          <p >{{tutor.correo ? tutor.correo : "-"}}</p>
+        </td>
+
+        <td class="text-center">
+          <p>{{tutor.parentesco}}</p>
+        </td>
+
+        <td class="text-center">
+          <a (click)="AbrirPadreTutor('Editar', tutor)" class="iconBtn">
+            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+  </div>
+
+  <div >
+    <input class="labelCheckBox" type="checkbox" id="cbTutor" [disabled]="true" [(ngModel)]="alumno.actualizarDatos.padrestutor"/>
+
+    <label class="checkLabel labelCheckBoxText" for="cbTutor">
+      Aplicar los datos de padres y/o tutores a todos los alumnos de la familila.
+    </label>
+  </div>
+
+  <div class="margenSeparador"></div>
+</section>
+
+
+<div #modalTutor="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal  style="background: rgba(0,0,0,0.5);"  [config]="{'backdrop':'static', 'keyboard': false}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content modal-lg">
+
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <h3 class="text-uppercase">Padre o tutor</h3>
+        </h4>
+      </div>
+
+      <div class="row hidden-lg-up">
+        <div class="col-sm-12">
+          <div style="height: 15px"></div>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding: 0px !important;">
+        <form id="formaPT">
+
+          <div class="form-group row" style=" padding-left: 15px; padding-right: 15px;" >
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-block !important;">
+
+              <div class="col-sm-12 divseparador"></div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <h5 class="text-uppercase">Información básica</h5>
+                </div>
+              </div>
+
+              <div class="divider16"></div>
+              <div class="divider16"></div>
+
+              <div class="row">
+
+                <!-- Nombre -->
+                <div class="col-sm-4 col-12" >
+                  <div class="group ">
+
+                    <input class="textoMayuscula" type="text" id="nombreP"  name="nombretutor" required [(ngModel)]="nuevoTutor.Nombre" #nombreTutor="ngModel">
+
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="MaterialLabel">Nombre</label>
+
+                    <small [hidden]="nombreTutor.valid || (!nombreTutor.touched && !summittedTutor)" class="massageError">
+                      Indique el nombre
+                    </small>
+
+                  </div>
+                </div>
+
+                <div class="rowSeperador hidden-sm-up"></div>
+
+                <!-- Apellido Paterno -->
+                <div class="col-sm-4 col-12" >
+                  <div class="group ">
+
+                    <input class="textoMayuscula" type="text" id="apellidoPaterno" name="apellidoPaternoTutor"  required [(ngModel)]="nuevoTutor.ApellidoPaterno" #apellidoPTutor="ngModel">
+
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="MaterialLabel">Apellido Paterno</label>
+
+                    <small [hidden]="apellidoPTutor.valid || (!apellidoPTutor.touched && !summittedTutor) || apellidoMTutor.valid" class="massageError">
+                      Indique el apellido paterno
+                    </small>
+
+                  </div>
+                </div>
+
+                <div class="rowSeperador hidden-sm-up"></div>
+
+                <!-- Apellido Materno -->
+                <div class="col-sm-4 col-12" >
+                  <div class="group ">
+
+                    <input class="textoMayuscula" type="text" id="apellidoMaterno" name="apellidoMaternoTutor"  required [(ngModel)]="nuevoTutor.ApellidoMaterno" #apellidoMTutor="ngModel">
+
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="MaterialLabel">Apellido Materno</label>
+
+                    <small [hidden]="apellidoMTutor.valid || (!apellidoMTutor.touched && !summittedTutor) || apellidoPTutor.valid " class="massageError">
+                      Indique el apellido materno
+                    </small>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="rowSeperadorSelect"></div>
+
+              <div class="row">
+                <!-- Parentesco  -->
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" >
+
+                  <label class="MaterialLabel labelSelect" >Parentesco</label>
+                  <div class="margenTopSelect"></div>
+
+                  <sui-select style="width: 100%; " class="selection" required name="parentescotutor"
+                              id="parentescoPT"
+                              placeholder="Parentesco"
+                              [options]="alumno.tutor"
+                              labelField="descripcion"
+                              valueField="tutorid"
+                              [(ngModel)]="nuevoTutor.TutorId"
+                              #parentesPTcoselect #parentescoPT="ngModel">
+
+                    <sui-select-option *ngFor="let option of parentesPTcoselect.filteredOptions" [value]="option" ></sui-select-option >
+
+                  </sui-select>
+
+                  <small [hidden]="parentescoPT.valid || (!parentescoPT.touched && !summittedTutor)" class="massageError">
+                    Seleccione un parentesco
+                  </small>
+
+                </div>
+
+                <!-- Vive -->
+                <div class="col-sm-6 col-md-3 col-lg-4 col-6 text-center">
+
+                  <div class="margenTopSelect"></div>
+
+                  <input class="labelCheckBox" (ngModelChange)="CambiarVive($event)"  type="checkbox" name="fiando" id="tutorvive{{nuevoTutor.PadresOTutoresId}}" [(ngModel)]="nuevoTutor.Vive" style="margin-left: 0px !important"/>
+
+                  <label class="checkLabel labelCheckBoxText" for="tutorvive{{nuevoTutor.PadresOTutoresId}}">
+                    VIVE
+                  </label>
+
+                </div>
+
+                <!-- Tutor -->
+                <div class="col-sm-6 col-md-3 col-lg-4 col-6 text-center" >
+
+                  <div class="margenTopSelect"></div>
+
+                  <input class="labelCheckBox" type="checkbox" name="tutor" id="tutorTutor" [(ngModel)]="nuevoTutor.Tutor" style="margin-left: 0px !important" [disabled]="!nuevoTutor.Vive" />
+
+                  <label class="checkLabel labelCheckBoxText" for="tutorTutor">
+                    TUTOR
+                  </label>
+
+                </div>
+
+              </div>
+
+              <div class="rowSeperador"></div>
+
+              <div class="row">
+
+                <!-- Lada  -->
+                <div class="col-lg-2 col-md-2 col-4">
+
+                  <div class="group ">
+
+                    <input type="text" id="ladatutor" maxlength="40" name="ladaTutor"  required [(ngModel)]="nuevoTutor.Lada"  #ladatutor="ngModel" lada pattern="\([1-9][0-9]{1,2}\)">
+
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="MaterialLabel">Lada </label>
+
+                    <small [hidden]="ladatutor.valid || (!nuevoTutor.Telefono && !nuevoTutor.Vive) || (!ladatutor.touched && !summittedTutor)" class="massageError">
+                      Indique una lada válida
+                    </small>
+
+                  </div>
+                </div>
+
+                <!-- Teléfono  -->
+                <div class="col-lg-2 col-md-4 col-8" >
+
+                  <div class="group ">
+
+                    <input type="text" id="telefonotutor" name="telefonoTutor"  maxlength="40" required [(ngModel)]="nuevoTutor.Telefono"  #telefonotutor="ngModel" [phonenumber]="{lada: nuevoTutor.Lada}" pattern="{{telefonoService.GetExpresionRegularTelefono(nuevoTutor.Lada)}}">
+
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="MaterialLabel">Teléfono </label>
+
+                    <small [hidden]="telefonotutor.valid || (!nuevoTutor.Lada && !nuevoTutor.Vive) || (!telefonotutor.touched && !summittedTutor) " class="massageError">
+                      Indique un teléfono válido
+                    </small>
+
+                  </div>
+                </div>
+
+                <div class="rowSeperador hidden-md-up"></div>
+
+                <!-- Correo  -->
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" >
+
+                  <div class="group ">
+
+                    <input type="text" id="correo" name="correotutor" maxlength="40" required [(ngModel)]="nuevoTutor.Correo" #correotutor="ngModel" class="textoMinuscula" pattern="^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$">
+
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="MaterialLabel">Correo </label>
+
+                    <small [hidden]="correotutor.valid || (!nuevoTutor.Correo && !nuevoTutor.Vive) || (!correotutor.touched && !summittedTutor) " class="massageError">
+                      Indique un correo válido
+                    </small>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="rowSeperadorSelect"></div>
+
+              <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-4">
+
+                  <label class="MaterialLabel labelSelect" >¿Ha sido miembro de algún colegio jesuita?</label>
+                  <div class="margenTopSelect"></div>
+
+                  <sui-select style="width: 100%;" class="selection" required name="instituto"
+                              placeholder=""
+                              [options]="alumno.respuestaSiNo"
+                              (selectedOptionChange)="validarEscuela($event)"
+                              labelField="nombre"
+                              valueField="valor"
+                              [(ngModel)]="nuevoTutor.AlumnoInstituto"
+                              #miembroColegioTutorSelect
+                              #miembroColegioTutor="ngModel"
+                  >
+
+                    <sui-select-option *ngFor="let option of miembroColegioTutorSelect.filteredOptions" [value]="option"></sui-select-option>
+
+                  </sui-select>
+
+                  <small [hidden]="miembroColegioTutor.valid || (!miembroColegioTutor.touched && !summittedTutor)" class="massageError">
+                    Seleccione su respuesta
+                  </small>
+
+                </div>
+
+                <div class="rowSeperador hidden-md-up" [hidden]="nuevoTutor.AlumnoInstituto != '1'"></div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4" [hidden]="nuevoTutor.AlumnoInstituto != '1'">
+
+                  <div class="group">
+                    <div class="margenTopSelect hidden-sm-down"></div>
+                    <input class="textoMayuscula" (change)="AlumnoChange();" type="text" [required]="especificaescuela" name="escuelajesuitatutor"  [(ngModel)]="nuevoTutor.EspecificarAlumno" #especificarEscuela="ngModel">
+
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="MaterialLabel">Especificar escuela jesuita </label>
+
+                    <small [hidden]="especificarEscuela.valid || (!especificarEscuela.touched && !summittedTutor) " class="massageError">
+                      Indique su respuesta
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="margenSeparador"></div>
+
+              <!-- -------- información adicional padre/tutor --------- -->
+              <legend></legend>
+
+              <div class="margenSeparador"></div>
+
+              <h5 class="text-uppercase">Información adicional</h5>
+
+              <div class="divider16"></div>
+              <div class="row">
+
+                <!-- Fecha de nacimiento -->
+                <div class="col-sm-6 col-lg-4 col-12">
+
+                  <label class="MaterialLabel labelSelect" >Fecha de nacimiento</label>
+                  <div class="margenTopSelect "></div>
+
+                  <my-date-picker name="fechanacimientotutor" [options]="opcionaesFehaNacimiento"  [(ngModel)]="nuevoTutor.FechaNacimiento" required #fechanacimiento="ngModel" id="fechanacimientotutor" ></my-date-picker>
+
+                  <small [hidden]="fechanacimiento.valid || (!fechanacimiento.touched && !summittedTutor)" class="massageError">
+                    Indique la fecha de nacimiento
+                  </small>
+
+                </div>
+
+              </div>
+
+              <div class="rowSeperadorSelect" style="height: 9px"></div>
+
+              <div class="row">
+
+                <!-- Nacionalidad -->
+                <div class="col-lg-4 col-xs-12 col-md-6 col-sm-12">
+
+                  <label class="MaterialLabel labelSelect" >Nacionalidad</label>
+                  <div class="margenTopSelect"></div>
+
+                  <sui-multi-select style="width: 100%; " class="selection" required name="nacionalidad"
+                              placeholder="Nacionalidad"
+                              [options]="alumno.nacionalidad"
+                              labelField="nombre"
+                              valueField="nacionalidadid"
+                              [(ngModel)]="nuevoTutor.Nacionalidad"
+                              #nacionalidadtutorselect #nacionalidadTutor="ngModel"
+                  >
+
+                    <div class="divider" style="border-color: transparent"></div>
+
+                    <div class="ui icon search input">
+                      <i class="search icon"></i>
+                      <input suiSelectSearch type="text">
+                    </div>
+
+                    <sui-select-option *ngFor="let option of nacionalidadtutorselect.filteredOptions" [value]="option" [hidden]="!option.activo"></sui-select-option >
+
+                  </sui-multi-select>
+
+                  <small [hidden]="nacionalidadTutor.valid || (!nacionalidadTutor.touched && !summittedTutor)" class="massageError">
+                    Seleccione una opción
+                  </small>
+
+                </div>
+
+                <div class="rowSeperadorSelect hidden-md-up"></div>
+
+                <!-- Situación conyugal -->
+                <div class="col-lg-4 col-xs-12 col-md-6 col-sm-12">
+
+                  <label class="MaterialLabel labelSelect" >Situación conyugal</label>
+                  <div class="margenTopSelect"></div>
+
+                  <sui-select style="width: 100%; " class="selection" required name="situacionconyugal"
+                              id="situacionConyugalPT"
+                              placeholder="Situación conyugal"
+                              [options]="alumno.situacionConyugal"
+                              labelField="descripcion"
+                              valueField="situacionconyugalid"
+                              [(ngModel)]="nuevoTutor.SituacionConyugalId"
+                              #situacionconyugalselect #situacionConyugalTutor="ngModel"
+                  >
+                    <div class="divider" style="border-color: transparent"></div>
+                    <div class="ui icon search input">
+                      <i class="search icon"></i>
+                      <input suiSelectSearch type="text">
+                    </div>
+
+                    <sui-select-option *ngFor="let option of situacionconyugalselect.filteredOptions" [value]="option"></sui-select-option >
+
+                  </sui-select>
+
+                  <small [hidden]="!this.nuevoTutor.Vive || nuevoTutor.SituacionConyugalId || (!situacionConyugalTutor.touched && !summittedTutor)" class="massageError">
+                    Seleccione una opción
+                  </small>
+
+
+                </div>
+
+                <div class="rowSeperadorSelect hidden-lg-up"></div>
+
+                <!-- Escolaridad -->
+                <div class="col-lg-4 col-xs-12 col-md-6 col-sm-12">
+
+                  <label class="MaterialLabel labelSelect" >Escolaridad</label>
+                  <div class="margenTopSelect"></div>
+
+                  <sui-select style="width: 100%; " class="selection" required name="escolaridad"
+                              id="escolaridadPT"
+                              placeholder="Escolaridad"
+                              [options]="alumno.escolaridad"
+                              labelField="descripcion"
+                              valueField="escolaridadid"
+                              [(ngModel)]="nuevoTutor.NivelEstudioId"
+                              #escolaridadTutorSelect #escolaridadTutor="ngModel"
+                  >
+
+                    <div class="divider" style="border-color: transparent"></div>
+
+                    <div class="ui icon search input">
+                      <i class="search icon"></i>
+                      <input suiSelectSearch type="text">
+                    </div>
+
+                    <sui-select-option *ngFor="let option of escolaridadTutorSelect.filteredOptions" [value]="option"></sui-select-option >
+
+                  </sui-select>
+
+                  <small [hidden]="!this.nuevoTutor.Vive || nuevoTutor.NivelEstudioId || (!escolaridadTutor.touched && !summittedTutor)" class="massageError">
+                    Seleccione una opción
+                  </small>
+
+
+                </div>
+
+              </div>
+
+
+              <div >
+
+                <div class="rowSeperador"></div>
+
+                <div class="row">
+
+                  <!-- Ocupación -->
+                  <div class="col-sm-4 col-12" >
+
+                    <div class="group">
+
+                      <input class="textoMayuscula" type="text" required name="ocupacion"  [(ngModel)]="nuevoTutor.EspecificacionOcupacion" #especificarocupaciontutor="ngModel">
+
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Ocupación </label>
+
+                      <small [hidden]="!this.nuevoTutor.Vive || especificarocupaciontutor.valid || (!especificarocupaciontutor.touched && !summittedTutor) " class="massageError">
+                        Indique la ocupación
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- Puesto -->
+                  <div class="col-12 col-sm-4" >
+
+                    <div class="group ">
+
+                      <input class="textoMayuscula" type="text" required name="ramo"  [(ngModel)]="nuevoTutor.Ramo" #ramotutor="ngModel">
+
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Puesto </label>
+
+                      <small [hidden]="!this.nuevoTutor.Vive || ramotutor.valid || (!ramotutor.touched && !summittedTutor) " class="massageError">
+                        Indique el puesto
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- Empresa -->
+                  <div class="col-sm-4 col-12 " >
+
+                    <div class="group">
+
+                      <input class="textoMayuscula" type="text" required name="empresa"  [(ngModel)]="nuevoTutor.Empresa" #empresatutor="ngModel">
+
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Empresa </label>
+
+                      <small [hidden]="!this.nuevoTutor.Vive || empresatutor.valid || (!empresatutor.touched && !summittedTutor) " class="massageError">
+                        Indique la empresa
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="rowSeperador "></div>
+
+                <div class="row" >
+
+
+                  <!-- Horario -->
+                  <div class="col-sm-4 col-12" >
+
+                    <div class="group ">
+
+                      <input class="textoMayuscula" type="text" name="horario"  required [(ngModel)]="nuevoTutor.HorarioTrabajo" #horariotrabajotutor="ngModel">
+
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Horario de trabajo</label>
+
+                      <small [hidden]="!this.nuevoTutor.Vive || horariotrabajotutor.valid || (!horariotrabajotutor.touched && !summittedTutor) " class="massageError">
+                        Indique el horario de trabajo
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-sm-up"></div>
+
+                  <!-- Antigüedad -->
+                  <div class="col-sm-4 col-12" >
+
+                    <div class="group ">
+
+                      <input class="textoMayuscula" type="text" name="antiguedad"  required [(ngModel)]="nuevoTutor.Antiguedad" #antiguedad="ngModel">
+
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Antigüedad</label>
+
+                      <small [hidden]="!this.nuevoTutor.Vive || antiguedad.valid || (!antiguedad.touched && !summittedTutor) " class="massageError">
+                        Indique el horario de trabajo
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="rowSeperador"></div>
+
+                <div class="row" >
+                  <!-- Lada -->
+                  <div class="col-lg-2 col-md-2 col-4" >
+
+                    <div class="group ">
+
+                      <input type="text" id="ladaEmpresa" name="ladaempresa"  required [(ngModel)]="nuevoTutor.LadaEmpresa" #ladatrabajotutor="ngModel"  lada  pattern="\([1-9][0-9]{1,2}\)">
+
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Lada</label>
+
+                      <small [hidden]="((!nuevoTutor.TelefonoEmpresa && !nuevoTutor.ExtensionEmpresa &&  !nuevoTutor.Vive) && !nuevoTutor.ExtensionEmpresa ) || ladatrabajotutor.valid || (!ladatrabajotutor.touched && !summittedTutor)" class="massageError">
+                        Indique la lada
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                  <!-- Teléfono -->
+                  <div class="col-lg-2 col-md-4 col-8" >
+
+                    <div class="group ">
+
+                      <input type="text" id="telefonoEmpresa" name="telefonoempresa"  required [(ngModel)]="nuevoTutor.TelefonoEmpresa" #telefonotrabajotutor="ngModel"  [phonenumber]="{lada: nuevoTutor.LadaEmpresa}" pattern="{{telefonoService.GetExpresionRegularTelefono(nuevoTutor.LadaEmpresa) }}" >
+
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Tel. Oficina</label>
+
+                      <small [hidden]="((!nuevoTutor.LadaEmpresa && !nuevoTutor.ExtensionEmpresa  && !nuevoTutor.Vive) && !nuevoTutor.ExtensionEmpresa) || telefonotrabajotutor.valid || (!telefonotrabajotutor.touched && !summittedTutor) " class="massageError">
+                        Indique el teléfono de la empresa
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                  <div class="rowSeperador hidden-md-up"></div>
+
+                  <!-- Extensión -->
+                  <div class="col-lg-2 col-md-2 col-4" >
+
+                    <div class="group ">
+
+                      <input class="textoMayuscula" numbers required name="extensionempresa"  [(ngModel)]="nuevoTutor.ExtensionEmpresa" #extensiontrabajotutor="ngModel" [textMask]="{mask: alumno.numberMaskNoComma, guide: false}">
+
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="MaterialLabel">Extensión</label>
+
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="rowSeperadorSelect"></div>
+
+              <div class="row">
+
+                <div class="col-sm-12 col-md-6 col-lg-4">
+
+                  <label class="MaterialLabel labelSelect" >¿Es ex-alumno del Pereyra?</label>
+                  <div class="margenTopSelect"></div>
+
+                  <sui-select style="width: 100%;" class="selection" required name="exlux"
+                              placeholder=""
+                              [options]="alumno.respuestaSiNo"
+                              labelField="nombre"
+                              valueField="valor"
+                              [(ngModel)]="nuevoTutor.ExLux"
+                              #miembroLuxTutorSelect
+                              #miembroLuxTutor="ngModel"
+                  >
+
+                    <sui-select-option *ngFor="let option of miembroLuxTutorSelect.filteredOptions" [value]="option"></sui-select-option>
+
+                  </sui-select>
+
+                  <small [hidden]="miembroLuxTutor.valid || (!miembroLuxTutor.touched && !summittedTutor)" class="massageError">
+                    Indique su respuesta
+                  </small>
+
+                </div>
+
+                <div class="rowSeperadorSelect hidden-md-up"></div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4" [hidden]="nuevoTutor.ExLux != '1'">
+
+                  <label class="MaterialLabel labelSelect" >Último año cursado</label>
+                  <div class="margenTopSelect"></div>
+
+                  <sui-select style="width: 100%;" class="selection" required name="generacion"
+                              placeholder="Año"
+                              [options]="alumno.generacion"
+                              labelField="nombre"
+                              valueField="generacionid"
+                              [(ngModel)]="nuevoTutor.GeneracionId"
+                              #generacionTutorSelect
+                              #generacionTutor="ngModel"
+                  >
+
+                    <sui-select-option *ngFor="let option of generacionTutorSelect.filteredOptions" [value]="option"></sui-select-option>
+
+                  </sui-select>
+
+                  <small [hidden]="generacionTutor.valid || (!generacionTutor.touched && !summittedTutor)" class="massageError">
+                    Seleccione su respuesta
+                  </small>
+
+                </div>
+              </div>
+
+              <div class="margenSeparador"></div>
+            </div>
+
+          </div>
+
+
+          <div class="modal-footer">
+            <button class="btn btn-default btnBase" type="button" (click)="CerrarPadreTutor()">Cancelar</button>
+            <button class="btn  btnPrincipal" type="submit" (click)="GuardarPadreTutor(correotutor.valid, telefonotutor.valid, ladatutor.valid, fechanacimiento.valid, ladatrabajotutor.valid, telefonotrabajotutor.valid)">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

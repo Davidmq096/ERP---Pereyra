@@ -1,0 +1,158 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h1> Extraordinarios </h1>
+            </header>
+            <div class="widget-body">
+                <legend></legend>
+                <div class="col-sm-12 form-group">
+                    <form [formGroup]="FormAlumno" (ngSubmit)="buscar()">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <small>Alumno</small>
+                                <sui-select style="width: 100%;" class="selection" formControlName="alumnoid"
+                                    placeholder="Alumno"
+                                    [options]="selectAlumno" labelField="nombrecompleto" valueField="alumnoid"
+                                    #alumnoselect>
+                                    <sui-select-option *ngFor="let option of alumnoselect.filteredOptions"
+                                        [value]="option">
+                                    </sui-select-option>
+                                </sui-select>
+                                <small [hidden]="FormAlumno.controls.alumnoid.valid || (FormAlumno.controls.alumnoid.pristine && !submittedBuscar)" style="color: red">
+                                    Seleccione un alumno
+                                </small> 
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <small>Periodo de regularización</small>
+                                <sui-select style="width: 100%;" class="selection" formControlName="periodoregularizacionid"
+                                    placeholder="Periodo de regularización"
+                                    [options]="selectPeriodo" labelField="nombre" valueField="periodoregularizacionid"
+                                    #periodoselect>
+                                    <sui-select-option *ngFor="let option of periodoselect.filteredOptions"
+                                        [value]="option">
+                                    </sui-select-option>
+                                </sui-select>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-12">
+                                <button class="btn principal" type="submit" style="float: right;" >Consultar</button>
+                                <button class="btn btn-default" type="button" (click)="limpiar()" style="float: right; margin-right: 10px;">Limpiar</button>
+
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12">
+                    <fieldset>
+                        <div class="tabllePaddingLTE no-padding table-responsive"
+                            style="margin-top: 20px; font-size: 13px;">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover"
+                                id="tablaExtraordinario">
+                                <thead>
+                                    <tr style="color: #fff;">
+                                        <th class="text-center headerTable" class="no-sort text-center"
+                                            style="background: #443E42; color: white;">
+                                            Matricula
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Alumno
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Nivel
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Grado
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Materia
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Motivo
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Curricular
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Estatus
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Aplicación
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Revisión
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Comentarios
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Calificación
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="font-size: 13px;" *ngFor="let c of arrayentidad">
+    
+                                        <td class="text-center">
+                                            <p>{{c.matricula? c.matricula : '-'}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.nombrecompleto? c.nombrecompleto : '-'}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.nivel}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.grado}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.materia}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.motivo? c.motivo : '-'}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.curricular? 'SI' : 'NO'}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.estatus? c.estatus : '-'}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <div *ngIf="c.estatusextraordinarioid == 3">
+                                                <p>{{(c.fechainicio? c.fechainicio:'-') + ' ' + (c.fechafin? c.fechafin:'')}}
+                                                </p>
+                                                <p *ngIf="c.horainicio">
+                                                    {{(c.horainicio? c.horainicio:'-') + ' a ' + (c.horafin? c.horafin:'')}}
+                                                </p>
+                                                <p *ngIf="c.lugaraplicacion">{{(c.lugaraplicacion? c.lugaraplicacion:'-') }}
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div *ngIf="c.estatusextraordinarioid == 3">
+                                                <p>{{(c.fecharevision? c.fecharevision:'-')}}</p>
+                                                <p *ngIf="c.horainiciorevision">
+                                                    {{(c.horainiciorevision? c.horainiciorevision:'-') + ' a ' + (c.horafinrevision? c.horafinrevision:'')}}
+                                                </p>
+                                                <p *ngIf="c.lugarrevision">{{(c.lugarrevision? c.lugarrevision:'-') }}</p>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div *ngIf="c.estatusextraordinarioid == 3">
+                                                <p>{{c.comentarios? c.comentarios : '-'}}</p>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.calificaciondefinitiva? c.calificaciondefinitiva : '-'}}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>

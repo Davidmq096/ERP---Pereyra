@@ -1,0 +1,207 @@
+.titleLogin{
+    color:#CB0036;
+    text-align:center;
+    font-faimly:icon;  
+}
+
+.landing-btn{
+    width:350px;
+    background: #1E88E5;
+    cursor: pointer;
+    color: #FFF;
+    padding:15px;    
+    border: solid 1px #C5C5C5;
+    border-radius:80px;  
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;  
+    box-shadow: 3px 2px 8px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.landing-btn:hover{
+    background: #1976D2;
+}
+
+.login-form{
+    width:350px;
+    padding:15px;
+    padding-bottom: 25px;  
+    border: solid 1px #C5C5C5;
+    border-radius:60px;  
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;  
+    margin:50px auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.form-control2:focus, .form-control2:focus + .fa{  
+    border-color:#CB0036 !important;
+    color:#CB0036 !important;
+}
+
+.log-status.wrong-entry {
+    -webkit-animation: wrong-log 0.3s;
+    -moz-animation: wrong-log 0.3s;
+    -ms-animation: wrong-log 0.3s;
+    animation: wrong-log 0.3s;
+}
+.log-status.wrong-entry .form-control, .wrong-entry .form-control + .fa {
+    border-color: #CB0036;
+    color: #CB0036;
+}
+@keyframes wrong-log {
+    0% { left: 0px;}
+    20% {left: 15px;}
+    40% {left: -15px;}
+    60% {left: 15px;}
+    80% {left: -15px;}
+    100% {left: 0px;}
+}
+@-ms-keyframes wrong-log {
+    0% { left: 0px;}
+    20% {left: 15px;}
+    40% {left: -15px;}
+    60% {left: 15px;}
+    80% {left: -15px;}
+    100% {left: 0px;}
+}
+@-moz-keyframes wrong-log {
+    0% { left: 0px;}
+    20% {left: 15px;}
+    40% {left: -15px;}
+    60% {left: 15px;}
+    80% {left: -15px;}
+    100% {left: 0px;}
+}
+@-webkit-keyframes wrong-log {
+    0% { left: 0px;}
+    20% {left: 15px;}
+    40% {left: -15px;}
+    60% {left: 15px;}
+    80% {left: -15px;}
+    100% {left: 0px;}
+}
+.log-btn
+{
+    background:#CB0036;
+    dispaly:inline-block;
+    width:80%;
+    font-size:16px;
+    height:40px;
+    color:#fff;
+    text-decoration:none;
+    border:none;
+    border-radius:10px !important;
+    -moz-border-radius:10px !important;
+    -webkit-border-radius:10px !important;
+}
+
+.link{
+    text-decoration:none;
+    color:#2FB00A;
+    display:block;
+    text-align:right;
+    font-size:12px;
+    margin-bottom:15px;
+}
+.link:hover{
+    text-decoration:underline;
+    color:#CB0036;
+}
+
+.labLogin {
+    color: #CB0036;
+    font-size: 15px;
+}
+
+.footerInt {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    border-top: solid 2px rgba(0, 0, 0, 0.19);
+}
+
+.page-footer {
+  margin-bottom: 25px;
+  
+  text-align: center;
+  @media (min-height: 600px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+
+
+.login-btn, .login-btn:focus, .login-btn:active
+{
+    background:#007a33;
+    dispaly:inline-block;
+    font-size:16px;
+    height: auto;
+    color:#fff;
+    text-decoration:none;
+    border:none;
+    border-radius:5px !important;
+    
+    outline: none !important;
+    box-shadow: none;
+}
+
+.login-btn:hover
+{
+    opacity: 0.85;
+}
+
+.login-btn:hover:disabled
+{
+    opacity: 0.65;
+}
+
+.fondoLogin
+{
+  height: 100vh;
+  min-height: 550px;
+  background: white;         /*url('../../assets/img/background.jpg') center top / cover no-repeat scroll*/
+}
+
+.panelLogin
+{
+    color: #CC0000;
+    background: rgba(0, 0, 0, 1.0);
+    border-radius: 5px;
+}
+
+.btnLogin, .btnLogin:focus, .btnLogin:active
+{
+    background: white;
+    color: #CC0000;
+    border: 2px solid #CC0000;
+    
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btnLogin:hover
+{
+    background: #CC0000;
+    color: white;
+}
+
+.aLogin, .aLogin:focus, .aLogin:active
+{
+    cursor: pointer;
+    color: lightgray;
+    
+    text-decoration: none;
+}
+
+.aLogin:hover
+{
+    color: white;
+    text-decoration: none;
+}

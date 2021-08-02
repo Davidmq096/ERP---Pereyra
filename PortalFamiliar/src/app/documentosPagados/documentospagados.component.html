@@ -1,0 +1,135 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h3 class="text-uppercase"> Documentos <b>pagados</b> </h3>
+            </header>
+            <div class="widget-body">
+                <fieldset>
+                        <div class="col-lg-12 col-sm-12 col-12 form-group no-padding">
+                            <div class="group text-justify">
+                            <p>Si acaba de realizar un pago y no lo ve reflejado en el listado de movimientos mostrados a continuación, presione el botón <strong>CONSULTAR</strong> para obtener nuevamente los pagos de la institución bancaria.</p>
+                            </div>
+                        </div>
+                     <div class="col-lg-12 no-padding">
+                        <h6>
+                            A continuación se muestra la lista de documentos pagados:
+                        </h6>                                
+                    </div>
+                    <div class="col-sm-12 divseparador"></div>
+
+                    <!-- filtros -->
+                    <div class="col-12 no-padding">
+
+                        <!-- label -->
+                        <div style="display: inline-block;">
+                            <h6>
+                                Alumno(s)
+                            </h6>
+                        </div>
+
+                        <div  style="display: inline-block;">
+                            <sui-select class="selection"
+                                            [(ngModel)]="myalumnoid"
+                                            placeholder="Seleccione un Alumno"
+                                            (selectedOptionChange)="FiltrarDocumento($event)"
+                                            [options]="arrayalumnos"
+                                            labelField="nombrecompleto"
+                                            valueField="alumnoid"
+                                            #alumnosselectmodal>
+                                    <div class="divider" style="border-color: transparent"></div>
+                                    <div class="ui icon search input">
+                                        <i class="search icon"></i>
+                                        <input suiSelectSearch type="text">
+                                    </div>
+                                    <div class="divider"></div>
+                                    <sui-select-option *ngFor="let option of alumnosselectmodal.filteredOptions" [value]="option"></sui-select-option>
+                                </sui-select>
+                        </div>
+
+                        <!-- Botón para consultar -->
+                        <div class="pull-right">
+                            <button class="btn btnGeneral btnLeft" style="margin-left: 12px" (click)="getDocumentos()">
+                                Consultar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de documentos pagados -->
+                    <div class="tabllePaddingLTE table-responsive" style="margin-top: 20px; font-size: 13px; ">
+                        <table datatable [dtOptions]="dtOptionsPagado" [dtTrigger]="dtTriggerPagado" class="table table-hover" id="tablaPagados">
+                               <thead>
+                                <tr style="color: #fff;">
+                                    <th [hidden]="true"></th>
+                                     <th class="text-center headerTable-top-left" [hidden]="myalumnoid > 0">
+                                        Matrícula
+                                    </th>
+                                    <th class="text-center headerTable" [hidden]="myalumnoid > 0">
+                                        Nombre del alumno
+                                    </th>
+                                    <th class="text-center headerTable" [ngClass]="{'headerTable-top-left' : myalumnoid > 0}">
+                                        Concepto
+                                    </th>
+
+                                    <th class="text-center headerTable">
+                                        Folio
+                                    </th>
+
+                                    <th class="text-center headerTable">
+                                        Importe
+                                    </th>   
+                                    <th class="text-center headerTable">
+                                        Recargo
+                                    </th>   
+                                    <th class="text-center headerTable">
+                                        Total
+                                    </th>   
+                                    <th class="text-center headerTable headerTable-top-right">
+                                        Fecha de pago
+                                    </th>                                                                 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 13px;" *ngFor="let d of arraydocumentos">
+                                    <td [hidden]="true"></td>
+                                    <td class="text-center" [hidden]="myalumnoid > 0">
+                                        <p>{{d.Matricula}}</p>
+                                    </td>
+                                    <td class="text-center" [hidden]="myalumnoid > 0">
+                                        <p>{{d.Alumno | uppercase}}</p>
+                                    </td>
+
+                                    <td class="text-center">
+                                         <p>{{d.Concepto | uppercase}}</p>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <p>{{d.Folio | uppercase}}</p>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <p>{{(d.ImporteTotal - d.Interes) | currency:'MXN':true:'2.2-4'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{d.Interes | currency:'MXN':true:'2.2-4'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{(d.ImporteTotal ) | currency:'MXN':true:'2.2-4'}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>{{d.FechaPago | fechaEsp | uppercase}} {{d.HoraPago}}</p>
+                                    </td>                                                              
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    </div>
+                </fieldset>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+

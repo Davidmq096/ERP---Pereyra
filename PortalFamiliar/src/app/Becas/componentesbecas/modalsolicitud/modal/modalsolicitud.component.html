@@ -1,0 +1,197 @@
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal  
+     #modal="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <h3 class="text-uppercase">Solicitud de beca</h3>
+                </h4>
+            </div>
+            <div class="modal-body" >
+              <div class="divider16"></div>
+                <div class="row affix-row">
+                    <div class="col-sm-3 col-md-2 affix-sidebar">
+
+                      <!-- drop down list -->
+                      <div class="hidden-sm-up">
+                        <div class="dropdown">
+
+                          <a class="btn btn-block dropdown-toggle   tabSelBeca" data-toggle="dropdown">
+                            <span>{{GetCurrentTab()}}</span>
+                            <span class="pull-right"> <span class="fa fa-caret-down"></span> </span>
+                          </a>
+
+                          <ul class="dropdown-menu" style="width: 100%">
+                            <li>
+                              <a class="tabBeca dropdown-item" [ngClass]="{active: parametrosModal.pestana == 1}"  (click)="guardar(1)">Solicitud</a>
+                            </li>
+
+                            <li>
+                              <a class="tabBeca dropdown-item" [ngClass]="{active: parametrosModal.pestana == 2}"  (click)="guardar(2)">Datos de los padres</a>
+                            </li>
+
+                            <li>
+                              <a class="tabBeca dropdown-item" [ngClass]="{active: parametrosModal.pestana == 3}"  (click)="guardar(3)">Dependientes económicos</a>
+                            </li>
+
+                            <li>
+                              <a class="tabBeca dropdown-item" [ngClass]="{active: parametrosModal.pestana == 4}"  (click)="guardar(4)">Situación económica</a>
+                            </li>
+
+                            <li [hidden]="sistema == 1">
+                              <a class="tabBeca dropdown-item" [ngClass]="{active: parametrosModal.pestana == 5}"  (click)="guardar(5)">Referencias</a>
+                            </li>
+
+                          </ul>
+
+                        </div>
+
+                        <div class="divider16"></div>
+                      </div>
+
+                        <!-- Barra lateral -->
+                        <div class="hidden-xs-down">
+                            <div >
+                                <div>
+                                    <ul class="nav navbar-nav"  style="position: absolute;" [hidden]="verision == 2">
+
+                                        <li class="tabBeca" [ngClass]="{active: parametrosModal.pestana == 1}" (click)="guardar(1)" [hidden]="!parametrosModal.configpestana.solicitudbeca.visible">
+                                          <a>
+                                            <span class="glyphicon glyphicon-lock"></span> Solicitud
+                                          </a>
+                                        </li>
+
+                                        <li class="tabBeca" [ngClass]="{active: parametrosModal.pestana == 2}" (click)="guardar(2)" [hidden]="!parametrosModal.configpestana.datospadres.visible">
+                                          <a >
+                                            <span class="glyphicon glyphicon-lock"></span> Datos de los padres
+                                          </a>
+                                        </li>
+
+                                        <li class="tabBeca" [ngClass]="{active: parametrosModal.pestana == 3}" (click)="guardar(3)" [hidden]="!parametrosModal.configpestana.dependienteseconomicos.visible">
+                                          <a >
+                                            <span class="glyphicon glyphicon-lock"></span> Dependientes económicos
+                                          </a>
+                                        </li>
+
+                                        <li class="tabBeca" [ngClass]="{active: parametrosModal.pestana == 4}" (click)="guardar(4)" [hidden]="!parametrosModal.configpestana.situacioneconomica.visible">
+                                          <a>
+                                            <span class="glyphicon glyphicon-lock"></span> Situación económica
+                                          </a>
+                                        </li>
+
+                                        <li class="tabBeca" [ngClass]="{active: parametrosModal.pestana == 5}" (click)="guardar(5)" [hidden]="!parametrosModal.configpestana.referencias.visible" [hidden]="sistema == 1">
+                                          <a >
+                                            <span class="glyphicon glyphicon-lock"></span> Referencias
+                                          </a>
+                                        </li>
+
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-md-10 affix-content" style="height: auto; min-height: 570px; padding-right: 15px; padding-left: 15px">
+                        <div id="contentSolicitud" style="width: 100% !important; height: auto;">
+
+                            <section class="widget" id="datosAlumnosfamiliaView" style="padding: 0px">
+                                <div class="widget-body">
+                                    <style>
+                                        .secciones{
+                                            padding: 9px 25px;
+                                            margin-bottom: 14px;
+                                            background-color: #f7f7f9;
+                                            border: 1px solid #e1e1e8;
+                                            border-radius: 10px;
+                                        }
+                                    </style>
+                                    <div #container></div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- fotter -->
+                <div class="modal-footer" style="padding-left: 0px; padding-right: 0px">
+
+                  <div class="row" style="width: 100%; margin-right: 0px; margin-left: 0px">
+
+                    <!-- sm - lg -->
+                    <div class="col-md-4 hidden-sm-down">
+                      <div style="text-align: left;">
+                       <p>Consulte el aviso de privacidad</p>
+                       <a [attr.href]="avisoPrivacidad" class="alink" target="_blank">
+                         {{avisoPrivacidad}}
+                       </a>
+                      </div>
+                    </div>
+
+                    <div class="col-12 hidden-md-up" style="margin-bottom: 16px">
+                      <div style="text-align: center;">
+                        <p>Consulte el aviso de privacidad</p>
+                        <a [attr.href]="avisoPrivacidad" class="alink" target="_blank">
+                            {{avisoPrivacidad}}
+                        </a>
+                      </div>
+                    </div>
+
+                      <!-- botones de operación -->
+                     <div class="col-md-8 col-12">
+                         <!--
+                        <div class="row" >
+                          <div class="col-12">
+
+                            
+                            <div class="text-right hidden-xs-down">
+                              <button style="margin-bottom: 16px " class="btn principal" type="button" *ngIf="!mostrar && parametrosModal.editable" (click)="valoresiniciales()">Obtener último domcilio guardado</button>
+                            </div>
+
+                           
+                            <div class=" hidden-sm-up">
+                              <button style="margin-bottom: 16px" class="btn principal btn-block" type="button" *ngIf="!mostrar && parametrosModal.editable" (click)="valoresiniciales()">Obtener último domcilio guardado</button>
+                            </div>
+
+                          </div>
+                        </div>
+                    -->
+                       <div class="row" *ngIf="!mostrarsalir">
+
+                         <!-- sm - lg -->
+                         <div class="col-12 hidden-xs-down">
+                           <div class="text-right">
+                             <!-- salir -->
+                             <button style="display: inline-block;" [ngStyle]="{'margin-right': mostrar ? '7px' : '24px'}" class="btn btn-default" type="button"  (click)="salir()" id="btnSaveSolicitud" >Salir</button>
+
+                             <!--operación -->
+                             <button style="display: inline-block" class="btn principal" type="button" *ngIf="!mostrarguardar && parametrosModal.editable" (click)="guardar()">Guardar y siguiente</button>
+                             <button style="display: inline-block" class="btn principal" type="button" *ngIf="!mostrarguardarfinalizar && parametrosModal.editable" (click)="guardar()">Guardar y Finalizar</button>
+                             <button style="display: inline-block" class="btn principal" type="button" *ngIf="!parametrosModal.editable" (click)="guardar()">{{parametrosModal.pestana == (sistema == 1 ? 4 : 5) ? 'Finalizar': 'Siguiente'}}</button>
+                           </div>
+                         </div>
+
+                         <!-- xs -->
+                         <div class="col-12 hidden-sm-up">
+                           <div class="text-right">
+                             <!-- salir -->
+                             <button style=" margin-bottom: 16px" class="btn btn-default btn-block" type="button"  (click)="salir()" >Salir</button>
+
+                             <!--operación -->
+                             <button class="btn principal btn-block" type="button" *ngIf="!mostrarguardar && parametrosModal.editable" (click)="guardar()">Guardar y siguiente</button>
+                             <button class="btn principal btn-block" type="button" *ngIf="!mostrarguardarfinalizar && parametrosModal.editable" (click)="guardar()">Guardar y Finalizar</button>
+                             <button *ngIf=" !parametrosModal.editable" style="display: inline-block" class="btn principal" type="button" (click)="Siguiente()">{{parametrosModal.pestana == (sistema == 1 ? 4 : 5) ? 'Finalizar': 'Siguiente'}}</button>
+                           </div>
+                         </div>
+
+                       </div>
+                     </div>
+
+                  </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

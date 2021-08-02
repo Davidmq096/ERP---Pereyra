@@ -1,0 +1,371 @@
+<section class="widget">
+  <h5 class="text-uppercase">Área médica</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <h6>Contacto de emergencia</h6>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let contacto of contactoEmergencia; let i = index">
+    <!-- Nombre -->
+    <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="display: inline-block !important;">
+
+      <div class="margenTopSelect"></div>
+      <div class="group inputResponsive">
+
+        <input type="text" required [(ngModel)]="contacto.ContactoEmergenciaNombre" #dmCENombre="ngModel" class="textoMayuscula">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Nombre</label>
+
+        <small [hidden]="dmCENombre.valid || (!dmCENombre.touched && !alumno.summittedGeneral)" class="massageError">
+          Indique un nombre
+        </small>
+
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" style="display: inline-block !important;">
+
+        <div class="margenTopSelect"></div>
+        <div class="group inputResponsive">
+  
+          <input type="email" required [(ngModel)]="contacto.ContactoEmergenciaEmail" pattern="^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,3})$" #dmCEEmail="ngModel" >
+  
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label class="MaterialLabel">Correo electrónico</label>
+
+          <small [hidden]="dmCEEmail.valid || (!dmCEEmail.touched && !alumno.summittedGeneral) || !contacto.ContactoEmergenciaEmail" class="massageError">
+            Ingrese un correo válido
+          </small>
+
+        </div>
+      </div>
+
+    <!-- Lada -->
+    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-4" style="display: inline-block !important;">
+
+      <div class="margenTopSelect "></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="ladadm"  required [(ngModel)]="contacto.ContactoEmergenciaLada" lada pattern="\([1-9][0-9]{1,2}\)" #cmCELada="ngModel">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Lada</label>
+
+        <small [hidden]="cmCELada.valid || (!cmCELada.touched && !alumno.summittedGeneral)" class="massageError">
+          Ingrese una lada válida
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-8" style="display: inline-block !important;">
+
+      <div class="margenTopSelect "></div>
+      <div class="group inputResponsive">
+
+        <input type="text" id="telefonodm"  required  [(ngModel)]="contacto.ContactoEmergenciaTelefono" [phonenumber]="{lada: contacto.ContactoEmergenciaLada}"  pattern="{{telefonoService.GetExpresionRegularTelefono(contacto.ContactoEmergenciaLada)}}"  #dmCETelefono="ngModel">
+
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label class="MaterialLabel">Teléfono</label>
+
+        <small [hidden]="dmCETelefono.valid || (!dmCETelefono.touched && !alumno.summittedGeneral)" class="massageError">
+          Ingrese un teléfono válido
+        </small>
+
+      </div>
+    </div>
+
+    <!-- Parentesco  -->
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="display: inline-block !important;" >
+
+        <label class="MaterialLabel labelSelect" >Parentesco</label>
+        <div class="margenTopSelect"></div>
+  
+        <sui-select style="width: 100%; " class="selection" required
+                    placeholder="Parentesco"
+                    [options]="alumno.parentesco"
+                    labelField="descripcion"
+                    valueField="parentescoid"
+                    [(ngModel)]="contacto.ContactoEmergenciaParentesco"
+                    #dmCEparentescoselect #dmCEParentesco="ngModel">
+  
+          <div class="divider" style="border:none"></div>
+  
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input suiSelectSearch type="text">
+          </div>
+  
+          <sui-select-option *ngFor="let option of dmCEparentescoselect.filteredOptions" [value]="option"></sui-select-option >
+  
+        </sui-select>
+  
+        <small [hidden]="dmCEParentesco.valid || (!dmCEParentesco.touched && !alumno.summittedGeneral)" class="massageError">
+          Seleccione un parentesco
+        </small>
+  
+      </div>
+      <div class="col-lg-1 col-md-2 col-sm-2 col-xs-4" style="display: inline-block !important;">
+        <label class="MaterialLabel labelSelect" >Eliminar</label>
+        <div class="margenTopSelect"></div>
+        <a (click)="eliminarContacto(contacto, i)" style="margin-left:10px" class="iconBtn">
+            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+          </a>
+    </div>
+      
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="display: inline-block !important;">
+        <div style="margin-top: 15px">
+            <button class=" btnGeneral btn-sm" (click)="AgregarContacto()">
+              <span class="fa fa-plus"></span>
+              <span style="margin-left: 5px"> Agregar </span>
+            </button>
+          </div>
+      </div>
+  </div>
+  <br>
+
+  <!-- Padece enfermedad -->
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Padece alguna enfermedad o condición que requiera cuidados especiales?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input type="radio" name="renfermedadcronica" value="SI" [(ngModel)]="datoMedico.Padece">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="renfermedadcronica" value="NO" [(ngModel)]="datoMedico.Padece">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row" [hidden]="datoMedico.Padece != 'SI'">
+    <div class="col-sm-12">
+      <textarea placeholder="Especificar" style="width: 100% !important; min-height: 100px; border: 1px solid lightgray" [(ngModel)]="datoMedico.PadeceEnfermedadDescripcion" required #endescripcion="ngModel" class="textoMayuscula"> </textarea>
+    </div>
+  </div>
+
+
+   <div>
+
+      <small  class="massageError" [hidden]="datoMedico.Padece || (!alumno.summittedGeneral)">
+        Indique su respuesta
+      </small>
+
+     <small [hidden]="datoMedico.Padece == 'NO' || datoMedico.PadeceEnfermedadDescripcion || (!endescripcion.touched && !alumno.summittedGeneral)" class="massageError">
+       Especifique su respuesta
+     </small>
+
+   </div>
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Su hijo(a) tiene alguna alergia?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input  type="radio" name="ralergico" value="SI" [(ngModel)]="datoMedico.Alergico">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="ralergico" value="NO" [(ngModel)]="datoMedico.Alergico">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row" [hidden]="datoMedico.Alergico != 'SI'">
+    <div class="col-sm-12" style="height: 15px"></div>
+    <div class="col-sm-12">
+      <textarea placeholder="Especificar" style="width: 100% !important; min-height: 100px; border: 1px solid lightgray" [(ngModel)]="datoMedico.AlergicoDescripcion" required #alergicodescripciondm="ngModel" class="textoMayuscula"> </textarea>
+    </div>
+  </div>
+
+  <div >
+      <small [hidden]="datoMedico.Alergico || (!alumno.summittedGeneral)" class="massageError">
+        Elija al menos una respuesta
+      </small>
+
+      <small [hidden]="datoMedico.Alergico == 'NO' || datoMedico.AlergicoDescripcion || (!alergicodescripciondm.touched && !alumno.summittedGeneral)" class="massageError">
+        Especifique su respuesta
+      </small>
+  </div>
+
+  <br>
+
+  <!-- Toma de medicamentos -->
+  <div class="row">
+    <div class="col-sm-12">
+      <p>¿Toma medicamentos de manera frecuente?</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div style="margin-top: 10px; margin-left: 10px">
+
+        <label class="radio">
+          <input  type="radio" name="rtomamedicamento" value="SI" [(ngModel)]="datoMedico.TomaMedicamento">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          Si
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="rtomamedicamento" value="NO" [(ngModel)]="datoMedico.TomaMedicamento">
+          <span class="outer" style="margin-top: -5px;">
+              <span class="inner"></span>
+          </span>
+          No
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row" [hidden]="datoMedico.TomaMedicamento != 'SI'">
+    <div class="col-sm-12" style="height: 15px"></div>
+    <div class="col-sm-12">
+      <textarea placeholder="Especificar" style="width: 100% !important; min-height: 100px; border: 1px solid lightgray" [(ngModel)]="datoMedico.TomaMedicamentoDescripcion" required #tomamedicamentodescripciondm="ngModel" class="textoMayuscula"> </textarea>
+    </div>
+  </div>
+
+  <div>
+      <small [hidden]="datoMedico.TomaMedicamento || (!alumno.summittedGeneral)" class="massageError">
+        Elija al menos una respuesta
+      </small>
+
+      <small [hidden]="datoMedico.TomaMedicamento == 'NO' || datoMedico.TomaMedicamentoDescripcion || (!tomamedicamentodescripciondm.touched && !alumno.summittedGeneral)" class="massageError">
+        Especifique su respuesta
+      </small>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Estatura</p>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <div class="input-group" style="margin-top: 10px">
+
+        <div class="group inputResponsive">
+          <input  id="dmEstatuta" required class=""
+                 [(ngModel)]="datoMedico.Talla" #estaturadm="ngModel" [textMask]="{mask: numberMask}" style="max-height: 33px">
+
+          <span class="highlight"></span>
+          <span class="bar"></span>
+
+        </div>
+
+        <div class="input-group-addon" style="max-height: 33px; background: white; border: none">
+          cm
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <small [hidden]="estaturadm.valid || (!estaturadm.touched && !alumno.summittedGeneral)" class="massageError">
+      Indique la estatura en cm
+    </small>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Peso</p>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <div class="input-group" style="margin-top: 10px">
+
+        <div class="group inputResponsive">
+          <input type="text" id="dmPeso" required class="" 
+                 [(ngModel)]="datoMedico.Peso" #pesodm="ngModel" [textMask]="{mask: numberMask}"  style="max-height: 33px">
+
+          <span class="highlight"></span>
+          <span class="bar"></span>
+
+        </div>
+
+        <div class="input-group-addon" style="max-height: 33px; background: white; border: none">
+          kg
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <small [hidden]="pesodm.valid || (!pesodm.touched && !alumno.summittedGeneral)" class="massageError">
+      Indique el peso en kg
+    </small>
+  </div>
+
+
+
+  <div class="margenSeparador"></div>
+</section>

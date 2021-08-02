@@ -1,0 +1,225 @@
+<script src="../../../../../../../node_modules/angular-directive-utils/src/uppercase.directive.js"></script>
+<section class="widget">
+  <h5 class="text-uppercase">Hermanos</h5>
+  <legend></legend>
+
+  <div class="margenSeparador"></div>
+
+  <div style="margin-top: 15px">
+    <button class=" btnGeneral btn-sm" (click)="AbrirHermano('Agregar', null)">
+      <span class="fa fa-plus"></span>
+      <span style="margin-left: 5px"> Agregar </span>
+    </button>
+  </div>
+
+  <div class="margenSeparador"></div>
+
+  <div class="tabllePaddingLTE  table-responsive" style="margin-top: 20px; font-size: 13px;">
+
+    <table datatable [dtOptions]="dtOptionsHermano" [dtTrigger]="dtTriggerHermano" class="table table-hover" id="hermanotabla">
+      <thead>
+      <tr style="color: #fff;">
+
+        <th class="headerTable-top-left">
+          Nombre
+        </th>
+
+        <th class=" headerTable">
+          Apellido Paterno
+        </th>
+
+        <th class="headerTable">
+          Apellido Materno
+        </th>
+
+        <th class="headerTable text-center" [hidden]="sistema == 2">
+          CURP
+        </th>
+
+        <th class="text-center headerTable">
+          Edad
+        </th>
+
+        <th class="text-center headerTable-top-right">
+          Acciones
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr style="font-size: 13px;" *ngFor="let h of hermano">
+        <td >
+          <p>{{h.Nombre}}</p>
+        </td>
+
+        <td>
+          <p>{{h.ApellidoPaterno}}</p>
+        </td>
+
+        <td>
+          <p>{{h.ApellidoMaterno}}</p>
+        </td>
+
+        <td class="text-center" [hidden]="sistema == 2">
+          <p>{{h.CURP ? h.CURP : "-"}}</p>
+        </td>
+
+        <td class="text-center">
+          <p>{{h.Edad}}</p>
+        </td>
+
+        <td class="text-center">
+          <a (click)="AbrirHermano('Editar', h)" class="iconBtn">
+            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+          </a>
+
+          <a (click)="BorrarHermano(h)" style="margin-left:10px" class="iconBtn">
+            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+
+  <div class="margenSeparador"></div>
+</section>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);"
+     #modalHermano="bs-modal" [config]="{'backdrop':'static', 'keyboard': false}" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <h3 class="text-uppercase">Hermanos</h3>
+        </h4>
+      </div>
+
+      <div class="modal-body" style="padding: 0px !important;">
+
+        <form id="hermanoForm">
+          <div class="form-group row" style="margin-top: 30px; padding-left: 15px; padding-right: 15px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+              <!-- Nombre -->
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+
+
+                  <div class="group ">
+                    <input class="textoMayuscula" type="text"  required [(ngModel)]="nuevoHermano.Nombre" #nombreH="ngModel" name="nombreHermano">
+
+                    <span class="highlight"></span> <span class="bar"></span>
+                    <label class="MaterialLabel">Nombre</label>
+
+                    <small [hidden]="nombreH.valid || (!nombreH.touched && !summittedHermano)" class="massageError">
+                      Ingrese un nombre
+                    </small>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="rowSeperador"></div>
+
+              <div class="row">
+
+                <!-- Apellido paterno -->
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" >
+
+
+                  <div class="group ">
+                    <input class="textoMayuscula" type="text"  required [(ngModel)]="nuevoHermano.ApellidoPaterno" #apePaternoH="ngModel" name="apepaternoHermano">
+
+                    <span class="highlight"></span> <span class="bar"></span>
+                    <label class="MaterialLabel">Apellido Paterno</label>
+
+                    <small [hidden]="apePaternoH.valid || (!apePaternoH.touched && !summittedHermano) || nuevoHermano.ApellidoMaterno" class="massageError">
+                      Ingrese el apellido paterno
+                    </small>
+                  </div>
+
+                </div>
+
+                <div class="rowSeperador hidden-lg-up"></div>
+
+                <!-- Apellido materno -->
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" >
+
+
+                  <div class="group ">
+                    <input class="textoMayuscula" type="text"  required [(ngModel)]="nuevoHermano.ApellidoMaterno" #apeMaternoH="ngModel" name="apepaternoMaterno">
+
+                    <span class="highlight"></span> <span class="bar"></span>
+                    <label class="MaterialLabel">Apellido Materno</label>
+
+                    <small [hidden]="apeMaternoH.valid || (!apeMaternoH.touched && !summittedHermano) || nuevoHermano.ApellidoPaterno" class="massageError">
+                      Ingrese el apellido materno
+                    </small>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="rowSeperador"></div>
+
+              <!-- CURP y Edad -->
+              <div class="row">
+
+                <!-- CURP-->
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"  [hidden]="sistema == 2">
+
+
+                  <div class="group ">
+                    <input class="" type="text"  required [(ngModel)]="nuevoHermano.CURP" uppercase #curpH="ngModel" name="curp" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)" >
+
+                    <span class="highlight"></span> <span class="bar"></span>
+                    <label class="MaterialLabel">CURP</label>
+
+                    <small [hidden]="curpH.valid || (!curpH.touched && !summittedHermano) || !nuevoHermano.CURP" class="massageError">
+                      Ingrese un curp válido
+                    </small>
+                  </div>
+
+                </div>
+
+                <div class="rowSeperador hidden-lg-up" [hidden]="sistema == 2"  ></div>
+
+                <!-- Edad -->
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+                  <div class="group ">
+                    <input class="textoMayuscula" numbers pattern="[1-9]{1}[0-9]?[0-9]?" required [(ngModel)]="nuevoHermano.Edad" #edadH="ngModel" name="edad" [textMask]="{mask:numberMaskNoComma, guide: false}">
+
+                    <span class="highlight"></span> <span class="bar"></span>
+                    <label class="MaterialLabel">Edad</label>
+
+                    <small [hidden]="edadH.valid || (!edadH.touched && !summittedHermano) " class="massageError">
+                      Ingrese una edad válida
+                    </small>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default btnBase" type="button" (click)="CerrarHermano()" id="btnCerrarPAR">Cancelar</button>
+        <button class="btn btnPrincipal" type="submit" (click)="GuardarHermano(curpH.valid, edadH.valid)">Guardar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

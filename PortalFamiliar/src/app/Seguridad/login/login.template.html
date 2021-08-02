@@ -1,0 +1,151 @@
+<div class="container-fluid">
+    <div class="row loginHeader">
+        <div class="col-sm-12">
+            <h1 class="text-center">
+                Portal Familiar
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <main id="content" class="widget-login-container" role="main">
+        <div class="row">
+            <div class="col-12" style=" padding-right: 0px;">
+                <div class="">
+                    <section class="widget animated center-block loginPanel">
+                        <p (click)="handleVersion()" class="text-center" style="font-size: 45px;" *ngIf="qa"><strong>QA</strong></p>
+                        <header>
+                            <div class="row">
+                                <div class="col-12" style=" margin-top: 16px">
+                                    <img src="{{logo}}" style="width: 367px; height: auto;" class="img-responsive" />
+                                </div>
+                            </div>
+                        </header>
+
+                        <div class="" style="margin-top:29px; margin-bottom: 0px">
+
+                            <div class="form-group ">
+                                <div class="group">
+                                    <input type="text" id="correo" class="" required [(ngModel)]="loginModel.cuenta"
+                                        #cuenta="ngModel">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Correo electrónico</label>
+
+                                    <small [hidden]="cuenta.valid || (!cuenta.touched && !sumitted)"
+                                        class="massageError">
+                                        Ingrese su correo electrónico
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group log-status" style="margin-top: 29px !important;">
+                                <div class="group">
+                                    <input type="password" id="clave" required [(ngModel)]="loginModel.clave"
+                                        #clave="ngModel" passwordToggle>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="MaterialLabel">Contraseña</label>
+
+                                    <small [hidden]="clave.valid || (!clave.touched && !sumitted)" class="massageError">
+                                        Ingrese su contraseña
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 29px !important;" *ngIf="qa && mostrarversion">
+                                <div class="clearfix">
+                                    <ul class="nav nav-tabs float-left" role="tablist">
+                                        <li class="nav-item" (click)="switchVersion(1)">
+                                            <a class="nav-link" data-toggle="tab"  role="tab" aria-controls="basic" aria-expanded="true">LUX</a>
+                                        </li>
+                                        <li class="nav-item" (click)="switchVersion(2)">
+                                            <a class="nav-link" data-toggle="tab"   role="tab" aria-controls="basic" aria-expanded="true">CIENCIAS</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row" style=" margin-top: 24px; boder: 1px solid gray">
+                                <div class="col-12">
+
+                                    <div class="center-block" style="width: 300px">
+                                        <re-captcha (resolved)="CaptchaResolve($event)"
+                                            siteKey="6Lc3ZVYUAAAAACMHJFC4EOpGRopRxN8zbDw-_Je_" #reCaptcha></re-captcha>
+                                    </div>
+                                    <small class="massageError">
+                                        {{errorCaptcha}}
+                                    </small>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-block login-btn" id="btn" (click)="IniciarSesion();"
+                                [disabled]="bloqueo" style="margin-top: 22px">
+                                Iniciar sesión
+                            </button>
+
+                            <small [hidden]="!bloqueo" class="massageError">
+                                Se ha superado el número de intentos de acceso al sistema.
+                                <br>Tiempo de espera para el siguiente intento {{tiempoBloqueo | date: "mm:ss"}} o
+                                utilice la opción de Recuperar contraseña.
+                            </small>
+
+                            <div style="height: 19px"></div>
+
+                            <div class="row">
+                                <button class="btn principal" *ngIf="sistema==2"
+                                    style="text-align: center; margin-left: 157px" (click)="agregardatosbecas();">
+                                    Regístrate
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <solicitudCambioPassword [logo]="logo"></solicitudCambioPassword>
+
+                        <div style="height: 13px"></div>
+                        <div class="text-center" style="background: white; margin-top: 20px;">
+                            <p><strong>Este portal funciona mejor con Chrome</strong></p>
+                            <a style="color: blue;" target="_blank"
+                                href="https://www.google.com/intl/es-419/chrome">https://www.google.com/intl/es-419/chrome</a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+<div #modal2="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true" bsModal style="background: rgba(0,0,0,0.5);" [config]="{'backdrop':'static', 'keyboard': false}">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content modal-md">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <strong>Mensaje de nuestro rector</strong>
+                </h4>
+                <button type="button" (click)="remove();" class="close" data-dismiss="modal" id="close-cid" style="color: #fff; opacity: 1">X</button>
+
+            </div>
+
+            <div class="row hidden-lg-up">
+                <div class="col-sm-12">
+                    <div style="height: 15px"></div>
+                </div>
+            </div>
+
+            <div class="modal-body" style="padding: 0px !important;">
+                <iframe  id="iframe" style="border: none; width: 100%" width="560" height="315"
+                    src="" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <div class="widget-body">
+                <fieldset>
+                    <div class="col-sm-12" style="margin-top: 15px;">
+                        <div style="float: left;" *ngIf="reinscripciones">
+                            <b style="float: left"> Proceso de reinscripción en linea</b>
+                        </div>
+                        <div style="float: right;" *ngIf="reinscripciones">
+                            <b style="float: right"> Ciclo: {{reinscripciones.alumno.ciclo}}</b>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-sm-12" style="margin-top: 15px;">
+                        <div style="float: left;" *ngIf="reinscripciones">
+                            <b
+                                style="float: left">{{reinscripciones.alumno.matricula + ' - ' + reinscripciones.alumno.nombrecompleto}}</b>
+
+                        </div>
+                        <div style="float: right;" *ngIf="reinscripciones">
+                            <b style="float: right">
+                                {{reinscripciones.alumno.grado ? reinscripciones.alumno.nivel + ' ' + reinscripciones.alumno.grado : ''}}</b>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset style="margin-top: 30px;">
+                    <div class="col-sm-12">
+                        <legend></legend>
+                        <b>Paso 3 de 3</b>
+                        <br>
+                        <p>Cargue los siguientes documentos llenos y firmados ya sea escaneados como documento ó
+                            imagenes o como fotografías. Por favor asegúrate que sean legibles.</p>
+                        <br>
+                        <p>Agregue los archivos para cada tipo de documento. Si va a adjuntar varios archivos para 
+                            un tipo de documento seleccione todos al presionar el botón “Seleccionar” 
+                            (puede hacerlo utilizando la tecla CTRL de su teclado y el clic del mouse). 
+                            <b *ngIf="tamanoMaximo">Máximo {{tamanoMaximo}}</b></p>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top: 30px;">
+                        <ul class="list-group" style='margin-bottom: 10px; border-bottom: 1px solid #E1E1E1;'>
+                            <li class="list-group-item" *ngFor="let c of arrayDocumentos; let i = index">
+                                <div class="col-sm-12">
+                                    <div style="float: left;">
+                                        <b style="float: left; margin-top: 5px;">{{(i+1) + ') '}} {{c.nombre + (c.documentoid == 2 ? ' (adjuntar solo la última hoja)' : '')}}</b>
+
+                                    </div>
+                                    <br><br>
+                                    <div class="col-lg-12">
+                                        <input id="multimedia{{i}}" type="file" multiple
+                                            (change)="onFileChange($event.target.files, c.documentoid);" />
+                                    </div>
+                                    <br>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-12"
+                                                *ngFor="let d of c.documentossubidos;">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <div class="btn-group">
+                                                        <button type="button" (click)="eliminar(d)"
+                                                             class="btn btn-default"><i class="fa fa-trash"></i></button>
+                                                        <button type="button" (click)="descargar(d)"
+                                                           style="white-space: normal;" class="btn btn-default">{{d.documento}}<i style="margin-left: 10px;" class="fa fa-download"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="mensaje">
+                            {{mensaje}}
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+<div style="position: fixed; bottom:0px; left: 0; right: 0; height: 50px; background-color:#242424; z-index: 1050">
+    <div class="row">
+        <div class="col-2 col-sm-5 col-md-7 col-lg-7">
+        </div>
+        <div class="col-4 col-sm-3 col-md-2 col-lg-2" style=" float: right; margin-top: 7px;">
+            <button class="btn btn-default btn-block" type="button" (click)="cancelar()">ANTERIOR</button>
+        </div>
+        <div class="col-4 col-sm-3 col-md-2 col-lg-2" style="margin-top: 7px;">
+            <button class="btn principal btn-block" type="button" (click)="finalizar()">FINALIZAR</button>
+        </div>
+
+    </div>
+</div>

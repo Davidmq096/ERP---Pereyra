@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <header>
+                <h1> Notificaciones</h1>
+                <br>
+            </header>
+
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form [formGroup]="FormBuscar">
+                            <div class="col-sm-12 col-md-3">
+                                <small>Alumno</small>
+                                <sui-select style="width: 100%;" class="selection" formControlName="alumnoid"
+                                    placeholder="Alumno" [options]="selectAlumno" labelField="nombrecompleto"
+                                    valueField="alumnoid" #alumnoselect>
+                                    <sui-select-option *ngFor="let option of alumnoselect.filteredOptions"
+                                        [value]="option"></sui-select-option>
+                                </sui-select>
+                                <small [hidden]="FormBuscar.controls.alumnoid.valid || (FormBuscar.controls.alumnoid.pristine && !submitted)" style="color: red">
+                                        Seleccione una opción
+                                    </small>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-12 form-group">
+                                <button class="btn principal" type="submit" (click)="buscar()"
+                                    style="float: right;">Consultar</button>
+                                <button class="btn btn-default" type="button" (click)="limpiar()"
+                                    style="float: right; margin-right: 10px;">Limpiar</button>
+                            </div>
+                        </form>
+                        <p style="height: 15px"></p>
+                        <legend></legend>
+                    </div>
+
+                    <div class="col-sm-12" id="alumnos">
+                        <div class="tabllePaddingLTE no-padding table-responsive"
+                            style="margin-top: 20px; font-size: 13px;">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover"
+                                id="tablaFormato">
+                                <thead>
+                                    <tr style="color: white;">
+                                        <th class="text-center headerTable-top-left">
+                                            Fecha
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Hora
+                                        </th>
+                                        <th class="text-center headerTable">
+                                            Actividad
+                                        </th>
+                                        <th class="text-center headerTable">
+                                           Origen
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="font-size: 13px;" *ngFor="let c of arrayentidad; let i = index">
+                                        <td class="text-center">
+                                            <p>{{c.fecha}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.hora}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.tipoactividad}}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p>{{c.origen}}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

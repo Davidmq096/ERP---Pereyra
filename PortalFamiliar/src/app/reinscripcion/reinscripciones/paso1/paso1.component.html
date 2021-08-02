@@ -1,0 +1,375 @@
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modal-form" [config]="{'keyboard': false, 'download': 0}" aria-hidden="true"  bsModal #modal="bs-modal">
+    <div class="modal-dialog-centered " style="height: 100%;">
+       <div class="modal-content" style="height: 100%">
+           <div class="modal-header">
+               <h4 class="modal-title">Vista previa (Descargue en el 3er paso)</h4>
+           </div>
+           <div class="modal-body preview" *ngIf="preview">
+               <iframe src="" frameborder="0" width="100%" height="100%"
+               ></iframe>
+           </div>
+           <div class="modal-footer controls right">
+               <button type="button" class="btn btn-default" (click)="closeContrato(1)">Cerrar</button>
+           </div>
+       </div>
+   </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="widget">
+            <div class="widget-body">
+                <fieldset>
+                    <div class="col-sm-12" style="margin-top: 15px;">
+                        <div style="float: left;" *ngIf="reinscripciones">
+                            <h5 style="float: left"> Información de contrato de servicios educativos y formas de pago</h5>
+                        </div>
+                        <div style="float: right;" *ngIf="reinscripciones">
+                            <b style="float: right"> Ciclo: {{ reinscripciones.alumno.ciclo}}</b>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-sm-12" style="margin-top: 15px;">
+                        <div style="float: left;" *ngIf="reinscripciones">
+                            <b
+                                style="float: left">{{reinscripciones.alumno.matricula + ' - ' + reinscripciones.alumno.nombrecompleto}}</b>
+
+                        </div>
+                        <div style="float: right;" *ngIf="reinscripciones">
+                            <b style="float: right">
+                                {{reinscripciones.alumno.grado ? reinscripciones.alumno.nivel + ' ' + reinscripciones.alumno.grado : ''}}</b>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset style="margin-top: 30px;">
+                    <div class="col-sm-12">
+                        <legend></legend>
+                        <b>Paso 1 de 3</b>
+                        <br>
+                        <div class="col-sm-6">                                
+                            <div class="col-4 col-sm-5 col-md-4 col-lg-4" style=" float: right; margin-top: 7px;">        
+                                <button class="btn btn-primary btn-block" type="button" (click)="openContrato(1)">VER CONTRATO</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 divseparador">
+                        </div>
+                        <li>Lea detenidamente el contrato de <b>servicios educativos</b></li>
+                        <li>Capture la siguiente información detenidamente, ya que esta información se tomará en cuenta para el contrato</li>
+                        <li>En el paso 3 podrá imprimirlos para después entregarlos físicamente</li>
+                    </div>
+                    <div class="col-sm-12 divseparador"></div>
+                    <div class="col-sm-12 divseparador"></div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <h4>
+                            Información del firmante (Padre, Madre o Tutor)
+                        </h4>
+                    </div><div class="col-sm-12 divseparador"></div>
+                    <div class="col-4"><h5>Seleccione o ingrese información:</h5></div>
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                        <div class="form-group col-12">
+                            <sui-select style="width: 100%;" class="selection" placeholder="Seleccione"
+                              [options]="Padres"
+                              labelField="nombrecompleto"
+                              valueField="padresotutoresid"
+                              (selectedOptionChange)="seleccionPadre($event)"
+                              #padreotutor
+                            >
+                                <sui-select-option *ngFor="let option of padreotutor.filteredOptions" [value]="option"></sui-select-option>
+                            </sui-select>                            
+                            <p id="padreotutormassageError" class="massageError"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 divseparador"></div>
+                    <div class="col-sm-12 divseparador"></div>
+                    <hr>
+                    <div class="col-md-12" style="margin-top: 30px;">
+                        <form [formGroup]="FormGuardar" (ngSubmit)="buscar()">
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group">
+                                    <input type="text" formControlName="firmantenombre" required > 
+                                    <span
+                                           class="highlight"></span> <span class="bar"></span> <label
+                                           class="MaterialLabel">Nombre</label>
+                                        <small
+                                           [hidden]="FormGuardar.controls.firmantenombre.valid || (FormGuardar.controls.firmantenombre.pristine && !submitted)"
+                                           style="color: red">
+                                           Ingrese un nombre
+                                       </small>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="firmanteap"  required > 
+                                    <span
+                                           class="highlight"></span> <span class="bar"></span> <label
+                                           class="MaterialLabel">Apellido Paterno</label>  
+                                    <small
+                                        [hidden]="FormGuardar.controls.firmanteap.valid || (FormGuardar.controls.firmanteap.pristine && !submitted)" 
+                                        style="color: red">
+                                        Ingrese el apellido paterno
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <div class="group inputResponsive">
+                                    <input type="text" formControlName="firmanteam" required> 
+                                    <span
+                                           class="highlight"></span> <span class="bar"></span> <label
+                                           class="MaterialLabel">Apellido Materno</label>   
+                                     <small
+                                        [hidden]="FormGuardar.controls.firmanteam.valid || (FormGuardar.controls.firmanteam.pristine && !submitted)"
+                                        style="color: red">
+                                        Ingrese el apellido materno
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;"></div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="display: inline-block;">
+                                <small>Parentesco</small>
+                                <sui-select style="width: 100%;" class="selection" placeholder="Parentesco"
+                                    formControlName="firmanteparentesco"
+                                    [options]="Parentesco"
+                                    labelField="descripcion"
+                                    valueField="tutorid"
+                                    #parentesco
+                                >
+                                    <sui-select-option *ngFor="let option of parentesco.filteredOptions" [value]="option"></sui-select-option> 
+                                </sui-select>
+                                <small
+                                    [hidden]="FormGuardar.controls.firmanteparentesco.valid || (FormGuardar.controls.firmanteparentesco.pristine && !submitted)"
+                                    style="color: red">
+                                    Ingrese un parentesco
+                                </small>
+                            </div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <div class="col-sm-12 divseparador"></div>
+                            <small>Correo electrónico para notificaciones de este proceso</small>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="margin-top: 15px;">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="group">
+                                            <input type="text" required id="nombre" formControlName="correo" maxlength="100">
+                                            <span class="highlight"></span> <span class="bar"></span>
+                                            <label class="MaterialLabel">Correo electrónico</label>
+                                        </div>
+                                        <small
+                                            [hidden]="FormGuardar.controls.correo.valid || (FormGuardar.controls.correo.pristine && !submitted)"
+                                            style="color: red">
+                                            Ingrese un correo valido
+                                        </small>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="row">
+                                            <!--<div class="col-lg-4 col-md-6 form-group">
+                                                <div class="group">
+                                                    <input required formControlName="lada"  lada #lada1> <span
+                                                        class="highlight"></span> <span class="bar"></span> <label
+                                                        class="MaterialLabel">Lada</label>
+                                                    <small [hidden]="FormGuardar.controls.lada.valid || (FormGuardar.controls.lada.pristine && !submitted)" style="color: red">
+                                                        Ingrese una lada valida
+                                                    </small>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-lg-8 col-md-6 form-group">
+                                                <div class="group">
+                                                    <input  [phonenumber]="{lada: 0}" [pattern]="telefonoService.GetExpresionRegularTelefonoSinLada()" (click)="_httpService.inputValidateSuccess('tel')" formControlName="tel" required > <span
+                                                        class="highlight"></span> <span class="bar"></span> <label
+                                                        class="MaterialLabel">Télefono</label>
+                                                        <small [hidden]="FormGuardar.controls.tel.valid || (!FormGuardar.controls.tel.touched && !submitted)" class="massageError">
+                                                            Ingrese un teléfono válido
+                                                        </small>
+                                                        <p id="telmassageError" class="massageError"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <small>Realizó trámite de beca</small>
+                                <sui-select style="width: 100%;" class="selection" formControlName="tramitobeca"
+                                    placeholder="SI/NO" [options]="tramitobecaSelect" labelField="nombre"
+                                    valueField="id" #tramitobecas>
+                                    <div class="divider"></div>
+                                    <sui-select-option *ngFor="let option of tramitobecas.filteredOptions"
+                                        [value]="option"></sui-select-option>
+                                </sui-select>
+                                <small
+                                    [hidden]="FormGuardar.controls.tramitobeca.valid || (FormGuardar.controls.tramitobeca.pristine && !submitted)"
+                                    style="color: red">
+                                    Seleccione una opción
+                                </small>
+                            </div>
+                            <div class="col-sm-12" style="margin-top: 15px;">
+                                <p>Forma de pago de colegiaturas (de acuerdo a la opción que anotó en el contrato de
+                                    servicios)</p>
+                                <ul class="list-group" style='margin-bottom: 10px; border: 1px solid #E1E1E1;'>
+                                    <li class="list-group-item" style="padding: 0;"
+                                        *ngFor="let c of arrayPagocolegiaturas; let i = index">
+                                        <ul class="list-group flex-md-row">
+                                            <li class="list-group-item" style="width: 190px; min-width: 190px;">
+                                                <label class="radio">
+                                                    <input type="radio" name="formapagocolegiaturaid"
+                                                        [value]="c.formapagocolegiaturaid"
+                                                        formControlName="formapagocolegiaturaid">
+                                                    <span class="outer" style="margin-top: -5px;">
+                                                        <span class="inner"></span>
+                                                    </span>
+                                                    {{c.nombre}}
+                                                </label>
+                                            </li>
+                                            <li class="list-group-item" style="border-right: none; padding-top: 20px">
+                                                <label style="margin-top: -15px;" [innerHtml]="c.descripcion"></label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <small
+                                    [hidden]="FormGuardar.controls.formapagocolegiaturaid.valid || (FormGuardar.controls.formapagocolegiaturaid.pristine && !submitted)"
+                                    style="color: red">
+                                    Seleccione una opción
+                                </small>
+                            </div>
+                            <div class="col-sm-12" style="margin-top: 15px;" *ngIf="mostrarpagoanticipado">
+                                <p>Pago de colegiaturas anticipadas</p>
+                                <ul class="list-group" style='margin-bottom: 10px; border: 1px solid #E1E1E1;'>
+                                    <li class="list-group-item" style="padding: 0;"
+                                        *ngFor="let c of arrayPagoadelantada; let i = index">
+                                        <ul class="list-group flex-md-row">
+                                            <li class="list-group-item" style="width: 190px; min-width: 190px;">
+                                                <label class="radio">
+                                                    <input type="radio" name="formapagocolegiaturaanticipadaid"
+                                                        [value]="c.formapagocolegiaturaanticipadaid"
+                                                        formControlName="formapagocolegiaturaanticipadaid">
+                                                    <span class="outer" style="margin-top: -5px;">
+                                                        <span class="inner"></span>
+                                                    </span>
+                                                    <p>{{c.nombre}}</p>
+                                                </label>
+                                            </li>
+                                            <li class="list-group-item" style="border-right: none; padding-top: 20px;">
+                                                <label style="margin-top: -15px;" [innerHtml]="c.descripcion"></label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <small
+                                    [hidden]="FormGuardar.controls.formapagocolegiaturaanticipadaid.valid || (FormGuardar.controls.formapagocolegiaturaanticipadaid.pristine && !submitted)"
+                                    style="color: red">
+                                    Seleccione una opción
+                                </small>
+                            </div>
+                            <!-- Se omite la forma de pago ya que no es funcional para reinscripciones -->
+                            <!--<div class="col-sm-12" style="margin-top: 15px;">
+                                <p>Pago de inscripción y fondo de orfandad</p>
+                                <ul class="list-group" style='margin-bottom: 10px; border: 1px solid #E1E1E1;'>
+                                    <li class="list-group-item" style="padding: 0;"
+                                        *ngFor="let c of arrayInscripcion; let i = index">
+                                        <ul class="list-group flex-md-row">
+                                            <li class="list-group-item" style="width: 190px; min-width: 190px;">
+                                                <label class="radio">
+                                                    <input type="radio" name="formapagoinscripcion"
+                                                        [value]="c.formapagoinscripcionyfoid"
+                                                        formControlName="formapagoinscripcion">
+                                                    <span class="outer" style="margin-top: -5px;">
+                                                        <span class="inner"></span>
+                                                    </span>
+                                                    {{c.nombre}}
+                                                </label>
+                                            </li>
+                                            <li class="list-group-item" style="border-right: none; padding-top: 20px">
+                                                <label style="margin-top: -15px;" [innerHtml]="c.descripcion"></label>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                                <small
+                                    [hidden]="FormGuardar.controls.formapagoinscripcion.valid || (FormGuardar.controls.formapagoinscripcion.pristine && !submitted)"
+                                    style="color: red">
+                                    Seleccione una opción
+                                </small>
+                            </div> -->
+                            <div class="col-sm-12 form-group" style="margin-top: 25px;" *ngIf="reinscripciones && reinscripciones.alumno">
+                                <p>Si usted realizó el pago anual anticipado de colegiaturas del ciclo {{reinscripciones.alumno.ciclo_actual.nombre}}, cuenta con un saldo a favor, derivado del descuento del 10% que se otorgó de manera general por contingencia sanitaria.  
+                                </p>
+                                <br>
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-4">
+                                        <p>¿Realizó el pago anual de colegiaturas del ciclo {{reinscripciones.alumno.ciclo_actual.nombre}}?</p>
+                                        <sui-select 
+                                            [options]="tramitobecaSelect"
+                                            formControlName="pagocolegiaturas"
+                                            placeholder="Pago colegiaturas"
+                                            class="selection"
+                                            labelField="nombre"
+                                            valueField="id"
+                                            #pagocolegiaturasSelect>
+                                            <sui-select-option *ngFor="let option of pagocolegiaturasSelect.filteredOptions" [value]="option">
+                                            </sui-select-option>
+                                        </sui-select>
+                                        <br>
+                                        <small [hidden]="FormGuardar.controls.pagocolegiaturas.valid || (FormGuardar.controls.pagocolegiaturas.pristine && !submitted)"
+                                            style="color: red">Seleccione una opción</small>
+                                    </div>
+                                    <div class="form-group col-12" *ngIf="mostrarpagocolegiatura">
+                                        <ul class="list-group" style='margin-bottom: 10px; border: 1px solid #E1E1E1;'>
+                                            <li class="list-group-item" style="padding: 0;"
+                                                *ngFor="let c of arrayTipopago; let i = index">
+                                                <ul class="list-group flex-md-row">
+                                                    <li class="list-group-item" style="width: 50px; min-width: 50px; border-right: none;">
+                                                        <label class="radio">
+                                                            <input type="radio" name="tipopagocolegiaturas"
+                                                                [value]="c.tipopagocolegiaturaid"
+                                                                formControlName="tipopagocolegiaturas">
+                                                            <span class="outer" style="margin-top: -5px;">
+                                                                <span class="inner"></span>
+                                                            </span>
+                                                            
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item" style="border-left: none; border-right: none; padding-top: 20px;">
+                                                        <label style="margin-top: -15px;" [innerHtml]="c.descripcion"></label>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <small
+                                            [hidden]="FormGuardar.controls.tipopagocolegiaturas.valid || (FormGuardar.controls.tipopagocolegiaturas.pristine && !submitted)"
+                                            style="color: red">
+                                            Seleccione una opción
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-12 divseparador">
+                    </div>
+                    <div class="col-sm-12 divseparador">
+                    </div>
+                    <div class="col-sm-12 divseparador">
+                    </div>
+                    <div class="row">
+                        <div class="col-2 col-sm-5 col-md-7 col-lg-7">
+                        </div>
+                        <div class="col-4 col-sm-3 col-md-2 col-lg-2" style=" float: left; margin-top: 7px;">
+                            <button class="btn btn-default btn-block" type="button" (click)="cancelar()">ANTERIOR</button>
+                        </div>
+                        <div class="col-4 col-sm-3 col-md-2 col-lg-2" style="float: right; margin-top: 7px;">
+                            <button class="btn principal btn-block" type="button" (click)="siguiente()">SIGUIENTE</button>
+                        </div>
+                
+                    </div>
+                </fieldset>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+<!--<div style="position: fixed; bottom:0px; left: 0; right: 0; height: 50px; background-color:#242424; z-index: 1050">
+</div> -->
