@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Documentoporsolicitudadmision" table="documentoporsolicitudadmision">
+    <indexes>
+      <index name="DocumentoPorGrado_idx" columns="DocumentoPorGradoId"/>
+      <index name="SolicitudAdmisionId_idx" columns="SolicitudAdmision"/>
+    </indexes>
+    <id name="documentoporsolicitudadmisionid" type="integer" column="DocumentoPorSolicitudAdmisionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="entregado" type="boolean" column="Entregado" nullable="true"/>
+    <field name="fechaentrega" type="date" column="FechaEntrega" nullable="true"/>
+    <field name="validado" type="boolean" column="Validado" nullable="true"/>
+    <many-to-one field="documentoporgradoid" target-entity="Documentoporgrado" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoPorGradoId" referenced-column-name="DocumentoPorGradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmision" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmision" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

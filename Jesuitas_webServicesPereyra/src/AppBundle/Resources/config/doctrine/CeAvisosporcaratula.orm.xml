@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAvisosporcaratula" table="ce_avisosporcaratula">
+    <indexes>
+      <index name="fk_avisoestatus" columns="AvisoCaratulaEstatusId"/>
+      <index name="fk_caratulaid" columns="CaratulaId"/>
+    </indexes>
+    <id name="avisocaratulaid" type="integer" column="AvisoCaratulaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="text" column="Descripcion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fecha" type="date" column="Fecha" nullable="true"/>
+    <field name="hora" type="time" column="Hora" nullable="true"/>
+    <many-to-one field="avisocaratulaestatusid" target-entity="CeAvisosporcaratulaestatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="AvisoCaratulaEstatusId" referenced-column-name="AvisoCaratulaEstatusid"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="caratulaid" target-entity="CeCaratula" fetch="LAZY">
+      <join-columns>
+        <join-column name="CaratulaId" referenced-column-name="CaratulaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

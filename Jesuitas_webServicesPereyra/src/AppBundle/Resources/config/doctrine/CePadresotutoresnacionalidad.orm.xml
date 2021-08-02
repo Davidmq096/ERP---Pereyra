@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CePadresotutoresnacionalidad" table="ce_padresotutoresnacionalidad">
+    <indexes>
+      <index name="NacionalidadIdPadresOTutores_idx" columns="NacionalidadId"/>
+      <index name="PadresOTutoresIdNacionalidad_idx" columns="PadresOTutoresId"/>
+    </indexes>
+    <id name="padresotutoresnacionalidad" type="integer" column="PadresOTutoresNacionalidad">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="nacionalidadid" target-entity="Nacionalidad" fetch="LAZY">
+      <join-columns>
+        <join-column name="NacionalidadId" referenced-column-name="NacionalidadId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

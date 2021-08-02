@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Infoadicional" table="infoadicional">
+    <id name="infoadicionalid" type="integer" column="InfoAdicionalId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="estadosalud" type="string" column="EstadoSalud" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="aspectosinportantes" type="string" column="AspectosInportantes" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="necesidadespecial" type="boolean" column="NecesidadEspecial" nullable="true"/>
+    <field name="descripcionnecesidad" type="string" column="DescripcionNecesidad" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hijopersonal" type="boolean" column="HijoPersonal" nullable="true"/>
+    <field name="alumnoinstituto" type="boolean" column="AlumnoInstituto" nullable="true"/>
+  </entity>
+</doctrine-mapping>

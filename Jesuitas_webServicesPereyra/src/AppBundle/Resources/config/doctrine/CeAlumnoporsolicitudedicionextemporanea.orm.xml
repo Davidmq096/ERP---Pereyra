@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnoporsolicitudedicionextemporanea" table="ce_alumnoporsolicitudedicionextemporanea">
+    <indexes>
+      <index name="ce_alumnoporsolicitudedicionextemporanea_ibfk_1_idx" columns="SolicitudEdicionExtemporaneaId"/>
+      <index name="FK_ce_alumnoporsolicitudedicio" columns="AlumnoId"/>
+    </indexes>
+    <id name="alumnoporsolicitudedicionextemporaneaid" type="integer" column="AlumnoPorSolicitudEdicionExtemporaneaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="solicitudedicionextemporaneaid" target-entity="CeSolicitudedicionextemporanea" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudEdicionExtemporaneaId" referenced-column-name="SolicitudEdicionExtemporaneaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

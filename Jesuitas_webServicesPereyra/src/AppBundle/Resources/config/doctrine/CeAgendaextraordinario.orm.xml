@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAgendaextraordinario" table="ce_agendaextraordinario">
+    <indexes>
+      <index name="ce_agendaextraordinario_ce_profesor_ProfesorId_fk" columns="ProfesorId"/>
+      <index name="ce_agendaextraordinario_lugar_LugarId_fk" columns="LugarId"/>
+      <index name="ce_agendaextraordinario_lugares_LugarId_fk" columns="LugarRevisionId"/>
+      <index name="ce_materiaporplanestudios__fk" columns="MateriaPorPlanEstudioId"/>
+      <index name="ce_periodoregularizacion__fk" columns="PeriodoRegularizacionId"/>
+      <index name="EstatusAgendaExtraordinarioId_fk" columns="EstatusAgendaExtraordinarioId"/>
+      <index name="TipoExtraordinarioId_fk" columns="TipoExtraordinarioId"/>
+    </indexes>
+    <id name="agendaextraordinarioid" type="integer" column="AgendaExtraordinarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="false"/>
+    <field name="fechafin" type="date" column="FechaFin" nullable="true"/>
+    <field name="horainicio" type="string" column="HoraInicio" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="horafin" type="time" column="HoraFin" nullable="true"/>
+    <field name="cupo" type="integer" column="Cupo" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fecharevision" type="date" column="FechaRevision" nullable="false"/>
+    <field name="horainiciorevision" type="time" column="HoraInicioRevision" nullable="false"/>
+    <field name="horafinrevision" type="time" column="HoraFinRevision" nullable="false"/>
+    <field name="comentarios" type="text" column="Comentarios" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="estatusagendaextraordinarioid" target-entity="CeEstatusagendaextraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusAgendaExtraordinarioId" referenced-column-name="EstatusAgendaExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoextraordinarioid" target-entity="CeTipoextraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoExtraordinarioId" referenced-column-name="TipoExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorid" target-entity="CeProfesor" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorId" referenced-column-name="ProfesorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lugarid" target-entity="Lugar" fetch="LAZY">
+      <join-columns>
+        <join-column name="LugarId" referenced-column-name="LugarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lugarrevisionid" target-entity="Lugar" fetch="LAZY">
+      <join-columns>
+        <join-column name="LugarRevisionId" referenced-column-name="LugarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaporplanestudioid" target-entity="CeMateriaporplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPorPlanEstudioId" referenced-column-name="MateriaPorPlanEstudioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="periodoregularizacionid" target-entity="CePeriodoregularizacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoRegularizacionId" referenced-column-name="PeriodoRegularizacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

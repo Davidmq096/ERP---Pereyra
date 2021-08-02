@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjMediopago" table="cj_mediopago">
+    <id name="mediopagoid" type="integer" column="MedioPagoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre de la tabla.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="comment">Indica si el medio de pago esta activo (1) o inactivo (0) dentro del sistema.</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

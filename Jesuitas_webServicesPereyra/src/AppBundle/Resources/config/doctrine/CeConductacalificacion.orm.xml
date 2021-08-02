@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeConductacalificacion" table="ce_conductacalificacion">
+    <indexes>
+      <index name="fk_ce_conductacalificacion_alumnociclogrupo_idx" columns="AlumnoCicloPorGrupoId"/>
+      <index name="fk_ce_conductacalificacion_periodoevaluacion_idx" columns="PeriodoEvaluacionId"/>
+    </indexes>
+    <id name="conductacalificacionid" type="integer" column="ConductaCalificacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="calificacion" type="float" column="Calificacion" precision="10" scale="0" nullable="false"/>
+    <field name="titular" type="boolean" column="Titular" nullable="false"/>
+    <many-to-one field="alumnocicloporgrupoid" target-entity="CeAlumnocicloporgrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoCicloPorGrupoId" referenced-column-name="AlumnoCicloPorGrupo"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="periodoevaluacionid" target-entity="CePeriodoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoEvaluacionId" referenced-column-name="PeriodoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

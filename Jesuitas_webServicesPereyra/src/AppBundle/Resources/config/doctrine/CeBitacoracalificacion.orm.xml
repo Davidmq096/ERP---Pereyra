@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeBitacoracalificacion" table="ce_bitacoracalificacion">
+    <indexes>
+      <index name="FK_ce_bitacoracalificacion_Per" columns="PeriodoEvaluacionId"/>
+      <index name="FK_ce_bitacoracalificacion_Pro" columns="ProfesorPorMateriaPlanEstudiosId"/>
+      <index name="FK_ce_bitacoracalificacion_Usu" columns="UsuarioId"/>
+    </indexes>
+    <id name="bitacoracalificacionid" type="integer" column="BitacoraCalificacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ciclo" type="string" column="Ciclo" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nivel" type="string" column="Nivel" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="grado" type="string" column="Grado" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clase" type="string" column="Clase" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="materia" type="string" column="Materia" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="criterioevaluacion" type="string" column="CriterioEvaluacion" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numerocaptura" type="string" column="NumeroCaptura" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="alumno" type="string" column="Alumno" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="capturaanterior" type="string" column="CapturaAnterior" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="capturanuevo" type="string" column="CapturaNuevo" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="calperiodoanterior" type="string" column="CalPeriodoAnterior" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="calperiodonuevo" type="string" column="CalPeriodoNuevo" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="opcperiodoanterior" type="string" column="OpcPeriodoAnterior" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="opcperiodonuevo" type="string" column="OpcPeriodoNuevo" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comperiodoanterior" type="text" column="ComPeriodoAnterior" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comperiodonuevo" type="text" column="ComPeriodoNuevo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="calfinalanterior" type="string" column="CalFinalAnterior" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="calfinalnuevo" type="string" column="CalFinalNuevo" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="opcfinalanterior" type="string" column="OpcFinalAnterior" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="opcfinalnuevo" type="string" column="OpcFinalNuevo" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fecha" type="datetime" column="Fecha" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="folioedicionextemporanea" type="string" column="FolioEdicionExtemporanea" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="periodoevaluacionid" target-entity="CePeriodoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoEvaluacionId" referenced-column-name="PeriodoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorpormateriaplanestudiosid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanEstudiosId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

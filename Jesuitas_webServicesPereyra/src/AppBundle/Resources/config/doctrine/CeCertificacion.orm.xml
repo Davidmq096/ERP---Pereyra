@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCertificacion" table="ce_certificacion">
+    <indexes>
+      <index name="fk_ce_certificacion_ce_idioma_idx" columns="IdiomaId"/>
+    </indexes>
+    <id name="certificacionid" type="integer" column="CertificacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tipovigencia" type="integer" column="TipoVigencia" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="anovigencia" type="integer" column="AnoVigencia" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idiomaid" target-entity="CeIdioma" fetch="LAZY">
+      <join-columns>
+        <join-column name="IdiomaId" referenced-column-name="IdiomaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

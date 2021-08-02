@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boleta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="20" whenResourceMissingType="Empty" uuid="d3781f9e-26a8-4b0a-b011-2b68b888ee30">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="general" isDefault="true" fontName="Arial" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="table" forecolor="#FFFFFF" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="Arial" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="table_title" style="table" fontSize="10" isBold="true"/>
+	<style name="photo" style="general" forecolor="#999999" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" isBold="true" isUnderline="false"/>
+	<subDataset name="Students" uuid="25c7cea7-d928-4230-b803-d592500d333a">
+		<parameter name="tallerid" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT acg.alumnoporcicloid,
+ acg.NumeroLista AS nolista,
+ a.Matricula AS matricula,
+ a.ApellidoPaterno AS apaterno,
+ a.ApellidoMaterno AS amaterno,
+ a.PrimerNombre AS nombre,
+ a.Sexo AS sexo,
+ CONVERT(SUBSTRING_INDEX(afcav.foto,';base64,',-1) USING utf8) AS photo
+ FROM ce_alumnocicloportaller acg
+ INNER JOIN ce_alumnoporciclo ac ON ac.alumnoporcicloid=acg.alumnoporcicloid AND ac.EstatusAlumnoCicloId IN (1,2,4)
+ INNER JOIN ce_alumno a ON a.alumnoid=ac.alumnoid AND a.AlumnoEstatusId = 1
+ LEFT JOIN ce_alumnofotocicloactualvista afcav ON afcav.alumnoid=ac.alumnoid
+ WHERE acg.tallercurricularid=$P{tallerid}
+ GROUP BY a.alumnoid
+ ORDER BY acg.numerolista;]]>
+		</queryString>
+		<field name="matricula" class="java.lang.String"/>
+		<field name="nolista" class="java.lang.String"/>
+		<field name="sexo" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="apaterno" class="java.lang.String"/>
+		<field name="amaterno" class="java.lang.String"/>
+		<field name="photo" class="java.lang.String"/>
+		<variable name="hasPhoto" class="java.lang.Boolean">
+			<variableExpression><![CDATA[($F{photo}!=null)]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="Header" whenResourceMissingType="Empty" uuid="9511bf28-4015-4ee2-a065-09b9f911b9c6">
+		<parameter name="tallerid" class="java.lang.Integer" isForPrompting="false">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+		<queryString>
+			<![CDATA[SELECT c.Nombre AS ciclo,
+ n.Nombre AS nivel,
+ GROUP_CONCAT(gr.Grado) AS grado,
+ g.Nombre AS grupo,
+ g.cupo AS cupo,
+ (SELECT COUNT(acg.alumnocicloportallerid)
+ FROM ce_alumnocicloportaller acg
+ INNER JOIN ce_alumnoporciclo ac ON ac.alumnoporcicloid=acg.alumnoporcicloid  AND ac.EstatusAlumnoCicloId IN (1,2,4)
+ INNER JOIN ce_alumno a ON a.alumnoid=ac.alumnoid AND a.AlumnoEstatusId = 1
+ WHERE acg.tallercurricularid=g.tallercurricularid AND a.sexo="F") AS mujer,
+ (SELECT COUNT(acg.alumnocicloportallerid)
+ FROM ce_alumnocicloportaller acg
+ INNER JOIN ce_alumnoporciclo ac ON ac.alumnoporcicloid=acg.alumnoporcicloid AND ac.EstatusAlumnoCicloId IN (1,2,4)
+ INNER JOIN ce_alumno a ON a.alumnoid=ac.alumnoid AND a.AlumnoEstatusId = 1
+ WHERE acg.tallercurricularid=g.tallercurricularid AND a.sexo="M") AS hombre,
+ NULL AS promedio
+ FROM ce_tallercurricular g
+ INNER JOIN ciclo c ON c.cicloid=g.cicloid
+ INNer JOIN ce_gradoportallercurricular acgg on acgg.tallercurricularid = g.tallercurricularid
+ INNER JOIN grado gr On gr.gradoid=acgg.gradoid
+ INNER JOIN nivel n ON n.nivelid=gr.nivelid
+ WHERE g.tallercurricularid=$P{tallerid}]]>
+		</queryString>
+		<field name="ciclo" class="java.lang.String"/>
+		<field name="nivel" class="java.lang.String"/>
+		<field name="grado" class="java.lang.String"/>
+		<field name="grupo" class="java.lang.String"/>
+		<field name="cupo" class="java.lang.Integer"/>
+		<field name="hombre" class="java.lang.Integer"/>
+		<field name="mujer" class="java.lang.Integer"/>
+		<field name="promedio" class="java.lang.String"/>
+		<variable name="asignado" class="java.lang.Integer">
+			<variableExpression><![CDATA[$F{hombre}+$F{mujer}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="disponible" class="java.lang.Integer">
+			<variableExpression><![CDATA[$F{cupo}-$V{asignado}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Boletas\\alumnos\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tallerid" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[89]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Alumnos\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 1]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" mode="Opaque" x="0" y="0" width="555" height="80" forecolor="#000000" backcolor="#CB0036" uuid="325179bb-fd22-46fe-b894-08985a03bf97"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Header" uuid="b452d4ac-1902-441a-9391-690641f170a5">
+						<datasetParameter name="tallerid">
+							<datasetParameterExpression><![CDATA[$P{tallerid}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="logo">
+							<datasetParameterExpression><![CDATA[$P{logo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="555" uuid="2748d3b8-05e1-4b16-b0aa-eb3897d1d7df">
+						<jr:columnHeader height="0" rowSpan="1"/>
+						<jr:detailCell height="80" rowSpan="1">
+							<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+								<reportElement mode="Transparent" x="10" y="5" width="70" height="70" forecolor="#CB0036" backcolor="#CB0036" uuid="b934e94a-fe12-45cc-bfff-9b7c7a756f17"/>
+								<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+							</image>
+							<textField>
+								<reportElement style="table_title" x="90" y="20" width="440" height="14" uuid="9de501d7-5c76-4258-a419-4d9e75c56ff6"/>
+								<textFieldExpression><![CDATA['INSTITUTO LUX - CICLO ESCOLAR '+$F{ciclo}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="90" y="35" width="110" height="12" uuid="1296b985-dd23-498c-bb61-18e0392fe0cc"/>
+								<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="200" y="35" width="110" height="12" uuid="3b6ddf9a-81fe-4ff7-84f5-603a51443671"/>
+								<textFieldExpression><![CDATA["Cupo: "+$F{cupo}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="310" y="35" width="110" height="12" uuid="129e8ee6-60af-4bca-a0d3-d94d81599901"/>
+								<textFieldExpression><![CDATA["Asignado: "+$V{asignado}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="420" y="35" width="110" height="12" uuid="8e54a407-f621-4f2c-a758-40698748d860"/>
+								<textFieldExpression><![CDATA["Disponible: "+$V{disponible}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="90" y="48" width="110" height="12" uuid="1ba5c07e-d1c1-49ab-bb06-39aef499272a"/>
+								<textFieldExpression><![CDATA[$F{grado}+" / "+$F{grupo}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="200" y="48" width="110" height="12" uuid="78ab6adf-ff8f-4f63-a795-bb9d8019426b"/>
+								<textFieldExpression><![CDATA["Hombres: "+$F{hombre}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="310" y="48" width="110" height="12" uuid="f2286430-5a63-42d8-9690-6e81c04da7d0"/>
+								<textFieldExpression><![CDATA["Mujeres: "+$F{mujer}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="420" y="48" width="110" height="12" uuid="ab9a7bdf-2bd8-4cfa-a630-d91f63433898"/>
+								<textFieldExpression><![CDATA["Promedio: "+($F{promedio} ? $F{promedio} : "-")]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="137" splitType="Stretch">
+			<componentElement>
+				<reportElement x="2" y="0" width="552" height="137" uuid="93eb140f-c134-46ab-9a48-fa51ae2e4c64"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal" ignoreWidth="false">
+					<datasetRun subDataset="Students" uuid="4b57c24b-1c49-4857-a7b2-828c1cb6a8e5">
+						<datasetParameter name="tallerid">
+							<datasetParameterExpression><![CDATA[$P{tallerid}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="137" width="92">
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement x="3" y="3" width="86" height="74" uuid="b934e94a-fe12-45cc-bfff-9b7c7a756f17"/>
+							<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64($F{photo}.getBytes()))]]></imageExpression>
+						</image>
+						<textField>
+							<reportElement x="3" y="80" width="86" height="10" uuid="ce0d72d5-eef3-4cd3-97c0-bf103531cb91"/>
+							<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="3" y="90" width="86" height="10" uuid="e63d7867-5386-4d5f-9101-cf8649148fb0"/>
+							<textFieldExpression><![CDATA["#Lista: "+$F{nolista}+" / Sexo: "+$F{sexo}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="3" y="100" width="86" height="37" uuid="8b303e6c-4502-446e-ad24-6421082b6e03"/>
+							<textFieldExpression><![CDATA[$F{apaterno}+" "+$F{amaterno}+" "+$F{nombre}]]></textFieldExpression>
+						</textField>
+						<rectangle>
+							<reportElement mode="Opaque" x="3" y="3" width="86" height="74" backcolor="#CCCCCC" uuid="a363ecad-faad-45d6-9414-04219fadd1c1">
+								<printWhenExpression><![CDATA[!$V{hasPhoto}]]></printWhenExpression>
+							</reportElement>
+							<graphicElement>
+								<pen lineWidth="0.0"/>
+							</graphicElement>
+						</rectangle>
+						<staticText>
+							<reportElement style="photo" x="3" y="3" width="86" height="74" uuid="87402c78-2962-4ef7-9a64-238d6c768d19">
+								<printWhenExpression><![CDATA[!$V{hasPhoto}]]></printWhenExpression>
+							</reportElement>
+							<text><![CDATA[SIN
+FOTOGRAFIA]]></text>
+						</staticText>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

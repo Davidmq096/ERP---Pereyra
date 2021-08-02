@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\RiDocumentoresponsable" table="ri_documentoresponsable">
+    <indexes>
+      <index name="FK_RiContratoResponsableTutor" columns="TutorId"/>
+      <index name="FK_RiContratoResponsableEstado" columns="EstadoId"/>
+      <index name="FK_RiContratoResponsableMunicipio" columns="MunicipioId"/>
+      <index name="FK_RiContratoResponsableid" columns="ReinscripcionId"/>
+      <index name="FK_RiContratoResponsableDocumento" columns="DocumentoId"/>
+    </indexes>
+    <id name="responsablecontratoid" type="integer" column="ResponsableContratoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidopaterno" type="string" column="ApellidoPaterno" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidomaterno" type="string" column="ApellidoMaterno" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cp" type="string" column="Cp" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="colonia" type="string" column="Colonia" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="calle" type="string" column="Calle" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numeroext" type="string" column="NumeroExt" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numeroint" type="string" column="NumeroInt" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono" type="string" column="Telefono" length="12" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="celular" type="string" column="Celular" length="12" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ocupacion" type="string" column="Ocupacion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="edad" type="integer" column="Edad" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="reinscripcionid" target-entity="RiReinscripcion" fetch="LAZY">
+      <join-columns>
+        <join-column name="ReinscripcionId" referenced-column-name="ReInscripcionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="documentoid" target-entity="RiDocumento" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoId" referenced-column-name="DocumentoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estadoid" target-entity="Estado" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstadoId" referenced-column-name="EstadoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="municipioid" target-entity="Municipio" fetch="LAZY">
+      <join-columns>
+        <join-column name="MunicipioId" referenced-column-name="MunicipioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tutorid" target-entity="Tutor" fetch="LAZY">
+      <join-columns>
+        <join-column name="TutorId" referenced-column-name="TutorId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

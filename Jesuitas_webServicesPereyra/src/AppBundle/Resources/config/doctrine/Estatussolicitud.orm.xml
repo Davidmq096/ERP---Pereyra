@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Estatussolicitud" table="estatussolicitud">
+    <id name="estatussolicitudid" type="integer" column="EstatusSolicitudId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="estatus" type="string" column="Estatus" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dictaminacion" type="boolean" column="Dictaminacion" nullable="true"/>
+    <field name="aceptado" type="boolean" column="Aceptado" nullable="true"/>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnocicloporgrupo" table="ce_alumnocicloporgrupo">
+    <indexes>
+      <index name="FK_ce_alumnocicloporgrupo_Alum" columns="AlumnoPorCicloId"/>
+      <index name="FK_ce_alumnocicloporgrupo_Grup" columns="GrupoId"/>
+    </indexes>
+    <id name="alumnocicloporgrupo" type="integer" column="AlumnoCicloPorGrupo">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="numerolista" type="integer" column="NumeroLista" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoporcicloid" target-entity="CeAlumnoporciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoPorCicloId" referenced-column-name="AlumnoPorCicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="grupoid" target-entity="CeGrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="GrupoId" referenced-column-name="GrupoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

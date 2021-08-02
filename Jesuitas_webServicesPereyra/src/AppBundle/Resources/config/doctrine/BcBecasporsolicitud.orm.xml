@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcBecasporsolicitud" table="bc_becasporsolicitud">
+    <indexes>
+      <index name="BecaId" columns="BecaId"/>
+      <index name="ProvisionalBecaId" columns="ProvisionalBecaId"/>
+      <index name="bc_becasporsolicitud_ibfk_3_idx" columns="SolicitudId"/>
+    </indexes>
+    <id name="becaporsolicitudid" type="integer" column="BecaPorSolicitudId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="becaid" target-entity="BcBecas" fetch="LAZY">
+      <join-columns>
+        <join-column name="BecaId" referenced-column-name="BecaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="provisionalbecaid" target-entity="BcProvisionalbecas" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProvisionalBecaId" referenced-column-name="ProvisionalBecaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

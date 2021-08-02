@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcPersonareferencia" table="bc_personareferencia">
+    <indexes>
+      <index name="ReferenciaFamiliaId" columns="SolicitudId"/>
+    </indexes>
+    <id name="personareferenciaid" type="integer" column="PersonaReferenciaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombrecompleto" type="string" column="NombreCompleto" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonocelular" type="string" column="TelefonoCelular" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonofijo" type="string" column="TelefonoFijo" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ocupacion" type="string" column="Ocupacion" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

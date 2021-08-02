@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\AdBloquegradoentrevista" table="ad_bloquegradoentrevista">
+    <indexes>
+      <index name="bloquegradoid_idx" columns="BloqueGradoId"/>
+      <index name="evaluacionid_idx" columns="EvaluacionId"/>
+      <index name="tipoevaluacionid_idx" columns="TipoEvaluacionId"/>
+    </indexes>
+    <id name="bloquegradoentrevistaid" type="integer" column="BloqueGradoEntrevistaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="datetime" column="Fecha" nullable="true"/>
+    <field name="horaprimeracita" type="time" column="HoraPrimeraCita" nullable="true"/>
+    <field name="horaultimacita" type="time" column="HoraUltimaCita" nullable="true"/>
+    <field name="duracion" type="float" column="Duracion" precision="10" scale="0" nullable="true"/>
+    <field name="cupo" type="integer" column="Cupo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="casillasbloqueadas" type="text" column="CasillasBloqueadas" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="bloquegradoid" target-entity="AdBloquegrado" fetch="LAZY">
+      <join-columns>
+        <join-column name="BloqueGradoId" referenced-column-name="BloqueGradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="evaluacionid" target-entity="Evaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="EvaluacionId" referenced-column-name="EvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoevaluacionid" target-entity="Tipoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoEvaluacionId" referenced-column-name="TipoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

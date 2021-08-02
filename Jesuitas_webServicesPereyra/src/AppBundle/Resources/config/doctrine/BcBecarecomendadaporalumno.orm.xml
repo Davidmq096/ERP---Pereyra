@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcBecarecomendadaporalumno" table="bc_becarecomendadaporalumno">
+    <indexes>
+      <index name="bc_becarecomendadaporalumno_ibfk_1" columns="AlumnoSolicitudId"/>
+    </indexes>
+    <id name="becarecomendadaporalumnoid" type="integer" column="BecaRecomendadaPorAlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="becarecomendada" type="string" column="BecaRecomendada" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="alumnosolicitudid" target-entity="BcSolicitudporalumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoSolicitudId" referenced-column-name="AlumnoSolicitudId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCriterioevaluaciongrupo" table="ce_criterioevaluaciongrupo">
+    <indexes>
+      <index name="ce_profesorpormateriaplanestudios_profesorpormateriaplanest_idx" columns="ProfesorPorMateriaPlanEstudiosId"/>
+      <index name="ce_criterioevaluaciongrupo_ibfk_2" columns="PeriodoEvaluacionId"/>
+      <index name="ce_criterioevaluaciongrupo_ibfk_3" columns="CriterioEvaluacionId"/>
+    </indexes>
+    <id name="criterioevaluaciongrupoid" type="integer" column="CriterioEvaluacionGrupoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="aspecto" type="string" column="Aspecto" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcion" type="text" column="Descripcion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="porcentajecalificacion" type="integer" column="PorcentajeCalificacion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="capturas" type="integer" column="Capturas" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="puntajemaximo" type="integer" column="PuntajeMaximo" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="eliminaraspecto" type="boolean" column="EliminarAspecto" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="editarporcentajecalificacion" type="boolean" column="EditarPorcentajeCalificacion" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="editarcapturas" type="boolean" column="EditarCapturas" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="editarpuntajemaximo" type="boolean" column="EditarPuntajeMaximo" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="minimo" type="integer" column="Minimo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="maximo" type="integer" column="Maximo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="configurartarea" type="boolean" column="ConfigurarTarea" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="configurarexamen" type="boolean" column="ConfigurarExamen" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="periodoevaluacionid" target-entity="CePeriodoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoEvaluacionId" referenced-column-name="PeriodoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="criterioevaluacionid" target-entity="CeCriterioevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="CriterioEvaluacionId" referenced-column-name="CriterioEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorpormateriaplanestudiosid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanEstudiosId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

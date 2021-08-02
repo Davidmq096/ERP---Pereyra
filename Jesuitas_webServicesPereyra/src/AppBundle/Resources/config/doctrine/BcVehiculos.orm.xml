@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcVehiculos" table="bc_vehiculos">
+    <indexes>
+      <index name="SolicitudId" columns="SolicitudId"/>
+      <index name="estatus" columns="estatus"/>
+    </indexes>
+    <id name="vehiculosid" type="integer" column="VehiculosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="marcamodelo" type="string" column="MarcaModelo" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="anio" type="integer" column="Anio" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="tarjetacirculacion" type="string" column="tarjetacirculacion" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="portal" type="integer" column="portal" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatus" target-entity="BcEstatusvehiculos" fetch="LAZY">
+      <join-columns>
+        <join-column name="estatus" referenced-column-name="idestatusvehiculo"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

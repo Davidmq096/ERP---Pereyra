@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group/>
+        <group name="Jesuitas">
+            <file>file:/C:/_VSW/W/I/ERP%20Jesuitas/Code/Jesuitas_webServices/src/AppBundle/Controller/Reportes/CalificacionesController.php</file>
+            <file>file:/C:/_VSW/W/I/ERP%20Jesuitas/Code/Jesuitas_webServices/src/AppBundle/Controller/Controlescolar/CapturaCalificacionesController.php</file>
+            <file>file:/C:/_VSW/W/I/ERP%20Jesuitas/Code/Jesuitas_webServices/src/AppBundle/Controller/Controlescolar/BoletaImpresionController.php</file>
+            <file>file:/C:/_VSW/W/I/ERP%20Jesuitas/Code/Jesuitas_webServices/src/AppBundle/DB/DbmControlescolar.php</file>
+            <file>file:/C:/_VSW/W/I/ERP%20Jesuitas/Code/Jesuitas_webServices/src/AppBundle/DB/Mysql/Controlescolar/AlumnoDB.php</file>
+            <file>file:/C:/_VSW/W/I/ERP%20Jesuitas/Code/Jesuitas_webServices/src/AppBundle/Controller/Controlescolar/CapturaCalificacionReporteController.php</file>
+        </group>
+    </open-files>
+</project-private>

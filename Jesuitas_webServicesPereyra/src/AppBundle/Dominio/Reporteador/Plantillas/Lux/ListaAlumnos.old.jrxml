@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boleta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="20" whenResourceMissingType="Empty" uuid="d3781f9e-26a8-4b0a-b011-2b68b888ee30">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="general" isDefault="true" fontName="Arial" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="table" forecolor="#FFFFFF" hAlign="Center" vAlign="Middle" fontName="Arial" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="table_title" style="table" fontSize="10" isBold="true"/>
+	<style name="photo" style="general" forecolor="#999999" hAlign="Center" vAlign="Middle" isBold="true" isUnderline="false"/>
+	<subDataset name="Students" uuid="25c7cea7-d928-4230-b803-d592500d333a">
+		<queryString language="json">
+			<![CDATA[]]>
+		</queryString>
+		<field name="matricula" class="java.lang.String"/>
+		<field name="nolista" class="java.lang.String"/>
+		<field name="sexo" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="apaterno" class="java.lang.String"/>
+		<field name="amaterno" class="java.lang.String"/>
+		<field name="photo" class="java.lang.String"/>
+		<variable name="hasPhoto" class="java.lang.Boolean">
+			<variableExpression><![CDATA[($F{photo}!=null)]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="Header" whenResourceMissingType="Empty" uuid="9511bf28-4015-4ee2-a065-09b9f911b9c6">
+		<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+		<queryString language="json">
+			<![CDATA[]]>
+		</queryString>
+		<field name="ciclo" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Boletas\\alumnos\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Alumnos\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="json">
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" mode="Opaque" x="0" y="0" width="555" height="80" forecolor="#000000" backcolor="#CB0036" uuid="325179bb-fd22-46fe-b894-08985a03bf97"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Header" uuid="1c10f4da-5bbb-4c12-9336-50231225d7c2">
+						<datasetParameter name="logo">
+							<datasetParameterExpression><![CDATA[$P{logo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("header")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="555" uuid="2748d3b8-05e1-4b16-b0aa-eb3897d1d7df">
+						<jr:columnHeader height="0" rowSpan="1"/>
+						<jr:detailCell height="80" rowSpan="1">
+							<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+								<reportElement mode="Transparent" x="10" y="5" width="70" height="70" forecolor="#CB0036" backcolor="#CB0036" uuid="b934e94a-fe12-45cc-bfff-9b7c7a756f17"/>
+								<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+							</image>
+							<textField>
+								<reportElement style="table_title" x="90" y="26" width="440" height="14" uuid="9de501d7-5c76-4258-a419-4d9e75c56ff6"/>
+								<textFieldExpression><![CDATA['INSTITUTO LUX - CICLO ESCOLAR '+$F{ciclo}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="table" x="90" y="41" width="440" height="12" uuid="1296b985-dd23-498c-bb61-18e0392fe0cc"/>
+								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="137" splitType="Stretch">
+			<componentElement>
+				<reportElement x="2" y="0" width="552" height="137" uuid="93eb140f-c134-46ab-9a48-fa51ae2e4c64"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal" ignoreWidth="false">
+					<datasetRun subDataset="Students" uuid="d974b341-4100-4b2d-a308-ab81dd0e7500">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("student")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="137" width="92">
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement x="3" y="3" width="86" height="74" uuid="b934e94a-fe12-45cc-bfff-9b7c7a756f17"/>
+							<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64($F{photo}.getBytes()))]]></imageExpression>
+						</image>
+						<textField>
+							<reportElement x="3" y="80" width="86" height="10" uuid="ce0d72d5-eef3-4cd3-97c0-bf103531cb91"/>
+							<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="3" y="90" width="86" height="10" uuid="e63d7867-5386-4d5f-9101-cf8649148fb0"/>
+							<textFieldExpression><![CDATA["Sexo: "+$F{sexo}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="3" y="100" width="86" height="37" uuid="8b303e6c-4502-446e-ad24-6421082b6e03"/>
+							<textFieldExpression><![CDATA[$F{apaterno}+" "+$F{amaterno}+" "+$F{nombre}]]></textFieldExpression>
+						</textField>
+						<rectangle>
+							<reportElement mode="Opaque" x="3" y="3" width="86" height="74" backcolor="#CCCCCC" uuid="a363ecad-faad-45d6-9414-04219fadd1c1">
+								<printWhenExpression><![CDATA[!$V{hasPhoto}]]></printWhenExpression>
+							</reportElement>
+							<graphicElement>
+								<pen lineWidth="0.0"/>
+							</graphicElement>
+						</rectangle>
+						<staticText>
+							<reportElement style="photo" x="3" y="3" width="86" height="74" uuid="87402c78-2962-4ef7-9a64-238d6c768d19">
+								<printWhenExpression><![CDATA[!$V{hasPhoto}]]></printWhenExpression>
+							</reportElement>
+							<text><![CDATA[SIN
+FOTOGRAFIA]]></text>
+						</staticText>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

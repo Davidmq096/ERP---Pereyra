@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAvisosporplataformaarchivo" table="ce_avisosporplataformaarchivo">
+    <indexes>
+      <index name="fk_avisoplataforma" columns="AvisoPlataformaId"/>
+    </indexes>
+    <id name="avisoplataformaarchivoid" type="integer" column="AvisoPlataformaArchivoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="contenido" type="blob" column="Contenido" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="size" type="string" column="Size" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tipo" type="string" column="Tipo" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="avisoplataformaid" target-entity="CeAvisosplataforma" fetch="LAZY">
+      <join-columns>
+        <join-column name="AvisoPlataformaId" referenced-column-name="AvisoPlataformaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

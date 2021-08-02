@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeGrupoorigenporsubgrupo" table="ce_grupoorigenporsubgrupo">
+    <indexes>
+      <index name="ce_grupoorigenporsubgrupo_grupo_idx" columns="GrupoId"/>
+      <index name="ce_grupoorigenporsubgrupo_grupoorigen_idx" columns="GrupoOrigenId"/>
+      <index name="ce_grupoorigenporsubgrupo_ce_materiaporplanestudios_fk_idx" columns="MateriaPorPlanEstudioId"/>
+    </indexes>
+    <id name="grupoorigenporsubgrupoid" type="integer" column="GrupoOrigenPorSubgrupoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="materiaporplanestudioid" target-entity="CeMateriaporplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPorPlanEstudioId" referenced-column-name="MateriaPorPlanEstudioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="grupoid" target-entity="CeGrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="GrupoId" referenced-column-name="GrupoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="grupoorigenid" target-entity="CeGrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="GrupoOrigenId" referenced-column-name="GrupoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

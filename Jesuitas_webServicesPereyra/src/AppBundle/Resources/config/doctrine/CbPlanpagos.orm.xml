@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CbPlanpagos" table="cb_planpagos">
+    <indexes>
+      <index name="FK_cb_planpagos_AcuerdoId" columns="AcuerdoId"/>
+    </indexes>
+    <id name="planpagosid" type="integer" column="PlanPagosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="matricula" type="string" column="Matricula" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="concepto" type="string" column="Concepto" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechacompromiso" type="date" column="FechaCompromiso" nullable="false"/>
+    <field name="importecompromiso" type="float" column="ImporteCompromiso" precision="10" scale="0" nullable="false"/>
+    <field name="observaciones" type="string" column="Observaciones" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="acuerdoid" target-entity="CbAcuerdo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AcuerdoId" referenced-column-name="AcuerdoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

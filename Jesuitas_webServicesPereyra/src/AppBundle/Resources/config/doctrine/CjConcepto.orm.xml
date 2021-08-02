@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjConcepto" table="cj_concepto">
+    <indexes>
+      <index name="FK_CONCEPTO_EMPRESA_idx" columns="EmpresaId"/>
+      <index name="FK_CONCEPTO_CENTROCOSTO_idx" columns="CentroCostoId"/>
+    </indexes>
+    <id name="conceptoid" type="integer" column="ConceptoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clave" type="string" column="Clave" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">CLAVE ALFANUMÉRICA DEL CONCEPTO.</option>
+      </options>
+    </field>
+    <field name="alias" type="string" column="Alias" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">NOMBRE CORTO DEL CONCEPTO.</option>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">NOMBRE O DESCRIPCIÓN DEL CONCEPTO.</option>
+      </options>
+    </field>
+    <field name="tipomovimiento" type="boolean" column="TipoMovimiento" nullable="false">
+      <options>
+        <option name="comment">TIPO DE MOVIMIENTO CARGO (1) O ABONO (0).</option>
+      </options>
+    </field>
+    <field name="clasificacion" type="boolean" column="Clasificacion" nullable="false">
+      <options>
+        <option name="comment">CLASIFICACIÓN DEL CONCEPTO GENERAL (0) O ACADEMICO (1). LOS CONCEPTOS GENERALES NO SOLICITAN NÚMERO DE MATRÍCULA, LOS ACADÉMICOS SI.</option>
+      </options>
+    </field>
+    <field name="esdiverso" type="boolean" column="EsDiverso" nullable="false">
+      <options>
+        <option name="comment">INDICA SI EL CONCEPTO ES DIVERSO (1) O NO(0). SI ES DIVERSO, PERMITE CAPTURAR SUB CONCEPTOS.</option>
+      </options>
+    </field>
+    <field name="escurricular" type="boolean" column="EsCurricular" nullable="false">
+      <options>
+        <option name="comment">INDICA SI EL CONCEPTO ES CURRICULAR (1) O NO (0). CUANDO NO SON CURRICULARES BLOQUEAN POR ADEUDO.</option>
+      </options>
+    </field>
+    <field name="esfijo" type="boolean" column="EsFijo" nullable="false">
+      <options>
+        <option name="comment">INDICA SI EL CONCEPTO ES FIJO (1) O NO (0). SI ES FIJO, NO PERMITE SER INACTIVADO O MODIFICADO YA QUE ESTA AMARRADO A LAS REGLAS DE NEGOCIO DEL SISTEMA.</option>
+      </options>
+    </field>
+    <field name="gravado" type="boolean" column="Gravado" nullable="false">
+      <options>
+        <option name="comment">GRAVADO  CON IVA (1) O NO (0).</option>
+      </options>
+    </field>
+    <field name="tipoasignacion" type="boolean" column="TipoAsignacion" nullable="false">
+      <options>
+        <option name="comment">TIPO DE ASIGNACIÓN ESPECÍFICO (1) O POR NIVEL (0). SI ES ESPECÍFICO SE DEBE INDICAR EL CENTRO DE COSTO (CAMPO CentroCostoId), CUANDO ES POR NIVEL SE TOMARÁ EL CENTRO DE COSTO QUE APLIQUE A CADA NIVEL.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <many-to-one field="centrocostoid" target-entity="CjCentrocosto" fetch="LAZY">
+      <join-columns>
+        <join-column name="CentroCostoId" referenced-column-name="CentroCostoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="empresaid" target-entity="CjEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="EmpresaId" referenced-column-name="EmpresaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CePadresotutoresdomicilio" table="ce_padresotutoresdomicilio">
+    <indexes>
+      <index name="PK_PADRESOTUTORES_DOMICILIO_idx" columns="PadresOTutoresId"/>
+    </indexes>
+    <id name="padresotutoresdomicilioid" type="integer" column="PadresOTutoresDomicilioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="calle" type="string" column="Calle" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numeroexterior" type="string" column="NumeroExterior" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="numerointerior" type="string" column="NumeroInterior" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="colonia" type="string" column="Colonia" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ciudad" type="integer" column="Ciudad" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codigopostal" type="string" column="CodigoPostal" length="5" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="observaciones" type="string" column="Observaciones" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

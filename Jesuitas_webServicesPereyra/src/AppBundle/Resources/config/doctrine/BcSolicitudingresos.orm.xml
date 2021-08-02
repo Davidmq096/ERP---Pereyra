@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcSolicitudingresos" table="bc_solicitudingresos">
+    <indexes>
+      <index name="SolicitudId" columns="SolicitudId"/>
+    </indexes>
+    <id name="solicitudingresosid" type="integer" column="SolicitudIngresosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ingresos" type="float" column="Ingresos" precision="10" scale="0" nullable="false"/>
+    <field name="egresos" type="float" column="Egresos" precision="10" scale="0" nullable="false"/>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

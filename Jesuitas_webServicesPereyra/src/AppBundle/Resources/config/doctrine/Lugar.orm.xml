@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Lugar" table="lugar">
+    <indexes>
+      <index name="LugarEdificio_idx" columns="EdificioId"/>
+    </indexes>
+    <id name="lugarid" type="integer" column="LugarId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cupo" type="integer" column="Cupo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="equipocomputo" type="boolean" column="EquipoComputo" nullable="true"/>
+    <field name="equipocantidad" type="integer" column="EquipoCantidad" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="proyector" type="boolean" column="Proyector" nullable="true"/>
+    <field name="internet" type="boolean" column="Internet" nullable="true"/>
+    <field name="activo" type="boolean" column="Activo" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <many-to-one field="edificioid" target-entity="Edificio" fetch="LAZY">
+      <join-columns>
+        <join-column name="EdificioId" referenced-column-name="EdificioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

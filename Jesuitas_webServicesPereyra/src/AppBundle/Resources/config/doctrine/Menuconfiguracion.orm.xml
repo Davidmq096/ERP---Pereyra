@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Menuconfiguracion" table="menuconfiguracion">
+    <indexes>
+      <index name="menuconfiguracion_menuconfiguracion_MenuConfiguracionId_fk" columns="MenuConfiguracionParentId"/>
+    </indexes>
+    <id name="menuconfiguracionid" type="integer" column="MenuConfiguracionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="sistema" type="integer" column="Sistema" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="title" type="string" column="Title" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="key" type="string" column="Key" length="30" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="icon" type="string" column="Icon" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="color" type="string" column="Color" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="action" type="string" column="Action" length="150" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="orden" type="integer" column="Orden" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <many-to-one field="menuconfiguracionparentid" target-entity="Menuconfiguracion" fetch="LAZY">
+      <join-columns>
+        <join-column name="MenuConfiguracionParentId" referenced-column-name="MenuConfiguracionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

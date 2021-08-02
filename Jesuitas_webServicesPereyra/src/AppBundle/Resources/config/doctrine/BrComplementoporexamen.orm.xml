@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrComplementoporexamen" table="br_complementoporexamen">
+    <indexes>
+      <index name="FK_br_complementoporexamen_Com" columns="ComplementoId"/>
+      <index name="FK_br_complementoporexamen_Exa" columns="ExamenId"/>
+    </indexes>
+    <id name="complementoporexamenid" type="integer" column="ComplementoporexamenId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="complementoid" target-entity="Complemento" fetch="LAZY">
+      <join-columns>
+        <join-column name="ComplementoId" referenced-column-name="ComplementoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="examenid" target-entity="BrExamen" fetch="LAZY">
+      <join-columns>
+        <join-column name="ExamenId" referenced-column-name="ExamenId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

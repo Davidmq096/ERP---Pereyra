@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\MaActividadporinforme" table="ma_actividadporinforme">
+    <indexes>
+      <index name="FK_ma_actividadporinforme_ActividadId" columns="ActividadId"/>
+      <index name="FK_ma_actividadporinforme_InformeId" columns="InformeId"/>
+    </indexes>
+    <id name="actividadporinformeid" type="integer" column="ActividadPorInformeId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="actividadid" target-entity="MaActividad" fetch="LAZY">
+      <join-columns>
+        <join-column name="ActividadId" referenced-column-name="ActividadId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="informeid" target-entity="MaInforme" fetch="LAZY">
+      <join-columns>
+        <join-column name="InformeId" referenced-column-name="InformeId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcEstatuspropiedad" table="bc_estatuspropiedad">
+    <id name="estatusid" type="integer" column="EstatusId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="string" column="Descripcion" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="instituto" type="integer" column="Instituto" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1 lux
+2 ciencias
+3 ambos</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

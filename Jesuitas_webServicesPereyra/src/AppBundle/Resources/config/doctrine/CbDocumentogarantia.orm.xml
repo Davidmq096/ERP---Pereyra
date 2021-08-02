@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CbDocumentogarantia" table="cb_documentogarantia">
+    <indexes>
+      <index name="FK_cb_documentogarantia_Acuerd" columns="AcuerdoId"/>
+      <index name="FK_cb_documentogarantia_TipoGa" columns="TipoGarantiaId"/>
+    </indexes>
+    <id name="documentogarantiaid" type="integer" column="DocumentoGarantiaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="importe" type="float" column="Importe" precision="10" scale="0" nullable="true"/>
+    <field name="descripcion" type="text" column="Descripcion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="archivo" type="blob" column="Archivo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="archivosize" type="string" column="ArchivoSize" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="archivotipo" type="string" column="ArchivoTipo" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="acuerdoid" target-entity="CbAcuerdo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AcuerdoId" referenced-column-name="AcuerdoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipogarantiaid" target-entity="CbTipogarantia" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoGarantiaId" referenced-column-name="TipoGarantiaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

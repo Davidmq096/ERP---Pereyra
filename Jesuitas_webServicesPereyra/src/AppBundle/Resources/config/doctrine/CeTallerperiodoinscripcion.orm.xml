@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeTallerperiodoinscripcion" table="ce_tallerperiodoinscripcion">
+    <indexes>
+      <index name="ce_tallerperiodoinscripcion_ce_clasificadorparaescolares__fk" columns="ClasificadorParaEscolaresId"/>
+    </indexes>
+    <id name="tallerperiodoinscripcionid" type="integer" column="TallerPeriodoInscripcionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechanuevoingresoinicio" type="date" column="FechaNuevoIngresoInicio" nullable="false"/>
+    <field name="fechanuevoingresofin" type="date" column="FechaNuevoIngresoFin" nullable="false"/>
+    <field name="fechareingresoinicio" type="date" column="FechaReingresoInicio" nullable="false"/>
+    <field name="fechareingresofin" type="date" column="FechaReingresoFin" nullable="false"/>
+    <many-to-one field="clasificadorparaescolaresid" target-entity="CeClasificadorparaescolares" fetch="LAZY">
+      <join-columns>
+        <join-column name="ClasificadorParaEscolaresId" referenced-column-name="ClasificadorParaEscolaresId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

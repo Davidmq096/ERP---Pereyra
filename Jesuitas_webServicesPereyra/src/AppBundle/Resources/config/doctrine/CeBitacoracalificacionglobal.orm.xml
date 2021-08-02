@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeBitacoracalificacionglobal" table="ce_bitacoracalificacionglobal">
+    <indexes>
+      <index name="FK_ce_bitacoracalificacionglo4" columns="PeriodoEvaluacionId"/>
+      <index name="FK_ce_bitacoracalificacionglob" columns="CapturaAlumnoPorPeriodoId"/>
+      <index name="FK_ce_bitacoracalificacionglo3" columns="UsuarioId"/>
+    </indexes>
+    <id name="bitacoracalificacionglobalid" type="integer" column="BitacoraCalificacionGlobalId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ciclo" type="string" column="Ciclo" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nivel" type="string" column="Nivel" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="grado" type="string" column="Grado" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="alumno" type="string" column="Alumno" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="asistenciaanterior" type="string" column="AsistenciaAnterior" length="3" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="asistencianuevo" type="string" column="AsistenciaNuevo" length="3" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comanterior" type="text" column="ComAnterior" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comnuevo" type="text" column="ComNuevo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tareasolicitadaanterior" type="string" column="TareaSolicitadaAnterior" length="3" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tareasolicitadanuevo" type="string" column="TareaSolicitadaNuevo" length="3" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tareaentregadaanterior" type="string" column="TareaEntregadaAnterior" length="3" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tareaentregadanuevo" type="string" column="TareaEntregadaNuevo" length="3" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fecha" type="datetime" column="Fecha" nullable="false"/>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="periodoevaluacionid" target-entity="CePeriodoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoEvaluacionId" referenced-column-name="PeriodoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="capturaalumnoporperiodoid" target-entity="CeCapturaalumnoporperiodo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CapturaAlumnoPorPeriodoId" referenced-column-name="CapturaAlumnoPorPeriodoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

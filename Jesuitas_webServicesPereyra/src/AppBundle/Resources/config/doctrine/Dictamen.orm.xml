@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Dictamen" table="dictamen">
+    <indexes>
+      <index name="SolicitudAdmisionId_idx" columns="SolicitudAdmisionId"/>
+      <index name="Usuario_idx" columns="UsuarioId"/>
+    </indexes>
+    <id name="dictamenid" type="integer" column="DictamenId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dictamen" type="string" column="Dictamen" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="motivo" type="string" column="Motivo" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fecharegistro" type="date" column="FechaRegistro" nullable="true"/>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

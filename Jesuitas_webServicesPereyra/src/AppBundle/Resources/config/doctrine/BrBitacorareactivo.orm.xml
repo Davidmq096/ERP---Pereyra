@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrBitacorareactivo" table="br_bitacorareactivo">
+    <indexes>
+      <index name="FK_br_bitacorareactivo_MotivoR" columns="MotivoRechazoId"/>
+      <index name="FK_br_bitacorareactivo_TipoAcc" columns="TipoAccionBitacoraReactivoId"/>
+      <index name="FK_br_bitacorareactivo_Usuario" columns="UsuarioId"/>
+      <index name="FK_br_bitacorareactivo_Reactiv" columns="ReactivoId"/>
+    </indexes>
+    <id name="bitacorareactivoid" type="integer" column="BitacoraReactivoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="comentariorechazo" type="text" column="ComentarioRechazo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fecha" type="date" column="Fecha" nullable="true"/>
+    <field name="hora" type="time" column="Hora" nullable="true"/>
+    <many-to-one field="motivorechazoid" target-entity="BrMotivorechazo" fetch="LAZY">
+      <join-columns>
+        <join-column name="MotivoRechazoId" referenced-column-name="MotivoRechazoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="reactivoid" target-entity="BrReactivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="ReactivoId" referenced-column-name="ReactivoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoaccionbitacorareactivoid" target-entity="BrTipoaccionbitacorareactivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoAccionBitacoraReactivoId" referenced-column-name="TipoAccionBitacoraReactivoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

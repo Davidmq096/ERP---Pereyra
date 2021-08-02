@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAcuerdoextraordinario" table="ce_acuerdoextraordinario">
+    <indexes>
+      <index name="AgendaExtraordinarioId_fk" columns="AgendaExtraordinarioId"/>
+      <index name="ce_acuerdoextraordinario_usuario_UsuarioId_fk" columns="UsuarioId"/>
+      <index name="ce_estatusextraordinario__fk" columns="EstatusExtraordinarioId"/>
+      <index name="ce_extraordinario__fk" columns="ExtraordinarioId"/>
+      <index name="ce_periodoregularizacioan__fk" columns="PeriodoRegularizacionId"/>
+      <index name="ce_tipoextraoirdinario__fk" columns="TipoExtraordinarioId"/>
+      <index name="FK_ce_acuerdoextraordinario_DocumentoPorPagarId" columns="DocumentoPorPagarId"/>
+    </indexes>
+    <id name="acuerdoextraordinarioid" type="integer" column="AcuerdoExtraordinarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="intento" type="integer" column="Intento" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calificacion" type="string" column="Calificacion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="calificacionfinal" type="string" column="CalificacionFinal" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="agendaextraordinarioid" target-entity="CeAgendaextraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="AgendaExtraordinarioId" referenced-column-name="AgendaExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="documentoporpagarid" target-entity="CjDocumentoporpagar" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoPorPagarId" referenced-column-name="DocumentoPorPagarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatusextraordinarioid" target-entity="CeEstatusextraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusExtraordinarioId" referenced-column-name="EstatusExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="extraordinarioid" target-entity="CeExtraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="ExtraordinarioId" referenced-column-name="ExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="periodoregularizacionid" target-entity="CePeriodoregularizacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoRegularizacionId" referenced-column-name="PeriodoRegularizacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoextraordinarioid" target-entity="CeTipoextraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoExtraordinarioId" referenced-column-name="TipoExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

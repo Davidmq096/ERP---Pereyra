@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjSubconceptopornivel" table="cj_subconceptopornivel">
+    <indexes>
+      <index name="FK_SUBCONCEPTOPORNIVEL_NIVEL_idx" columns="NivelId"/>
+      <index name="FK_SUBCONCEPTOPORNIVEL_SUBCONCEPTO_idx" columns="SubConceptoId"/>
+      <index name="FK_SUBCONCEPTOPORNIVEL_CODIGOSAT_idx" columns="CodigoSATId"/>
+    </indexes>
+    <id name="subconceptopornivelid" type="integer" column="SubConceptoPorNivelId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false"/>
+    <field name="descuentobeca" type="boolean" column="DescuentoBeca" nullable="false"/>
+    <field name="descuentoprontopago" type="boolean" column="DescuentoProntoPago" nullable="false"/>
+    <field name="importeminimo" type="decimal" column="ImporteMinimo" precision="12" scale="2" nullable="false"/>
+    <field name="importedescuentoprontopago" type="decimal" column="ImporteDescuentoProntoPago" precision="12" scale="2" nullable="false"/>
+    <field name="dialimiteprontopago" type="integer" column="DiaLimiteProntoPago" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dialimitepago" type="integer" column="DiaLimitePago" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fechalimitepago" type="datetime" column="FechaLimitePago" nullable="true"/>
+    <field name="fechalimiteprontopago" type="datetime" column="FechaLimiteProntoPago" nullable="true"/>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <many-to-one field="codigosatid" target-entity="CjCodigosat" fetch="LAZY">
+      <join-columns>
+        <join-column name="CodigoSATId" referenced-column-name="CodigoSATId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="nivelid" target-entity="Nivel" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelId" referenced-column-name="NivelId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="subconceptoid" target-entity="CjSubconcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubConceptoId" referenced-column-name="SubConceptoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

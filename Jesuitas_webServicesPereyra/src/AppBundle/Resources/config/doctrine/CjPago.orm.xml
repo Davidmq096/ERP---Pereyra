@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjPago" table="cj_pago">
+    <indexes>
+      <index name="FK_PAGO_USUARIO_idx" columns="UsuarioId"/>
+      <index name="FK_PAGO_CAJA_idx" columns="CajaId"/>
+      <index name="FK_PAGO_ALUMNO_idx" columns="AlumnoId"/>
+      <index name="FK_PAGO_SOLICITUD_idx" columns="SolicitudAdmisionId"/>
+      <index name="FK_PAGO_CICLO_idx" columns="CicloId"/>
+      <index name="FK_PAGO_BITACORACAJA_idx" columns="BitacoraCajaId"/>
+      <index name="FK_PAGO_PAGOESTATUS_idx" columns="PagoEstatusId"/>
+      <index name="FK_PAGO_EMPRESA_idx" columns="EmpresaId"/>
+    </indexes>
+    <id name="pagoid" type="integer" column="PagoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="empleadoid" type="integer" column="EmpleadoId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Empleado que realiza el pago (si aplica).</option>
+      </options>
+    </field>
+    <field name="folio" type="string" column="Folio" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Folio de la Transacción en Caja.</option>
+      </options>
+    </field>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Importe pagado de la transacción.</option>
+      </options>
+    </field>
+    <field name="fecha" type="datetime" column="Fecha" nullable="false">
+      <options>
+        <option name="comment">Fecha y hora de la transacción.</option>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="bitacoracajaid" target-entity="CjBitacoracaja" fetch="LAZY">
+      <join-columns>
+        <join-column name="BitacoraCajaId" referenced-column-name="BitacoraCajaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cajaid" target-entity="CjCaja" fetch="LAZY">
+      <join-columns>
+        <join-column name="CajaId" referenced-column-name="CajaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cicloid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CicloId" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="empresaid" target-entity="CjEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="EmpresaId" referenced-column-name="EmpresaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pagoestatusid" target-entity="CjPagoestatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="PagoEstatusId" referenced-column-name="PagoEstatusId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

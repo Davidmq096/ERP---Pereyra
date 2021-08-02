@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCapturacalificacionporalumno" table="ce_capturacalificacionporalumno">
+    <indexes>
+      <index name="CalificacionPeriodoPorAlumnoIdCaptura" columns="CalificacionPeriodoPorAlumnoId"/>
+      <index name="CriterioEvaluacionGrupoIdCapturaAlumno" columns="CriterioEvaluacionGrupoId"/>
+    </indexes>
+    <id name="capturacalificacionporalumnoid" type="integer" column="CapturaCalificacionPorAlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="numerocaptura" type="integer" column="NumeroCaptura" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calificacion" type="string" column="Calificacion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="calificacionperiodoporalumnoid" target-entity="CeCalificacionperiodoporalumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="CalificacionPeriodoPorAlumnoId" referenced-column-name="CalificacionPeriodoPorAlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="criterioevaluaciongrupoid" target-entity="CeCriterioevaluaciongrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CriterioEvaluacionGrupoId" referenced-column-name="CriterioEvaluacionGrupoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

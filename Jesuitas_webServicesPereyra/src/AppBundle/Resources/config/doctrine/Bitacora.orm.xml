@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Bitacora" table="bitacora">
+    <indexes>
+      <index name="BitacoraPantallaId" columns="PantallaId"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="BitacoraId_UNIQUE" columns="BitacoraId"/>
+    </unique-constraints>
+    <id name="bitacoraid" type="integer" column="BitacoraId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="usuario" type="string" column="Usuario" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="direccionip" type="string" column="DireccionIP" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="accion" type="string" column="Accion" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="bitacora" type="text" column="Bitacora" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="registro" type="datetime" column="Registro" nullable="true">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <many-to-one field="pantallaid" target-entity="Pantalla" fetch="LAZY">
+      <join-columns>
+        <join-column name="PantallaId" referenced-column-name="PantallaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

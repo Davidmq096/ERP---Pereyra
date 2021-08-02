@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcCuentabanco" table="bc_cuentabanco">
+    <indexes>
+      <index name="FK_bc_cuentabanco_SolicitudBec" columns="SolicitudBecaId"/>
+      <index name="FK_bc_cuentabanco_TipoCuentaBa" columns="TipoCuentaBancoId"/>
+    </indexes>
+    <id name="cuentabancoid" type="integer" column="CuentaBancoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="bancoinstitucion" type="string" column="BancoInstitucion" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numerocuenta" type="string" column="NumeroCuenta" length="75" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="saldoactual" type="float" column="SaldoActual" precision="10" scale="0" nullable="true"/>
+    <field name="portal" type="integer" column="portal" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="solicitudbecaid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudBecaId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipocuentabancoid" target-entity="BcTipocuentabanco" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoCuentaBancoId" referenced-column-name="TipoCuentaBancoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

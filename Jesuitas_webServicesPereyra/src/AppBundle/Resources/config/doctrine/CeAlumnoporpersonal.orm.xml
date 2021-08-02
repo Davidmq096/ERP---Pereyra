@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnoporpersonal" table="ce_alumnoporpersonal">
+    <indexes>
+      <index name="AlumnoId" columns="AlumnoId"/>
+      <index name="PersonaId" columns="PersonaId"/>
+    </indexes>
+    <id name="alumnopersonalid" type="integer" column="AlumnoPersonalId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="personaid" type="integer" column="PersonaId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

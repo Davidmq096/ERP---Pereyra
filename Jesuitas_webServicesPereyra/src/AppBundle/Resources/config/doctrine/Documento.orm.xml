@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Documento" table="documento">
+    <indexes>
+      <index name="DocumentoFormato_idx" columns="FormatoId"/>
+      <index name="DocumentoTipoDocumento_idx" columns="TipoDocumentoId"/>
+    </indexes>
+    <id name="documentoid" type="integer" column="DocumentoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+    <many-to-one field="formatoid" target-entity="Formato" fetch="LAZY">
+      <join-columns>
+        <join-column name="FormatoId" referenced-column-name="FormatoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipodocumentoid" target-entity="Tipodocumento" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoDocumentoId" referenced-column-name="TipoDocumentoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

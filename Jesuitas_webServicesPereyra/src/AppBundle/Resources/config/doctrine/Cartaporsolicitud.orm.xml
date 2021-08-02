@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Cartaporsolicitud" table="cartaporsolicitud">
+    <indexes>
+      <index name="CartaPorSolicitudFormato_idx" columns="CartaId"/>
+      <index name="CartaPorSolicitudSolicitud_idx" columns="SolicitudAdmisionId"/>
+    </indexes>
+    <id name="cartaporsolicitudid" type="integer" column="CartaPorSolicitudId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="cartaid" target-entity="Formato" fetch="LAZY">
+      <join-columns>
+        <join-column name="CartaId" referenced-column-name="FormatoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

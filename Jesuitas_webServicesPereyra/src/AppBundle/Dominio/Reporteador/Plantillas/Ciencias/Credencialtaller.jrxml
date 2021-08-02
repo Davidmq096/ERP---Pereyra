@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Credencialtaller" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f2c3a1b7-015b-4378-b0b0-2f92897c7d5d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Jesuitas"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="alumnotallerid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT ct.Nombre AS taller, 
+  a.Matricula AS matricula, 
+  CONCAT_WS(' ', a.ApellidoPaterno, a.ApellidoMaterno, a.PrimerNombre, a.SegundoNombre) AS alumno,
+  CONCAT(CONCAT_WS(' ', n.nombre,gr.grado),  ' - ', g.nombre) as gradogrupo, 
+  CONVERT(SUBSTRING_INDEX(ca2.Foto,';base64,',-1) USING utf8) AS foto
+  FROM ce_alumnocicloportallerextra ca
+  INNER JOIN ce_tallerextracurricular ct ON ct.TallerExtracurricularId = ca.TallerExtraId
+  INNER JOIN ce_alumnoporciclo ca1 ON ca1.AlumnoPorCicloId = ca.AlumnoPorCicloId
+  LEFT JOIN ce_alumnociclofoto ca2 ON ca2.AlumnoPorCicloId = ca1.AlumnoPorCicloId
+  INNER JOIN grado gr on gr.gradoid = ca1.gradoid
+  INNER JOIN nivel n on n.nivelid = gr.nivelid
+  left join ce_alumnocicloporgrupo acg on acg.AlumnoPorCicloId = ca1.AlumnoPorCicloid
+  left join ce_grupo g on g.grupoid = acg.grupoid and g.tipogrupoid = 1
+  INNER JOIN ce_alumno a ON a.AlumnoId = ca1.AlumnoId
+  WHERE ca.AlumnoCicloPorTallerExtraId  IN ($P!{alumnotallerid})
+  GROUP BY a.AlumnoId]]>
+	</queryString>
+	<field name="taller" class="java.lang.String"/>
+	<field name="matricula" class="java.lang.String"/>
+	<field name="alumno" class="java.lang.String"/>
+	<field name="foto" class="java.lang.String"/>
+	<field name="gradogrupo" class="java.lang.String"/>
+	<detail>
+		<band height="230" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="10" width="551" height="1" uuid="99134459-a1c7-4855-920b-a7281a9ba0c9"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="10" y="10" width="1" height="190" uuid="0ac10a63-d86a-4ae4-a536-31eb18f2ee84"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="540" y="11" width="1" height="189" uuid="ed08574b-4383-4127-b394-cf7e42aff81d"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-3" y="190" width="553" height="1" uuid="53a67b3a-ce92-4a3f-a396-011dc5e31093"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<image>
+				<reportElement x="50" y="40" width="109" height="119" uuid="55f9f150-4725-4102-bef1-544a5f5f0911"/>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64($F{foto}.getBytes()))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="170" y="80" width="228" height="18" uuid="88683095-a483-4d0f-b004-d57e64d36ee3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{taller}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="124" width="265" height="20" uuid="3259f62e-6049-4f0e-8915-fe12f9aa306b"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="143" width="270" height="20" uuid="2d00e978-0fc2-4885-ab80-627b9a898a10"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{alumno}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="170" y="60" width="340" height="10" backcolor="#FF0400" uuid="be3e5787-bb79-4e88-b9f4-c8bfe249d221"/>
+			</rectangle>
+			<image>
+				<reportElement x="400" y="20" width="90" height="80" uuid="ddeed27c-da47-4896-be72-1133c39c5579"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="190" y="30" width="210" height="30" uuid="6374354c-9f12-4d6c-b4e4-7fa120c42b50"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Escuela Carlos Pereyra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="124" width="55" height="19" uuid="9c9372c1-5736-461c-a340-5880960d5533"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matricula:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="143" width="50" height="20" uuid="b2e5016f-3a70-41ba-a42e-3aaca95120ad"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alumno:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="50" y="40" width="109" height="119" uuid="8698cd1a-cba1-4cac-9ec6-e4704a686153"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="170" y="106" width="85" height="18" uuid="8888facc-65b6-4eaf-a052-288ffaf6955b"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grado y grupo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="106" width="235" height="19" uuid="1c89b39d-7c76-461c-a494-4f121b7c5722"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gradogrupo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

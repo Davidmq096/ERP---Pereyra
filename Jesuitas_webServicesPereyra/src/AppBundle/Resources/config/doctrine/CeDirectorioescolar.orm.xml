@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeDirectorioescolar" table="ce_directorioescolar">
+    <id name="directorioescolarid" type="integer" column="DirectorioEscolarId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombredepartamento" type="string" column="NombreDepartamento" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correoelectronico" type="string" column="CorreoElectronico" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono" type="string" column="Telefono" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="extension" type="string" column="Extension" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombreresponsable" type="string" column="NombreResponsable" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ordendirectorio" type="integer" column="OrdenDirectorio" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+  </entity>
+</doctrine-mapping>

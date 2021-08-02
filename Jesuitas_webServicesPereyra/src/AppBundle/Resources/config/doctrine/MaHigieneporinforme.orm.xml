@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\MaHigieneporinforme" table="ma_higieneporinforme">
+    <indexes>
+      <index name="FK_ma_higieneporinforme_HigieneId" columns="HigieneId"/>
+      <index name="FK_ma_higieneporinforme_InformeId" columns="InformeId"/>
+    </indexes>
+    <id name="higieneporinformeid" type="integer" column="HigienePorInformeId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="higieneid" target-entity="MaHigiene" fetch="LAZY">
+      <join-columns>
+        <join-column name="HigieneId" referenced-column-name="HigieneId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="informeid" target-entity="MaInforme" fetch="LAZY">
+      <join-columns>
+        <join-column name="InformeId" referenced-column-name="InformeId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

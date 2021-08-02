@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjDevoluciondetalle" table="cj_devoluciondetalle">
+    <indexes>
+      <index name="FK_DEVOLUCIONDETALLE_DEVOLUCION_idx" columns="DevolucionId"/>
+      <index name="FK_DEVOLUCIONDETALLE_FORMAPAGO_idx" columns="FormaPagoId"/>
+      <index name="FK_DEVOLUCIONDETALLE_PAGODETALLE_idx" columns="PagoDetalleId"/>
+    </indexes>
+    <id name="devoluciondetalleid" type="integer" column="DevolucionDetalleId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false"/>
+    <field name="afectasaldo" type="boolean" column="AfectaSaldo" nullable="false"/>
+    <many-to-one field="devolucionid" target-entity="CjDevolucion" fetch="LAZY">
+      <join-columns>
+        <join-column name="DevolucionId" referenced-column-name="DevolucionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="formapagoid" target-entity="CjFormapago" fetch="LAZY">
+      <join-columns>
+        <join-column name="FormaPagoId" referenced-column-name="FormaPagoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pagodetalleid" target-entity="CjPagodetalle" fetch="LAZY">
+      <join-columns>
+        <join-column name="PagoDetalleId" referenced-column-name="PagoDetalleId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

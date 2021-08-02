@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAprendizajeesperado" table="ce_aprendizajeesperado">
+    <indexes>
+      <index name="fk_aeperiodoeval" columns="periodoevaluacionid"/>
+      <index name="fk_aegradoid" columns="gradoid"/>
+      <index name="fk_aecicloid" columns="cicloid"/>
+      <index name="fk_planeid" columns="planestudioid"/>
+    </indexes>
+    <id name="aprendizajeesperadoid" type="integer" column="aprendizajeesperadoid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="configurarcomentarios" type="boolean" column="configurarcomentarios" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <many-to-one field="cicloid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="cicloid" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="gradoid" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="periodoevaluacionid" target-entity="CePeriodoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="periodoevaluacionid" referenced-column-name="PeriodoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="planestudioid" target-entity="CePlanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="planestudioid" referenced-column-name="PlanEstudioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

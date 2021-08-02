@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Documentorecibido" table="documentorecibido">
+    <indexes>
+      <index name="FK_DOCUMENTORECIBIDO_DOCUMENTO_idx" columns="DocumentoId"/>
+      <index name="FK_DOCUMENTORECIBIDO_SOLICITUDADMISION_idx" columns="SolicitudAdmisionId"/>
+    </indexes>
+    <id name="documentorecibidoid" type="integer" column="DocumentoRecibidoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecharegistro" type="datetime" column="FechaRegistro" nullable="false">
+      <options>
+        <option name="comment">Fecha de entrega del documento.</option>
+      </options>
+    </field>
+    <many-to-one field="documentoid" target-entity="Documento" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoId" referenced-column-name="DocumentoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

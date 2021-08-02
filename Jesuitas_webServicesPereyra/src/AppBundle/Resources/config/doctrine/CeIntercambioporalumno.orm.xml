@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeIntercambioporalumno" table="ce_intercambioporalumno">
+    <indexes>
+      <index name="ce_intercambioporalumno_ce_alumno_AlumnoId_fk" columns="AlumnoId"/>
+    </indexes>
+    <id name="intercambioporalumnoid" type="integer" column="IntercambioPorAlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="false"/>
+    <field name="fechafin" type="date" column="FechaFin" nullable="true"/>
+    <field name="observaciones" type="text" column="Observaciones" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

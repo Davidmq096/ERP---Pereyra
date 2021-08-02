@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcOtrosdependienteseconomicos" table="bc_otrosdependienteseconomicos">
+    <indexes>
+      <index name="SolicitudId" columns="SolicitudId"/>
+      <index name="bc_otrosdependientes_situacionconyugal_situacionconyugalid_idx" columns="SituacionConyugalId"/>
+    </indexes>
+    <id name="otrosdependientesid" type="integer" column="OtrosDependientesId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombrecompleto" type="string" column="NombreCompleto" length="70" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="relacion" type="string" column="Relacion" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ocupacion" type="string" column="Ocupacion" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="edad" type="integer" column="Edad" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="situacionconyugalid" target-entity="Situacionconyugal" fetch="LAZY">
+      <join-columns>
+        <join-column name="SituacionConyugalId" referenced-column-name="SituacionConyugalId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

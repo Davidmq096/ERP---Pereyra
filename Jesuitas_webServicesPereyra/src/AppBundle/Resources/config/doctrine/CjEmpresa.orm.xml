@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjEmpresa" table="cj_empresa">
+    <id name="empresaid" type="integer" column="EmpresaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">NOMBRE DE LA EMPRESA.</option>
+      </options>
+    </field>
+    <field name="alias" type="string" column="Alias" length="25" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">ALIAS DE LA EMPRESA</option>
+      </options>
+    </field>
+    <field name="color" type="string" column="Color" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Color de la empresa para el MDI de caja y la pantalla de cobro.</option>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="comment">INDICA SI LA EMPRESA ESTA ACTIVA (1) O INACTIVA (0).</option>
+      </options>
+    </field>
+    <field name="logo" type="blob" column="Logo" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Logo de la empresa.</option>
+      </options>
+    </field>
+    <field name="tiposistemafacturacion" type="integer" column="TipoSistemaFacturacion" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Tipo de sistema de facturación.
+1 = Contpaq Comercial.
+2 = Contpaq factura electrónica.</option>
+      </options>
+    </field>
+    <field name="nombresistema" type="string" column="NombreSistema" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre del sistema de facturación.</option>
+      </options>
+    </field>
+    <field name="usuariocontpaq" type="string" column="UsuarioContpaq" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Usuario de Contpaq con el que se realiza el login.</option>
+      </options>
+    </field>
+    <field name="passworcontpaq" type="string" column="PassworContpaq" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Password para el login de contpaq.</option>
+      </options>
+    </field>
+    <field name="passwordtimbrado" type="string" column="PasswordTimbrado" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Password para el timbrado de la facturación.</option>
+      </options>
+    </field>
+    <field name="rutareportepdfxml" type="string" column="RutaReportePDFXML" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Ruta del reporte .htm de contpaq que genera el PDF y XML al timbrar.</option>
+      </options>
+    </field>
+    <field name="rutaempresa" type="string" column="RutaEmpresa" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Ruta de la empresa en contpaq.</option>
+      </options>
+    </field>
+    <field name="rutaservidorxmlpdf" type="string" column="RutaServidorXMLPDF" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Carpeta donde se guardan los archivos PDF y XML en el servidor de contpaq.</option>
+      </options>
+    </field>
+    <field name="rutalocalxmlpdf" type="string" column="RutaLocalXMLPDF" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Carpeta donde se guardan los archivos PDF y XML en el la PC que realiza las facturas manuales.</option>
+      </options>
+    </field>
+    <field name="registrowindows" type="string" column="RegistroWindows" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Key del registro de windows que contien las rutas de Contpaq.</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

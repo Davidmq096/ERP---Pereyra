@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeHorarioportaller" table="ce_horarioportaller">
+    <indexes>
+      <index name="ce_horarioportaller_ce_tallerextracurricular_fk" columns="TallerExtraCurricularId"/>
+    </indexes>
+    <id name="horarioportallerid" type="integer" column="HorarioPorTallerId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dia" type="string" column="dia" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="horainicio" type="time" column="HoraInicio" nullable="false"/>
+    <field name="horafin" type="time" column="HoraFin" nullable="false"/>
+    <many-to-one field="tallerextracurricularid" target-entity="CeTallerextracurricular" fetch="LAZY">
+      <join-columns>
+        <join-column name="TallerExtraCurricularId" referenced-column-name="TallerExtracurricularId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

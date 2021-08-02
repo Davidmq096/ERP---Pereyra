@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Cupoadmision" table="cupoadmision">
+    <indexes>
+      <index name="CupoAdmisionCiclo_idx" columns="Cicloid"/>
+      <index name="GradoId_idx" columns="GradoId"/>
+    </indexes>
+    <id name="cupoadmisionid" type="integer" column="CupoAdmisionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="iniciorecepcion" type="date" column="InicioRecepcion" nullable="true"/>
+    <field name="finrecepcion" type="date" column="FinRecepcion" nullable="true"/>
+    <field name="cupo" type="integer" column="Cupo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="cantidadfichas" type="integer" column="CantidadFichas" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="textocompleto" type="string" column="TextoCompleto" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="textocapturaficha" type="string" column="TextoCapturaFicha" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="listaespera" type="boolean" column="ListaEspera" nullable="true"/>
+    <field name="textolistaespera" type="string" column="TextoListaEspera" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechaentregaresultados" type="date" column="FechaEntregaResultados" nullable="true"/>
+    <field name="fechapagoadeudos" type="date" column="FechaPagoAdeudos" nullable="true"/>
+    <field name="fechaentregainscripcion" type="date" column="FechaEntregaInscripcion" nullable="true"/>
+    <field name="activo" type="boolean" column="Activo" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="fechaedad" type="date" column="FechaEdad" nullable="true"/>
+    <many-to-one field="cicloid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="Cicloid" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

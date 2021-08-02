@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjCheque" table="cj_cheque">
+    <indexes>
+      <index name="FK_CHEQUE_ALUMNO_idx" columns="AlumnoId"/>
+      <index name="FK_CHEQUE_ASPIRANTE_idx" columns="SolicitudAdmisionId"/>
+      <index name="FK_CHEQUE_BANCO_idx" columns="BancoId"/>
+      <index name="FK_CHEQUE_PAGOFORMAPAGO_idx" columns="PagoFormaPagoId"/>
+    </indexes>
+    <id name="chequeid" type="integer" column="ChequeId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="folio" type="string" column="Folio" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Folio o N</option>
+      </options>
+    </field>
+    <field name="cuenta" type="string" column="Cuenta" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">N</option>
+      </options>
+    </field>
+    <field name="fecha" type="datetime" column="Fecha" nullable="false">
+      <options>
+        <option name="comment">Fecha en la que se emiti</option>
+      </options>
+    </field>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Importe del Cheque.</option>
+      </options>
+    </field>
+    <field name="observaciones" type="string" column="Observaciones" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Observaciones o comentarios de la persona que captura el cheque.</option>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="bancoid" target-entity="CjBanco" fetch="LAZY">
+      <join-columns>
+        <join-column name="BancoId" referenced-column-name="BancoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pagoformapagoid" target-entity="CjPagoformapago" fetch="LAZY">
+      <join-columns>
+        <join-column name="PagoFormaPagoId" referenced-column-name="PagoFormaPagoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

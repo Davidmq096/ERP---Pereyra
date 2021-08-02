@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CbBloqueomanual" table="cb_bloqueomanual">
+    <indexes>
+      <index name="FK_cb_bloqueomanual_EstatusBlo" columns="EstatusBloqueoId"/>
+      <index name="FK_cb_bloqueomanual_AlumnoPorC" columns="AlumnoPorCicloId"/>
+    </indexes>
+    <id name="bloqueomanualid" type="integer" column="BloqueoManualId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="false"/>
+    <field name="fechafin" type="date" column="FechaFin" nullable="true"/>
+    <field name="observaciones" type="text" column="Observaciones" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoporcicloid" target-entity="CeAlumnoporciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoPorCicloId" referenced-column-name="AlumnoPorCicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatusbloqueoid" target-entity="CbEstatusbloqueo" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusBloqueoId" referenced-column-name="EstatusBloqueoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

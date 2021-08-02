@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CbAgendacitapadresotutores" table="cb_agendacitapadresotutores">
+    <indexes>
+      <index name="agendaCita_idx" columns="AgendaCitaId"/>
+      <index name="fk_paderotutores_idx" columns="PadresOTutoresId"/>
+    </indexes>
+    <id name="agendacitapadresotutoresid" type="integer" column="AgendaCitaPadresOTutoresId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="otros" type="text" column="Otros" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="agendacitaid" target-entity="CbAgendacita" fetch="LAZY">
+      <join-columns>
+        <join-column name="AgendaCitaId" referenced-column-name="AgendaCitaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

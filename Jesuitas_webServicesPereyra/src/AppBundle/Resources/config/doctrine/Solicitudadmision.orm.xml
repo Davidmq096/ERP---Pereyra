@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Solicitudadmision" table="solicitudadmision">
+    <indexes>
+      <index name="EstatusSolicitud_idx" columns="EstatusSolicitudId"/>
+      <index name="fk_solicitudadmision_1_idx" columns="EncuestaId"/>
+      <index name="GradoId_idx" columns="GradoId"/>
+      <index name="SolicitudAdmisionContacto_idx" columns="ContactoId"/>
+      <index name="SolicitudAdmisionDatoAspirante_idx" columns="DatoAspiranteId"/>
+      <index name="SolicitudAdmisionInfoAdicional_idx" columns="InfoAdicionalId"/>
+      <index name="SolicitudAdmisionParentesco_idx" columns="ParentescoIdPersonaCaptura"/>
+      <index name="SolicitudAdminsion_Alumno_idx" columns="AlumnoId"/>
+      <index name="solicitudadmision_usuario_usuarioid_idx" columns="ValidadoPor"/>
+    </indexes>
+    <id name="solicitudadmisionid" type="integer" column="SolicitudAdmisionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="folio" type="string" column="Folio" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clavesolicitud" type="string" column="ClaveSolicitud" length="8" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clavefamiliar" type="string" column="ClaveFamiliar" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correo" type="string" column="Correo" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="aceptado" type="boolean" column="Aceptado" nullable="true"/>
+    <field name="motivo" type="string" column="Motivo" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="listaespera" type="boolean" column="ListaEspera" nullable="true"/>
+    <field name="pendiente" type="integer" column="Pendiente" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nombrepersonacaptura" type="string" column="NombrePersonaCaptura" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="entregada" type="boolean" column="Entregada" nullable="true"/>
+    <field name="impresa" type="boolean" column="Impresa" nullable="true"/>
+    <field name="correoenviado" type="boolean" column="CorreoEnviado" nullable="true"/>
+    <field name="capturainternet" type="boolean" column="CapturaInternet" nullable="true"/>
+    <field name="fechacaptura" type="date" column="FechaCaptura" nullable="true"/>
+    <field name="fechavalidacion" type="date" column="FechaValidacion" nullable="true"/>
+    <field name="fechadictaminacion" type="date" column="FechaDictaminacion" nullable="true"/>
+    <field name="solicitudpagada" type="boolean" column="SolicitudPagada" nullable="true"/>
+    <field name="documentosfirmados" type="boolean" column="DocumentosFirmados" nullable="true"/>
+    <field name="pagado" type="boolean" column="Pagado" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="solicitudextemporanea" type="boolean" column="SolicitudExtemporanea" nullable="true"/>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="contactoid" target-entity="Contacto" fetch="LAZY">
+      <join-columns>
+        <join-column name="ContactoId" referenced-column-name="ContactoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="datoaspiranteid" target-entity="Datoaspirante" fetch="LAZY">
+      <join-columns>
+        <join-column name="DatoAspiranteId" referenced-column-name="DatoAspiranteId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="encuestaid" target-entity="Encuesta" fetch="LAZY">
+      <join-columns>
+        <join-column name="EncuestaId" referenced-column-name="EncuestaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatussolicitudid" target-entity="Estatussolicitud" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusSolicitudId" referenced-column-name="EstatusSolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="infoadicionalid" target-entity="Infoadicional" fetch="LAZY">
+      <join-columns>
+        <join-column name="InfoAdicionalId" referenced-column-name="InfoAdicionalId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="parentescoidpersonacaptura" target-entity="Parentesco" fetch="LAZY">
+      <join-columns>
+        <join-column name="ParentescoIdPersonaCaptura" referenced-column-name="ParentescoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="validadopor" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="ValidadoPor" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

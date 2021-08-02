@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeBoletaporgrado" table="ce_boletaporgrado">
+    <indexes>
+      <index name="ce_boletaporgrado_ce_boletas_BoletaId_fk" columns="BoletaId"/>
+      <index name="ce_boletaporgrado_grado_GradoId_fk" columns="GradoId"/>
+    </indexes>
+    <id name="boletaporgradoid" type="integer" column="BoletaPorGradoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="oficial" type="boolean" column="Oficial" nullable="true"/>
+    <many-to-one field="boletaid" target-entity="CeBoletas" fetch="LAZY">
+      <join-columns>
+        <join-column name="BoletaId" referenced-column-name="BoletaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcPorcentajebecapornivel" table="bc_porcentajebecapornivel">
+    <indexes>
+      <index name="TipoBecaId" columns="TipoBecaId"/>
+      <index name="FK_porcentaje_por_nivel_1" columns="NivelId"/>
+      <index name="FK_porcentaje_por_nivel_2" columns="PorcentajeBecaId"/>
+    </indexes>
+    <id name="porcenjatebecapornivelid" type="integer" column="PorcenjateBecaporNivelId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="activo" type="smallint" column="Activo" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="nivelid" target-entity="Nivel" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelId" referenced-column-name="NivelId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="porcentajebecaid" target-entity="BcPorcentajebeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="PorcentajeBecaId" referenced-column-name="PorcentajeBecaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipobecaid" target-entity="BcTipobeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoBecaId" referenced-column-name="TipoBecaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

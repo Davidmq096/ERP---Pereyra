@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjPlanpago" table="cj_planpago">
+    <id name="planpagoid" type="integer" column="PlanPagoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre del plan de pagos.</option>
+      </options>
+    </field>
+    <field name="cantidadpagos" type="integer" column="CantidadPagos" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Cantidad de pagos a realizar.</option>
+      </options>
+    </field>
+    <field name="aplicadescuentoprontopago" type="boolean" column="AplicaDescuentoProntoPago" nullable="false">
+      <options>
+        <option name="comment">Indica si aplica descuento por pronto pago (1) o no (0).</option>
+      </options>
+    </field>
+    <field name="descuentoprontopago" type="decimal" column="DescuentoProntoPago" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Indica el % de descuento por pronto pago.</option>
+      </options>
+    </field>
+    <field name="recargoporvencimiento" type="decimal" column="RecargoPorVencimiento" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Porcentaje de descuento por vencimiento.</option>
+      </options>
+    </field>
+    <field name="nuevoingreso" type="boolean" column="NuevoIngreso" nullable="false">
+      <options>
+        <option name="comment">Indica si el plan de pagos se puede aplicar para los alumnos de nuevo ingreso (1) o no (0).</option>
+      </options>
+    </field>
+    <field name="reingreso" type="boolean" column="Reingreso" nullable="false">
+      <options>
+        <option name="comment">Indica si el plan aplica para reingresos (1) o no (0).</option>
+      </options>
+    </field>
+    <field name="fechaprorroga" type="datetime" column="FechaProrroga" nullable="true">
+      <options>
+        <option name="comment">Fecha límite para pagar en web o ventanilla bancaria, una vez que la inscripción pasa esta fecha, se debe pagar en caja.</option>
+      </options>
+    </field>
+    <field name="fechaprontopago" type="datetime" column="FechaProntoPago" nullable="true">
+      <options>
+        <option name="comment">Fecha límite para descuento por pronto pago en la inscripción.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="comment">Indica si el registro esta activo (1) o inactivo (0).</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

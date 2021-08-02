@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCalificacionfinalperiodoporalumno" table="ce_calificacionfinalperiodoporalumno">
+    <indexes>
+      <index name="ce_calificacionfinalperiodoporalumno_ce_ponderacionopcion_p_idx" columns="PonderacionOpcionId"/>
+    </indexes>
+    <id name="calificacionfinalperiodoporalumnoid" type="integer" column="CalificacionFinalPeriodoPorAlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="calificacion" type="string" column="Calificacion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="observacion" type="text" column="Observacion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="ponderacionopcionid" target-entity="CePonderacionopcion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PonderacionOpcionId" referenced-column-name="PonderacionOpcionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeMotivoextraordinarioporextraordinario" table="ce_motivoextraordinarioporextraordinario">
+    <indexes>
+      <index name="ce_motivoextraordinario__fk" columns="MotivoExtraordinarioId"/>
+      <index name="ExtraordinarioId_fk" columns="ExtraordinarioId"/>
+    </indexes>
+    <id name="motivoextraordinarioporextraordinarioid" type="integer" column="MotivoExtraordinarioPorExtraordinarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="extraordinarioid" target-entity="CeExtraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="ExtraordinarioId" referenced-column-name="ExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="motivoextraordinarioid" target-entity="CeMotivoextraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="MotivoExtraordinarioId" referenced-column-name="MotivoExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

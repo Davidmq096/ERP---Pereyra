@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCapturaasistenciaalumno" table="ce_capturaasistenciaalumno">
+    <indexes>
+      <index name="FK_ce_capturaasistenciaalumno_" columns="CapturaAlumnoPorPeriodoId"/>
+    </indexes>
+    <id name="capturaasistenciaalumnoid" type="integer" column="CapturaAsistenciaAlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="asistencia" type="integer" column="Asistencia" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="capturaalumnoporperiodoid" target-entity="CeCapturaalumnoporperiodo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CapturaAlumnoPorPeriodoId" referenced-column-name="CapturaAlumnoPorPeriodoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

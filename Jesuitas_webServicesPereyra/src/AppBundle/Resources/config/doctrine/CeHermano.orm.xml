@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeHermano" table="ce_hermano">
+    <indexes>
+      <index name="AlumnoIdHermano_idx" columns="AlumnoId"/>
+      <index name="GeneracionIdHermano_idx" columns="GeneracionId"/>
+      <index name="GradoIdHermnao_idx" columns="GradoId"/>
+    </indexes>
+    <id name="hermanoid" type="integer" column="HermanoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="180" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidopaterno" type="string" column="ApellidoPaterno" length="120" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidomaterno" type="string" column="ApellidoMaterno" length="120" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="edad" type="integer" column="Edad" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fechanacimiento" type="date" column="FechaNacimiento" nullable="true"/>
+    <field name="curp" type="string" column="CURP" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombreescuela" type="string" column="NombreEscuela" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tipohermano" type="integer" column="TipoHermano" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="generacionid" target-entity="Generacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="GeneracionId" referenced-column-name="GeneracionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

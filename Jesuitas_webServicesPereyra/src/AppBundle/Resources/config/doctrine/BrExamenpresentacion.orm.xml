@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrExamenpresentacion" table="br_examenpresentacion">
+    <indexes>
+      <index name="FK_br_examenpresentacion_Mostr" columns="MostrarReactivoId"/>
+    </indexes>
+    <id name="examenpresentacionid" type="integer" column="ExamenPresentacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="instrucciones" type="text" column="Instrucciones" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ordenaleatorioreactivo" type="boolean" column="OrdenAleatorioReactivo" nullable="true"/>
+    <field name="ordenaleatoriorespuesta" type="boolean" column="OrdenAleatorioRespuesta" nullable="true"/>
+    <field name="seleccionaleatorioreactivos" type="boolean" column="SeleccionAleatorioReactivos" nullable="true"/>
+    <field name="cantidadreactivos" type="integer" column="CantidadReactivos" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calificacionautomatica" type="boolean" column="CalificacionAutomatica" nullable="true"/>
+    <many-to-one field="mostrarreactivoid" target-entity="BrMostrarreactivos" fetch="LAZY">
+      <join-columns>
+        <join-column name="MostrarReactivoId" referenced-column-name="MostrarReactivosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

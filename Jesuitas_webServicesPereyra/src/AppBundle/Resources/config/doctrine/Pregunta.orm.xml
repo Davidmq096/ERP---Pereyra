@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Pregunta" table="pregunta">
+    <indexes>
+      <index name="PreguntaRespuesta_idx" columns="PadreId"/>
+      <index name="PreguntaTipoPregunta_idx" columns="TipoPreguntaId"/>
+    </indexes>
+    <id name="preguntaid" type="integer" column="PreguntaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="pregunta" type="text" column="Pregunta" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="valorporcentaje" type="integer" column="ValorPorcentaje" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="tipoordenamiento" type="boolean" column="TipoOrdenamiento" nullable="true">
+      <options>
+        <option name="comment">0 = lineal. 1 = cuadricular</option>
+      </options>
+    </field>
+    <field name="anidada" type="boolean" column="Anidada" nullable="true"/>
+    <field name="resaltar" type="boolean" column="resaltar" nullable="true"/>
+    <field name="color" type="integer" column="color" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="validar" type="boolean" column="validar" nullable="true"/>
+    <many-to-one field="padreid" target-entity="Respuesta" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadreId" referenced-column-name="RespuestaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipopreguntaid" target-entity="Tipopregunta" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoPreguntaId" referenced-column-name="TipoPreguntaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

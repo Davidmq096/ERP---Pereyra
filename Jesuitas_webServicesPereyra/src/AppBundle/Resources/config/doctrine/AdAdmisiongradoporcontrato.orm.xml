@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\AdAdmisiongradoporcontrato" table="ad_admisiongradoporcontrato">
+    <indexes>
+      <index name="FK_ad_gradoporcontrato_Contrato" columns="ContratoId"/>
+      <index name="FK_ad_gradoporcontrato_GradoI" columns="GradoId"/>
+    </indexes>
+    <id name="gradopordocumentoid" type="integer" column="GradoPorDocumentoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="contratoid" target-entity="AdAdmisioncontrato" fetch="LAZY">
+      <join-columns>
+        <join-column name="ContratoId" referenced-column-name="Contratoid"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

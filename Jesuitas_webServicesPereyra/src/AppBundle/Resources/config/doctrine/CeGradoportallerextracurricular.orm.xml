@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeGradoportallerextracurricular" table="ce_gradoportallerextracurricular">
+    <indexes>
+      <index name="ce_gradoportallerextracurricular_ce_tallerextracurricular_fk" columns="TallerExtraCurricularId"/>
+      <index name="ce_gradoportallerextracurricular_grado_GradoId_fk" columns="GradoId"/>
+    </indexes>
+    <id name="gradoportallerextracurricularid" type="integer" column="GradoPorTallerExtraCurricularId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="tallerextracurricularid" target-entity="CeTallerextracurricular" fetch="LAZY">
+      <join-columns>
+        <join-column name="TallerExtraCurricularId" referenced-column-name="TallerExtracurricularId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

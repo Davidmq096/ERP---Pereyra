@@ -1,0 +1,1185 @@
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-03-20 05:38:12
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-03-20 05:38:12
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-03-20 05:42:39
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-03-20 05:42:39
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/menuerp
+Date: 2021-03-20 05:42:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Usuario/Foto/2
+Date: 2021-03-20 05:42:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/AvisoPlataforma/Filtrar?usuarioid=2&activo=1&borrador=true
+Date: 2021-03-20 05:42:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Agendaexamen
+Date: 2021-03-20 05:43:35
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-03-20 05:51:15
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/AvisoPlataforma/Filtrar?usuarioid=2&activo=1&borrador=true
+Date: 2021-03-20 05:51:46
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Agendaexamen
+Date: 2021-03-20 05:51:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-04-23 03:18:33
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-04-23 03:18:41
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros/Menu/4
+Date: 2021-04-23 03:19:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Estado/484
+Date: 2021-04-23 03:20:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/89005/1
+Date: 2021-04-23 03:20:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/datos?padresotutoresid=89005
+Date: 2021-04-23 03:20:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Estado/484
+Date: 2021-04-23 03:21:42
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/89005/1
+Date: 2021-04-23 03:21:42
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/datos?padresotutoresid=89005
+Date: 2021-04-23 03:21:42
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Estado/484
+Date: 2021-04-23 03:22:36
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/datos?padresotutoresid=89005
+Date: 2021-04-23 03:22:36
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/89005/1
+Date: 2021-04-23 03:22:36
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Estado/484
+Date: 2021-04-23 03:25:06
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/datos?padresotutoresid=89005
+Date: 2021-04-23 03:25:06
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/89005/1
+Date: 2021-04-23 03:25:06
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/datos?padresotutoresid=89005
+Date: 2021-04-23 03:26:34
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/facturacion/89005/1
+Date: 2021-04-23 03:26:34
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Estado/484
+Date: 2021-04-23 03:26:34
+Can pass: True
+----------------------------------------------
+Request origin: ::1
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17523&alumnoporcicloid=22882&cicloid=4&gradoid=11
+Date: 2021-05-26 12:06:57
+Can pass: True
+----------------------------------------------
+Request origin: ::1
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17523&alumnoporcicloid=22882&cicloid=4&gradoid=11
+Date: 2021-05-26 12:07:33
+Can pass: True
+----------------------------------------------
+Request origin: ::1
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17523&alumnoporcicloid=22882&cicloid=4&gradoid=11
+Date: 2021-05-26 12:08:57
+Can pass: True
+----------------------------------------------
+Request origin: ::1
+Request uri: /Code/Jesuitas_webServices/web/
+Date: 2021-05-28 03:42:48
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-05-28 03:42:58
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/AvisoPlataforma/Filtrar?usuarioid=2&activo=1&borrador=true
+Date: 2021-05-28 03:43:15
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno
+Date: 2021-05-28 03:44:08
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/ConsultaAlumnos?nivelid%5B%5D=1&nivelid%5B%5D=2&nivelid%5B%5D=3&nivelid%5B%5D=4&gradoid=&semestreid=&grupoid=&nombre=&apellidopaterno=&apellidomaterno=&matricula=8000&intercambio=&oyente=&precision=true&alumnoestatusid=&estatusalumnocicloid=&reingresofuturo=
+Date: 2021-05-28 03:44:34
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/DatosGenerales/17110
+Date: 2021-05-28 03:46:17
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=17110
+Date: 2021-05-28 03:46:29
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=17110
+Date: 2021-05-28 03:46:29
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/ContactoEmergencia
+Date: 2021-05-28 03:50:25
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/DatosMedicos/17110
+Date: 2021-05-28 03:50:25
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno
+Date: 2021-05-28 03:50:41
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?matricula=8000&precision=
+Date: 2021-05-28 03:51:31
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/DatosGenerales/17110
+Date: 2021-05-28 03:51:35
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=17110
+Date: 2021-05-28 03:51:48
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=17110
+Date: 2021-05-28 03:51:48
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?matricula=8000&precision=
+Date: 2021-05-28 03:52:55
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/DatosGenerales/17110
+Date: 2021-05-28 03:52:59
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=17110
+Date: 2021-05-28 03:53:07
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-06-10 03:47:01
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/AvisoPlataforma/Filtrar?usuarioid=2&activo=1&borrador=true
+Date: 2021-06-10 03:47:50
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno
+Date: 2021-06-10 03:48:10
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?matricula=15788&precision=
+Date: 2021-06-10 03:49:07
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/DatosGenerales/28635
+Date: 2021-06-10 03:49:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=28635
+Date: 2021-06-10 03:49:26
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=28635
+Date: 2021-06-10 03:49:26
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28635&alumnoporcicloid=39904&cicloid=4&gradoid=13
+Date: 2021-06-10 03:49:37
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15788
+Date: 2021-06-10 03:50:15
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15788
+Date: 2021-06-10 03:51:23
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15788
+Date: 2021-06-10 03:53:53
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15788
+Date: 2021-06-10 03:56:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-06-10 05:19:48
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/AvisoPlataforma/Filtrar?usuarioid=2&activo=1&borrador=true
+Date: 2021-06-10 05:19:59
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Extraordinario
+Date: 2021-06-10 05:20:37
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Extraordinario/Filtrar
+Date: 2021-06-10 05:22:02
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Extraordinario/Filtrar
+Date: 2021-06-10 05:22:08
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Extraordinario/Filtrar
+Date: 2021-06-10 05:22:12
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno
+Date: 2021-06-10 05:22:59
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?matricula=15771&precision=
+Date: 2021-06-10 05:23:52
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/DatosGenerales/28617
+Date: 2021-06-10 05:23:54
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=28617
+Date: 2021-06-10 05:23:58
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=28617
+Date: 2021-06-10 05:23:58
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28617&alumnoporcicloid=39886&cicloid=4&gradoid=13
+Date: 2021-06-10 05:24:01
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15771
+Date: 2021-06-10 05:25:34
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno
+Date: 2021-06-10 06:21:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-06-11 12:25:42
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/AvisoPlataforma/Filtrar?usuarioid=2&activo=1&borrador=true
+Date: 2021-06-11 12:25:59
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno
+Date: 2021-06-11 12:26:27
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?matricula=15771&precision=
+Date: 2021-06-11 12:27:53
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/DatosGenerales/28617
+Date: 2021-06-11 12:27:55
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=28617
+Date: 2021-06-11 12:28:00
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=28617
+Date: 2021-06-11 12:28:00
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28617&alumnoporcicloid=39886&cicloid=4&gradoid=13
+Date: 2021-06-11 12:31:23
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28617&alumnoporcicloid=39886&cicloid=4&gradoid=13
+Date: 2021-06-11 12:32:28
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28617&alumnoporcicloid=39886&cicloid=4&gradoid=13
+Date: 2021-06-11 12:33:53
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15771
+Date: 2021-06-11 12:35:13
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28617&alumnoporcicloid=39886&cicloid=4&gradoid=13
+Date: 2021-06-11 12:36:25
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15771
+Date: 2021-06-11 12:41:09
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28617&alumnoporcicloid=39886&cicloid=4&gradoid=13
+Date: 2021-06-11 12:43:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15771
+Date: 2021-06-11 12:45:10
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-06-18 04:25:06
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/AvisoPlataforma/Filtrar?usuarioid=2&activo=1&borrador=true
+Date: 2021-06-18 04:25:26
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Misclases?permiso=1&usuarioid=2
+Date: 2021-06-18 04:26:36
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Misclases/
+Date: 2021-06-18 04:27:52
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/VersionSistema/2
+Date: 2021-07-05 12:41:52
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-05 12:41:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros/Menu/4
+Date: 2021-07-05 12:42:34
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/88683
+Date: 2021-07-05 12:42:44
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/88683
+Date: 2021-07-05 12:42:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=17768
+Date: 2021-07-05 12:43:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=17768
+Date: 2021-07-05 12:43:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17768&alumnoporcicloid=11844&cicloid=3&gradoid=8
+Date: 2021-07-05 12:43:22
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17768&alumnoporcicloid=11844&cicloid=3&gradoid=8
+Date: 2021-07-05 12:43:53
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17768&alumnoporcicloid=11844&cicloid=3&gradoid=8
+Date: 2021-07-05 12:44:17
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17768&alumnoporcicloid=11844&cicloid=3&gradoid=8
+Date: 2021-07-05 12:44:59
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17768&alumnoporcicloid=11844&cicloid=3&gradoid=8
+Date: 2021-07-05 12:48:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/88683
+Date: 2021-07-05 12:50:38
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=17597
+Date: 2021-07-05 12:54:41
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=17597
+Date: 2021-07-05 12:54:41
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17597&alumnoporcicloid=11673&cicloid=3&gradoid=10
+Date: 2021-07-05 12:54:45
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-05 01:22:23
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-20 10:34:49
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-20 11:48:15
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/AvisoPlataforma/Filtrar?usuarioid=2&activo=1&borrador=true
+Date: 2021-07-20 11:48:35
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno
+Date: 2021-07-20 11:49:46
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?matricula=15416&precision=
+Date: 2021-07-20 11:50:13
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/DatosGenerales/28268
+Date: 2021-07-20 11:50:19
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=28268
+Date: 2021-07-20 11:51:00
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=28268
+Date: 2021-07-20 11:51:00
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28268&alumnoporcicloid=22430&cicloid=4&gradoid=13
+Date: 2021-07-20 11:51:16
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28268&alumnoporcicloid=22430&cicloid=4&gradoid=13
+Date: 2021-07-20 12:12:51
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28268&alumnoporcicloid=22430&cicloid=4&gradoid=13
+Date: 2021-07-20 12:13:46
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=28268&alumnoporcicloid=22430&cicloid=4&gradoid=13
+Date: 2021-07-20 12:16:42
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3000/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Boletaimpresion/?publicacion=false&cicloid=4&nivelid=4&gradoid=13&matricula=15416
+Date: 2021-07-20 12:17:49
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 03:56:55
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/VersionSistema/2
+Date: 2021-07-22 03:57:07
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 03:57:12
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 03:59:08
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:00:08
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:00:38
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:00:58
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:02:07
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:03:51
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:04:18
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:06:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:09:39
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:10:08
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:11:32
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:11:42
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:14:56
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:15:08
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:16:45
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:17:56
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-22 04:20:56
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/becas/SolicitudBeca/Mensajes
+Date: 2021-07-23 02:14:36
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/PeriodoCaptura
+Date: 2021-07-23 02:14:36
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/padresotutores/91891
+Date: 2021-07-23 02:14:36
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/PeriodoCaptura
+Date: 2021-07-23 02:17:51
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/becas/SolicitudBeca/Mensajes
+Date: 2021-07-23 02:17:51
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/padresotutores/91891
+Date: 2021-07-23 02:17:51
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/becas/SolicitudBeca/Familia/91891
+Date: 2021-07-23 02:22:48
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/GuardarSb
+Date: 2021-07-23 02:22:54
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/padresotutores/91891
+Date: 2021-07-23 02:23:00
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/ConsultaSolicitudBecas/InfoFamiliaBeca
+Date: 2021-07-23 02:24:25
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Estado/484
+Date: 2021-07-23 02:24:25
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/getdomicilio
+Date: 2021-07-23 02:24:31
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 02:44:56
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros/Menu/4
+Date: 2021-07-23 03:46:40
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 03:46:45
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 03:47:52
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 03:52:29
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 03:53:26
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 03:53:34
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:09:34
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:09:41
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:10:10
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:10:22
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 04:10:39
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:12:58
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:16:53
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:18:03
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:18:27
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:19:47
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 04:20:31
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:22:27
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:23:16
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:27:31
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:28:08
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 04:28:15
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:33:29
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:33:33
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/registro
+Date: 2021-07-23 04:40:38
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 04:40:46
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-23 04:51:28
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros/Menu/4
+Date: 2021-07-26 09:39:10
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/PeriodoCaptura
+Date: 2021-07-26 09:39:23
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/becas/SolicitudBeca/Mensajes
+Date: 2021-07-26 09:39:23
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/padresotutores/91891
+Date: 2021-07-26 09:39:24
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Estado/484
+Date: 2021-07-26 09:39:32
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/ConsultaSolicitudBecas/InfoFamiliaBeca
+Date: 2021-07-26 09:39:32
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/getdomicilio
+Date: 2021-07-26 09:39:39
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/getdomicilioalumno
+Date: 2021-07-26 09:39:53
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Colonia/GetByCP/45130
+Date: 2021-07-26 09:39:58
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/domicilio
+Date: 2021-07-26 09:40:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/PadresOTutoresAlumno/1152
+Date: 2021-07-26 09:40:21
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/estadocivil
+Date: 2021-07-26 09:40:21
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/GuardarPadrestutores
+Date: 2021-07-26 09:41:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/DependientesEconomicos/1152
+Date: 2021-07-26 09:41:21
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/DependientesEconomicos/Hijos
+Date: 2021-07-26 09:43:47
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/DependientesEconomicos/ObtenerHijos/1152
+Date: 2021-07-26 09:43:53
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/SituacionEconomica/ObtenerSituacionEconomica/1152?portal=1&escuela=2
+Date: 2021-07-26 09:44:02
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/SituacionEconomica/DeudasCreditos
+Date: 2021-07-26 09:46:32
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/SituacionEconomica/Propiedadesfamiliares
+Date: 2021-07-26 09:47:07
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/SituacionEconomica/Vehiculos
+Date: 2021-07-26 09:47:24
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/SituacionEconomica/CuentaBanco
+Date: 2021-07-26 09:47:40
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/SituacionEconomica
+Date: 2021-07-26 09:47:51
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/Getreferencias
+Date: 2021-07-26 09:47:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/getvisita
+Date: 2021-07-26 09:47:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/GuardarReferencias
+Date: 2021-07-26 09:49:49
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/Getreferencias
+Date: 2021-07-26 09:49:53
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/GuardarReferencias
+Date: 2021-07-26 09:50:17
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/Getreferencias
+Date: 2021-07-26 09:50:20
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/GuardarReferencias
+Date: 2021-07-26 09:50:34
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/Getreferencias
+Date: 2021-07-26 09:50:38
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/SolicitudBeca/visitaestudios
+Date: 2021-07-26 09:50:47
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Becas/SolicitudBeca/padresotutores/91891
+Date: 2021-07-26 09:50:51
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Directorioescolar?departamento=&activo=1
+Date: 2021-07-26 09:51:46
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Transporte/Contrato/?padresotutoresid=91891
+Date: 2021-07-26 10:01:01
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Transporte/Misboletos?padreotutorid=91891
+Date: 2021-07-26 10:01:01
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-26 10:16:20
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros/Menu/4
+Date: 2021-07-26 10:17:46
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/91891
+Date: 2021-07-26 10:18:05
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/conftallerextracurricular/alumno/
+Date: 2021-07-26 10:18:14
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/91891
+Date: 2021-07-26 10:19:48
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/preregistrocurricular/17292
+Date: 2021-07-26 10:19:57
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/91891
+Date: 2021-07-26 10:20:05
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Extraordinario/Periodos
+Date: 2021-07-26 10:20:07
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/infoalumno/91891
+Date: 2021-07-26 10:21:48
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/91891
+Date: 2021-07-26 10:21:55
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/91891
+Date: 2021-07-26 10:22:07
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/portalfamiliar/hijos/91891
+Date: 2021-07-26 10:22:13
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Alumno/?alumnoid=17292
+Date: 2021-07-26 10:22:21
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/Alumno/Subgrupos/Datoalumno?alumnoid=17292
+Date: 2021-07-26 10:22:21
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Controlescolar/CapturaCalificacion/alumno?alumnoid[]=17292&alumnoporcicloid=11369&cicloid=3&gradoid=12
+Date: 2021-07-26 10:24:22
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros/2
+Date: 2021-07-26 10:25:42
+Can pass: True
+----------------------------------------------
+Request origin: http://localhost:3003/
+Request uri: /Code/Jesuitas_webServices/web/api/Parametros
+Date: 2021-07-26 10:26:39
+Can pass: True
+----------------------------------------------

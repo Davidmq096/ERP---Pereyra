@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Notificacion" table="notificacion">
+    <indexes>
+      <index name="user_fk_noti_idx" columns="UsuarioId"/>
+    </indexes>
+    <id name="notificacionid" type="integer" column="NotificacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="leido" type="boolean" column="Leido" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="tiponotificacionid" type="integer" column="TipoNotificacionId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1 = Reinicio de contraase?a</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="fechacreacion" type="datetime" column="FechaCreacion" nullable="false"/>
+    <field name="fechaenvio" type="datetime" column="FechaEnvio" nullable="true"/>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

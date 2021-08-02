@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjCaja" table="cj_caja">
+    <indexes>
+      <index name="FK_CAJA_MEDIOPAGO_idx" columns="MedioPagoId"/>
+      <index name="FK_CAJA_EMPRESA_idx" columns="EmpresaId"/>
+    </indexes>
+    <id name="cajaid" type="integer" column="CajaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre de la caja.</option>
+      </options>
+    </field>
+    <field name="ip" type="string" column="IP" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Dirección IP del equipo.</option>
+      </options>
+    </field>
+    <field name="macaddress" type="string" column="MacAddress" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Mac Address del Equipo.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="comment">Indica si la caja se encuentra Activa (1) o Inactiva (0).</option>
+      </options>
+    </field>
+    <many-to-one field="empresaid" target-entity="CjEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="EmpresaId" referenced-column-name="EmpresaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="mediopagoid" target-entity="CjMediopago" fetch="LAZY">
+      <join-columns>
+        <join-column name="MedioPagoId" referenced-column-name="MedioPagoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

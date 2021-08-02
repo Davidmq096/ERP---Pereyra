@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnocicloportaller" table="ce_alumnocicloportaller">
+    <indexes>
+      <index name="ce_alumnocicloportaller_ce_alumnoporciclo_fk" columns="AlumnoPorCicloId"/>
+      <index name="ce_alumnocicloportaller_ce_clasificadorparaescolares_fk" columns="ClasificadorParaEscolarId"/>
+      <index name="ce_alumnocicloportaller_ce_tallercurricular_fk" columns="TallerCurricularId"/>
+    </indexes>
+    <id name="alumnocicloportallerid" type="integer" column="AlumnoCicloPorTallerId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="vigente" type="boolean" column="Vigente" nullable="true"/>
+    <field name="numerolista" type="integer" column="NumeroLista" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoporcicloid" target-entity="CeAlumnoporciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoPorCicloId" referenced-column-name="AlumnoPorCicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="clasificadorparaescolarid" target-entity="CeClasificadorparaescolares" fetch="LAZY">
+      <join-columns>
+        <join-column name="ClasificadorParaEscolarId" referenced-column-name="ClasificadorParaEscolaresId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tallercurricularid" target-entity="CeTallercurricular" fetch="LAZY">
+      <join-columns>
+        <join-column name="TallerCurricularId" referenced-column-name="TallerCurricularId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

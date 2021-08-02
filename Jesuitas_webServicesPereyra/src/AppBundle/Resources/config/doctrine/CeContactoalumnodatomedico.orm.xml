@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeContactoalumnodatomedico" table="ce_contactoalumnodatomedico">
+    <id name="contactoalumnodatomedicoid" type="integer" column="ContactoalumnodatomedicoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="contactoemergencianombre" type="string" column="Contactoemergencianombre" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactoemergenciatelefono" type="string" column="ContactoEmergenciatelefono" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactoemergenciaparentesco" type="integer" column="ContactoEmergenciaParentesco" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="contactoemergenciaemail" type="string" column="ContactoEmergenciaEmail" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="alumnodatomedicoid" type="integer" column="AlumnodatomedicoId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

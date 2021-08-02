@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boleta" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="d3781f9e-26a8-4b0a-b011-2b68b888ee30">
+	<property name="net.sf.jasperreports.json.source" value="Dynamic.json"/>
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="65"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AdeudosVencidosDetalle"/>
+	<style name="general" isDefault="true" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="Arial" fontSize="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="headGeneral" style="general" hTextAlign="Left" fontSize="9" isBold="true">
+		<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="5">
+			<pen lineWidth="1.0" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="headNivel" style="headGeneral" mode="Opaque" forecolor="#FFFFFF" backcolor="#5B9BD5"/>
+	<style name="headGrupo" style="headGeneral" mode="Opaque" backcolor="#B2E0F9"/>
+	<style name="scoreGeneral" style="general">
+		<box>
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="scoreCol" style="scoreGeneral" mode="Opaque" forecolor="#FFFFFF" backcolor="#A5A5A5" fontSize="8"/>
+	<style name="scoreVal" style="scoreGeneral"/>
+	<style name="scoreSum" style="scoreGeneral" mode="Opaque" backcolor="#D9D9D9"/>
+	<subDataset name="Nivel" whenResourceMissingType="Error" uuid="778c3bb4-6ff6-47e4-a48c-907f9550afb6">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AdeudosVencidosDetalle"/>
+		<queryString language="jsonql">
+			<![CDATA[.]]>
+		</queryString>
+		<field name="nivel" class="java.lang.String">
+			<fieldDescription><![CDATA[nivel]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="Grupo" uuid="df302dfb-e76d-475c-97ab-77ec46ed0d68">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="grupo" class="java.lang.String">
+			<fieldDescription><![CDATA[grupo]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="Alumno" uuid="eac5b03d-80e3-40fd-8d44-e962430ee0dc">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="matricula" class="java.lang.String">
+			<fieldDescription><![CDATA[matricula]]></fieldDescription>
+		</field>
+		<field name="alumno" class="java.lang.String">
+			<fieldDescription><![CDATA[alumno]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="Concepto" uuid="c2329e50-a31d-43b2-ad5f-9398ecedea61">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[nombre]]></fieldDescription>
+		</field>
+		<field name="importe" class="java.lang.Double">
+			<fieldDescription><![CDATA[importe]]></fieldDescription>
+		</field>
+		<field name="recargo" class="java.lang.Double">
+			<fieldDescription><![CDATA[recargo]]></fieldDescription>
+		</field>
+		<field name="pago" class="java.lang.Double">
+			<fieldDescription><![CDATA[pago]]></fieldDescription>
+		</field>
+		<field name="saldo" class="java.lang.Double">
+			<fieldDescription><![CDATA[saldo]]></fieldDescription>
+		</field>
+		<variable name="importe" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+		</variable>
+		<variable name="recargo" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{recargo}]]></variableExpression>
+		</variable>
+		<variable name="pago" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{pago}]]></variableExpression>
+		</variable>
+		<variable name="saldo" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Boletas\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="jsonql">
+		<![CDATA[]]>
+	</queryString>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="59">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement stretchType="ContainerHeight" x="0" y="0" width="555" height="49" isPrintWhenDetailOverflows="true" uuid="e7749484-1b5a-404d-bd91-51921c31e12f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Nivel" uuid="7e496f44-374a-4d4d-9683-b4c40ce3b6ba">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource()]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="49" width="555">
+						<textField>
+							<reportElement style="headNivel" x="0" y="0" width="555" height="15" uuid="5326a382-ef12-4da9-8549-2fda6ecba456">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+						</textField>
+						<componentElement>
+							<reportElement x="0" y="15" width="555" height="34" uuid="22804f2f-c709-4726-8d5c-e581dab77ed4">
+								<property name="com.jaspersoft.studio.unit.y" value="px"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<jr:list printOrder="Vertical">
+								<datasetRun subDataset="Grupo" uuid="15952cdc-996e-46d5-9874-b738d6a3b7a6">
+									<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("grupos")]]></dataSourceExpression>
+								</datasetRun>
+								<jr:listContents height="34" width="555">
+									<textField>
+										<reportElement style="headGrupo" x="0" y="0" width="555" height="15" uuid="a4e78e49-6747-451d-a7e4-8351766f0ee5">
+											<property name="com.jaspersoft.studio.unit.x" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										</reportElement>
+										<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+									</textField>
+									<staticText>
+										<reportElement style="scoreCol" x="0" y="15" width="45" height="10" uuid="3c8c0e90-4105-47bb-859e-dedb2811ced6">
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<text><![CDATA[Matricula]]></text>
+									</staticText>
+									<staticText>
+										<reportElement style="scoreCol" x="45" y="15" width="160" height="10" uuid="a1931813-40bd-452f-8622-737e96c4de59">
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<text><![CDATA[Alumno]]></text>
+									</staticText>
+									<staticText>
+										<reportElement style="scoreCol" x="205" y="15" width="110" height="10" uuid="95830219-e3b1-4cbd-aa45-0344439c64aa">
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<text><![CDATA[Concepto]]></text>
+									</staticText>
+									<staticText>
+										<reportElement style="scoreCol" x="315" y="15" width="60" height="10" uuid="e899374a-1cd5-4243-928e-95deccaf04a9">
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<text><![CDATA[Importe]]></text>
+									</staticText>
+									<staticText>
+										<reportElement style="scoreCol" x="375" y="15" width="60" height="10" uuid="4fcdb559-b606-4525-8bc3-b455b8fe4f11">
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<text><![CDATA[Recargos]]></text>
+									</staticText>
+									<staticText>
+										<reportElement style="scoreCol" x="435" y="15" width="60" height="10" uuid="fd465b07-2e71-42fc-aa98-e373bc88ba97">
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<text><![CDATA[Pagos]]></text>
+									</staticText>
+									<staticText>
+										<reportElement style="scoreCol" x="495" y="15" width="60" height="10" uuid="748c74d6-2849-4ec9-9656-59246f584698">
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<text><![CDATA[Saldo]]></text>
+									</staticText>
+									<componentElement>
+										<reportElement x="0" y="25" width="555" height="9" uuid="c230247f-bb34-41ed-9d06-7d72d1737726">
+											<property name="com.jaspersoft.studio.unit.y" value="px"/>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										</reportElement>
+										<jr:list printOrder="Vertical">
+											<datasetRun subDataset="Alumno" uuid="934616df-4b35-4005-8c89-b4a6a990414f">
+												<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("alumnos")]]></dataSourceExpression>
+											</datasetRun>
+											<jr:listContents height="9" width="555">
+												<componentElement>
+													<reportElement x="205" y="0" width="350" height="9" uuid="f5bfa965-eb04-4184-a312-2aa5bdb173e3">
+														<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+														<property name="com.jaspersoft.studio.table.style.column_header" value="scoreCol"/>
+														<property name="com.jaspersoft.studio.table.style.detail" value="scoreVal"/>
+														<property name="com.jaspersoft.studio.unit.height" value="px"/>
+														<property name="com.jaspersoft.studio.unit.y" value="px"/>
+														<property name="com.jaspersoft.studio.unit.x" value="px"/>
+														<property name="com.jaspersoft.studio.unit.width" value="px"/>
+													</reportElement>
+													<jr:table>
+														<datasetRun subDataset="Concepto" uuid="986291a0-12b8-4fff-b0b4-ecfae29f55c2">
+															<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("conceptos")]]></dataSourceExpression>
+														</datasetRun>
+														<jr:column width="110" uuid="7a4be291-95f1-45c5-a400-0bed5cc7f4a5">
+															<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+															<jr:tableFooter height="9" rowSpan="1">
+																<staticText>
+																	<reportElement style="scoreSum" x="0" y="0" width="110" height="9" uuid="499bb254-fb1d-47af-9dff-a475c82ff230"/>
+																	<text><![CDATA[]]></text>
+																</staticText>
+															</jr:tableFooter>
+															<jr:detailCell style="scoreVal" height="9">
+																<property name="com.jaspersoft.studio.unit.width" value="px"/>
+																<textField>
+																	<reportElement x="0" y="0" width="110" height="9" uuid="3dfda86a-06ba-44ae-9a0b-7f699616ad10"/>
+																	<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+																</textField>
+															</jr:detailCell>
+														</jr:column>
+														<jr:column width="60" uuid="d68f7a07-91bd-4697-9b22-ea5e5b01b69b">
+															<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+															<jr:tableFooter height="9" rowSpan="1">
+																<property name="com.jaspersoft.studio.unit.height" value="px"/>
+																<textField>
+																	<reportElement style="scoreSum" x="0" y="0" width="60" height="9" uuid="437405cc-7f5c-41cd-a2e9-ba9a9dda506f"/>
+																	<textFieldExpression><![CDATA['$ '+$V{importe}]]></textFieldExpression>
+																</textField>
+															</jr:tableFooter>
+															<jr:detailCell style="scoreVal" height="9">
+																<property name="com.jaspersoft.studio.unit.width" value="px"/>
+																<textField>
+																	<reportElement x="0" y="0" width="60" height="9" uuid="a5f0ab80-a6de-4866-81d9-7b6a5de4c4c5"/>
+																	<textFieldExpression><![CDATA['$ '+$F{importe}]]></textFieldExpression>
+																</textField>
+															</jr:detailCell>
+														</jr:column>
+														<jr:column width="60" uuid="d9366498-ba63-48ce-9b30-10a24e68b6e1">
+															<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+															<jr:tableFooter height="9" rowSpan="1">
+																<textField>
+																	<reportElement style="scoreSum" x="0" y="0" width="60" height="9" uuid="91360c20-7a06-4612-9323-d5e769232be7"/>
+																	<textFieldExpression><![CDATA['$ '+$V{recargo}]]></textFieldExpression>
+																</textField>
+															</jr:tableFooter>
+															<jr:detailCell style="scoreVal" height="9">
+																<property name="com.jaspersoft.studio.unit.width" value="px"/>
+																<textField>
+																	<reportElement x="0" y="0" width="60" height="9" uuid="41f9e28c-2d68-4bc6-86fa-1669eb87c4fb"/>
+																	<textFieldExpression><![CDATA['$ '+$F{recargo}]]></textFieldExpression>
+																</textField>
+															</jr:detailCell>
+														</jr:column>
+														<jr:column width="60" uuid="1de73a02-ac1e-4e9a-af18-265ed9fdb89a">
+															<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+															<jr:tableFooter height="9" rowSpan="1">
+																<textField>
+																	<reportElement style="scoreSum" x="0" y="0" width="60" height="9" uuid="9186d884-89b2-4996-9ea6-67f4d3197745"/>
+																	<textFieldExpression><![CDATA['$ '+$V{pago}]]></textFieldExpression>
+																</textField>
+															</jr:tableFooter>
+															<jr:detailCell style="scoreVal" height="9">
+																<property name="com.jaspersoft.studio.unit.width" value="px"/>
+																<textField>
+																	<reportElement x="0" y="0" width="60" height="9" uuid="d334d5ce-b624-424b-90c9-9d2ebfdb53d6"/>
+																	<textFieldExpression><![CDATA['$ '+$F{pago}]]></textFieldExpression>
+																</textField>
+															</jr:detailCell>
+														</jr:column>
+														<jr:column width="60" uuid="510e53f7-7028-4657-b932-7674833ce85c">
+															<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+															<jr:tableFooter height="9" rowSpan="1">
+																<textField>
+																	<reportElement style="scoreSum" x="0" y="0" width="60" height="9" uuid="1642eff9-d0ef-4833-94ea-28ce4ef5f9bf"/>
+																	<textFieldExpression><![CDATA['$ '+$V{saldo}]]></textFieldExpression>
+																</textField>
+															</jr:tableFooter>
+															<jr:detailCell style="scoreVal" height="9">
+																<property name="com.jaspersoft.studio.unit.width" value="px"/>
+																<textField>
+																	<reportElement x="0" y="0" width="60" height="9" uuid="7c7c57ea-6c54-4fe1-8e6d-75533fb05d7d"/>
+																	<textFieldExpression><![CDATA['$ '+$F{saldo}]]></textFieldExpression>
+																</textField>
+															</jr:detailCell>
+														</jr:column>
+													</jr:table>
+												</componentElement>
+												<textField>
+													<reportElement style="scoreVal" stretchType="ContainerHeight" x="45" y="0" width="160" height="9" uuid="295cbe8d-bc27-4519-8cab-0c5bc221c29f">
+														<property name="com.jaspersoft.studio.unit.y" value="px"/>
+														<property name="com.jaspersoft.studio.unit.height" value="px"/>
+														<property name="com.jaspersoft.studio.unit.width" value="px"/>
+													</reportElement>
+													<textFieldExpression><![CDATA[$F{alumno}]]></textFieldExpression>
+												</textField>
+												<textField>
+													<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="45" height="9" uuid="c894918b-084e-4d11-8a79-4636e277e180">
+														<property name="com.jaspersoft.studio.unit.y" value="px"/>
+														<property name="com.jaspersoft.studio.unit.height" value="px"/>
+														<property name="com.jaspersoft.studio.unit.width" value="px"/>
+													</reportElement>
+													<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+												</textField>
+											</jr:listContents>
+										</jr:list>
+									</componentElement>
+								</jr:listContents>
+							</jr:list>
+						</componentElement>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

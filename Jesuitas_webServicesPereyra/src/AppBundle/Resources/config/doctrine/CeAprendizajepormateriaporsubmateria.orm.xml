@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAprendizajepormateriaporsubmateria" table="ce_aprendizajepormateriaporsubmateria">
+    <indexes>
+      <index name="fk_aemsubaesp" columns="aprendizajepormateriaid"/>
+      <index name="fk_aemsubmatid" columns="materiaid"/>
+    </indexes>
+    <id name="aprendizajeesperadopormaterisubmateriaid" type="integer" column="aprendizajeesperadopormaterisubmateriaid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="aprendizajepormateriaid" target-entity="CeAprendizajeesperadopormateria" fetch="LAZY">
+      <join-columns>
+        <join-column name="aprendizajepormateriaid" referenced-column-name="aprendizajeesperadopormateriaid"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaid" target-entity="Materia" fetch="LAZY">
+      <join-columns>
+        <join-column name="materiaid" referenced-column-name="MateriaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

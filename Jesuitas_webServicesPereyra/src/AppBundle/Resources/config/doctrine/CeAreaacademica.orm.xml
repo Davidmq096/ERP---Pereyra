@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAreaacademica" table="ce_areaacademica">
+    <indexes>
+      <index name="FK_br_area_NivelId" columns="NivelId"/>
+      <index name="ce_areaacademica_usuario_UsuarioId_fk" columns="UsuarioId"/>
+    </indexes>
+    <id name="areaacademicaid" type="integer" column="AreaAcademicaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clave" type="string" column="Clave" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+    <many-to-one field="nivelid" target-entity="Nivel" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelId" referenced-column-name="NivelId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

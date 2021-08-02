@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeMateriahorarioporsubgrupotaller" table="ce_materiahorarioporsubgrupotaller">
+    <indexes>
+      <index name="fk_materiaporhorario" columns="MateriaPorHorarioId"/>
+      <index name="fk_mathorariosubprofesor" columns="ProfesorPorMateriaPlanEstudiosId"/>
+    </indexes>
+    <id name="materiahorariosubgrupotallerid" type="integer" column="MateriaHorarioSubgrupoTallerId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="salon" type="string" column="Salon" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="materiaporhorarioid" target-entity="CeMateriaporhorario" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPorHorarioId" referenced-column-name="MateriaPorHorarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorpormateriaplanestudiosid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanEstudiosId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

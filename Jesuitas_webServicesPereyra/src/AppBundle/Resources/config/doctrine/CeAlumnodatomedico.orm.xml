@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnodatomedico" table="ce_alumnodatomedico">
+    <indexes>
+      <index name="AlumnoIdCE_DatoMedico_idx" columns="AlumnoId"/>
+      <index name="ParentescoIdDatoMedicoAlumno_idx" columns="ContactoEmergenciaParentesco"/>
+      <index name="TipoSanguineoIdCE_DatoMedico_idx" columns="TipoSangineo"/>
+    </indexes>
+    <id name="alumnodatomedicoid" type="integer" column="AlumnoDatoMedicoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="padece" type="string" column="Padece" length="150" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="alergico" type="string" column="Alergico" length="150" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="antecedentefamiliar" type="string" column="AntecedenteFamiliar" length="150" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="autorizoantihistaminico" type="string" column="AutorizoAntihistaminico" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="examenvista" type="string" column="ExamenVista" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lentes" type="string" column="Lentes" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="examenauditivo" type="string" column="ExamenAuditivo" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="aparatoauditivo" type="string" column="AparatoAuditivo" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="examenortopedicos" type="string" column="ExamenOrtopedicos" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="aditamentoortopedico" type="string" column="AditamentoOrtopedico" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="peso" type="string" column="Peso" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="talla" type="string" column="Talla" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="enfermedadcronica" type="string" column="EnfermedadCronica" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="medicamentoregularidad" type="string" column="MedicamentoRegularidad" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="alergicosustancias" type="string" column="AlergicoSustancias" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="medicamentoadministrar" type="string" column="MedicamentoAdministrar" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="analgesicosantinflamatorios" type="string" column="AnalgesicosAntinflamatorios" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="antigripalesantihistaminicos" type="string" column="AntigripalesAntihistaminicos" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="antiacidos" type="string" column="Antiacidos" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="antiespasmodicos" type="string" column="Antiespasmodicos" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="materialcuracion" type="string" column="MaterialCuracion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="unguentos" type="string" column="Unguentos" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="remediosalternativos" type="string" column="RemediosAlternativos" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombreautoriza" type="string" column="NombreAutoriza" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="firma" type="string" column="Firma" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="personaatiende" type="string" column="PersonaAtiende" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonopersonaatiende" type="string" column="TelefonoPersonaAtiende" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactoemergencianombre" type="string" column="ContactoEmergenciaNombre" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactoemergenciatelefono" type="string" column="ContactoEmergenciaTelefono" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactoemergenciaemail" type="string" column="ContactoEmergenciaEmail" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="otraalergia" type="string" column="OtraAlergia" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="padeceenfermedadcuidanombre" type="string" column="PadeceEnfermedadCuidaNombre" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="padeceenfermedadcuidatelefono" type="string" column="PadeceEnfermedadCuidaTelefono" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="padeceenfermedadcuidadescripcion" type="string" column="PadeceEnfermedadCuidaDescripcion" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcionantecedenteimportante" type="string" column="DescripcionAntecedenteImportante" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="contactoemergenciaparentesco" target-entity="Parentesco" fetch="LAZY">
+      <join-columns>
+        <join-column name="ContactoEmergenciaParentesco" referenced-column-name="ParentescoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tiposangineo" target-entity="Tiposanguineo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoSangineo" referenced-column-name="TipoSanguineoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\AdFactoresapoyoporsolicitudadmision" table="ad_factoresapoyoporsolicitudadmision">
+    <indexes>
+      <index name="FK_ad_factorapoyoporsolicitud2" columns="SolicitudAdmisionid"/>
+      <index name="FK_ad_factorapoyoporsolicituda" columns="FactoresApoyoId"/>
+    </indexes>
+    <id name="factoresapoyoporsolicitudadmisionid" type="integer" column="FactoresApoyoporSolicitudAdmisionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionid" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="factoresapoyoid" target-entity="AdFactoresapoyo" fetch="LAZY">
+      <join-columns>
+        <join-column name="FactoresApoyoId" referenced-column-name="FactoresApoyoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

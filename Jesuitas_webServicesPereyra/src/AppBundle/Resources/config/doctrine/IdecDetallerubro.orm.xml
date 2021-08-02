@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IdecDetallerubro" table="idec_detallerubro">
+    <indexes>
+      <index name="FK_idec_detallerubro_CampoPond" columns="CampoPonderacionId"/>
+      <index name="FK_idec_detallerubro_Ponderaci" columns="PonderacionAdmisionId"/>
+      <index name="FK_idec_detallerubro_PreguntaP" columns="PreguntaPorEvaluacionId"/>
+      <index name="FK_idec_detallerubro_TipoDetal" columns="TipoDetalleRubroId"/>
+    </indexes>
+    <id name="detallerubroid" type="integer" column="DetalleRubroId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="valor" type="float" column="Valor" precision="10" scale="0" nullable="true"/>
+    <many-to-one field="campoponderacionid" target-entity="IdecCampoponderacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="CampoPonderacionId" referenced-column-name="CampoPonderacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ponderacionadmisionid" target-entity="IdecPonderacionadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="PonderacionAdmisionId" referenced-column-name="PonderacionAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="preguntaporevaluacionid" target-entity="Preguntaporevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PreguntaPorEvaluacionId" referenced-column-name="PreguntaPorEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipodetallerubroid" target-entity="IdecTipodetallerubro" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoDetalleRubroId" referenced-column-name="TipoDetalleRubro"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

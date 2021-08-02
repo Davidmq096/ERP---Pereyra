@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjDocumentosubconceptos" table="cj_documentosubconceptos">
+    <indexes>
+      <index name="FK_DOCUMENTOSSUBCONCEPTOS_DOCUMENTO_idx" columns="DocumentoId"/>
+      <index name="FK_DOCUMENTOSSUBCONCEPTOS_SUBCONCEPTO_idx" columns="SubConceptoId"/>
+    </indexes>
+    <id name="documentosubconceptosid" type="integer" column="DocumentoSubConceptosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="prioridad" type="boolean" column="Prioridad" nullable="false"/>
+    <field name="aplicainteres" type="boolean" column="AplicaInteres" nullable="false">
+      <options>
+        <option name="comment">Indica si al sub concepto del documento se le aplica un interés o no.</option>
+      </options>
+    </field>
+    <field name="aplicanivel" type="boolean" column="AplicaNivel" nullable="false">
+      <options>
+        <option name="comment">Indica si el sub concepto se aplica a todo el nivel (1) o no (0), cuando No, entonces se debe relacionar con los grados que aplica.</option>
+      </options>
+    </field>
+    <field name="nuevoingreso" type="boolean" column="NuevoIngreso" nullable="false">
+      <options>
+        <option name="comment">Indica si el concepto aplica solo para nuevo ingreso o no.</option>
+      </options>
+    </field>
+    <field name="unsolopago" type="boolean" column="UnSoloPago" nullable="false">
+      <options>
+        <option name="comment">Indica si el sub concepto se debe pagar en una sola exhibición (1) o segun los pagos del plan (0).</option>
+      </options>
+    </field>
+    <field name="descuentobeca" type="boolean" column="DescuentoBeca" nullable="true">
+      <options>
+        <option name="comment">Indica si para este sub concepto aplica descuento cuando el alumno tiene beca.</option>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="documentoid" target-entity="CjDocumento" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoId" referenced-column-name="DocumentoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="subconceptoid" target-entity="CjSubconcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubConceptoId" referenced-column-name="SubConceptoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

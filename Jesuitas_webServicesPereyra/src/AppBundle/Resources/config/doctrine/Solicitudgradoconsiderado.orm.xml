@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Solicitudgradoconsiderado" table="solicitudgradoconsiderado">
+    <indexes>
+      <index name="SolicitudGradoConsideradoNivel_idx" columns="NivelId"/>
+      <index name="SolicitudGradoConsideradoSolicitud_idx" columns="SolicitudAdmisionId"/>
+    </indexes>
+    <id name="solicitudgradoconsideradoid" type="integer" column="SolicitudGradoConsideradoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="numero" type="integer" column="Numero" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="nivelid" target-entity="Nivel" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelId" referenced-column-name="NivelId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

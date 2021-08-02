@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeConfiguracionsubmaterias" table="ce_configuracionsubmaterias">
+    <indexes>
+      <index name="FormaConfiguracionSubMateriaId" columns="FormaConfiguracionSubMateriaId"/>
+      <index name="MateriaId" columns="MateriaId"/>
+    </indexes>
+    <id name="configuracionsubmateriasid" type="integer" column="ConfiguracionSubMateriasId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="porcentajecalificacion" type="integer" column="PorcentajeCalificacion" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="formaconfiguracionsubmateriaid" target-entity="CeFormaconfiguracionsubmateria" fetch="LAZY">
+      <join-columns>
+        <join-column name="FormaConfiguracionSubMateriaId" referenced-column-name="FormaConfiguracionSubMateriaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaid" target-entity="Materia" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaId" referenced-column-name="MateriaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

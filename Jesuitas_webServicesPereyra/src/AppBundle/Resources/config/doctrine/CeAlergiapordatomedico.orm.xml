@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlergiapordatomedico" table="ce_alergiapordatomedico">
+    <indexes>
+      <index name="AlergiaIddatomedico_idx" columns="AlergiaId"/>
+      <index name="AlumnoDatoMedicoIdalergia_idx" columns="AlumnoDatoMedicoId"/>
+    </indexes>
+    <id name="alergiapordatomedicoid" type="integer" column="AlergiaPorDatoMedicoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="alergiaid" target-entity="Alergia" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlergiaId" referenced-column-name="AlergiaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnodatomedicoid" target-entity="CeAlumnodatomedico" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoDatoMedicoId" referenced-column-name="AlumnoDatoMedicoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

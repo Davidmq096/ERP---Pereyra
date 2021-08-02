@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Eventoevaluacion" table="eventoevaluacion">
+    <indexes>
+      <index name="EventoEvaluacionEvaluacion_idx" columns="EvaluacionId"/>
+      <index name="EventoEvaluacionLugar_idx" columns="LugarId"/>
+      <index name="EventoEvaluacionUsuario_idx" columns="UsuarioId"/>
+      <index name="EventoEvaluacionEntrevista_idx" columns="BloqueGradoEntrevistaId"/>
+      <index name="EventoEvaluacionEvaluacionExamen_idx" columns="BloqueGradoEvaluacionId"/>
+    </indexes>
+    <id name="eventoevaluacionid" type="integer" column="EventoEvaluacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="true"/>
+    <field name="fechafin" type="date" column="FechaFin" nullable="true"/>
+    <field name="horainicio" type="time" column="HoraInicio" nullable="true"/>
+    <field name="horafin" type="time" column="HoraFin" nullable="true"/>
+    <field name="cupo" type="integer" column="Cupo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="bloquegradoentrevistaid" target-entity="AdBloquegradoentrevista" fetch="LAZY">
+      <join-columns>
+        <join-column name="BloqueGradoEntrevistaId" referenced-column-name="BloqueGradoEntrevistaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="evaluacionid" target-entity="Evaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="EvaluacionId" referenced-column-name="EvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="bloquegradoevaluacionid" target-entity="AdBloquegradoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="BloqueGradoEvaluacionId" referenced-column-name="BloqueGradoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lugarid" target-entity="Lugar" fetch="LAZY">
+      <join-columns>
+        <join-column name="LugarId" referenced-column-name="LugarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

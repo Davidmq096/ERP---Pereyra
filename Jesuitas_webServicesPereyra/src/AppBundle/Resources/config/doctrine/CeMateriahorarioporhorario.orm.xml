@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeMateriahorarioporhorario" table="ce_materiahorarioporhorario">
+    <indexes>
+      <index name="fk_horario" columns="HorarioId"/>
+      <index name="fk_materiahorario" columns="MateriaHorarioId"/>
+    </indexes>
+    <id name="materiahorarioporhorarioid" type="integer" column="MateriaHorarioPorHorarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="horarioid" target-entity="CeHorario" fetch="LAZY">
+      <join-columns>
+        <join-column name="HorarioId" referenced-column-name="HorarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiahorarioid" target-entity="CeMateriaporhorario" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaHorarioId" referenced-column-name="MateriaPorHorarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

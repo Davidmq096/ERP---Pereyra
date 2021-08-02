@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjCuentaporconcepto" table="cj_cuentaporconcepto">
+    <indexes>
+      <index name="FK_CUENTAPORCONCEPTO_BANCO_idx" columns="BancoId"/>
+      <index name="FK_CUENTAPORCONCEPTO_TIPOCUENTA_idx" columns="TipoCuentaId"/>
+      <index name="FK_CUENTAPORCONCEPTO_CUENTA_idx" columns="CuentaContableId"/>
+      <index name="FK_CUENTAPORCONCEPTO_CONCEPTO_idx" columns="ConceptoId"/>
+    </indexes>
+    <id name="cuentaporconceptoid" type="integer" column="CuentaPorConceptoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="bancoid" target-entity="CjBanco" fetch="LAZY">
+      <join-columns>
+        <join-column name="BancoId" referenced-column-name="BancoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="conceptoid" target-entity="CjConcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConceptoId" referenced-column-name="ConceptoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cuentacontableid" target-entity="CjCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="CuentaContableId" referenced-column-name="CuentaContableId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipocuentaid" target-entity="CjTipocuenta" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoCuentaId" referenced-column-name="TipoCuentaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

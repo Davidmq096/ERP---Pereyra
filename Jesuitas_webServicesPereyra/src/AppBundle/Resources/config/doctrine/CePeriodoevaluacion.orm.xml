@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CePeriodoevaluacion" table="ce_periodoevaluacion">
+    <indexes>
+      <index name="FK_ce_periodoevaluacion_Conjun" columns="ConjuntoPeriodoEvaluacionId"/>
+    </indexes>
+    <id name="periodoevaluacionid" type="integer" column="PeriodoEvaluacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="string" column="Descripcion" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcioncorta" type="string" column="DescripcionCorta" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="true"/>
+    <field name="fechafin" type="date" column="FechaFin" nullable="true"/>
+    <field name="porcentajecalificacionfinal" type="integer" column="PorcentajeCalificacionFinal" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fechalimedicionplantilla" type="date" column="FechaLimEdicionPlantilla" nullable="true"/>
+    <field name="fechalimedicionprofesor" type="date" column="FechaLimEdicionProfesor" nullable="true"/>
+    <field name="fechacapturacalinicio" type="date" column="FechaCapturaCalInicio" nullable="true"/>
+    <field name="fechacapturacalfin" type="date" column="FechaCapturaCalFin" nullable="true"/>
+    <field name="fechapublicacionprevia" type="date" column="FechaPublicacionPrevia" nullable="true"/>
+    <field name="fechaperiodorevisioninicio" type="date" column="FechaPeriodoRevisionInicio" nullable="true"/>
+    <field name="fechaperiodorevisionfin" type="date" column="FechaPeriodoRevisionFin" nullable="true"/>
+    <field name="fechapublicaciondefinitiva" type="date" column="FechaPublicacionDefinitiva" nullable="true"/>
+    <many-to-one field="conjuntoperiodoevaluacionid" target-entity="CeConjuntoperiodoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConjuntoPeriodoEvaluacionId" referenced-column-name="ConjuntoPeriodoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

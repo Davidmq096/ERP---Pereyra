@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrUsuarioporexamen" table="br_usuarioporexamen">
+    <indexes>
+      <index name="FK_br_usuarioporexamen" columns="UsuarioExternoId"/>
+      <index name="FK_br_usuarioporexamen_AlumnoI" columns="AlumnoId"/>
+      <index name="FK_br_usuarioporexamen_ExamenP" columns="ExamenPorCalendarioId"/>
+    </indexes>
+    <id name="usuarioporexamenid" type="integer" column="UsuarioPorExamenId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="intentosrestantes" type="integer" column="IntentosRestantes" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="aplicado" type="boolean" column="Aplicado" nullable="true"/>
+    <field name="fecha" type="datetime" column="Fecha" nullable="true"/>
+    <field name="tiempo" type="string" column="Tiempo" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="puntaje" type="integer" column="Puntaje" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calificacion" type="float" column="Calificacion" precision="10" scale="0" nullable="true"/>
+    <many-to-one field="usuarioexternoid" target-entity="BrUsuarioexterno" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioExternoId" referenced-column-name="UsuarioExternoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="examenporcalendarioid" target-entity="BrExamenporcalendario" fetch="LAZY">
+      <join-columns>
+        <join-column name="ExamenPorCalendarioId" referenced-column-name="ExamenPorCalendarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

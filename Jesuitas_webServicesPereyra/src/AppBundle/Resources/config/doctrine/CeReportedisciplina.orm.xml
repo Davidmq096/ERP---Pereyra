@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeReportedisciplina" table="ce_reportedisciplina">
+    <indexes>
+      <index name="ce_reportedisciplina_ce_alumnoporciclo_AlumnoPorCicloId_fk" columns="AlumnoPorCicloId"/>
+      <index name="ce_reportedisciplina_ce_tiporeporte_TipoReporteId_fk" columns="TipoReporteId"/>
+      <index name="ce_reportedisciplina_usuario_UsuarioId_fk" columns="UsuarioId"/>
+      <index name="fk_area" columns="AreaDisciplinaId"/>
+      <index name="ce_reportedisciplina_ce_materiaporplanestudios_fk" columns="MateriaPorPlanEstudiosId"/>
+    </indexes>
+    <id name="reportedisciplinaid" type="integer" column="ReporteDisciplinaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="observaciones" type="text" column="Observaciones" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fecha" type="date" column="Fecha" nullable="false"/>
+    <many-to-one field="alumnoporcicloid" target-entity="CeAlumnoporciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoPorCicloId" referenced-column-name="AlumnoPorCicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaporplanestudiosid" target-entity="CeMateriaporplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPorPlanEstudiosId" referenced-column-name="MateriaPorPlanEstudioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tiporeporteid" target-entity="CeTiporeporte" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoReporteId" referenced-column-name="TipoReporteId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="areadisciplinaid" target-entity="CeAreadisciplina" fetch="LAZY">
+      <join-columns>
+        <join-column name="AreaDisciplinaId" referenced-column-name="AreaDisciplinaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

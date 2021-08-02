@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\MaHigienemarcado" table="ma_higienemarcado">
+    <indexes>
+      <index name="FK_ma_higienemarcado_higieneid" columns="higieneid"/>
+      <index name="FK_ma_higienemarcado_informeid" columns="informeid"/>
+    </indexes>
+    <id name="higienemarcadoid" type="integer" column="higienemarcadoid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="hecho" type="boolean" column="hecho" nullable="true"/>
+    <field name="archivado" type="boolean" column="archivado" nullable="true"/>
+    <many-to-one field="higieneid" target-entity="MaHigiene" fetch="LAZY">
+      <join-columns>
+        <join-column name="higieneid" referenced-column-name="HigieneId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="informeid" target-entity="MaInforme" fetch="LAZY">
+      <join-columns>
+        <join-column name="informeid" referenced-column-name="InformeId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

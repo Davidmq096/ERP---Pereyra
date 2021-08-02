@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAsistencia" table="ce_asistencia">
+    <indexes>
+      <index name="fk_ce_estatusinasistencia_estatusinasistenciaid_idx" columns="EstatusInasistenciaId"/>
+      <index name="fk_ce_tipoasistencia_tipoasistenciaid_idx" columns="TipoAsistenciaId"/>
+      <index name="fk_usuario_usuarioid_idx" columns="UsuarioId"/>
+      <index name="ce_asistencia_ce_alumnoporciclo_AlumnoPorCicloId_fk" columns="AlumnoPorCicloId"/>
+      <index name="ce_asistencia_ce_profesorpormateriaplanestudios_fk" columns="ProfesorPorMateriaPlanEstudioId"/>
+    </indexes>
+    <id name="asistenciaid" type="integer" column="AsistenciaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="Fecha" nullable="false"/>
+    <field name="hora" type="time" column="Hora" nullable="false"/>
+    <field name="motivocancelacioninasistencia" type="string" column="MotivoCancelacionInasistencia" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechamodificacion" type="datetime" column="FechaModificacion" nullable="true"/>
+    <many-to-one field="alumnoporcicloid" target-entity="CeAlumnoporciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoPorCicloId" referenced-column-name="AlumnoPorCicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorpormateriaplanestudioid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanEstudioId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatusinasistenciaid" target-entity="CeEstatusinasistencia" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusInasistenciaId" referenced-column-name="EstatusInasistenciaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoasistenciaid" target-entity="CeTipoasistencia" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoAsistenciaId" referenced-column-name="TipoAsistenciaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

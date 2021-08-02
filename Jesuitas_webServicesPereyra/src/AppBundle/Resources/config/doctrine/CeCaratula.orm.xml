@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCaratula" table="ce_caratula">
+    <indexes>
+      <index name="fk_profesorcaratula" columns="ProfesorPorMateriaPlanestudiosId"/>
+    </indexes>
+    <id name="caratulaid" type="integer" column="CaratulaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <field name="criterioevaluacion" type="boolean" column="CriterioEvaluacion" nullable="false"/>
+    <field name="descripcion" type="text" column="Descripcion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="profesorpormateriaplanestudiosid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanestudiosId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

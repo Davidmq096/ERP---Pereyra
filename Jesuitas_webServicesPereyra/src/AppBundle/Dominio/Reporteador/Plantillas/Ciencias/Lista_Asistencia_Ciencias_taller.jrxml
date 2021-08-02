@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Lista_Asistencia_Ciencias" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63fffd7b-ba3c-467d-843b-94b86aa69980">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="alumno" uuid="4dc66232-281d-4ec3-9487-e28e1c6a652c">
+		<parameter name="grupoid" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+  acg.numerolista as numerolista,
+  concat_ws(' ', a.ApellidoPaterno, a.ApellidoMaterno, a.PrimerNombre, a.SegundoNombre) alumno
+from ce_alumnocicloportaller acg
+  inner join ce_alumnoporciclo ac on acg.AlumnoPorCicloId = ac.AlumnoPorCicloId
+  inner join ce_alumno a on ac.AlumnoId = a.AlumnoId and a.AlumnoEstatusId = 1
+where acg.tallercurricularid = $P{grupoid} and acg.vigente = 1 Order By  acg.NumeroLista]]>
+		</queryString>
+		<field name="numerolista" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="alumno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="profesorpormateriaplanestudioid" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[207]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/Users/dherrejon/TFS/ERP Jesuitas/Code/Jesuitas_webServices/src/AppBundle/Dominio/Reporteador/Plantillas/ciencias/logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+  gr.tallercurricularid as grupoid,
+  c.Nombre as ciclo,
+  GROUP_CONCAT(DISTINCT n.Nombre) as nivel,
+  GROUP_CONCAT(DISTINCT g.Grado) as grado,
+  gr.Nombre as grupo,
+  CONCAT_WS(' ', p.ApellidoPaterno, p.ApellidoMaterno, p.Nombre) as profesor,
+  GROUP_CONCAT(DISTINCT m.Nombre) as materia
+from ce_profesorpormateriaplanestudios pmp
+
+inner join ce_profesor p on pmp.ProfesorId = p.ProfesorId
+inner join ce_tallercurricular gr on pmp.tallerid = gr.tallercurricularid
+inner join ce_gradoportallercurricular gra on gra.tallercurricularid = gr.tallercurricularid
+inner join ce_materiaporplanestudios mpe on gra.MateriaPorPlanEstudioId = mpe.MateriaPorPlanEstudioId
+inner join materia m on mpe.MateriaId = m.MateriaId
+inner join grado g on gra.GradoId = g.GradoId
+inner join nivel n on g.NivelId = n.NivelId
+inner join ciclo c on gr.CicloId = c.CicloId
+where pmp.ProfesorPorMateriaPlanEstudiosId = $P{profesorpormateriaplanestudioid}]]>
+	</queryString>
+	<field name="grupoid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ciclo" class="java.lang.String"/>
+	<field name="nivel" class="java.lang.String"/>
+	<field name="grado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="grupo" class="java.lang.String"/>
+	<field name="profesor" class="java.lang.String"/>
+	<field name="materia" class="java.lang.String"/>
+	<title>
+		<band height="106" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="89" height="98" uuid="0f58bb89-f263-45b6-8df4-0a6c9db62872"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="89" y="3" width="231" height="20" uuid="f3e9dc91-53e6-476b-b6a2-66871933e0a6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESCUELA CARLOS PEREYRA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="23" width="181" height="20" uuid="c21fe56d-1186-479b-99f9-1f18fee02741"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="58" width="181" height="20" uuid="c5fff6df-d604-49e3-ba4e-2309f52c2260"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ciclo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="78" width="181" height="20" uuid="97f5c2e2-f75e-4f87-9611-eeb64b4e24ce"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grado} + " " + $F{grupo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="19" width="172" height="20" uuid="be82e435-c4e2-499b-a463-f3e43c2a5a27"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="296" y="19" width="87" height="20" uuid="2e7c350b-142f-4672-bec4-b952a43b3697"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asignatura:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="383" y="78" width="172" height="20" uuid="db533394-44b0-4e58-8acb-a47299cbe20f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{profesor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="296" y="78" width="87" height="20" uuid="3f071060-b7f9-47dd-800a-c72c130d4591"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maestro(a):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="47" width="87" height="20" uuid="e7674e7d-5cd9-4df3-9c72-51baf730d97a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parcial:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="383" y="63" width="144" height="1" uuid="8a0a124a-4946-4fdc-b8b9-accc2f1ba298"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="555" height="125" uuid="a140265b-0be6-4233-863e-75f222bc3098"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="alumno" uuid="effa1803-1c7b-40a6-8cd4-68b8083f70f4">
+						<datasetParameter name="grupoid">
+							<datasetParameterExpression><![CDATA[$F{grupoid}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="35" uuid="7f7c9130-dc2e-4e4f-81d7-03522a23e8a9">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="35" height="20" uuid="6a7cbf2b-b2f2-4688-a5aa-0ff792c561e6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Lista]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="35" height="17" uuid="d0a20daf-3a11-4a28-8a85-b97494f3d992"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{numerolista}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="213" uuid="a5cc9233-497c-4441-81b2-d660900ed32c">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="213" height="20" uuid="b9b49bec-dabc-4b68-b31c-e0c5c18a8ff1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nombre]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement style="table_TD" x="0" y="0" width="213" height="17" uuid="fb865940-0a95-4dd2-b106-e35063fc1e56"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{alumno}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="30" uuid="f0c15c1a-3fa0-4b34-993a-309838412ce5">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="b0bdef42-9bb8-4fa8-ba28-9532544a71f3">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="f73f3fd8-7252-44c0-872d-dcb241b0c83b">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="fa6bf10e-8af5-4cad-b5c4-bd255686be0d">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="3d55f879-e36e-4191-a7cc-e28e468f958a">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="78f54d76-d26c-4ac6-90b6-17c384f8da5a">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="dab4d206-8e3a-48c2-9cb4-e7ad3f7c9387">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="015f70eb-886c-421c-ab3c-7a5e17380e19">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="70961ed6-8cbc-4817-8c42-cb00119e01c8">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="30" uuid="cc4d17b8-d933-4824-8ed3-b0e4581d51e7">
+						<jr:tableHeader style="table_TD" height="20" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

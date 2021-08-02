@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CbRegistroenviocorreo" table="cb_registroenviocorreo">
+    <unique-constraints>
+      <unique-constraint name="AlumnoId" columns="AlumnoId"/>
+    </unique-constraints>
+    <id name="registroenviocorreoid" type="integer" column="RegistroEnvioCorreoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="Fecha" nullable="false"/>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

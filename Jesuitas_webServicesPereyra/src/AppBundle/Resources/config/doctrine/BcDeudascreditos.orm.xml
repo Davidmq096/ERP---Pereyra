@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcDeudascreditos" table="bc_deudascreditos">
+    <indexes>
+      <index name="SolicitudId" columns="SolicitudId"/>
+      <index name="bc_deudascreditos_ibfk_2" columns="TipoCreditoId"/>
+    </indexes>
+    <id name="deudascreditosid" type="integer" column="DeudasCreditosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="importetotal" type="string" column="ImporteTotal" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="pagomensual" type="string" column="PagoMensual" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="bancoinstitucion" type="string" column="BancoInstitucion" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="limitecredito" type="string" column="LimiteCredito" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="portal" type="integer" column="portal" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipocreditoid" target-entity="BcTipocredito" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoCreditoId" referenced-column-name="TipoCreditoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcSolicitudporalumno" table="bc_solicitudporalumno">
+    <indexes>
+      <index name="AlumnoId" columns="AlumnoId"/>
+      <index name="EstatusId" columns="EstatusId"/>
+      <index name="SolicitudId" columns="SolicitudId"/>
+      <index name="bc_solicitudporalumno_bc_estatussolicitudbeca_motivocancela_idx" columns="MotivoCancelacionId"/>
+      <index name="FK_bc_solicitudporalumno_GradoIdDestino" columns="GradoIdDestino"/>
+      <index name="FK_bc_solicitudporalumno_GradoIdOrigen" columns="GradoIdOrigen"/>
+    </indexes>
+    <id name="alumnosolicitudid" type="integer" column="AlumnoSolicitudId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="calificacion" type="float" column="Calificacion" precision="10" scale="0" nullable="true"/>
+    <many-to-one field="gradoiddestino" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoIdDestino" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoidorigen" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoIdOrigen" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="motivocancelacionid" target-entity="BcMotivocancelacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="MotivoCancelacionId" referenced-column-name="MotivoCancelacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatusid" target-entity="BcEstatussolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusId" referenced-column-name="EstatusId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

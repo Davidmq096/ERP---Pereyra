@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpBoletobitacora" table="tp_boletobitacora">
+    <indexes>
+      <index name="fk_bolid" columns="BoletoId"/>
+      <index name="fk_bolestatusid" columns="BoletoEstatusId"/>
+      <index name="fk_rutaid" columns="RutaId"/>
+      <index name="fk_alu" columns="AlumnoId"/>
+      <index name="fk_paradaid" columns="ParadaId"/>
+    </indexes>
+    <id name="boletobitacoraid" type="integer" column="BoletoBitacoraId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="boletoid" type="integer" column="BoletoId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fechaviaje" type="date" column="Fechaviaje" nullable="true"/>
+    <field name="fechacompra" type="datetime" column="FechaCompra" nullable="true"/>
+    <field name="fechaedicion" type="datetime" column="FechaEdicion" nullable="true"/>
+    <field name="medioedicion" type="string" column="MedioEdicion" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usuarioedicion" type="text" column="UsuarioEdicion" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechacancelacion" type="datetime" column="FechaCancelacion" nullable="true"/>
+    <field name="mediocancelacion" type="string" column="MedioCancelacion" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usuariocancelacion" type="text" column="UsuarioCancelacion" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="precio" type="float" column="Precio" precision="10" scale="0" nullable="true"/>
+    <field name="usuario" type="text" column="Usuario" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="portal" type="string" column="Portal" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="escaneado" type="boolean" column="Escaneado" nullable="true"/>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="boletoestatusid" target-entity="TpBoletoestatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="BoletoEstatusId" referenced-column-name="BoletoEstatusId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="paradaid" target-entity="TpRutaprecioparada" fetch="LAZY">
+      <join-columns>
+        <join-column name="ParadaId" referenced-column-name="RutaPrecioParadaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="rutaid" target-entity="TpRuta" fetch="LAZY">
+      <join-columns>
+        <join-column name="RutaId" referenced-column-name="RutaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

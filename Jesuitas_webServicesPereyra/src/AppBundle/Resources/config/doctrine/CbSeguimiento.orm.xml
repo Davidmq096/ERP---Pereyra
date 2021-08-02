@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CbSeguimiento" table="cb_seguimiento">
+    <indexes>
+      <index name="FK_cb_seguimiento_AcuerdoI" columns="AcuerdoId"/>
+      <index name="FK_cb_seguimiento_ClaveFamiliar" columns="ClaveFamiliarId"/>
+      <index name="FK_cb_seguimiento_MedioCon" columns="MedioContactoId"/>
+      <index name="FK_cb_seguimiento_UsuarioI" columns="UsuarioId"/>
+    </indexes>
+    <id name="seguimientoid" type="integer" column="SeguimientoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="Fecha" nullable="false"/>
+    <field name="hora" type="time" column="Hora" nullable="false"/>
+    <field name="personaatiende" type="string" column="PersonaAtiende" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="observaciones" type="text" column="Observaciones" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="observacionmanual" type="text" column="ObservacionManual" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="asistio" type="boolean" column="Asistio" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="acuerdoid" target-entity="CbAcuerdo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AcuerdoId" referenced-column-name="AcuerdoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="clavefamiliarid" target-entity="CeClavefamiliar" fetch="LAZY">
+      <join-columns>
+        <join-column name="ClaveFamiliarId" referenced-column-name="ClaveFamiliarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="mediocontactoid" target-entity="CbMediocontacto" fetch="LAZY">
+      <join-columns>
+        <join-column name="MedioContactoId" referenced-column-name="MedioContactoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

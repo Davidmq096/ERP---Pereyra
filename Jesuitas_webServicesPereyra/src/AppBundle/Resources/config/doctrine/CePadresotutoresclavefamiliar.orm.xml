@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CePadresotutoresclavefamiliar" table="ce_padresotutoresclavefamiliar">
+    <indexes>
+      <index name="fk_clavefamiliar_idx" columns="ClaveFamiliarId"/>
+      <index name="fk_padresotutores_idx" columns="PadresOTutoresId"/>
+      <index name="fk_parentesco_idx" columns="TutorId"/>
+    </indexes>
+    <id name="padresotutoresporclavefamiliar" type="integer" column="PadresOTutoresPorClaveFamiliar">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="clavefamiliarid" target-entity="CeClavefamiliar" fetch="LAZY">
+      <join-columns>
+        <join-column name="ClaveFamiliarId" referenced-column-name="ClaveFamiliarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tutorid" target-entity="Tutor" fetch="LAZY">
+      <join-columns>
+        <join-column name="TutorId" referenced-column-name="TutorId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

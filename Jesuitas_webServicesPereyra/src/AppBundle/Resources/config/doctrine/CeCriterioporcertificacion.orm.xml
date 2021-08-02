@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCriterioporcertificacion" table="ce_criterioporcertificacion">
+    <indexes>
+      <index name="fk_ce_criterioporcertificacion_ce_certificacion_idx" columns="CertificacionId"/>
+    </indexes>
+    <id name="criterioporcertificacionid" type="integer" column="CriterioPorCertificacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="certificacionid" target-entity="CeCertificacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="CertificacionId" referenced-column-name="CertificacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

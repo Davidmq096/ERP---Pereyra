@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjTipodocumento" table="cj_tipodocumento">
+    <id name="tipodocumentoid" type="integer" column="TipoDocumentoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Descripción del tipo de documento.</option>
+      </options>
+    </field>
+    <field name="serie" type="string" column="Serie" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Serie de facturación para este tipo de documentos.</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrSubtema" table="br_subtema">
+    <indexes>
+      <index name="FK_br_subtema_TemaId" columns="TemaId"/>
+    </indexes>
+    <id name="subtemaid" type="integer" column="SubtemaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="text" column="Nombre" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+    <many-to-one field="temaid" target-entity="BrTema" fetch="LAZY">
+      <join-columns>
+        <join-column name="TemaId" referenced-column-name="TemaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjFormapago" table="cj_formapago">
+    <id name="formapagoid" type="integer" column="FormaPagoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre de la forma de pago.</option>
+      </options>
+    </field>
+    <field name="esefectivo" type="boolean" column="EsEfectivo" nullable="false"/>
+    <field name="doblecaptura" type="boolean" column="DobleCaptura" nullable="false"/>
+    <field name="comisionporcentaje" type="decimal" column="ComisionPorcentaje" precision="12" scale="2" nullable="false"/>
+    <field name="comisionmontofijo" type="decimal" column="ComisionMontoFijo" precision="12" scale="2" nullable="false"/>
+    <field name="pidereferencia" type="boolean" column="PideReferencia" nullable="false"/>
+    <field name="bancoid" type="integer" column="BancoId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Banco asociado a la forma de pago.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="comment">Indica si la forma de pago esta activa (1) o no (0) dentro del sistema.</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

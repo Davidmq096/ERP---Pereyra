@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\MaPlatillopormenu" table="ma_platillopormenu">
+    <indexes>
+      <index name="FK_ma_platillopormenu_MenuId" columns="MenuId"/>
+      <index name="FK_ma_platillopormenu_Platillo" columns="PlatilloId"/>
+    </indexes>
+    <id name="platillopormenuid" type="integer" column="PlatilloPorMenuId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="orden" type="integer" column="Orden" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="menuid" target-entity="MaMenu" fetch="LAZY">
+      <join-columns>
+        <join-column name="MenuId" referenced-column-name="MenuId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="platilloid" target-entity="MaPlatillo" fetch="LAZY">
+      <join-columns>
+        <join-column name="PlatilloId" referenced-column-name="PlatilloId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

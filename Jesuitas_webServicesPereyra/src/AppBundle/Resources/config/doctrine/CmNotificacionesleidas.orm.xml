@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CmNotificacionesleidas" table="cm_notificacionesleidas">
+    <indexes>
+      <index name="cm_notificacionesleidas_cm_notificaciondestinatarios_fk" columns="NotificacionDestinatarioId"/>
+      <index name="cm_notificacionesleidas_cm_notificacion_NotificacionId_fk_idx" columns="NotificacionId"/>
+      <index name="FK_cm_notificacionesleidas_Alu_idx" columns="AlumnoId"/>
+    </indexes>
+    <id name="notificacionleidaid" type="integer" column="notificacionleidaid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="id" type="integer" column="id" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="leido" type="boolean" column="leido" nullable="true"/>
+    <field name="hecho" type="boolean" column="hecho" nullable="true"/>
+    <field name="tipo" type="integer" column="tipo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="notificacionid" target-entity="CmNotificacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="NotificacionId" referenced-column-name="NotificacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="notificaciondestinatarioid" target-entity="CmNotificaciondestinatarios" fetch="LAZY">
+      <join-columns>
+        <join-column name="NotificacionDestinatarioId" referenced-column-name="notificaciondestinatariosid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

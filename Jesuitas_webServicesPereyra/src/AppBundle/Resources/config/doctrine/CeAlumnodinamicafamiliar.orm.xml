@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnodinamicafamiliar" table="ce_alumnodinamicafamiliar">
+    <indexes>
+      <index name="AlumnoIdDinamicaFamiliar_idx" columns="AlumnoId"/>
+      <index name="ParentescoIdDinamicaFamiliar_idx" columns="ParentescoId"/>
+    </indexes>
+    <id name="alumnodinamicafamiliarid" type="integer" column="AlumnoDinamicaFamiliarId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ninguna" type="boolean" column="Ninguna" nullable="true"/>
+    <field name="divorcio" type="boolean" column="Divorcio" nullable="true"/>
+    <field name="separacion" type="boolean" column="Separacion" nullable="true"/>
+    <field name="custodia" type="boolean" column="Custodia" nullable="true"/>
+    <field name="enfermedadgrave" type="boolean" column="EnfermedadGrave" nullable="true"/>
+    <field name="miembroenfermedadgrave" type="string" column="MiembroEnfermedadGrave" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="muerteperdida" type="boolean" column="MuertePerdida" nullable="true"/>
+    <field name="miembromuerteperdida" type="string" column="MiembroMuertePerdida" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cambioresidencia" type="boolean" column="CambioResidencia" nullable="true"/>
+    <field name="medioshermanos" type="boolean" column="MediosHermanos" nullable="true"/>
+    <field name="madrepadresoltero" type="boolean" column="MadrePadreSoltero" nullable="true"/>
+    <field name="segundosmatrimonios" type="boolean" column="SegundosMatrimonios" nullable="true"/>
+    <field name="otros" type="boolean" column="Otros" nullable="true"/>
+    <field name="descripcionotros" type="string" column="DescripcionOtros" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="parentescoid" target-entity="Parentesco" fetch="LAZY">
+      <join-columns>
+        <join-column name="ParentescoId" referenced-column-name="ParentescoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

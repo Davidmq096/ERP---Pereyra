@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\AdConfiguracionporgrado" table="ad_configuracionporgrado">
+    <indexes>
+      <index name="configuracionid_idx" columns="ConfiguracionId"/>
+      <index name="gradoid_idx" columns="GradoId"/>
+    </indexes>
+    <id name="configuracionporgradoid" type="integer" column="ConfiguracionPorGradoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="configuracionid" target-entity="AdConfiguracion" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConfiguracionId" referenced-column-name="ConfiguracionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

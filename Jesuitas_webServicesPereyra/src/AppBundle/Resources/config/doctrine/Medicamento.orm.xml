@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Medicamento" table="medicamento">
+    <id name="medicamentosid" type="integer" column="MedicamentosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="string" column="Descripcion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="antigripal" type="boolean" column="Antigripal" nullable="true"/>
+    <field name="analgesico" type="boolean" column="Analgesico" nullable="true"/>
+    <field name="antispasmodico" type="boolean" column="Antispasmodico" nullable="true"/>
+    <field name="materialcuracion" type="boolean" column="MaterialCuracion" nullable="true"/>
+    <field name="unguento" type="boolean" column="Unguento" nullable="true"/>
+    <field name="remediosalternativo" type="boolean" column="RemediosAlternativo" nullable="true"/>
+    <field name="antiacidos" type="boolean" column="Antiacidos" nullable="true"/>
+  </entity>
+</doctrine-mapping>

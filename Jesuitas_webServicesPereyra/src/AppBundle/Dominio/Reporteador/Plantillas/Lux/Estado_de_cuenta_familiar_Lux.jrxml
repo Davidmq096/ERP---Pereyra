@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Estado_de_cuenta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4fe49b64-5bde-4e3a-9f24-e274e3080a06">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table" mode="Transparent">
+		<box leftPadding="0">
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Double" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="tabla_encabezado" mode="Opaque" backcolor="#006666" fill="Solid">
+		<pen lineColor="#FFFFFF"/>
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_total" mode="Opaque" backcolor="#999999">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="tabla_td" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="tabla_cuerpo">
+		<box>
+			<pen lineWidth="0.0"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="1.5" lineColor="#009966"/>
+		</box>
+	</style>
+	<subDataset name="documentos" uuid="abfab16f-70b9-4026-9f9d-c9a1dd228696">
+		<parameter name="alumnoid" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="where" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+       c.Nombre as ciclo,
+       d.documento as documento,
+       d.concepto as concepto,
+       d.fechalimitepago as fechalimitepago,
+       DATEDIFF(CURRENT_DATE() , d.fechalimitepago) diasretraso,
+       d.saldo - d.descuento  as saldo,
+       calculaInteres(d.documentoporpagarid) as recargo,
+       (d.saldo -  d.descuento +calculaInteres(d.documentoporpagarid)) total
+from cj_documentoporpagar d
+inner join ciclo c on d.CicloId = c.CicloId
+left join cj_pagodetalle pd on d.DocumentoPorPagarId = pd.DocumentoPorPagarId
+left join cj_pago p ON  pd.PagoId = p.PagoId
+where d.alumnoid = $P{alumnoid} $P!{where}
+GROUP BY d.DocumentoPorPagarId
+ORDER BY  d.cicloid, d.FechaLimitePago]]>
+		</queryString>
+		<field name="ciclo" class="java.lang.String"/>
+		<field name="documento" class="java.lang.String">
+			<fieldDescription><![CDATA[Numero de pago (año + consecutivo de pago + letra nivel = 201800S]]></fieldDescription>
+		</field>
+		<field name="concepto" class="java.lang.String">
+			<fieldDescription><![CDATA[Descripción del concepto a pagar (opcional).]]></fieldDescription>
+		</field>
+		<field name="fechalimitepago" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[Fecha límite para realizar el pago a partir de la cual se realizarán los recargos.]]></fieldDescription>
+		</field>
+		<field name="diasretraso" class="java.lang.Long"/>
+		<field name="saldo" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[Saldo o adeudo restante del sub concepto.]]></fieldDescription>
+		</field>
+		<field name="recargo" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="total" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<variable name="saldoC" class="java.math.BigDecimal" resetType="Group" resetGroup="ciclo" calculation="Sum">
+			<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+			<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+		</variable>
+		<variable name="recargoC" class="java.math.BigDecimal" resetType="Group" resetGroup="ciclo" calculation="Sum">
+			<variableExpression><![CDATA[$F{recargo}]]></variableExpression>
+			<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+		</variable>
+		<variable name="totalC" class="java.math.BigDecimal" resetType="Group" resetGroup="ciclo" calculation="Sum">
+			<variableExpression><![CDATA[$F{total}]]></variableExpression>
+			<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+		</variable>
+		<variable name="saldo" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+			<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+		</variable>
+		<variable name="recargo" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{recargo}]]></variableExpression>
+			<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+		</variable>
+		<variable name="total" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{total}]]></variableExpression>
+			<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+		</variable>
+		<group name="ciclo">
+			<groupExpression><![CDATA[$F{ciclo}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="alumnoid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["17727,18040"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="where" class="java.lang.String">
+		<defaultValueExpression><![CDATA["and d.saldo > 0 and d.pagoestatusid = 1 and d.fechalimitepago < now()"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:/Desarrollo/Code/Jesuitas_webServices/src/AppBundle/Dominio/Reporteador/Plantillas/Lux/logonombre.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+cf.Clave as clave,
+a.alumnoid as alumnoid,
+  a.matricula as matricula,
+  CONCAT_WS(' ', a.apellidopaterno, a.apellidomaterno,a.primernombre, a.segundonombre) as nombre,
+  n.Nombre as nivel,
+  g.Grado as grado,
+  gr.Nombre as grupo,
+ae.nombre as estatus,
+  (Select DATE_FORMAT(ac.FechaCreacion,'%d/%m/%Y') as fecha from cb_alumnoporacuerdo apa
+    inner join cb_acuerdo ac on apa.AcuerdoId = ac.AcuerdoId
+    where apa.AlumnoId = $P{alumnoid}
+    GROUP BY apa.AlumnoId) primeracuerdo
+from ce_alumno a
+inner join ce_alumnoporclavefamiliar acf on  a.AlumnoId = acf.AlumnoId
+inner join ce_clavefamiliar cf on acf.ClaveFamiliarId = cf.ClaveFamiliarId
+inner join ce_alumnoestatus ae on a.AlumnoEstatusId = ae.AlumnoEstatusId
+left join ce_alumnoporciclo ac on a.AlumnoId = ac.AlumnoId and ac.gradoid = (
+	select CASE WHEN CURRENT_TIMESTAMP() >= cn.fechainicios2 THEN max(g2.gradoid) ELSE min(g2.gradoid) END 	from ce_alumnoporciclo ac2
+	inner join grado g2 on ac2.GradoId = g2.GradoId
+	inner join ciclo c2 on ac2.CicloId = c2.CicloId and  c2.CicloId = (SELECT CASE WHEN MAX(cactual.CicloId) IS NULL THEN max(acu.cicloid) ELSE  MAX(cactual.CicloId) END
+                                                                      from ce_alumnoporciclo acu
+                                                                      left JOIN ciclo cactual ON acu.CicloId = cactual.CicloId AND cactual.Actual = 1
+                                                                      where acu.AlumnoId = a.alumnoid)
+	inner join ce_ciclopornivel cn on g2.NivelId = cn.NivelId and cn.CicloId = c2.CicloId
+	where ac2.AlumnoId = a.alumnoid)
+left join ciclo cactual on ac.CicloId = cactual.CicloId
+left join grado g on ac.GradoId = g.GradoId
+left join nivel n on g.NivelId = n.NivelId
+left join ce_alumnocicloporgrupo acg on ac.AlumnoPorCicloId = acg.AlumnoPorCicloId
+left join ce_grupo gr on acg.GrupoId = gr.GrupoId and gr.TipoGrupoId = 1 and gr.gradoid = g.gradoid
+inner join cj_documentoporpagar dp on  dp.alumnoid = a.alumnoid and dp.pagoestatusid = 1 and dp.saldo > 0
+
+where a.alumnoid in ($P!{alumnoid})
+group by a.AlumnoId]]>
+	</queryString>
+	<field name="clave" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alumnoid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Llave prmaria de la tabla.]]></fieldDescription>
+	</field>
+	<field name="matricula" class="java.lang.String">
+		<fieldDescription><![CDATA[MatrÝcula del alumno.]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nivel" class="java.lang.String"/>
+	<field name="grado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="grupo" class="java.lang.String"/>
+	<field name="estatus" class="java.lang.String"/>
+	<field name="primeracuerdo" class="java.lang.String"/>
+	<variable name="totalfamilia" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{total}]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+	</variable>
+	<variable name="total" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[$V{total}]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.valueOf(0)]]></initialValueExpression>
+	</variable>
+	<group name="matricula">
+		<groupExpression><![CDATA[$F{clave}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="30" y="10" width="183" height="56" uuid="513bd2e5-3922-4bae-99ad-76659a98adb5"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="280" y="20" width="275" height="22" uuid="33b999b7-d62f-416a-9947-f5c4d78583b1"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE CUENTA FAMILIAR]]></text>
+			</staticText>
+			<elementGroup>
+				<rectangle>
+					<reportElement x="330" y="42" width="167" height="18" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="29a01ea5-671d-4ff6-b5a7-641aae16d866"/>
+				</rectangle>
+				<textField pattern="dd MMMMM yyyy">
+					<reportElement x="330" y="42" width="167" height="18" backcolor="#999999" uuid="86e81367-7e95-48b1-9c19-724527d6d368"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(new java.text.SimpleDateFormat("EEEEE dd MMMMM yyyy",new Locale("es", "ES"))).format(new Date())]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+		</band>
+	</title>
+	<detail>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="19" y="29" width="124" height="16" uuid="9334641d-34e3-427c-950a-cfba925827b0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre del Alumno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="16" width="114" height="16" uuid="61ea2664-7787-4232-8e56-750b42e85d3c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matricula:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="42" width="114" height="16" uuid="ef28f506-5190-4598-931f-822a50010076"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="55" width="114" height="16" uuid="505f1c23-3fe5-4fd6-a047-89a76781c9a7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grado y Grupo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="68" width="114" height="16" uuid="1c1c2ba9-ccf4-4e55-bef8-aca789313126"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatus:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="149" y="16" width="65" height="16" uuid="66cbf53e-7701-4972-ac72-d8c982ca9257"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="16" width="47" height="16" uuid="74139161-e63e-407b-a7ce-b59a7ea71714"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="29" width="261" height="16" uuid="88b7e360-e614-49db-9121-a333910fcda2"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="149" y="42" width="112" height="16" uuid="56a3c019-a669-433e-b4f4-f7998e189038"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="149" y="55" width="52" height="16" uuid="a58888d5-c0bd-44e9-96f2-add3384c89de"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="201" y="55" width="60" height="16" uuid="174a2893-40c8-49f0-8f03-c9f21f69499d"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="149" y="68" width="112" height="16" uuid="0cf9ce50-15e2-45d2-a556-ff3aab5327ba"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="83" width="114" height="16" uuid="1d01f3d3-3d54-435f-8ad5-89adae231979"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha 1er. Acuerdo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="149" y="83" width="112" height="16" uuid="2ba6daef-a2e8-448c-8280-03021a6d5087"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{primeracuerdo}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="52">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="555" height="50" uuid="15cbb8da-9fba-43d6-ba3f-94d89f49692b"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="documentos" uuid="38df7306-07c6-472f-888f-05415048640e">
+						<datasetParameter name="alumnoid">
+							<datasetParameterExpression><![CDATA[$F{alumnoid}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="where">
+							<datasetParameterExpression><![CDATA[$P{where}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						<returnValue fromVariable="total" toVariable="total"/>
+					</datasetRun>
+					<jr:column width="215" uuid="40328946-9bb4-4921-8b70-5e51add6a608">
+						<jr:tableHeader style="tabla_encabezado" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="11" y="0" width="204" height="30" forecolor="#FFFFFF" uuid="66ad3f8c-2165-48d2-b292-5e221783b72f"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<text><![CDATA[Concepto]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_total" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="22" y="0" width="193" height="20" uuid="6ef70db6-1e32-4fd4-8048-9800c44a9757"/>
+								<text><![CDATA[Total general]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="ciclo">
+							<jr:cell height="19" rowSpan="1">
+								<textField>
+									<reportElement style="table_total" x="22" y="0" width="193" height="19" uuid="1836e3d5-bc8a-4b4c-bf62-2b9014fd69e3"/>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA["Total  " +$F{ciclo}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="tabla_cuerpo" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="11" y="0" width="204" height="20" uuid="8bc378c8-ddae-47ee-85a7-18cadd87c288"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="78" uuid="72731cf5-a6b0-4d2e-9389-1f39caa33b90">
+						<jr:tableHeader style="tabla_encabezado" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="78" height="30" forecolor="#FFFFFF" uuid="bc9f78c4-79bc-464c-a97d-06d034ca4b3f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Fecha de
+vencimiento]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_total" height="20" rowSpan="1"/>
+						<jr:groupFooter groupName="ciclo">
+							<jr:cell style="table_total" height="19" rowSpan="1"/>
+						</jr:groupFooter>
+						<jr:detailCell style="tabla_cuerpo" height="20" rowSpan="1">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement x="0" y="0" width="78" height="20" uuid="bfab60cf-fb3d-4d5d-8471-8f991aa750bb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{fechalimitepago}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="43" uuid="658a5e16-7499-476a-8b3c-657393d3e699">
+						<jr:tableHeader style="tabla_encabezado" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="43" height="30" forecolor="#FFFFFF" uuid="392467b9-d369-43da-b479-542cdfdb509d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Dias de retraso]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_total" height="20" rowSpan="1"/>
+						<jr:groupFooter groupName="ciclo">
+							<jr:cell style="table_total" height="19" rowSpan="1"/>
+						</jr:groupFooter>
+						<jr:detailCell style="tabla_cuerpo" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="43" height="20" uuid="7119e39a-775d-456e-a8d1-9d0eb4803be1">
+									<printWhenExpression><![CDATA[$F{diasretraso} > 0]]></printWhenExpression>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{diasretraso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="74" uuid="066d033c-6f24-42fb-a27e-b1a4243b87cb">
+						<jr:tableHeader style="tabla_encabezado" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="74" height="30" forecolor="#FFFFFF" uuid="1ae5dd71-5433-4223-aeaf-bcfb70987b8b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Saldo]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_total" height="20" rowSpan="1">
+							<textField pattern="$#,##0.00">
+								<reportElement x="0" y="0" width="63" height="20" uuid="cae20d1c-6d3f-480b-b041-0de83431d85e"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{saldo}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="ciclo">
+							<jr:cell style="table_total" height="19" rowSpan="1">
+								<textField pattern="$#,##0.00">
+									<reportElement x="0" y="0" width="63" height="19" uuid="7764eeb1-672d-42c2-a4ae-7af6fa780516"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$V{saldoC}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="tabla_cuerpo" height="20" rowSpan="1">
+							<textField pattern="$#,##0.00">
+								<reportElement x="0" y="0" width="63" height="20" uuid="691029e8-27e4-4e54-83fb-a7dbcc46c919"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="7f6536cc-6857-47c8-8289-fe02729d27ce">
+						<jr:tableHeader style="tabla_encabezado" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="72" height="30" forecolor="#FFFFFF" uuid="32ce0544-31a1-46e9-a4fb-964b82c983ad"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Recargos]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_total" height="20" rowSpan="1">
+							<textField pattern="$#,##0.00">
+								<reportElement x="0" y="0" width="62" height="20" uuid="07bf92f6-7b40-431c-9c9f-b6c9494ed84a"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{recargo}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="ciclo">
+							<jr:cell style="table_total" height="19" rowSpan="1">
+								<textField pattern="$#,##0.00">
+									<reportElement x="0" y="0" width="62" height="19" uuid="fff18ffe-513f-45b6-8c23-5aa7503045ad"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$V{recargoC}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="tabla_cuerpo" height="20" rowSpan="1">
+							<textField pattern="$#,##0.00">
+								<reportElement x="0" y="0" width="62" height="20" uuid="499111e4-c265-4eee-bda9-38a5f6a39608"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{recargo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="84" uuid="de1f4b61-e6ee-4fbe-aef3-4c03a3e26ea4">
+						<jr:tableHeader style="tabla_encabezado" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="84" height="30" forecolor="#FFFFFF" uuid="fe4ec195-0d76-4254-89c6-57c040784ead"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_total" height="20" rowSpan="1">
+							<textField pattern="$#,##0.00">
+								<reportElement x="0" y="0" width="71" height="20" uuid="b7fc17e0-ff42-4ce8-beec-fd5ddbf63c37"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="ciclo">
+							<jr:cell style="table_total" height="19" rowSpan="1">
+								<textField pattern="$#,##0.00">
+									<reportElement x="0" y="0" width="71" height="19" uuid="60bb996d-f6f6-481c-bc6c-73ff21ba07cb"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$V{totalC}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField pattern="$#,##0.00">
+								<reportElement x="0" y="0" width="71" height="20" uuid="85be158a-0648-4183-8756-6c3cc5830e7a"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="89">
+			<staticText>
+				<reportElement x="28" y="62" width="521" height="25" uuid="5518e14b-87d5-42dd-9472-ccce1fd418e0"/>
+				<text><![CDATA[Estaremos a sus órdenes para cualquier aclaración o duda en la extensión 4527 Financiamiento educativo o 4645 Cobranza.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="42" width="521" height="20" uuid="310d02a5-f74a-43d6-b2d7-d06158e558c0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Si usted ya efectuó su pago, favor de hacer caso omiso a este documento.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="25" width="521" height="17" uuid="626e6f16-fa95-495c-951e-2660e7bafd81"/>
+				<text><![CDATA[* Nota: el presente estado de cuenta reporta el monto de adeudo a la fecha de impresión.]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="49">
+			<staticText>
+				<reportElement x="343" y="26" width="100" height="20" uuid="f32873e5-d7a7-4611-a84c-e8b9bba752f5">
+					<printWhenExpression><![CDATA[$V{totalfamilia} > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Total Familia:]]></text>
+			</staticText>
+			<textField pattern="$#,##0.00" isBlankWhenNull="true">
+				<reportElement x="443" y="26" width="106" height="20" uuid="f77b8ec1-c3ab-4a9b-abd8-1ee478e056a7"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalfamilia}+$V{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

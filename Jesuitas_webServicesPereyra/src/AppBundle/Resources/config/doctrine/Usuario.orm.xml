@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Usuario" table="usuario">
+    <indexes>
+      <index name="UsuarioTipoUsuario_idx" columns="TipoUsuarioId"/>
+      <index name="AlumnoId" columns="AlumnoId"/>
+      <index name="PadreoTutorId" columns="PadreoTutorId"/>
+      <index name="ProfesorId" columns="ProfesorId"/>
+      <index name="UsuarioPersona_01" columns="PersonaId"/>
+    </indexes>
+    <id name="usuarioid" type="integer" column="UsuarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="cuenta" type="string" column="Cuenta" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contrasena" type="string" column="Contrasena" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="id" type="string" column="ID" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="reiniciarcontrasena" type="boolean" column="ReiniciarContrasena" nullable="true"/>
+    <field name="activo" type="boolean" column="Activo" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="usuarioenmascarado" type="integer" column="UsuarioEnmascarado" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="personaid" target-entity="Persona" fetch="LAZY">
+      <join-columns>
+        <join-column name="PersonaId" referenced-column-name="PersonaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipousuarioid" target-entity="Tipousuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoUsuarioId" referenced-column-name="TipoUsuarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padreotutorid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadreoTutorId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorid" target-entity="CeProfesor" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorId" referenced-column-name="ProfesorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

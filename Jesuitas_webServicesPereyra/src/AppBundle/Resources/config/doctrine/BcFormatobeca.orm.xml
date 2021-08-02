@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcFormatobeca" table="bc_formatobeca">
+    <indexes>
+      <index name="TipoDocumentoId" columns="TipoDocumentoId"/>
+    </indexes>
+    <id name="formatobecaid" type="integer" column="FormatoBecaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombrearchivo" type="string" column="NombreArchivo" length="150" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="archivo" type="blob" column="Archivo" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="archivosize" type="integer" column="ArchivoSize" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="archivotipo" type="string" column="ArchivoTipo" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <many-to-one field="tipodocumentoid" target-entity="BcTipodocumento" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoDocumentoId" referenced-column-name="TipoDocumentoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

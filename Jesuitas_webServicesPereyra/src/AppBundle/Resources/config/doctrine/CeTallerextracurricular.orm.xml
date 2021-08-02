@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeTallerextracurricular" table="ce_tallerextracurricular">
+    <indexes>
+      <index name="ce_tallerextracurricular_usuario_idx" columns="UsuarioId"/>
+      <index name="ce_tallerextracurricular_ce_tallerextrareglamento_fk" columns="ReglamentoId"/>
+      <index name="ce_tallerextracurricular_ciclo_CicloId_fk" columns="CicloId"/>
+      <index name="ce_tallerextracurricular_lugar_LugarId_fk" columns="LugarId"/>
+      <index name="ce_tallerextracurricular_ce_profesor_ProfesorId_fk" columns="ProfesorId"/>
+    </indexes>
+    <id name="tallerextracurricularid" type="integer" column="TallerExtracurricularId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tipoinscripcion" type="integer" column="TipoInscripcion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1 Todos
+2 Reingreso 
+3 Nuevo Ingreso</option>
+      </options>
+    </field>
+    <field name="cupo" type="integer" column="Cupo" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="cupomaxmasculino" type="integer" column="Cupomaxmasculino" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="cupomaxfemenino" type="integer" column="Cupomaxfemenino" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="anonacimientomin" type="integer" column="AnoNacimientoMin" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="anonacimientomax" type="integer" column="AnoNacimientoMax" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="colorplayera" type="string" column="ColorPlayera" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcion" type="text" column="Descripcion" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="integer" column="Activo" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="formato" type="blob" column="Formato" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="profesorid" target-entity="CeProfesor" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorId" referenced-column-name="ProfesorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="reglamentoid" target-entity="CeTallerextrareglamento" fetch="LAZY">
+      <join-columns>
+        <join-column name="ReglamentoId" referenced-column-name="TallerExtraReglamentoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cicloid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CicloId" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lugarid" target-entity="Lugar" fetch="LAZY">
+      <join-columns>
+        <join-column name="LugarId" referenced-column-name="LugarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

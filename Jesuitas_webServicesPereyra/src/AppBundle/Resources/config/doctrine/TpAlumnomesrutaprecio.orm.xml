@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpAlumnomesrutaprecio" table="tp_alumnomesrutaprecio">
+    <indexes>
+      <index name="FK_tp_alumnomesrutaprecio_Alum" columns="AlumnoMesId"/>
+      <index name="FK_tp_alumnomesrutaprecio_Cont" columns="AlumnoRutaId"/>
+      <index name="FK_tp_alumnomesrutaprecio_Docu" columns="DocumentoPorPagarId"/>
+      <index name="fk_contratoidrp" columns="ContratoId"/>
+    </indexes>
+    <id name="alumnomesrutaprecioid" type="integer" column="AlumnoMesRutaPrecioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="importe" type="float" column="Importe" precision="10" scale="0" nullable="false"/>
+    <field name="precioespecial" type="boolean" column="PrecioEspecial" nullable="false"/>
+    <many-to-one field="alumnomesid" target-entity="TpAlumnomes" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoMesId" referenced-column-name="AlumnoMesId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnorutaid" target-entity="TpAlumnoruta" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoRutaId" referenced-column-name="AlumnoRutaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="documentoporpagarid" target-entity="CjDocumentoporpagar" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoPorPagarId" referenced-column-name="DocumentoPorPagarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="contratoid" target-entity="TpContrato" fetch="LAZY">
+      <join-columns>
+        <join-column name="ContratoId" referenced-column-name="ContratoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

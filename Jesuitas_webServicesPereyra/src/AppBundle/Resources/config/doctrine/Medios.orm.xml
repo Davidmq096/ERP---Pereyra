@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Medios" table="medios">
+    <indexes>
+      <index name="MediosTipoMedio_idx" columns="TipoMedioId"/>
+    </indexes>
+    <id name="mediosid" type="integer" column="MediosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+    <many-to-one field="tipomedioid" target-entity="Tipomedios" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoMedioId" referenced-column-name="TipoMediosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

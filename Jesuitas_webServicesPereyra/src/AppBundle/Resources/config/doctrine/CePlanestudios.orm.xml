@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CePlanestudios" table="ce_planestudios">
+    <indexes>
+      <index name="FK_ce_planestudios_CicloFinalI" columns="CicloFinalId"/>
+      <index name="FK_ce_planestudios_CicloInicia" columns="CicloInicialId"/>
+      <index name="FK_ce_planestudios_GradoId" columns="GradoId"/>
+      <index name="FK_ce_planestudios_TipoRedond2" columns="TipoRedondeoFinalId"/>
+      <index name="FK_ce_planestudios_TipoRedonde" columns="TipoRedondeoPeriodoId"/>
+      <index name="FK_ce_planestudios_AreaEspecidios" columns="AreaespecializacionId"/>
+      <index name="ce_planestudios_ce_tiporedondeo_TipoRedondeoId_fk_idx" columns="TipoRedondeoCalFinalId"/>
+    </indexes>
+    <id name="planestudioid" type="integer" column="PlanEstudioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="vigente" type="boolean" column="Vigente" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="puntopase" type="integer" column="PuntoPase" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calificacionminima" type="integer" column="CalificacionMinima" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="decimalescapturanumerica" type="integer" column="DecimalesCapturaNumerica" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calificacionextraordinario" type="integer" column="CalificacionExtraordinario" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="areaespecializacionid" target-entity="CeAreaespecializacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="AreaespecializacionId" referenced-column-name="AreaEspecializacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ciclofinalid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CicloFinalId" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cicloinicialid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CicloInicialId" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tiporedondeofinalid" target-entity="CeTiporedondeo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoRedondeoFinalId" referenced-column-name="TipoRedondeoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tiporedondeoperiodoid" target-entity="CeTiporedondeo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoRedondeoPeriodoId" referenced-column-name="TipoRedondeoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tiporedondeocalfinalid" target-entity="CeTiporedondeo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoRedondeoCalFinalId" referenced-column-name="TipoRedondeoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

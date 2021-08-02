@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Preguntaporevaluacion" table="preguntaporevaluacion">
+    <indexes>
+      <index name="PreguntaPorEvaluacionEvaluacion_idx" columns="EvaluacionId"/>
+      <index name="PreguntaPorEvaluacionPregunta_idx" columns="PreguntaId"/>
+    </indexes>
+    <id name="preguntaporevaluacionid" type="integer" column="PreguntaPorEvaluacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="orden" type="integer" column="Orden" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="evaluacionid" target-entity="Evaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="EvaluacionId" referenced-column-name="EvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="preguntaid" target-entity="Pregunta" fetch="LAZY">
+      <join-columns>
+        <join-column name="PreguntaId" referenced-column-name="PreguntaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

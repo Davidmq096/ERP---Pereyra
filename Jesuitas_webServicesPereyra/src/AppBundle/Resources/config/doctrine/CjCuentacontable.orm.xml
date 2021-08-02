@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjCuentacontable" table="cj_cuentacontable">
+    <indexes>
+      <index name="FK_CUENTA_EMPRESA_idx" columns="EmpresaId"/>
+    </indexes>
+    <id name="cuentacontableid" type="integer" column="CuentaContableId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clave" type="string" column="Clave" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Clave numérica de la cuenta contable</option>
+      </options>
+    </field>
+    <field name="claveanterior" type="string" column="ClaveAnterior" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Clave de la cuenta contable en la empresa anterior de contpaq i.</option>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">NOMBRE DE LA CUENTA CONTABLE.</option>
+      </options>
+    </field>
+    <field name="naturaleza" type="boolean" column="Naturaleza" nullable="false">
+      <options>
+        <option name="comment">NATURALEZA ACREEDORA (1) O DEUDORA (0).</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="comment">INDICA SI LA CUENTA CONTABLE ESTA ACTIVA (1) O INACTIVA (0).</option>
+      </options>
+    </field>
+    <many-to-one field="empresaid" target-entity="CjEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="EmpresaId" referenced-column-name="EmpresaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

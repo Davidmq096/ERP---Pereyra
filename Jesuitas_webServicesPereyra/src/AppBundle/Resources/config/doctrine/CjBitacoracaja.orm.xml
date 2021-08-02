@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjBitacoracaja" table="cj_bitacoracaja">
+    <indexes>
+      <index name="FK_BITACORACAJA_CAJA_idx" columns="CajaId"/>
+      <index name="FK_BITACORACAJA_USUARIO_idx" columns="UsuarioId"/>
+    </indexes>
+    <id name="bitacoracajaid" type="integer" column="BitacoraCajaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechaapertura" type="datetime" column="FechaApertura" nullable="true">
+      <options>
+        <option name="comment">Fecha de apertura.</option>
+      </options>
+    </field>
+    <field name="fechacierre" type="datetime" column="FechaCierre" nullable="true">
+      <options>
+        <option name="comment">Fecha de cierre.</option>
+      </options>
+    </field>
+    <field name="fechaprocesonocturno" type="datetime" column="FechaProcesoNocturno" nullable="true">
+      <options>
+        <option name="comment">Fecha del proceso nocturno.</option>
+      </options>
+    </field>
+    <field name="cierrecaja" type="boolean" column="CierreCaja" nullable="false">
+      <options>
+        <option name="comment">Indica si el usuario cerró la caja.</option>
+      </options>
+    </field>
+    <field name="observaciones" type="string" column="Observaciones" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Comentarios u observaciones sobre el cierre.</option>
+      </options>
+    </field>
+    <many-to-one field="cajaid" target-entity="CjCaja" fetch="LAZY">
+      <join-columns>
+        <join-column name="CajaId" referenced-column-name="CajaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

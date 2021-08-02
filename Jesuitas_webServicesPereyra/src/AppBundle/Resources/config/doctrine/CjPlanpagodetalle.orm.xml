@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjPlanpagodetalle" table="cj_planpagodetalle">
+    <indexes>
+      <index name="FK_PLANPAGODETALLE_PLANPAGO_idx" columns="PlanPagoId"/>
+    </indexes>
+    <id name="planpagodetalleid" type="integer" column="PlanPagoDetalleId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="orden" type="integer" column="Orden" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Orden del plan de pagos.</option>
+      </options>
+    </field>
+    <field name="porcentajepago" type="decimal" column="PorcentajePago" precision="12" scale="4" nullable="false">
+      <options>
+        <option name="comment">Porcentaje e la inscripci</option>
+      </options>
+    </field>
+    <field name="porcentajeinteresmensual" type="decimal" column="PorcentajeInteresMensual" precision="12" scale="4" nullable="false">
+      <options>
+        <option name="comment">Porcentaje de inter</option>
+      </options>
+    </field>
+    <field name="fechavencimiento" type="datetime" column="FechaVencimiento" nullable="false">
+      <options>
+        <option name="comment">Fecha de vencimiento antes de que empiece a aplicar recargos.</option>
+      </options>
+    </field>
+    <field name="fechaprontopago" type="datetime" column="FechaProntoPago" nullable="false">
+      <options>
+        <option name="comment">Fecha para descuento por pronto pago.</option>
+      </options>
+    </field>
+    <many-to-one field="planpagoid" target-entity="CjPlanpago" fetch="LAZY">
+      <join-columns>
+        <join-column name="PlanPagoId" referenced-column-name="PlanPagoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

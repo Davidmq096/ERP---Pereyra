@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpRutaporcontrato" table="tp_rutaporcontrato">
+    <indexes>
+      <index name="ContratoId" columns="ContratoId"/>
+      <index name="RutaId" columns="RutaId"/>
+    </indexes>
+    <id name="rutaporcontratoid" type="integer" column="RutaPorContratoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="rutaid" target-entity="TpRuta" fetch="LAZY">
+      <join-columns>
+        <join-column name="RutaId" referenced-column-name="RutaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="contratoid" target-entity="TpContrato" fetch="LAZY">
+      <join-columns>
+        <join-column name="ContratoId" referenced-column-name="ContratoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

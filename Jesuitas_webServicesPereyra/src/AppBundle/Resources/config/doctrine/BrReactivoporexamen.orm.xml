@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrReactivoporexamen" table="br_reactivoporexamen">
+    <indexes>
+      <index name="FK_br_reactivoporexamen_Examen" columns="ExamenId"/>
+      <index name="FK_br_reactivoporexamen_Reacti" columns="ReactivoId"/>
+    </indexes>
+    <id name="reactivoporexamenid" type="integer" column="ReactivoPorExamenId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="examenid" target-entity="BrExamen" fetch="LAZY">
+      <join-columns>
+        <join-column name="ExamenId" referenced-column-name="ExamenId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="reactivoid" target-entity="BrReactivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="ReactivoId" referenced-column-name="ReactivoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

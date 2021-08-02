@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnolugarnacimiento" table="ce_alumnolugarnacimiento">
+    <indexes>
+      <index name="AlumoIdLugarNacimiento_idx" columns="AlumnoId"/>
+      <index name="EstadoIdLugarNacimiento_idx" columns="EstadoId"/>
+      <index name="MunicipioIdLugarNacimiento_idx" columns="MunicipioId"/>
+      <index name="PaisIdLugarNacimiento_idx" columns="PaisId"/>
+    </indexes>
+    <id name="alumnolugarnacimientoid" type="integer" column="AlumnoLugarNacimientoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estadoid" target-entity="Estado" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstadoId" referenced-column-name="EstadoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="municipioid" target-entity="Municipio" fetch="LAZY">
+      <join-columns>
+        <join-column name="MunicipioId" referenced-column-name="MunicipioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="paisid" target-entity="Pais" fetch="LAZY">
+      <join-columns>
+        <join-column name="PaisId" referenced-column-name="PaisId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

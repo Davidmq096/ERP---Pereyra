@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Token" table="token">
+    <id name="tokenid" type="integer" column="TokenId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="string" column="Descripcion" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="token" type="string" column="Token" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="preescolar" type="boolean" column="Preescolar" nullable="true"/>
+    <field name="primaria" type="boolean" column="Primaria" nullable="true"/>
+    <field name="secundaria" type="boolean" column="Secundaria" nullable="true"/>
+    <field name="bachillerato" type="boolean" column="Bachillerato" nullable="true"/>
+  </entity>
+</doctrine-mapping>

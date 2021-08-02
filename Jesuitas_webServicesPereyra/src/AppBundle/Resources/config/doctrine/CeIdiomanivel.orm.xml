@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeIdiomanivel" table="ce_idiomanivel">
+    <indexes>
+      <index name="ce_idiomanivel_ce_idioma_IdiomaId_fk" columns="IdiomaId"/>
+    </indexes>
+    <id name="idiomanivelid" type="integer" column="IdiomaNivelId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="orden" type="integer" column="Orden" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="clave" type="string" column="Clave" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <many-to-one field="idiomaid" target-entity="CeIdioma" fetch="LAZY">
+      <join-columns>
+        <join-column name="IdiomaId" referenced-column-name="IdiomaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

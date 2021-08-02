@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeMateriaporhorario" table="ce_materiaporhorario">
+    <indexes>
+      <index name="fk_confhorarioid" columns="ConfiguracionHorarioId"/>
+      <index name="fk_profmatplanestudiosid" columns="ProfesorPorMateriaPlanEstudiosId"/>
+      <index name="fk_grupo" columns="GrupoId"/>
+    </indexes>
+    <id name="materiaporhorarioid" type="integer" column="MateriaPorHorarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dia" type="integer" column="Dia" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="salon" type="string" column="Salon" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="configuracionhorarioid" target-entity="CeConfiguracionhorario" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConfiguracionHorarioId" referenced-column-name="ConfiguracionHorarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="grupoid" target-entity="CeGrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="GrupoId" referenced-column-name="GrupoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorpormateriaplanestudiosid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanEstudiosId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

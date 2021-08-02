@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjUsocfdi" table="cj_usocfdi">
+    <id name="usocfdiid" type="smallint" column="UsoCfdiId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clave" type="string" column="Clave" length="5" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcion" type="string" column="Descripcion" length="120" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fisica" type="boolean" column="Fisica" nullable="false"/>
+    <field name="moral" type="boolean" column="Moral" nullable="false"/>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

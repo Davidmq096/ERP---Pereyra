@@ -1,0 +1,7 @@
+log
+src\AppBundle\Dominio\Reporteador\Plantillas\output\*.pdf
+src/AppBundle/Entity/*
+src/AppBundle/Resources/config/doctrine/*
+var/sessions/*
+var/cache/*
+var/logs/*.log

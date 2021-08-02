@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Datomedicoantecedente" table="datomedicoantecedente">
+    <indexes>
+      <index name="Antecedente_idx" columns="AntecedenteFamiliarImportanteId"/>
+      <index name="DatoMedico_idx" columns="DatoMedicoId"/>
+    </indexes>
+    <id name="datomedicoantecedenteid" type="integer" column="DatoMedicoAntecedenteId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="antecedentefamiliarimportanteid" target-entity="Antecedentefamiliarimportante" fetch="LAZY">
+      <join-columns>
+        <join-column name="AntecedenteFamiliarImportanteId" referenced-column-name="AntecedenteFamiliarImportanteId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="datomedicoid" target-entity="Datomedico" fetch="LAZY">
+      <join-columns>
+        <join-column name="DatoMedicoId" referenced-column-name="DatoMedicoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

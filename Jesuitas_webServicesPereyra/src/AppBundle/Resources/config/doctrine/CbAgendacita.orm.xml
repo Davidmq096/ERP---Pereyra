@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CbAgendacita" table="cb_agendacita">
+    <indexes>
+      <index name="ClaveFamiliar_idx" columns="ClaveFamiliarId"/>
+    </indexes>
+    <id name="agendacitaid" type="integer" column="AgendaCitaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="false"/>
+    <field name="horainicio" type="time" column="HoraInicio" nullable="false"/>
+    <field name="horafin" type="time" column="HoraFin" nullable="false"/>
+    <field name="asistencia" type="boolean" column="Asistencia" nullable="true"/>
+    <field name="enviocorreo" type="boolean" column="EnvioCorreo" nullable="true"/>
+    <field name="descripcion" type="string" column="Descripcion" length="300" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="asistio" type="string" column="Asistio" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="clavefamiliarid" target-entity="CeClavefamiliar" fetch="LAZY">
+      <join-columns>
+        <join-column name="ClaveFamiliarId" referenced-column-name="ClaveFamiliarId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

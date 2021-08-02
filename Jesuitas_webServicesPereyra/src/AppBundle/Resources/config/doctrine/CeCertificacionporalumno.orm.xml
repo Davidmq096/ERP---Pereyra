@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCertificacionporalumno" table="ce_certificacionporalumno">
+    <indexes>
+      <index name="ce_certificacionporalumno_ce_certificacion_fk_idx" columns="CertificacionId"/>
+      <index name="ce_certificacionporalumno__fk" columns="AlumnoId"/>
+    </indexes>
+    <id name="certificacionporalumnoid" type="integer" column="CertificacionPorAlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="calificacion" type="float" column="Calificacion" precision="10" scale="0" nullable="false"/>
+    <field name="fechacertificado" type="date" column="FechaCertificado" nullable="false"/>
+    <field name="vigencia" type="string" column="Vigencia" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="certificacionid" target-entity="CeCertificacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="CertificacionId" referenced-column-name="CertificacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

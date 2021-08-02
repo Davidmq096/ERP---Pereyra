@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Submodulo" table="submodulo">
+    <indexes>
+      <index name="SubmoduloModulo_idx" columns="ModuloId"/>
+    </indexes>
+    <id name="submoduloid" type="integer" column="SubmoduloId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="identificador" type="string" column="Identificador" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+    <field name="orden" type="integer" column="Orden" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="moduloid" target-entity="Modulo" fetch="LAZY">
+      <join-columns>
+        <join-column name="ModuloId" referenced-column-name="ModuloId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

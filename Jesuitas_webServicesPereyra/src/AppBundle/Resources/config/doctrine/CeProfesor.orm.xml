@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeProfesor" table="ce_profesor">
+    <indexes>
+      <index name="colonia_coloniaid_idx" columns="ColoniaId"/>
+      <index name="EstatusEmpleadoId" columns="EstatusEmpleadoId"/>
+      <index name="ce_profesor_ibfk_4_idx" columns="ParentescoId"/>
+      <index name="ce_profesor_ibfk_3" columns="EstadoId"/>
+    </indexes>
+    <id name="profesorid" type="integer" column="ProfesorId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidomaterno" type="string" column="ApellidoMaterno" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidopaterno" type="string" column="ApellidoPaterno" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correopersonal" type="string" column="CorreoPersonal" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correoinstitucional" type="string" column="CorreoInstitucional" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonofijo" type="string" column="TelefonoFijo" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="celular" type="string" column="celular" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombrecompletoemergencia" type="string" column="nombrecompletoemergencia" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="celular2" type="string" column="celular2" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numeronomina" type="string" column="NumeroNomina" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechanacimiento" type="date" column="FechaNacimiento" nullable="false"/>
+    <field name="genero" type="string" column="Genero" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="curp" type="string" column="Curp" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="estadocivil" type="string" column="EstadoCivil" length="30" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="rfc" type="string" column="Rfc" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nacionalidad" type="string" column="Nacionalidad" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nss" type="string" column="Nss" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="codigopostal" type="string" column="CodigoPostal" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ciudadid" type="integer" column="CiudadId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calle" type="string" column="Calle" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numeroexterior" type="string" column="NumeroExterior" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numerointerior" type="string" column="NumeroInterior" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fotografia" type="blob" column="Fotografia" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="otracolonia" type="string" column="OtraColonia" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="experienciasep" type="date" column="experienciasep" nullable="true"/>
+    <field name="experienciainstituto" type="float" column="experienciainstituto" precision="10" scale="0" nullable="true"/>
+    <field name="autorizaciondgb" type="string" column="autorizaciondgb" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="autorizacionsep" type="string" column="autorizacionsep" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="estatusempleadoid" target-entity="CeEstatusempleado" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusEmpleadoId" referenced-column-name="EstatusEmpleadoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estadoid" target-entity="Estado" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstadoId" referenced-column-name="EstadoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="parentescoid" target-entity="Parentesco" fetch="LAZY">
+      <join-columns>
+        <join-column name="ParentescoId" referenced-column-name="ParentescoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="coloniaid" target-entity="Colonia" fetch="LAZY">
+      <join-columns>
+        <join-column name="ColoniaId" referenced-column-name="ColoniaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

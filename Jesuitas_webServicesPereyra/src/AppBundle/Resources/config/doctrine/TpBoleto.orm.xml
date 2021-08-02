@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpBoleto" table="tp_boleto">
+    <indexes>
+      <index name="tp_boleto_ce_alumno_AlumnoId_fk" columns="Alumnoid"/>
+      <index name="tp_boleto_cj_documentoporpagar_DocumentoPorPagarId_fk" columns="DocumentoPorPagarId"/>
+      <index name="tp_boleto_tp_ruta_RutaId_fk" columns="RutaId"/>
+      <index name="tp_boleto_tp_rutaprecioparada_RutaPrecioParadaId_fk" columns="ParadaId"/>
+      <index name="FK_tp_boleto_UsuarioCompraId" columns="UsuarioCompraId"/>
+    </indexes>
+    <id name="boletoid" type="integer" column="BoletoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="Fecha" nullable="false"/>
+    <field name="fechabitacora" type="datetime" column="FechaBitacora" nullable="false"/>
+    <field name="precio" type="float" column="Precio" precision="10" scale="0" nullable="false"/>
+    <field name="escaneado" type="boolean" column="Escaneado" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="usuariocompraid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioCompraId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="Alumnoid" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="documentoporpagarid" target-entity="CjDocumentoporpagar" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoPorPagarId" referenced-column-name="DocumentoPorPagarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="rutaid" target-entity="TpRuta" fetch="LAZY">
+      <join-columns>
+        <join-column name="RutaId" referenced-column-name="RutaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="paradaid" target-entity="TpRutaprecioparada" fetch="LAZY">
+      <join-columns>
+        <join-column name="ParadaId" referenced-column-name="RutaPrecioParadaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjSubconcepto" table="cj_subconcepto">
+    <indexes>
+      <index name="FK_SUBCONCEPTO_CONCEPTO._idx" columns="ConceptoId"/>
+      <index name="FK_SUBCONCEPTO_ANTECESOR_idx" columns="SubConceptoAntecesorId"/>
+      <index name="FK_SUBCONCEPTO_CICLO_idx" columns="CicloId"/>
+      <index name="FK_SUBCONCEPTO_DEPARTAMENTO_idx" columns="DepartamentoId"/>
+      <index name="FK_SUBCONCEPTO_CODIGOSAT_idx" columns="CodigoSATId"/>
+    </indexes>
+    <id name="subconceptoid" type="integer" column="SubConceptoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clave" type="string" column="Clave" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Clave numérica.</option>
+      </options>
+    </field>
+    <field name="alias" type="string" column="Alias" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Alias del sub concepto.</option>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre del sub concepto.</option>
+      </options>
+    </field>
+    <field name="codigosatid" type="integer" column="CodigoSATId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="solocaja" type="boolean" column="SoloCaja" nullable="false">
+      <options>
+        <option name="comment">Solo disponible en la caja del instituto.
+</option>
+      </options>
+    </field>
+    <field name="permiteeditarimporte" type="boolean" column="PermiteEditarImporte" nullable="false">
+      <options>
+        <option name="comment">Permite editar el importe.</option>
+      </options>
+    </field>
+    <field name="generainteres" type="boolean" column="GeneraInteres" nullable="false">
+      <options>
+        <option name="comment">Genera interés después de la fecha límite.
+</option>
+      </options>
+    </field>
+    <field name="interesprimermes" type="decimal" column="InteresPrimerMes" precision="12" scale="2" nullable="true">
+      <options>
+        <option name="comment">Porcentaje de interés del primer mes.</option>
+      </options>
+    </field>
+    <field name="interessiguientemes" type="decimal" column="InteresSiguienteMes" precision="12" scale="2" nullable="true">
+      <options>
+        <option name="comment">Porcentaje de interés del segundo mes en adelante.</option>
+      </options>
+    </field>
+    <field name="iniciocobro" type="datetime" column="InicioCobro" nullable="true">
+      <options>
+        <option name="comment">Fecha Inicio de cobro.</option>
+      </options>
+    </field>
+    <field name="fincobro" type="datetime" column="FinCobro" nullable="true">
+      <options>
+        <option name="comment">Fecha fin de cobro.</option>
+      </options>
+    </field>
+    <field name="fincobrootrosmedios" type="datetime" column="FinCobroOtrosMedios" nullable="true">
+      <options>
+        <option name="comment">Fecha fin de cobro para otros medios.</option>
+      </options>
+    </field>
+    <field name="requiereasignacion" type="boolean" column="RequiereAsignacion" nullable="false">
+      <options>
+        <option name="comment">Requiere asignación de alumnos o empleados.</option>
+      </options>
+    </field>
+    <field name="inicioasignacion" type="datetime" column="InicioAsignacion" nullable="true">
+      <options>
+        <option name="comment">Fecha inicio de la asignación.</option>
+      </options>
+    </field>
+    <field name="finasignacion" type="datetime" column="FinAsignacion" nullable="true">
+      <options>
+        <option name="comment">Fecha fin de la asignación.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="comment">Activo (1) o Inactivo (0) dentro del sistema.</option>
+      </options>
+    </field>
+    <field name="espagomensual" type="boolean" column="EsPagoMensual" nullable="false">
+      <options>
+        <option name="comment">Indica el importe mensual que se debe pagar por este sub concepto.</option>
+      </options>
+    </field>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="default">0.00</option>
+      </options>
+    </field>
+    <field name="editartexto" type="boolean" column="EditarTexto" nullable="false">
+      <options>
+        <option name="comment">Indica si en el momento del pago, el concepto permite modificar la descripción.</option>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="domiciliacionycargo" type="boolean" column="DomiciliacionYCargo" nullable="false"/>
+    <field name="unsolocargo" type="boolean" column="UnSoloCargo" nullable="false"/>
+    <field name="capturarcantidad" type="boolean" column="CapturarCantidad" nullable="false"/>
+    <field name="facturable" type="boolean" column="Facturable" nullable="false">
+      <options>
+        <option name="comment">Indica si el concepto es facturable (0) o no (1).</option>
+      </options>
+    </field>
+    <field name="pagodiversoparcialidades" type="boolean" column="PagoDiversoParcialidades" nullable="true">
+      <options>
+        <option name="comment">Permite a un pago diverso ser pagado en parcialidades.</option>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="subconceptoantecesorid" target-entity="CjSubconcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubConceptoAntecesorId" referenced-column-name="SubConceptoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cicloid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CicloId" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="conceptoid" target-entity="CjConcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConceptoId" referenced-column-name="ConceptoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="departamentoid" target-entity="Departamento" fetch="LAZY">
+      <join-columns>
+        <join-column name="DepartamentoId" referenced-column-name="DepartamentoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

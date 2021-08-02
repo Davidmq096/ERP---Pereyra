@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Gradonivelporusuario" table="gradonivelporusuario">
+    <indexes>
+      <index name="GradoNivelPorUsuarioGrado_idx" columns="GradoId"/>
+      <index name="GradoNivelPorUsuarioUsuario_idx" columns="UsuarioId"/>
+    </indexes>
+    <id name="gradonivelporusuarioid" type="integer" column="GradoNivelPorUsuarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

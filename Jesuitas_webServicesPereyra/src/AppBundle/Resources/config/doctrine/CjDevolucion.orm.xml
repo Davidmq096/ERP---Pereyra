@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjDevolucion" table="cj_devolucion">
+    <indexes>
+      <index name="FK_DEVOLUCION_CAJA_idx" columns="CajaId"/>
+      <index name="FK_DEVOLUCION_PADREOTUTOR_idx" columns="PadresOTutoresId"/>
+      <index name="FK_DEVOLUCION_USUARIO_idx" columns="UsuarioId"/>
+      <index name="FK_DEVOLUCION_BITACORACAJA_idx" columns="BitacoraCajaId"/>
+      <index name="FK_DEVOLUCION_PAGO_idx" columns="PagoId"/>
+      <index name="FK_DEVOLUCION_EMPRESA_idx" columns="EmpresaId"/>
+    </indexes>
+    <id name="devolucionid" type="integer" column="DevolucionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="usuarioidautoriza" type="integer" column="UsuarioIdAutoriza" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Usuario que autoriza cuando es cheque por monto mayor a 2,500.</option>
+      </options>
+    </field>
+    <field name="personarecibedinero" type="string" column="PersonaRecibeDinero" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Si no se le entrega el dinero al padre o tutor, se especifica a que persona fue.</option>
+      </options>
+    </field>
+    <field name="motivo" type="string" column="Motivo" length="400" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="monto" type="decimal" column="Monto" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Importe a devolver.</option>
+      </options>
+    </field>
+    <field name="fecha" type="datetime" column="Fecha" nullable="false">
+      <options>
+        <option name="comment">Fecha en la que se realiza el pago.</option>
+      </options>
+    </field>
+    <field name="facturado" type="boolean" column="Facturado" nullable="false"/>
+    <many-to-one field="bitacoracajaid" target-entity="CjBitacoracaja" fetch="LAZY">
+      <join-columns>
+        <join-column name="BitacoraCajaId" referenced-column-name="BitacoraCajaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cajaid" target-entity="CjCaja" fetch="LAZY">
+      <join-columns>
+        <join-column name="CajaId" referenced-column-name="CajaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="empresaid" target-entity="CjEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="EmpresaId" referenced-column-name="EmpresaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pagoid" target-entity="CjPago" fetch="LAZY">
+      <join-columns>
+        <join-column name="PagoId" referenced-column-name="PagoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

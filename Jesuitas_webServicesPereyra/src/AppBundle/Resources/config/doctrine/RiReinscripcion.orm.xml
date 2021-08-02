@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\RiReinscripcion" table="ri_reinscripcion">
+    <indexes>
+      <index name="FK_ri_reinscripcion_AlumnoId" columns="AlumnoId"/>
+      <index name="FK_ri_reinscripcion_CicloId" columns="CicloId"/>
+      <index name="FK_ri_reinscripcion_FormaPago2" columns="FormaPagoColegiaturaAnticipadaId"/>
+      <index name="FK_ri_reinscripcion_FormaPagoC" columns="FormaPagoColegiaturaId"/>
+      <index name="FK_ri_reinscripcion_FormaPagoI" columns="FormaPagoInscripcionYFOId"/>
+      <index name="FK_ri_reinscripcion_ReInscripc" columns="ReInscripcionEstatusId"/>
+      <index name="fk_tipocolegiaturaid" columns="TipoPagoColegiaturaId"/>
+    </indexes>
+    <id name="reinscripcionid" type="integer" column="ReInscripcionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="telefono" type="string" column="Telefono" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correo" type="string" column="Correo" length="120" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tramitobeca" type="boolean" column="TramitoBeca" nullable="true"/>
+    <field name="observaciones" type="text" column="Observaciones" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="renunciafo" type="boolean" column="RenunciaFO" nullable="true"/>
+    <field name="pagocolegiaturas" type="boolean" column="PagoColegiaturas" nullable="true"/>
+    <field name="hijopersonal" type="boolean" column="HijoPersonal" nullable="true"/>
+    <field name="nonomina" type="string" column="NoNomina" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="documentacionoriginal" type="boolean" column="DocumentacionOriginal" nullable="true"/>
+    <field name="fecha" type="datetime" column="Fecha" nullable="true"/>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cicloid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CicloId" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="formapagocolegiaturaanticipadaid" target-entity="RiFormapagocolegiaturaanticipada" fetch="LAZY">
+      <join-columns>
+        <join-column name="FormaPagoColegiaturaAnticipadaId" referenced-column-name="FormaPagoColegiaturaAnticipadaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="formapagocolegiaturaid" target-entity="RiFormapagocolegiatura" fetch="LAZY">
+      <join-columns>
+        <join-column name="FormaPagoColegiaturaId" referenced-column-name="FormaPagoColegiaturaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="formapagoinscripcionyfoid" target-entity="RiFormapagoinscripcionyfo" fetch="LAZY">
+      <join-columns>
+        <join-column name="FormaPagoInscripcionYFOId" referenced-column-name="FormaPagoInscripcionYFOId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="reinscripcionestatusid" target-entity="RiReinscripcionestatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="ReInscripcionEstatusId" referenced-column-name="ReInscripcionEstatusId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipopagocolegiaturaid" target-entity="RiTipopagocolegiatura" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoPagoColegiaturaId" referenced-column-name="TipoPagoColegiaturaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

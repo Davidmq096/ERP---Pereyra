@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumno" table="ce_alumno">
+    <indexes>
+      <index name="FK_ce_alumno_AlumnoEstatusId" columns="AlumnoEstatusId"/>
+      <index name="FK_ce_alumno_TipoCoberturaId" columns="TipoCoberturaId"/>
+      <index name="ViveConIdAlumno" columns="ViveConId"/>
+      <index name="fk_aluusuid" columns="UsuarioId"/>
+    </indexes>
+    <id name="alumnoid" type="integer" column="AlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="matricula" type="string" column="Matricula" length="10" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">MatrÝcula del alumno.</option>
+      </options>
+    </field>
+    <field name="primernombre" type="string" column="PrimerNombre" length="80" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Primer Nombre del alumno</option>
+      </options>
+    </field>
+    <field name="segundonombre" type="string" column="SegundoNombre" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Segundo nombre el alumno.</option>
+      </options>
+    </field>
+    <field name="apellidopaterno" type="string" column="ApellidoPaterno" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Apellido paterno.</option>
+      </options>
+    </field>
+    <field name="apellidomaterno" type="string" column="ApellidoMaterno" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Apellido Materno.</option>
+      </options>
+    </field>
+    <field name="curp" type="string" column="CURP" length="18" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">CURP del alumno.</option>
+      </options>
+    </field>
+    <field name="fechanacimiento" type="datetime" column="FechaNacimiento" nullable="false">
+      <options>
+        <option name="comment">Fecha de Nacimiento.</option>
+      </options>
+    </field>
+    <field name="sexo" type="string" column="Sexo" length="1" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Sexo del alumno (M) = Masculino, (F) = Femenino.</option>
+      </options>
+    </field>
+    <field name="extranjero" type="boolean" column="Extranjero" nullable="false"/>
+    <field name="fechaactualizacion" type="date" column="FechaActualizacion" nullable="true"/>
+    <field name="intercambio" type="integer" column="Intercambio" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="correoinstitucional" type="string" column="CorreoInstitucional" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="matriculadgb" type="string" column="MatriculaDGB" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="custodiapersona" type="string" column="CustodiaPersona" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="custodiaoficio" type="string" column="CustodiaOficio" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="oyente" type="boolean" column="Oyente" nullable="true"/>
+    <field name="reingresofuturo" type="boolean" column="ReingresoFuturo" nullable="true"/>
+    <field name="hijopersonal" type="boolean" column="HijoPersonal" nullable="true"/>
+    <field name="alumnoperseverancia" type="boolean" column="AlumnoPerseverancia" nullable="true"/>
+    <many-to-one field="alumnoestatusid" target-entity="CeAlumnoestatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoEstatusId" referenced-column-name="AlumnoEstatusId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipocoberturaid" target-entity="FoTipocobertura" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoCoberturaId" referenced-column-name="TipoCoberturaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="viveconid" target-entity="Vivecon" fetch="LAZY">
+      <join-columns>
+        <join-column name="ViveConId" referenced-column-name="ViveConId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

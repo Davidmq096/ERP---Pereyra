@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeEstudiosprofesor" table="ce_estudiosprofesor">
+    <indexes>
+      <index name="ce_estudiosprofesor_ibfk_2_idx" columns="ProfesorId"/>
+      <index name="EstatusEstudioId" columns="EstatusEstudioId"/>
+      <index name="escolaridad_escolaridadid_idx" columns="escolaridadid"/>
+    </indexes>
+    <id name="estudioprofesorid" type="integer" column="EstudioProfesorId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="institucioneducativa" type="string" column="InstitucionEducativa" length="80" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cedulaprofesional" type="string" column="CedulaProfesional" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="titulo" type="string" column="titulo" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="estatusestudioid" target-entity="CeEstatusestudio" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusEstudioId" referenced-column-name="EstatusEstudioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorid" target-entity="CeProfesor" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorId" referenced-column-name="ProfesorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="escolaridadid" target-entity="Escolaridad" fetch="LAZY">
+      <join-columns>
+        <join-column name="escolaridadid" referenced-column-name="EscolaridadId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

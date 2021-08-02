@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Escuelaprocedencia" table="escuelaprocedencia">
+    <indexes>
+      <index name="fk_escuelaprocedencia1_1_idx" columns="DatoAspiranteId"/>
+      <index name="fkEscuelaJesuitas_idx" columns="EscuelaJesuitaId"/>
+    </indexes>
+    <id name="escuelaprocedenciaid" type="integer" column="EscuelaProcedenciaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="municipio" type="string" column="Municipio" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="causaseparacion" type="string" column="CausaSeparacion" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="seccion" type="string" column="seccion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="gradoinicio" type="string" column="GradoInicio" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="gradofin" type="string" column="GradoFin" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="matricula" type="string" column="Matricula" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="escuelajesuitaid" target-entity="Escuelajesuita" fetch="LAZY">
+      <join-columns>
+        <join-column name="EscuelaJesuitaId" referenced-column-name="EscuelaJesuitaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="datoaspiranteid" target-entity="Datoaspirante" fetch="LAZY">
+      <join-columns>
+        <join-column name="DatoAspiranteId" referenced-column-name="DatoAspiranteId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

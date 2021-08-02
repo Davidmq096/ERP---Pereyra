@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjFacturacorreo" table="cj_facturacorreo">
+    <indexes>
+      <index name="facturaidcorreo" columns="FacturaId"/>
+    </indexes>
+    <id name="facturacorreoid" type="integer" column="FacturaCorreoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="correo" type="string" column="Correo" length="120" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="facturaid" target-entity="CjFactura" fetch="LAZY">
+      <join-columns>
+        <join-column name="FacturaId" referenced-column-name="FacturaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

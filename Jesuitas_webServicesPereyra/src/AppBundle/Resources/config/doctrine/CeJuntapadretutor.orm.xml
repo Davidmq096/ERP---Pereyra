@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeJuntapadretutor" table="ce_juntapadretutor">
+    <indexes>
+      <index name="fk_GrupoId" columns="GrupoId"/>
+      <index name="fk_periodoevalid" columns="PeriodoEvaluacionId"/>
+      <index name="fk_Usuarioid" columns="UsuarioId"/>
+    </indexes>
+    <id name="juntapadreotutorid" type="integer" column="JuntaPadreoTutorId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="Fecha" nullable="true"/>
+    <field name="hora" type="time" column="Hora" nullable="true"/>
+    <field name="bloqueocalificacion" type="boolean" column="bloqueocalificacion" nullable="true"/>
+    <many-to-one field="grupoid" target-entity="CeGrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="GrupoId" referenced-column-name="GrupoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="periodoevaluacionid" target-entity="CePeriodoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoEvaluacionId" referenced-column-name="PeriodoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

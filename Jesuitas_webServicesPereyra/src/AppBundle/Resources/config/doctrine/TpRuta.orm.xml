@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpRuta" table="tp_ruta">
+    <indexes>
+      <index name="SubConceptoId" columns="SubConceptoId"/>
+    </indexes>
+    <id name="rutaid" type="integer" column="RutaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="capacidad" type="integer" column="Capacidad" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="preciocontrato" type="float" column="PrecioContrato" precision="10" scale="0" nullable="false"/>
+    <field name="tipoviaje" type="integer" column="TipoViaje" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1= Ida
+2= Regreso</option>
+      </options>
+    </field>
+    <field name="tipoprecio" type="integer" column="TipoPrecio" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1= Fijo
+2= Por parada</option>
+      </options>
+    </field>
+    <field name="vigenciainicio" type="date" column="VigenciaInicio" nullable="false"/>
+    <field name="vigenciafin" type="date" column="VigenciaFin" nullable="false"/>
+    <field name="horainicio" type="time" column="HoraInicio" nullable="false"/>
+    <field name="horafin" type="time" column="HoraFin" nullable="false"/>
+    <field name="sabado" type="boolean" column="Sabado" nullable="false"/>
+    <field name="domingo" type="boolean" column="Domingo" nullable="false"/>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <field name="alias" type="string" column="Alias" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="subconceptoid" target-entity="CjSubconcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubConceptoId" referenced-column-name="SubConceptoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

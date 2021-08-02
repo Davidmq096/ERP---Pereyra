@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CePonderacionopcion" table="ce_ponderacionopcion">
+    <indexes>
+      <index name="ce_ponderacionopcion_ce_ponderacion" columns="PonderacionId"/>
+    </indexes>
+    <id name="ponderacionopcionid" type="integer" column="PonderacionOpcionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="opcion" type="string" column="Opcion" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcioncorta" type="string" column="DescripcionCorta" length="5" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcion" type="string" column="Descripcion" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="valornumericoparapromedio" type="integer" column="ValorNumericoParaPromedio" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calificacionminima" type="integer" column="CalificacionMinima" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="calificacionmaxima" type="integer" column="CalificacionMaxima" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="ponderacionid" target-entity="CePonderacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PonderacionId" referenced-column-name="PonderacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

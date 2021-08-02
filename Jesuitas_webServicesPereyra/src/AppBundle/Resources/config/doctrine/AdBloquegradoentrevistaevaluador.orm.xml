@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\AdBloquegradoentrevistaevaluador" table="ad_bloquegradoentrevistaevaluador">
+    <indexes>
+      <index name="bloquegradoentrevistaid_idx" columns="BloqueGradoEntrevistaId"/>
+      <index name="lugarid_idx" columns="LugarId"/>
+      <index name="usuarioevaluadorporgradoid_idx" columns="UsuarioId"/>
+    </indexes>
+    <id name="bloquegradoentrevistaevaluadorid" type="integer" column="BloqueGradoEntrevistaEvaluadorId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="casillasbloqueadas" type="string" column="CasillasBloqueadas" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="bloquegradoentrevistaid" target-entity="AdBloquegradoentrevista" fetch="LAZY">
+      <join-columns>
+        <join-column name="BloqueGradoEntrevistaId" referenced-column-name="BloqueGradoEntrevistaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lugarid" target-entity="Lugar" fetch="LAZY">
+      <join-columns>
+        <join-column name="LugarId" referenced-column-name="LugarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjCentrocosto" table="cj_centrocosto">
+    <indexes>
+      <index name="FK_CENTROCOSTO_EMPRESA_idx" columns="EmpresaId"/>
+    </indexes>
+    <id name="centrocostoid" type="integer" column="CentroCostoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">NOMBRE DEL CENTRO DE COSTO.</option>
+      </options>
+    </field>
+    <field name="alias" type="string" column="Alias" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">ALIAS DEL CENTRO DE COSTO.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="comment">INDICA SI EL CENTRO DE COSTO ESTA ACTIVO (1) O INACTIVO (0).</option>
+      </options>
+    </field>
+    <many-to-one field="empresaid" target-entity="CjEmpresa" fetch="LAZY">
+      <join-columns>
+        <join-column name="EmpresaId" referenced-column-name="EmpresaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

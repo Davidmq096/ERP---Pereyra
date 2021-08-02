@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Permisoporperfil" table="permisoporperfil">
+    <indexes>
+      <index name="PerfilId_idx" columns="PerfilId"/>
+      <index name="PermisoIdFK_idx" columns="PermisoPorPantallaId"/>
+    </indexes>
+    <id name="permisoporperfilid" type="integer" column="PermisoPorPerfilId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="vigencia" type="datetime" column="Vigencia" nullable="true"/>
+    <many-to-one field="perfilid" target-entity="Perfil" fetch="LAZY">
+      <join-columns>
+        <join-column name="PerfilId" referenced-column-name="PerfilId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="permisoporpantallaid" target-entity="Permisoporpantalla" fetch="LAZY">
+      <join-columns>
+        <join-column name="PermisoPorPantallaId" referenced-column-name="PermisoporpantallaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CbAlumnoporacuerdo" table="cb_alumnoporacuerdo">
+    <indexes>
+      <index name="FK_cb_alumnoporacuerdo_Acuerdo" columns="AcuerdoId"/>
+      <index name="FK_cb_alumnoporacuerdo_AlumnoI" columns="AlumnoId"/>
+    </indexes>
+    <id name="alumnoporacuerdoid" type="integer" column="AlumnoPorAcuerdoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="importe" type="float" column="Importe" precision="10" scale="0" nullable="false"/>
+    <many-to-one field="acuerdoid" target-entity="CbAcuerdo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AcuerdoId" referenced-column-name="AcuerdoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

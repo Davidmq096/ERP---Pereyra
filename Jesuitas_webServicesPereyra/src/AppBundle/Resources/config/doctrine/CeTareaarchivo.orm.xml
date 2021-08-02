@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeTareaarchivo" table="ce_tareaarchivo">
+    <indexes>
+      <index name="FK_ce_tareaarchivo_TareaId" columns="TareaId"/>
+    </indexes>
+    <id name="tareaarchivoid" type="integer" column="TareaArchivoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="contenido" type="blob" column="Contenido" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="size" type="string" column="Size" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tipo" type="string" column="Tipo" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="tareaid" target-entity="CeTarea" fetch="LAZY">
+      <join-columns>
+        <join-column name="TareaId" referenced-column-name="TareaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

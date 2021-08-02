@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeTipotelefono" table="ce_tipotelefono">
+    <id name="tipotelefonoid" type="integer" column="TipoTelefonoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre del tipo de telÚfono Casa, Celular, etc.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Evaluacionporsolicitudadmision" table="evaluacionporsolicitudadmision">
+    <indexes>
+      <index name="EvaluacionPorSolicitudAdmisionEstatusEvaluacion" columns="EstatusEvaluacionId"/>
+      <index name="EvaluacionPorSolicitudAdmisionEvaluacion" columns="EvaluacionId"/>
+      <index name="EvaluacionPorSolicitudAdmisionEventoEvaluacion" columns="EventoEvaluacionId"/>
+      <index name="EvaluacionPorSolicitudAdmisionSolicitudAdmision" columns="SolicitudAdmisionId"/>
+    </indexes>
+    <id name="evaluacionporsolicitudadmisionid" type="integer" column="EvaluacionPorSolicitudAdmisionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="aprobado" type="boolean" column="Aprobado" nullable="true"/>
+    <field name="resultado" type="string" column="Resultado" length="30" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="conclusion" type="string" column="Conclusion" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="asistio" type="boolean" column="Asistio" nullable="true"/>
+    <field name="evidencia" type="blob" column="Evidencia" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="estatusevaluacionid" target-entity="Estatusevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusEvaluacionId" referenced-column-name="EstatusEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="evaluacionid" target-entity="Evaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="EvaluacionId" referenced-column-name="EvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="eventoevaluacionid" target-entity="Eventoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="EventoEvaluacionId" referenced-column-name="EventoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

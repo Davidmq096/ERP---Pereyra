@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\AdBloquegradoevaluacionevaluacion" table="ad_bloquegradoevaluacionevaluacion">
+    <id name="bloquegradoevaluacionevaluacionid" type="integer" column="BloqueGradoEvaluacionEvaluacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="evaluacionid" type="integer" column="EvaluacionId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="bloquegradoevaluacionid" type="integer" column="BloqueGradoEvaluacionId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

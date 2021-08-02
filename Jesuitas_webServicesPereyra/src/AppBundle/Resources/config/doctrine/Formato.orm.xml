@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Formato" table="formato">
+    <indexes>
+      <index name="FormatoTipoFormato_idx" columns="TipoFormatoId"/>
+    </indexes>
+    <id name="formatoid" type="integer" column="FormatoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="formatocontenido" type="blob" column="FormatoContenido" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="formatosize" type="string" column="FormatoSize" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="formatotipo" type="string" column="FormatoTipo" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="obligatorio" type="boolean" column="Obligatorio" nullable="true"/>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+    <many-to-one field="tipoformatoid" target-entity="Tipoformato" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoFormatoId" referenced-column-name="TipoFormatoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

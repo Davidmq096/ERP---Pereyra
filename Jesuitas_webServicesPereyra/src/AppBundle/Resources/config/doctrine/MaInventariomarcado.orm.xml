@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\MaInventariomarcado" table="ma_inventariomarcado">
+    <indexes>
+      <index name="FK_ma_inventariomarcado_inform" columns="informeid"/>
+      <index name="FK_ma_inventariomarcado_invent" columns="inventarioid"/>
+    </indexes>
+    <id name="inventariomarcadoid" type="integer" column="inventariomarcadoid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="hecho" type="boolean" column="hecho" nullable="true"/>
+    <field name="archivado" type="boolean" column="archivado" nullable="true"/>
+    <many-to-one field="informeid" target-entity="MaInforme" fetch="LAZY">
+      <join-columns>
+        <join-column name="informeid" referenced-column-name="InformeId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="inventarioid" target-entity="MaInventario" fetch="LAZY">
+      <join-columns>
+        <join-column name="inventarioid" referenced-column-name="InventarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

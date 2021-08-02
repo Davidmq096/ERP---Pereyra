@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeClavefamiliar" table="ce_clavefamiliar">
+    <indexes>
+      <index name="FK_ce_clavefamiliar_SituacionF" columns="SituacionFamiliarId"/>
+    </indexes>
+    <id name="clavefamiliarid" type="integer" column="ClaveFamiliarId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clave" type="string" column="Clave" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidopaterno" type="string" column="ApellidoPaterno" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidomaterno" type="string" column="ApellidoMaterno" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="situacionfamiliarid" target-entity="CeSituacionfamiliar" fetch="LAZY">
+      <join-columns>
+        <join-column name="SituacionFamiliarId" referenced-column-name="SituacionFamiliarId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

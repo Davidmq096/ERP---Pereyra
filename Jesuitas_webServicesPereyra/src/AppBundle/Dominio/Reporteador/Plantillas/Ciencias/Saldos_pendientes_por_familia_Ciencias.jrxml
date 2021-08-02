@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Saldos pendientes por familia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="680bb879-321a-458c-8398-3a232a9f511a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 6">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 6_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 6_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 6_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<subDataset name="alumnos" uuid="1167a8b2-b4ce-4f9c-8044-7bfb0fc5c0d8">
+		<parameter name="clavefamiliarid" class="java.lang.Integer" isForPrompting="false"/>
+		<queryString>
+			<![CDATA[select
+  a.matricula as matricula,
+  CONCAT_WS(' ', a.apellidopaterno, a.apellidomaterno,a.primernombre, a.segundonombre) as nombre,
+  ae.Nombre as estatus,
+  n.Nombre as nivel,
+  g.Grado as grado,
+  gr.Nombre as grupo,
+ sum(d.saldo - d.descuento) + sum(calculaInteres(d.documentoporpagarid)) as saldo
+from ce_alumnoporclavefamiliar acf
+inner join ce_alumno a on acf.AlumnoId = a.AlumnoId
+inner join ce_alumnoestatus ae on a.AlumnoEstatusId = ae.AlumnoEstatusId
+
+inner join ce_alumnoporciclo ac on a.AlumnoId = ac.AlumnoId
+     AND ac.GradoId = (SELECT CASE WHEN now() >= cn.fechainicios2 THEN MAX(g2.GradoId) ELSE MIN(g2.GradoId) END
+                    FROM ce_alumnoporciclo ac2
+                    INNER JOIN grado g2 ON ac2.GradoId = g2.GradoId
+                    INNER JOIN ciclo c2 ON ac2.CicloId = c2.CicloId and ac2.CicloId = (SELECT CASE WHEN MAX(cactual.CicloId) IS NULL THEN max(acu.cicloid) ELSE  MAX(cactual.CicloId) END
+                                                                      from ce_alumnoporciclo acu
+                                                                      left JOIN ciclo cactual ON acu.CicloId = cactual.CicloId AND cactual.Actual = 1
+                                                                      where acu.AlumnoId = a.alumnoid)
+                    INNER JOIN ce_ciclopornivel cn ON c2.CicloId = cn.CicloId AND g2.NivelId = cn.NivelId
+                    WHERE ac2.AlumnoId = a.AlumnoId)
+
+inner join grado g on ac.GradoId = g.GradoId
+inner join nivel n on g.NivelId = n.NivelId
+
+left join ce_alumnocicloporgrupo acg on ac.AlumnoPorCicloId = acg.AlumnoPorCicloId
+          AND acg.GrupoId = (SELECT gr2.GrupoId FROM ce_alumnocicloporgrupo acg2
+                              INNER JOIN ce_grupo gr2 ON acg2.GrupoId = gr2.GrupoId AND gr2.TipoGrupoId = 1
+                              WHERE acg2.AlumnoPorCicloId = ac.AlumnoPorCicloId)
+left join ce_grupo gr on acg.GrupoId = gr.GrupoId
+
+inner join cj_documentoporpagar d on a.AlumnoId = d.AlumnoId
+where d.PagoEstatusId = 1 and d.Saldo > 0 and d.FechaLimitePago < now() and
+acf.clavefamiliarid = $P{clavefamiliarid}
+group by  acf.alumnoporclavefamiliar]]>
+		</queryString>
+		<field name="matricula" class="java.lang.String">
+			<fieldDescription><![CDATA[MatrÝcula del alumno.]]></fieldDescription>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="estatus" class="java.lang.String"/>
+		<field name="nivel" class="java.lang.String"/>
+		<field name="grado" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="grupo" class="java.lang.String"/>
+		<field name="saldo" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[Saldo o adeudo restante del sub concepto.]]></fieldDescription>
+		</field>
+		<variable name="total" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="padres" uuid="8ec6cba6-bad3-4bec-b740-5eddcde660ca">
+		<parameter name="clavefamiliarid" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat_ws(' ', p.ApellidoPaterno, p.ApellidoMaterno, p.Nombre) as Nombre,
+p.Telefono,
+p.Celular,
+concat_ws(' ', p.TelEmpresa, p.ExtensionEmpresa) as TelEmpresa
+from  ce_padresotutoresclavefamiliar pcf
+  inner join tutor t on pcf.TutorId = t.TutorId
+inner join ce_padresotutores p on pcf.PadresOTutoresId = p.PadresOTutoresId
+where pcf.ClaveFamiliarId = $P{clavefamiliarid}
+order by t.TutorId]]>
+		</queryString>
+		<field name="Nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Telefono" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Celular" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="TelEmpresa" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="clavefamiliarids" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["9517,16702"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:/Desarrollo/Code/Jesuitas_webServices/src/AppBundle/Dominio/Reporteador/Plantillas/Ciencias/logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cf.ClaveFamiliarId, cf.Clave
+from ce_clavefamiliar cf where cf.ClaveFamiliarId in ($P!{clavefamiliarids})]]>
+	</queryString>
+	<field name="ClaveFamiliarId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Clave" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="Total">
+		<groupExpression><![CDATA[$F{ClaveFamiliarId}]]></groupExpression>
+	</group>
+	<title>
+		<band height="40">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="60" backcolor="#007336" uuid="5a7f93a5-12e7-452a-b1f9-76ea1c22fa18"/>
+				<staticText>
+					<reportElement x="190" y="10" width="389" height="23" forecolor="#FFFFFF" uuid="238ac7c2-ed63-49a6-b084-7e8f617fd483"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ESCUELA CARLOS PEREYRA]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="364" y="33" width="74" height="23" forecolor="#FFFFFF" uuid="2044e9b3-8240-48a5-a3b1-26a017ea7536"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="146" y="33" width="216" height="23" forecolor="#FFFFFF" uuid="77c54161-b08e-4d05-9d41-1c129e30f07a"/>
+					<textElement textAlignment="Right">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Saldos pendientes por familia al ]]></text>
+				</staticText>
+				<image>
+					<reportElement x="21" y="8" width="36" height="38" uuid="24f7c87a-b6cc-4948-aaec-75d67d6f2bd1"/>
+					<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="3" width="595" height="13" backcolor="#007336" uuid="cc62f11b-7970-459a-9cb1-98908e9060f3"/>
+				<textField>
+					<reportElement mode="Transparent" x="100" y="0" width="433" height="13" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="56f2b668-c2bf-439d-b610-f66890a94f57"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement mode="Transparent" x="533" y="0" width="42" height="13" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="854c6d50-e21b-4295-aead-cb6daaf75034"/>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="20" y="0" width="100" height="13" forecolor="#FFFFFF" uuid="c061ac6a-809a-4009-906f-93156db40d96"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="49">
+			<line>
+				<reportElement x="-20" y="47" width="595" height="1" forecolor="#666666" uuid="de6dae3f-6602-4840-91fb-bcfe2d45cbf8"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="6" width="29" height="14" uuid="f2d2c7fd-d3ad-4d2e-9f7f-398fcf519aee"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Familia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="5" width="143" height="14" uuid="9b87e726-83ed-4b94-b9f9-4cc5c5b55c59"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre Padre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="18" width="143" height="14" uuid="0229cec9-aed1-400e-9b55-2005536e1c0e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre Madre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="6" width="52" height="14" uuid="696cfec8-c9b3-4fb6-97a0-63a5caebba80"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tel. Padre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="19" width="52" height="14" uuid="a473bab9-9f5a-4abd-b24f-e15bcc3f0582"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tel Madre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="6" width="71" height="14" uuid="8482ce2e-2981-48a6-b72a-1569a7f7f3c9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tel. Emp. Padre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="19" width="71" height="14" uuid="aab91ff8-f59a-43b8-b410-25699a8e74a5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tel Emp. Madre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="6" width="52" height="14" uuid="dd3c2889-9552-4093-aecd-445ade4574b2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Cel. Padre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="19" width="52" height="14" uuid="f32251c8-e6f1-4c22-a47d-b6064bdd4a92"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Cel Madre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="33" width="37" height="14" uuid="314fdee8-3456-461b-b19d-ec9bf868cf68"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Alumno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="32" width="37" height="14" uuid="f348546c-f2a5-4204-a451-be20982f3a1a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="515" y="5" width="40" height="14" uuid="4e47d7e0-af10-4bb4-b682-4cd0ead26a9f"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="32" width="23" height="14" uuid="3db6cc2f-a19b-4e63-8c3a-9967a4fb5cbb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="33" width="31" height="14" uuid="748069fc-d588-410b-8447-b6b88ac548f3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Grado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="33" width="26" height="14" uuid="594e05fe-bd53-4ba4-ba90-83810b432d01"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Grupo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Prevent">
+			<componentElement>
+				<reportElement key="table 2" style="table 2" isPrintRepeatedValues="false" x="56" y="0" width="396" height="22" uuid="6505a9dd-fce7-4b10-945c-1239e8f95461"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="padres" uuid="25247151-0d53-4d40-896c-8b4205a47003">
+						<datasetParameter name="clavefamiliarid">
+							<datasetParameterExpression><![CDATA[$F{ClaveFamiliarId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="170" uuid="624df9ca-f12e-4a53-aef2-a0cc26538a6e">
+						<jr:detailCell style="table 2_TD" height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="170" height="13" uuid="7f1a68b8-2df1-456f-ab29-2fb78c0907e8"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="1d8f66eb-6854-4a99-936b-112bf235d256">
+						<jr:detailCell style="table 2_TD" height="13" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="76" height="13" uuid="c6d0b60e-0124-44e3-9c6d-d895694ab484"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Telefono}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="88" uuid="219abd7b-6c0f-4c27-8956-8089a28093b4">
+						<jr:detailCell style="table 2_TD" height="13" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="88" height="13" uuid="b11d2607-5c23-4c67-8151-7d7041f2c9f2"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TelEmpresa}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="3a376243-5fdb-4772-a896-838f6beb05f0">
+						<jr:detailCell height="13" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="13" uuid="71e7f8f5-7ce6-4b22-9bc2-d45d13a12137"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Celular}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="0" y="2" width="56" height="20" uuid="bc73bd94-2452-47cc-99fa-3f6995df700c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Clave}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="27" splitType="Prevent">
+			<line direction="BottomUp">
+				<reportElement positionType="FixRelativeToBottom" x="-20" y="23" width="595" height="1" forecolor="#666666" uuid="aa2b90c1-bf1a-412f-9900-4f41a00ff708"/>
+			</line>
+			<componentElement>
+				<reportElement key="table 5" style="table 5" x="0" y="0" width="555" height="19" uuid="4e57ba90-bf05-4771-9355-ca912cb2063b"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="alumnos" uuid="09161079-e432-4aae-9d44-ac21304e7b9f">
+						<datasetParameter name="clavefamiliarid">
+							<datasetParameterExpression><![CDATA[$F{ClaveFamiliarId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="28" uuid="707248c2-9871-4136-a39b-e57fd0541fed">
+						<jr:detailCell height="17" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="49" uuid="f44b2840-7a16-4159-b7b6-2e557d5228a7">
+						<jr:detailCell style="table 5_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="49" height="17" uuid="a86e3b54-cd27-4d62-af0c-780bfc908032"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="181" uuid="11b286d3-cc6e-4086-9b03-ad7442c94303">
+						<jr:detailCell style="table 5_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="181" height="17" uuid="61cb468b-db0f-4f2a-ac08-83949508fd4c"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="115" uuid="932bbb53-ea7d-4002-a7e1-a906ad2aa397">
+						<jr:detailCell style="table 5_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="115" height="17" uuid="7a2c4721-db57-4e45-a7ef-542174f341f5"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="8067a317-f831-4ba4-b217-a605e8eb0421">
+						<jr:detailCell style="table 5_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="17" uuid="91bc7704-e8af-4023-8172-da8359684f68"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="18c31da2-3586-46b8-bd66-d78efa790680">
+						<jr:detailCell style="table 5_TD" height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="17" uuid="8959aeba-ea6f-4e14-a190-139f00900f22"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{grado}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="32" uuid="c9d4235c-51f4-4d54-a8ec-d616ab8acd14">
+						<jr:detailCell style="table 5_TD" height="17" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="32" height="17" uuid="4dc01302-a9d0-4e46-a74d-50c3efd6aee0"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="53" uuid="a80772ae-8d13-4917-b339-19097a873d83">
+						<jr:columnFooter height="14" rowSpan="1">
+							<textField pattern="$#,##0.00">
+								<reportElement x="0" y="0" width="53" height="14" uuid="0783a0f5-e7c2-498a-8b83-5761c85d3105"/>
+								<textElement>
+									<font size="8" isUnderline="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 5_TD" height="17" rowSpan="1">
+							<textField pattern="$#,##0.00">
+								<reportElement x="0" y="0" width="53" height="17" uuid="f71191a9-8731-413b-92e0-4c3a88690bb9"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

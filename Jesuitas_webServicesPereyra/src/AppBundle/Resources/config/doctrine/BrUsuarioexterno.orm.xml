@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrUsuarioexterno" table="br_usuarioexterno">
+    <indexes>
+      <index name="FK_br_usuarioexterno_ColegioId" columns="ColegioId"/>
+      <index name="FK_br_usuarioexterno_Solicitud" columns="SolicitudAdmisionId"/>
+      <index name="FK_br_usuarioexterno_TipoUsuar" columns="TipoUsuarioExternoId"/>
+    </indexes>
+    <id name="usuarioexternoid" type="integer" column="UsuarioExternoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="usuario" type="string" column="Usuario" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contrasena" type="string" column="Contrasena" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="grupo" type="string" column="Grupo" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidopaterno" type="string" column="ApellidoPaterno" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidomaterno" type="string" column="ApellidoMaterno" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+    <many-to-one field="colegioid" target-entity="BrColegio" fetch="LAZY">
+      <join-columns>
+        <join-column name="ColegioId" referenced-column-name="ColegioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipousuarioexternoid" target-entity="BrTipousuarioexterno" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoUsuarioExternoId" referenced-column-name="TipoUsuarioExternoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

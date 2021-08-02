@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Tallerextracurricular_material" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d4a832f-571e-487a-8302-5e2a1f43ca14">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Jesuitas"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="4e2a1f80-794c-4dfd-a1a7-4e592f11e2b4">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Jesuitas"/>
+		<parameter name="tallerid" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT 
+          ceacte.alumnocicloportallerextraid AS id,
+          CONCAT(cea.matricula, ' - ', CONCAT_WS(' ',cea.ApellidoPaterno, cea.ApellidoMaterno, cea.PrimerNombre)) AS alumno,
+					GROUP_CONCAT(DISTINCT concat_ws(' ',ppa.apellidopaterno,ppa.nombre) SEPARATOR '\n') as padres,
+          CONCAT(CONCAT_WS(' ', n.Nombre, g.Grado), ' - ', ceg.Nombre) AS gradogrupo,
+	        case when ceacte.materialentregado = 1 then 'SI' else 'NO' end as materialentregado,
+	        case when ceacte.credencialentregada = 1 then 'SI' else 'NO' end as credencialentregada,
+	        case when ceacte.reglamento = 1 then 'SI' else 'NO' end as reglamento,
+	        DATE_FORMAT(ceacte.fechapreregistro, '%d/%m/%Y %H:%i') AS fechapreregistro,
+	        cjpe.nombre AS estatuspago,
+          (SELECT CASE WHEN ct.Nombre IS NOT NULL THEN GROUP_CONCAT(DISTINCT concat_ws( '  ',ct.Nombre,cm1.talla) SEPARATOR '\n' ) ELSE '' END FROM ce_materialporalumnocicloportallerextracurricular cm1
+            INNER JOIN ce_materialportallerextracurricular cm ON cm.MaterialPorTallerExtraCurricularId = cm1.MaterialPorTallerExtracurricularId
+            INNER JOIN ce_tallermaterial ct ON ct.TallerMaterialId = cm.TallerMaterialId WHERE cm1.AlumnoCicloPorTallerExtraId = ceacte.AlumnoCicloPorTallerExtraId) AS materiales
+  FROM ce_alumnocicloportallerextra ceacte
+  INNER JOIN ce_tallerextracurricular cete ON cete.TallerExtracurricularId = ceacte.TallerExtraId
+  INNER JOIN ce_alumnoporciclo ceac ON ceac.AlumnoPorCicloId = ceacte.AlumnoPorCicloId
+  INNER JOIN ce_alumno cea ON cea.AlumnoId = ceac.AlumnoId
+  LEFT JOIN ce_alumnoporclavefamiliar aca ON aca.AlumnoId = cea.AlumnoId
+  LEFT JOIN ce_padresotutoresclavefamiliar apca ON apca.ClaveFamiliarId = aca.ClaveFamiliarId
+  LEFT JOIN ce_padresotutores ppa ON ppa.PadresOTutoresId = apca.PadresOTutoresId
+  INNER JOIN ciclo c ON c.CicloId = ceac.CicloId
+  INNER JOIN grado g ON g.GradoId = ceac.GradoId
+  INNER JOIN nivel n ON n.NivelId = g.NivelId
+  INNER JOIN usuario u ON u.UsuarioId = ceacte.UsuarioId
+  INNER JOIN tipousuario tu ON tu.TipoUsuarioId = u.TipoUsuarioId
+  LEFT JOIN ce_padresotutores pa ON pa.PadresOTutoresId = u.PadreoTutorId
+  LEFT JOIN cj_documentoporpagar cjdp ON cjdp.DocumentoPorPagarId = ceacte.DocumentoPorPagarId
+  LEFT JOIN cj_pagoestatus cjpe ON cjpe.PagoEstatusId = cjdp.PagoEstatusId
+
+  LEFT JOIN ce_alumnocicloporgrupo ceacg ON ceacte.AlumnoPorCicloId = ceacg.AlumnoPorCicloId
+  LEFT JOIN ce_grupo ceg ON ceg.GrupoId = ceacg.GrupoId
+  WHERE cete.TallerExtracurricularId = $P{tallerid}
+  GROUP BY cea.AlumnoId
+  ORDER BY cea.Matricula;]]>
+		</queryString>
+		<field name="alumno" class="java.lang.String"/>
+		<field name="padres" class="java.lang.String"/>
+		<field name="materialentregado" class="java.lang.String"/>
+		<field name="credencialentregada" class="java.lang.String"/>
+		<field name="reglamento" class="java.lang.String"/>
+		<field name="fechapreregistro" class="java.lang.String"/>
+		<field name="estatuspago" class="java.lang.String"/>
+		<field name="materiales" class="java.lang.String"/>
+		<field name="gradogrupo" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="a01d950b-0520-4e61-bca6-8dc39504eabb">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Jesuitas"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="tallerxtra" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT ct1.Nombre as material, CONCAT_WS('',( SELECT COUNT(*) FROM ce_materialporalumnocicloportallerextracurricular cm2 
+  INNER JOIN ce_materialportallerextracurricular cm4 ON cm4.MaterialPorTallerExtraCurricularId = cm2.MaterialPorTallerExtracurricularId
+  WHERE cm4.MaterialPorTallerExtraCurricularId = cm.MaterialPorTallerExtraCurricularId), '/', 
+  (SELECT COUNT(*) FROM ce_alumnocicloportallerextra ca1 WHERE ca1.TallerExtraId = ct.TallerExtracurricularId)) AS entregadas 
+  FROM ce_tallerextracurricular ct
+  INNER JOIN ce_materialportallerextracurricular cm ON ct.TallerExtracurricularId = cm.TallerExtraCurricularId
+  INNER JOIN ce_tallermaterial ct1 ON ct1.TallerMaterialId = cm.TallerMaterialId
+  INNER JOIN ce_alumnocicloportallerextra ca ON ca.TallerExtraId = cm.TallerExtraCurricularId
+  left JOIN ce_materialporalumnocicloportallerextracurricular cm1 ON cm1.MaterialPorTallerExtracurricularId = cm.MaterialPorTallerExtraCurricularId
+  WHERE ca.TallerExtraId = $P{tallerxtra}
+  GROUP BY cm.MaterialPorTallerExtraCurricularId;]]>
+		</queryString>
+		<field name="material" class="java.lang.String"/>
+		<field name="entregadas" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="cicloid" class="java.lang.String"/>
+	<parameter name="nivelid" class="java.lang.String"/>
+	<parameter name="tallerextraid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+    cete.TallerExtracurricularId as tallerextracurricularid,
+    cete.Nombre as taller,
+    c.Nombre as ciclo
+  FROM ce_alumnocicloportallerextra ceacte
+  INNER JOIN ce_tallerextracurricular cete ON cete.TallerExtracurricularId = ceacte.TallerExtraId
+  INNER JOIN ce_alumnoporciclo ceac ON ceac.AlumnoPorCicloId = ceacte.AlumnoPorCicloId
+  INNER JOIN ce_alumno cea ON cea.AlumnoId = ceac.AlumnoId
+  INNER JOIN ciclo c ON c.CicloId = ceac.CicloId
+  INNER JOIN grado g ON g.GradoId = ceac.GradoId
+  INNER JOIN nivel n ON n.NivelId = g.NivelId
+  WHERE  cete.activo = 1 and c.CicloId = $P{cicloid} AND g.NivelId = $P{nivelid} and case when $P!{tallerextraid} > 0 then cete.tallerextracurricularid = $P!{tallerextraid} else true end
+  GROUP BY cete.TallerExtracurricularId
+  ORDER BY cete.Nombre;]]>
+	</queryString>
+	<field name="tallerextracurricularid" class="java.lang.String"/>
+	<field name="taller" class="java.lang.String"/>
+	<field name="ciclo" class="java.lang.String"/>
+	<detail>
+		<band height="263" splitType="Stretch">
+			<componentElement>
+				<reportElement x="2" y="140" width="798" height="60" uuid="21097d9d-4ea8-498f-8f5b-0d292f2e7c08">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="49d0a7bc-d824-48a5-87f2-010637b13a8f">
+						<datasetParameter name="tallerid">
+							<datasetParameterExpression><![CDATA[$F{tallerextracurricularid}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="210" uuid="ad095f6c-c977-4b24-9a66-7a28887c380b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="210" height="20" forecolor="#FFFFFF" backcolor="#FF0400" uuid="67ce21ce-156d-4f4c-a8b0-36ec9c92f657"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Alumno/Padres]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40">
+							<box>
+								<bottomPen lineWidth="3.0"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="210" height="20" uuid="35e57e3c-64b5-4542-9ac5-85b0d7707960"/>
+								<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="1">
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{alumno}]]></textFieldExpression>
+							</textField>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="20" width="210" height="20" uuid="c998d2f5-93d1-405b-9e76-0032d37ebec0"/>
+								<box topPadding="2" leftPadding="0" bottomPadding="2" rightPadding="0">
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{padres}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="130" uuid="f10a0bce-4865-4fe8-94bf-b1bb33c1e77b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="130" height="20" forecolor="#FFFFFF" backcolor="#FF0400" uuid="7b91589f-2647-4cda-b7c9-64f3408a8ce4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Grado y grupo]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40">
+							<box>
+								<bottomPen lineWidth="3.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="130" height="40" uuid="3faebc73-4dff-4646-a456-e846f86403a0"/>
+								<box leftPadding="1" rightPadding="1">
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{gradogrupo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="b705af4c-3449-495b-9957-071096b18c97">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#FF0703" uuid="805e28af-28f7-4249-8254-c28b91598d24"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fecha inscripción]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40">
+							<box>
+								<bottomPen lineWidth="3.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="100" height="40" uuid="47b4198f-980e-4b29-8ceb-11b4e0356549"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{fechapreregistro}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="fd69a73f-8911-43c2-b405-027cde8b7cd2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#FF0400" uuid="a5d546ae-1f1f-47ca-8cdd-de6a9ce7d7d2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Estatus pago]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40">
+							<box>
+								<bottomPen lineWidth="3.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="90" height="40" uuid="3ec2c282-2a8c-41e2-a3f0-19a5f41b9d9d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{estatuspago}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="0dac6976-933c-4b56-8d2c-1cb98f770196">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="60" height="20" forecolor="#FFFFFF" backcolor="#FF0703" uuid="6856d978-a9c3-44f7-8c44-6c9627e8076f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Credencial entregada]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40">
+							<box>
+								<bottomPen lineWidth="3.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="60" height="40" uuid="81f87c9d-5a2c-4d9a-a2a7-ed990d0e3ba6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{credencialentregada}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="8c802dc2-f851-4645-b20b-ff1cfdf5ee33">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="65" height="20" forecolor="#FFFFFF" backcolor="#FF0703" uuid="70de9c2c-8aac-40b6-a111-f2a4ddcd9a2a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Reglamento]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40">
+							<box>
+								<bottomPen lineWidth="3.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="65" height="40" uuid="693b3f6e-77b3-4334-ab53-d7cef7bb8c36"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{reglamento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="55" uuid="db718ab2-a003-4a9a-9172-6044eb81d53d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="55" height="20" forecolor="#FFFFFF" backcolor="#FF0400" uuid="6bd7b3d5-07da-47ef-8847-d75aee280827"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Material entregado]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40">
+							<box>
+								<bottomPen lineWidth="3.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="55" height="40" uuid="ee4df6be-7c4b-4c44-8266-93cf275cbb4b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{materialentregado}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="88" uuid="9e902a55-bbea-4d30-8000-002b218f3408">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="88" height="20" forecolor="#FFFFFF" backcolor="#FC0400" uuid="4fc509d9-2bb2-4347-9584-8af650bf4e45"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Material]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40">
+							<box>
+								<bottomPen lineWidth="3.0"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="88" height="40" uuid="3938eb72-41eb-4cec-900c-715f0e179653"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{materiales}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="e56d781e-16d3-469a-ad7b-135cdff06494">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#FF0400" uuid="f97f8576-1008-4c33-be8b-64e27934933e"/>
+								<text><![CDATA[Static Text]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40"/>
+					</jr:column>
+					<jr:column width="40" uuid="ec2242f7-d50c-48f9-8358-85cad228a065">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#FF0400" uuid="f5e87e98-96dc-4a64-bf14-8ceef308e0ee"/>
+								<text><![CDATA[Static Text]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="40"/>
+					</jr:column>
+					<jr:column width="40" uuid="01a98a07-cb8d-451b-95e3-98d0ab6e1759">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="40"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="0" y="97" width="800" height="16" uuid="66345a9b-e208-4f50-b26a-1ceaaeba4dac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{taller}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="113" width="800" height="13" uuid="4c349a71-73cf-4059-8970-623f28ab5850"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ciclo}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="270" y="0" width="80" height="80" uuid="48a59fc0-3774-4d9c-a581-5901a1d17625"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="350" y="50" width="130" height="20" uuid="cf053390-be4a-45d2-9137-d9a1b0e78b56"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instituto lux]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="800" height="20" uuid="1760a3b7-d284-45e2-88de-eb3b36101cf7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de material de talleres extracurriculares]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="630" y="2" width="170" height="50" uuid="44c919a3-b5d0-4c50-88b9-1380a3d159d6">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset2" uuid="e97d9ce4-de66-4591-8567-b50728cc7d6a">
+						<datasetParameter name="tallerxtra">
+							<datasetParameterExpression><![CDATA[$F{tallerextracurricularid}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="80" uuid="87c0ffb8-253d-4e54-8927-27e8018b4712">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#FF0703" uuid="056d88a7-28e1-4455-8cdd-d87b5e7b07be"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Material]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="89bd2d8f-548f-453b-8c6e-5ff151f377d6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{material}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="88" uuid="90df043b-f424-4136-9be2-1bcb58541099">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="88" height="20" forecolor="#FFFFFF" backcolor="#FF0400" uuid="2976ef83-dd91-43dc-9d9a-edcf999d3cfe"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Entregadas]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="88" height="30" uuid="a8525249-5051-47d7-a508-9d7cc3914538"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{entregadas}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

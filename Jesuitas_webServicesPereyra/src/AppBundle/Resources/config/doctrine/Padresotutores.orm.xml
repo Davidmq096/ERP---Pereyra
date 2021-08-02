@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Padresotutores" table="padresotutores">
+    <indexes>
+      <index name="OcupacionId_idx" columns="Ocupacion"/>
+      <index name="PadreOTutoresEscolaridad_idx" columns="NivelEstudioId"/>
+      <index name="PadresOTutoresGeneracion_idx" columns="GeneracionId"/>
+      <index name="PadresOTutoresSituacionConyugal_idx" columns="SituacionConyugal"/>
+      <index name="PadresOTutotres TipoSanguineo_idx" columns="TipoSanguineoId"/>
+      <index name="PadresOTutotresParentesco_idx" columns="TutorId"/>
+      <index name="SolicitudAdmisionId_idx" columns="SolicitudAdmisionId"/>
+    </indexes>
+    <id name="padresotutoresid" type="integer" column="PadresOTutoresId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ocupacion" type="string" column="Ocupacion" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidopaterno" type="string" column="ApellidoPaterno" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidomaterno" type="string" column="ApellidoMaterno" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono" type="string" column="Telefono" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="celular" type="string" column="Celular" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lugartrabajo" type="string" column="LugarTrabajo" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="capturadordatos" type="boolean" column="CapturadorDatos" nullable="true"/>
+    <field name="autoriza" type="boolean" column="Autoriza" nullable="true"/>
+    <field name="tutor" type="boolean" column="Tutor" nullable="true"/>
+    <field name="foto" type="blob" column="Foto" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="curp" type="string" column="CURP" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="finado" type="boolean" column="Finado" nullable="true"/>
+    <field name="fechanacimiento" type="date" column="FechaNacimiento" nullable="true"/>
+    <field name="especificacionocupacion" type="string" column="EspecificacionOcupacion" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="empresa" type="string" column="Empresa" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correo" type="string" column="Correo" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telempresa" type="string" column="TelEmpresa" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="extencionempresa" type="string" column="ExtencionEmpresa" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="horariotrabajo" type="string" column="HorarioTrabajo" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="exlux" type="boolean" column="ExLux" nullable="true"/>
+    <field name="ramo" type="string" column="Ramo" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="alumnoinstituto" type="boolean" column="AlumnoInstituto" nullable="true"/>
+    <field name="especificaralumno" type="string" column="EspecificarAlumno" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tipoocupacion" type="integer" column="TipoOcupacion" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="nivelestudioid" target-entity="Escolaridad" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelEstudioId" referenced-column-name="EscolaridadId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="generacionid" target-entity="Generacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="GeneracionId" referenced-column-name="GeneracionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="situacionconyugal" target-entity="Situacionconyugal" fetch="LAZY">
+      <join-columns>
+        <join-column name="SituacionConyugal" referenced-column-name="SituacionConyugalId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudadmisionid" target-entity="Solicitudadmision" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudAdmisionId" referenced-column-name="SolicitudAdmisionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tutorid" target-entity="Tutor" fetch="LAZY">
+      <join-columns>
+        <join-column name="TutorId" referenced-column-name="TutorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tiposanguineoid" target-entity="Tiposanguineo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoSanguineoId" referenced-column-name="TipoSanguineoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

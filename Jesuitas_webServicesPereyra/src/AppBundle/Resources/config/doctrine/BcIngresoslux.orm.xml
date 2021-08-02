@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcIngresoslux" table="bc_ingresoslux">
+    <id name="ingresosluxid" type="integer" column="IngresosLuxId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ingresomensualbruto" type="float" column="IngresoMensualBruto" precision="10" scale="0" nullable="true"/>
+    <field name="ingresomensualneto" type="float" column="IngresoMensualNeto" precision="10" scale="0" nullable="true"/>
+    <field name="rentas" type="float" column="Rentas" precision="10" scale="0" nullable="true"/>
+    <field name="donativo" type="float" column="Donativo" precision="10" scale="0" nullable="true"/>
+    <field name="otrosingresos" type="float" column="OtrosIngresos" precision="10" scale="0" nullable="true"/>
+    <field name="fondodeahorro" type="float" column="FondoDeAhorro" precision="10" scale="0" nullable="true"/>
+    <field name="aguinaldo" type="float" column="Aguinaldo" precision="10" scale="0" nullable="true"/>
+    <field name="utilidades" type="float" column="Utilidades" precision="10" scale="0" nullable="true"/>
+    <field name="interesesporinversion" type="float" column="InteresesPorInversion" precision="10" scale="0" nullable="true"/>
+  </entity>
+</doctrine-mapping>

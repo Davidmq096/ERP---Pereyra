@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeExtraordinario" table="ce_extraordinario">
+    <indexes>
+      <index name="ce_alumno_fk" columns="AlumnoId"/>
+      <index name="ce_estatusextraordinario_fk" columns="EstatusExtraordinarioId"/>
+      <index name="ce_profesorpormateriaplanestudios_fk" columns="ProfesorPorMateriaPlanEstudiosId"/>
+    </indexes>
+    <id name="extraordinarioid" type="integer" column="ExtraordinarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatusextraordinarioid" target-entity="CeEstatusextraordinario" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusExtraordinarioId" referenced-column-name="EstatusExtraordinarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorpormateriaplanestudiosid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanEstudiosId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

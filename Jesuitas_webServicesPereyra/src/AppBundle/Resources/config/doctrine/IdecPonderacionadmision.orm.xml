@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IdecPonderacionadmision" table="idec_ponderacionadmision">
+    <indexes>
+      <index name="FK_idec_ponderacionadmision_Ti" columns="TipoRubroId"/>
+    </indexes>
+    <id name="ponderacionadmisionid" type="integer" column="PonderacionAdmisionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="rubro" type="string" column="Rubro" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="valor" type="float" column="Valor" precision="10" scale="0" nullable="true"/>
+    <many-to-one field="tiporubroid" target-entity="IdecTiporubro" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoRubroId" referenced-column-name="TipoRubroId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

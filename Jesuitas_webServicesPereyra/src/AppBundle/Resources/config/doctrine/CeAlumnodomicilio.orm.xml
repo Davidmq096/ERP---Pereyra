@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnodomicilio" table="ce_alumnodomicilio">
+    <indexes>
+      <index name="FK_ALUMNODOMICILIO_ALUMNO_idx" columns="AlumnoId"/>
+    </indexes>
+    <id name="alumnodomicilioid" type="integer" column="AlumnoDomicilioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="esfiscal" type="boolean" column="EsFiscal" nullable="false">
+      <options>
+        <option name="comment">Tipo de Direcci¾n (Personal, Fiscal</option>
+      </options>
+    </field>
+    <field name="calle" type="string" column="Calle" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numeroexterior" type="string" column="NumeroExterior" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="numerointerior" type="string" column="NumeroInterior" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="colonia" type="string" column="Colonia" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ciudad" type="integer" column="Ciudad" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codigopostal" type="string" column="CodigoPostal" length="5" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="observaciones" type="string" column="Observaciones" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

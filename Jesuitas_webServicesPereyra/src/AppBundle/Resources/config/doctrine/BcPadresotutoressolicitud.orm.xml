@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcPadresotutoressolicitud" table="bc_padresotutoressolicitud">
+    <indexes>
+      <index name="PadresOTutoresVivenId" columns="PadresOTutoresVivenId"/>
+      <index name="SituacionConyugalId" columns="SituacionConyugalId"/>
+      <index name="SolicitudId" columns="SolicitudId"/>
+      <index name="ce_padresotutores_padresotutoresid_idx" columns="PadresOTutoresId"/>
+    </indexes>
+    <id name="padresotutoressolicitudid" type="integer" column="PadresoTutoresSolicitudId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="vive" type="integer" column="Vive" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="puesto" type="string" column="Puesto" length="80" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lugardetrabajo" type="string" column="LugarDeTrabajo" length="80" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="horariodetrabajo" type="string" column="HorarioDeTrabajo" length="80" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="antiguedad" type="string" column="Antiguedad" length="10" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="celular" type="string" column="Celular" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonooficina" type="string" column="TelefonoOficina" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ocupacion" type="string" column="Ocupacion" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="situacionconyugalid" target-entity="Situacionconyugal" fetch="LAZY">
+      <join-columns>
+        <join-column name="SituacionConyugalId" referenced-column-name="SituacionConyugalId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresvivenid" target-entity="BcEstatuspadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresVivenId" referenced-column-name="PadresOTutoresVivenId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

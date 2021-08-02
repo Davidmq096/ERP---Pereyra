@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeHorario" table="ce_horario">
+    <indexes>
+      <index name="ce_horario_ce_profesorpormateriaplanestudios_Profesor_fk" columns="ProfesorPorMateriaPlanEstudiosId"/>
+    </indexes>
+    <id name="horarioid" type="integer" column="HorarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="horainicio" type="time" column="HoraInicio" nullable="false"/>
+    <field name="horafin" type="time" column="HoraFin" nullable="false"/>
+    <field name="dia" type="integer" column="Dia" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="salon" type="string" column="Salon" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="profesorpormateriaplanestudiosid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanEstudiosId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

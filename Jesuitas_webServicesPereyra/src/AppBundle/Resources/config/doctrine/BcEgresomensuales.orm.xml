@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcEgresomensuales" table="bc_egresomensuales">
+    <indexes>
+      <index name="FK_bc_egresomensuales_Solicitu" columns="SolicitudBecaId"/>
+    </indexes>
+    <id name="egresomensualid" type="integer" column="EgresoMensualId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="alimentacion" type="float" column="Alimentacion" precision="10" scale="0" nullable="true"/>
+    <field name="mantenimientoautos" type="float" column="MantenimientoAutos" precision="10" scale="0" nullable="true"/>
+    <field name="gastosdiversion" type="float" column="GastosDiversion" precision="10" scale="0" nullable="true"/>
+    <field name="renta" type="float" column="Renta" precision="10" scale="0" nullable="true"/>
+    <field name="telefonofijo" type="float" column="TelefonoFijo" precision="10" scale="0" nullable="true"/>
+    <field name="inscripcioncolegios" type="float" column="InscripcionColegios" precision="10" scale="0" nullable="true"/>
+    <field name="hipoteca" type="float" column="Hipoteca" precision="10" scale="0" nullable="true"/>
+    <field name="telefonomovil" type="float" column="TelefonoMovil" precision="10" scale="0" nullable="true"/>
+    <field name="colegiaturas" type="float" column="Colegiaturas" precision="10" scale="0" nullable="true"/>
+    <field name="predial" type="float" column="Predial" precision="10" scale="0" nullable="true"/>
+    <field name="television" type="float" column="Television" precision="10" scale="0" nullable="true"/>
+    <field name="segurovida" type="float" column="SeguroVida" precision="10" scale="0" nullable="true"/>
+    <field name="empleadadomestica" type="float" column="EmpleadaDomestica" precision="10" scale="0" nullable="true"/>
+    <field name="gas" type="float" column="Gas" precision="10" scale="0" nullable="true"/>
+    <field name="seguroautos" type="float" column="SeguroAutos" precision="10" scale="0" nullable="true"/>
+    <field name="gastosmedicos" type="float" column="GastosMedicos" precision="10" scale="0" nullable="true"/>
+    <field name="agua" type="float" column="Agua" precision="10" scale="0" nullable="true"/>
+    <field name="segurogastosmedicos" type="float" column="SeguroGastosMedicos" precision="10" scale="0" nullable="true"/>
+    <field name="transporteurbano" type="float" column="TransporteUrbano" precision="10" scale="0" nullable="true"/>
+    <field name="luz" type="float" column="Luz" precision="10" scale="0" nullable="true"/>
+    <field name="mantenimientofraccionamiento" type="float" column="MantenimientoFraccionamiento" precision="10" scale="0" nullable="true"/>
+    <field name="clubdeportivogimnasio" type="float" column="ClubDeportivoGimnasio" precision="10" scale="0" nullable="true"/>
+    <field name="gasolina" type="float" column="Gasolina" precision="10" scale="0" nullable="true"/>
+    <field name="vestido" type="float" column="Vestido" precision="10" scale="0" nullable="true"/>
+    <field name="vacaciones" type="float" column="Vacaciones" precision="10" scale="0" nullable="true"/>
+    <field name="clasesextra" type="float" column="ClasesExtra" precision="10" scale="0" nullable="true"/>
+    <field name="otros1" type="float" column="Otros1" precision="10" scale="0" nullable="true"/>
+    <field name="otros2" type="float" column="Otros2" precision="10" scale="0" nullable="true"/>
+    <field name="especifiqueclasesextra" type="string" column="EspecifiqueClasesExtra" length="150" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="especifiqueotros1" type="string" column="EspecifiqueOtros1" length="150" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="especifiqueotros2" type="string" column="EspecifiqueOtros2" length="150" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="solicitudbecaid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudBecaId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeTallerextraopcionregistro" table="ce_tallerextraopcionregistro">
+    <indexes>
+      <index name="ce_tallerextraopcionregistro_ce_tallerfrecuenciapago_fk" columns="FrecuenciaPagoId"/>
+      <index name="ce_tallerextraopcionregistro_grado_GradoId_fk" columns="GradoId"/>
+    </indexes>
+    <id name="tallerextraopcionregistroid" type="integer" column="TallerExtraOpcionRegistroId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tipopago" type="integer" column="TipoPago" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="notalleres" type="integer" column="NoTalleres" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="frecuenciapagoid" target-entity="CeTallerfrecuenciapago" fetch="LAZY">
+      <join-columns>
+        <join-column name="FrecuenciaPagoId" referenced-column-name="TallerFrecuenciaPagoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

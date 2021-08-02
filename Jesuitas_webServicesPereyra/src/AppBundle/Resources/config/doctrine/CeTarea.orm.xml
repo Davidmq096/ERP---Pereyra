@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeTarea" table="ce_tarea">
+    <indexes>
+      <index name="FK_ce_tarea_CriterioEvaluacion" columns="CriterioEvaluacionGrupoId"/>
+      <index name="FK_ce_tarea_TipoEntregaId" columns="TipoEntregaId"/>
+      <index name="ce_tarea_materia_MateriaId_fk" columns="MateriaId"/>
+    </indexes>
+    <id name="tareaid" type="integer" column="TareaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcion" type="text" column="Descripcion" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="captura" type="integer" column="Captura" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="false"/>
+    <field name="fechafin" type="date" column="FechaFin" nullable="false"/>
+    <field name="horalimite" type="time" column="HoraLimite" nullable="false"/>
+    <field name="entregaextemporanea" type="integer" column="EntregaExtemporanea" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="criterioevaluaciongrupoid" target-entity="CeCriterioevaluaciongrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CriterioEvaluacionGrupoId" referenced-column-name="CriterioEvaluacionGrupoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoentregaid" target-entity="CeTipoentrega" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoEntregaId" referenced-column-name="TipoEntregaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaid" target-entity="Materia" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaId" referenced-column-name="MateriaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

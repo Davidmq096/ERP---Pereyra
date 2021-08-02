@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjExtraordinariosubconceptopormateria" table="cj_extraordinariosubconceptopormateria">
+    <indexes>
+      <index name="FK_EXTRAORDINARIOSUBCONCEPTOPORNIVEL_SUBCONCEPTO_idx" columns="SubConceptoId"/>
+      <index name="MateriaId" columns="MateriaId"/>
+    </indexes>
+    <id name="extraordinariosubconceptopormateriaid" type="integer" column="ExtraordinarioSubConceptoPorMateriaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechalimitepago" type="datetime" column="FechaLimitePago" nullable="true"/>
+    <many-to-one field="subconceptoid" target-entity="CjSubconcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubConceptoId" referenced-column-name="SubConceptoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaid" target-entity="Materia" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaId" referenced-column-name="MateriaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

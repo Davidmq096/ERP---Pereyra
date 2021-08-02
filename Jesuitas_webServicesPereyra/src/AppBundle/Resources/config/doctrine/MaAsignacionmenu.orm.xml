@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\MaAsignacionmenu" table="ma_asignacionmenu">
+    <indexes>
+      <index name="FK_ma_asignacionmenu_AlumnoId" columns="AlumnoId"/>
+      <index name="FK_ma_asignacionmenu_MenuAnter" columns="MenuAnteriorId"/>
+      <index name="FK_ma_asignacionmenu_MenuId" columns="MenuId"/>
+    </indexes>
+    <id name="asignacionmenuid" type="integer" column="AsignacionMenuId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="Fecha" nullable="false"/>
+    <field name="visto" type="boolean" column="visto" nullable="true"/>
+    <field name="fechavisto" type="datetime" column="fechavisto" nullable="true"/>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="menuanteriorid" target-entity="MaMenu" fetch="LAZY">
+      <join-columns>
+        <join-column name="MenuAnteriorId" referenced-column-name="MenuId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="menuid" target-entity="MaMenu" fetch="LAZY">
+      <join-columns>
+        <join-column name="MenuId" referenced-column-name="MenuId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

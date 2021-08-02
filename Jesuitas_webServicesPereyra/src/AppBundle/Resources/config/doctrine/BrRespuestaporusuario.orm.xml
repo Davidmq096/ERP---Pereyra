@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrRespuestaporusuario" table="br_respuestaporusuario">
+    <indexes>
+      <index name="FK_br_respuestaporusuario_Reac" columns="ReactivoId"/>
+      <index name="FK_br_respuestaporusuario_Resp" columns="RespuestaId"/>
+      <index name="FK_br_respuestaporusuario_Usua" columns="UsuarioExamenId"/>
+    </indexes>
+    <id name="respuestaporusuarioid" type="integer" column="RespuestaPorUsuarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="respuestatext" type="text" column="RespuestaText" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="puntaje" type="integer" column="Puntaje" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="reactivoid" target-entity="BrReactivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="ReactivoId" referenced-column-name="ReactivoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="respuestaid" target-entity="BrRespuestaporreactivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="RespuestaId" referenced-column-name="RespuestaPorReactivoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioexamenid" target-entity="BrUsuarioporexamen" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioExamenId" referenced-column-name="UsuarioPorExamenId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

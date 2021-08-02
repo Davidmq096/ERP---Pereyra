@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\LuImportepormesportipo" table="lu_importepormesportipo">
+    <indexes>
+      <index name="lu_importepormesportipo_idx" columns="TipoId"/>
+    </indexes>
+    <id name="importepormesportipoid" type="integer" column="Importepormesportipoid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="mes" type="integer" column="Mes" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="importe" type="float" column="Importe" precision="10" scale="0" nullable="true"/>
+    <many-to-one field="tipoid" target-entity="LuTipo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoId" referenced-column-name="TipoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

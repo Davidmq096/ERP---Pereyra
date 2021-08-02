@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\MaInventarioporinforme" table="ma_inventarioporinforme">
+    <indexes>
+      <index name="FK_ma_inventarioporinforme_InformeId" columns="InformeId"/>
+      <index name="FK_ma_inventarioporinforme_InventarioId" columns="InventarioId"/>
+    </indexes>
+    <id name="inventarioporinformeid" type="integer" column="InventarioPorInformeId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="cantidad" type="integer" column="Cantidad" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="informeid" target-entity="MaInforme" fetch="LAZY">
+      <join-columns>
+        <join-column name="InformeId" referenced-column-name="InformeId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="inventarioid" target-entity="MaInventario" fetch="LAZY">
+      <join-columns>
+        <join-column name="InventarioId" referenced-column-name="InventarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

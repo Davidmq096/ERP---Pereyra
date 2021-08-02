@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeConftalleresextracurriculares" table="ce_conftalleresextracurriculares">
+    <id name="conftallerextracurricularid" type="integer" column="ConfTallerExtracurricularId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="horasreservacion" type="integer" column="HorasReservacion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="descuentoempleados" type="float" column="DescuentoEmpleados" precision="10" scale="0" nullable="true"/>
+    <field name="fechatallersem1inicio" type="date" column="FechaTallerSem1Inicio" nullable="false"/>
+    <field name="fechatallersem1fin" type="date" column="FechaTallerSem1Fin" nullable="false"/>
+    <field name="fechatallersem2inicio" type="date" column="FechaTallerSem2Inicio" nullable="false"/>
+    <field name="fechatallersem2fin" type="date" column="FechaTallerSem2Fin" nullable="false"/>
+  </entity>
+</doctrine-mapping>

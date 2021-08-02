@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjSubconceptoportaller" table="cj_subconceptoportaller">
+    <indexes>
+      <index name="fk_cj_subconceptoportaller_subconcepto_idx" columns="SubConceptoId"/>
+      <index name="fk_cj_subconceptoportaller_tallerextracurricular_idx" columns="TallerExtracurricularId"/>
+    </indexes>
+    <id name="subconceptoportallerid" type="integer" column="SubConceptoPorTallerId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="subconceptoid" target-entity="CjSubconcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubConceptoId" referenced-column-name="SubConceptoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tallerextracurricularid" target-entity="CeTallerextracurricular" fetch="LAZY">
+      <join-columns>
+        <join-column name="TallerExtracurricularId" referenced-column-name="TallerExtracurricularId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

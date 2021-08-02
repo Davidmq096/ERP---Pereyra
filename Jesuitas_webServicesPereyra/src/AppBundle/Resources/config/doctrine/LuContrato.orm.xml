@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\LuContrato" table="lu_contrato">
+    <indexes>
+      <index name="lu_contrato_lu_contratoestatus_ContratoEstatusId_fk" columns="ContratoEstatusId"/>
+      <index name="fk_lu_contrato_lu_tipo_idx" columns="TipoId"/>
+      <index name="ce_contratoludoteca_ce_alumno_AlumnoId_fk" columns="AlumnoId"/>
+    </indexes>
+    <id name="contratoid" type="integer" column="ContratoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="motivocancelacion" type="text" column="MotivoCancelacion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fechaalta" type="date" column="FechaAlta" nullable="true"/>
+    <field name="fechabaja" type="date" column="FechaBaja" nullable="true"/>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoid" target-entity="LuTipo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoId" referenced-column-name="TipoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="contratoestatusid" target-entity="LuContratoestatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="ContratoEstatusId" referenced-column-name="ContratoEstatusId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

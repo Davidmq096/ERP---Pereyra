@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeComponentecurricular" table="ce_componentecurricular">
+    <indexes>
+      <index name="ce_componentecurricular_ce_tipocalificacion_tipocalificacio_idx" columns="TipoCalificacionId"/>
+      <index name="FK_ce_componentecurricular_Pon" columns="PonderacionId"/>
+    </indexes>
+    <id name="componentecurricularid" type="integer" column="ComponenteCurricularId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <field name="mostrarcapturaopciones" type="boolean" column="MostrarCapturaOpciones" nullable="true"/>
+    <field name="habilitarcapturaopciones" type="boolean" column="HabilitarCapturaOpciones" nullable="true"/>
+    <field name="realizarpromedioponderacion" type="boolean" column="RealizarPromedioPonderacion" nullable="true"/>
+    <field name="ponderacionparacapturaopciones" type="boolean" column="PonderacionParaCapturaOpciones" nullable="true"/>
+    <many-to-one field="ponderacionid" target-entity="CePonderacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PonderacionId" referenced-column-name="PonderacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipocalificacionid" target-entity="CeTipocalificacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoCalificacionId" referenced-column-name="TipoCalificacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

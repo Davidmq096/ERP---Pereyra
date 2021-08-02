@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeProfesorpormateriaplanestudios" table="ce_profesorpormateriaplanestudios">
+    <indexes>
+      <index name="ce_estatuscriterioevaluan_estatuscriterioevaluacionid_idx" columns="EstatusCriterioEvaluacionId"/>
+      <index name="CoTitularId" columns="CoTitularId"/>
+      <index name="GrupoId" columns="GrupoId"/>
+      <index name="PlantillaProfesorId" columns="PlantillaProfesorId"/>
+      <index name="ProfesorId" columns="ProfesorId"/>
+      <index name="ce_profesorpormateriaplanestudios_ibfk_1" columns="MateriaPorPlanEstudioId"/>
+      <index name="FK_ce_profesorpormateriaplanes" columns="SuplenteId"/>
+      <index name="ce_profesorpormateriaplanestudios_materiaid_idx" columns="MateriaId"/>
+      <index name="ce_profesorpormateriaplanestudios_ibfk_4_idx" columns="TallerId"/>
+    </indexes>
+    <id name="profesorpormateriaplanestudiosid" type="integer" column="ProfesorPorMateriaPlanEstudiosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <many-to-one field="suplenteid" target-entity="CeProfesor" fetch="LAZY">
+      <join-columns>
+        <join-column name="SuplenteId" referenced-column-name="ProfesorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatuscriterioevaluacionid" target-entity="CeEstatuscriterioevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusCriterioEvaluacionId" referenced-column-name="EstatusCriterioEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaporplanestudioid" target-entity="CeMateriaporplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPorPlanEstudioId" referenced-column-name="MateriaPorPlanEstudioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorid" target-entity="CeProfesor" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorId" referenced-column-name="ProfesorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tallerid" target-entity="CeTallercurricular" fetch="LAZY">
+      <join-columns>
+        <join-column name="TallerId" referenced-column-name="TallerCurricularId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="grupoid" target-entity="CeGrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="GrupoId" referenced-column-name="GrupoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cotitularid" target-entity="CeProfesor" fetch="LAZY">
+      <join-columns>
+        <join-column name="CoTitularId" referenced-column-name="ProfesorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="plantillaprofesorid" target-entity="CePlantillaprofesor" fetch="LAZY">
+      <join-columns>
+        <join-column name="PlantillaProfesorId" referenced-column-name="PlantillaProfesorId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaid" target-entity="Materia" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaId" referenced-column-name="MateriaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

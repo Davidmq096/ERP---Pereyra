@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeEventopornivel" table="ce_eventopornivel">
+    <indexes>
+      <index name="ce_eventopornivel_evento_idx" columns="EventoId"/>
+      <index name="ce_eventopornivel_nivel_idx" columns="NivelId"/>
+    </indexes>
+    <id name="eventopornivelid" type="integer" column="EventoPorNivelId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="eventoid" target-entity="CeEvento" fetch="LAZY">
+      <join-columns>
+        <join-column name="EventoId" referenced-column-name="EventoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="nivelid" target-entity="Nivel" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelId" referenced-column-name="NivelId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

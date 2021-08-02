@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrRespuestaporreactivo" table="br_respuestaporreactivo">
+    <indexes>
+      <index name="FK_br_respuestaporreactivo_Re" columns="ReactivoId"/>
+    </indexes>
+    <id name="respuestaporreactivoid" type="integer" column="RespuestaPorReactivoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="text" column="Descripcion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comentario" type="text" column="Comentario" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correcta" type="boolean" column="Correcta" nullable="true"/>
+    <many-to-one field="reactivoid" target-entity="BrReactivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="ReactivoId" referenced-column-name="ReactivoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CmNotificaciondestinatarios" table="cm_notificaciondestinatarios">
+    <indexes>
+      <index name="ma_notificacion_notificacionid_idx" columns="notificacionid"/>
+      <index name="ma_notificacion_notificacionid_idxsd" columns="notificacionid"/>
+    </indexes>
+    <id name="notificaciondestinatariosid" type="integer" column="notificaciondestinatariosid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nivelid" type="integer" column="nivelid" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="gradoid" type="integer" column="gradoid" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="grupoid" type="integer" column="grupoid" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="alumnoid" type="integer" column="alumnoid" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="notificacionid" target-entity="CmNotificacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="notificacionid" referenced-column-name="NotificacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

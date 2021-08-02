@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjFacturaRes" table="cj_factura_res">
+    <id name="facturaid" type="integer" column="FacturaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="pagoid" type="integer" column="PagoId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Pago relacionado con la factura.</option>
+      </options>
+    </field>
+    <field name="padresotutoresid" type="integer" column="PadresOTutoresId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Padre o Tutor al que se le realiza la factura.</option>
+      </options>
+    </field>
+    <field name="usuarioid" type="integer" column="UsuarioId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Usuario que realiza la factura.</option>
+      </options>
+    </field>
+    <field name="cajaid" type="integer" column="CajaId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Caja donde se realiza la factura.</option>
+      </options>
+    </field>
+    <field name="facturaestatusid" type="integer" column="FacturaEstatusId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Estatus de la factura.</option>
+      </options>
+    </field>
+    <field name="usocfdiid" type="smallint" column="UsoCfdiId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="serie" type="string" column="Serie" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="folio" type="string" column="Folio" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Folio de la factura.</option>
+      </options>
+    </field>
+    <field name="rfc" type="string" column="RFC" length="14" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">RFC al que se le factura.</option>
+      </options>
+    </field>
+    <field name="razonsocial" type="string" column="RazonSocial" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Razón social a la que se factura.</option>
+      </options>
+    </field>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Importe total de la factura.</option>
+      </options>
+    </field>
+    <field name="fechaemision" type="datetime" column="FechaEmision" nullable="false">
+      <options>
+        <option name="comment">Fecha de emisión de la factura.</option>
+      </options>
+    </field>
+    <field name="correo" type="string" column="Correo" length="300" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Correo al que se le envía la factura.</option>
+      </options>
+    </field>
+    <field name="calle" type="string" column="Calle" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Calle del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="numeroexterior" type="string" column="NumeroExterior" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Número exterior del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="numerointerior" type="string" column="NumeroInterior" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Número Interior del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="colonia" type="string" column="Colonia" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Colonia del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="ciudad" type="string" column="Ciudad" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Ciudad del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="codigopostal" type="string" column="CodigoPostal" length="5" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Código Postal del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="tipofactura" type="integer" column="TipoFactura" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Tipo de Factura (0 = Factura por colegiatura, 1 = Factura por inscripción, 2 = factura por pagos diversos).</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

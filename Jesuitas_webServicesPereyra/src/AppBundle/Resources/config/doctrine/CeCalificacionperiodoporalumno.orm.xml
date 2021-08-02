@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeCalificacionperiodoporalumno" table="ce_calificacionperiodoporalumno">
+    <indexes>
+      <index name="AlumnoId" columns="AlumnoId"/>
+      <index name="materia_materiaid_idx" columns="MateriaId"/>
+      <index name="PeriodoId" columns="PeriodoEvaluacionId"/>
+      <index name="MateriaPorPlanEstudioIdCalificacionPeriodo" columns="MateriaPorPlanEstudioId"/>
+      <index name="ce_ce_calificacionperiodoporalumno_ce_ponderacionopcion_poi_idx" columns="PonderacionOpcionId"/>
+      <index name="FK_ce_calificacionperiodoporal" columns="CalificacionFinalPorPeriodoAlumno"/>
+      <index name="ce_calificacionperiodoporalumno_ce_alumnoporcicl_fk" columns="AlumnoPorCicloId"/>
+      <index name="ce_calificacionperiodoporalumno_ce_profesorpo_fk" columns="ProfesorPorMateriaPlanEstudioId"/>
+      <index name="FK_ce_calificacionperiodopora3" columns="MateriaPadreCalificacionPeriodoPorAlumnoId"/>
+    </indexes>
+    <id name="calificacionperiodoporalumnoid" type="integer" column="CalificacionPeriodoPorAlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="calificacionantesredondeo" type="string" column="CalificacionAntesRedondeo" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="calificacion" type="string" column="Calificacion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="observacion" type="text" column="Observacion" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="avance" type="float" column="Avance" precision="10" scale="0" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="materiapadrecalificacionperiodoporalumnoid" target-entity="CeCalificacionperiodoporalumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPadreCalificacionPeriodoPorAlumnoId" referenced-column-name="CalificacionPeriodoPorAlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="calificacionfinalporperiodoalumno" target-entity="CeCalificacionfinalperiodoporalumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="CalificacionFinalPorPeriodoAlumno" referenced-column-name="CalificacionFinalPeriodoPorAlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaporplanestudioid" target-entity="CeMateriaporplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPorPlanEstudioId" referenced-column-name="MateriaPorPlanEstudioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaid" target-entity="Materia" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaId" referenced-column-name="MateriaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoporcicloid" target-entity="CeAlumnoporciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoPorCicloId" referenced-column-name="AlumnoPorCicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="profesorpormateriaplanestudioid" target-entity="CeProfesorpormateriaplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="ProfesorPorMateriaPlanEstudioId" referenced-column-name="ProfesorPorMateriaPlanEstudiosId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="periodoevaluacionid" target-entity="CePeriodoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoEvaluacionId" referenced-column-name="PeriodoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ponderacionopcionid" target-entity="CePonderacionopcion" fetch="LAZY">
+      <join-columns>
+        <join-column name="PonderacionOpcionId" referenced-column-name="PonderacionOpcionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

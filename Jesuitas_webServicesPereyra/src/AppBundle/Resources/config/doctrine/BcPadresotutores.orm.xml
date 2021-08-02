@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcPadresotutores" table="bc_padresotutores">
+    <indexes>
+      <index name="bc_padresotutores_bc_ingresoslux_ingresosluxid_idx" columns="IngresosLuxId"/>
+      <index name="bc_padresotutores_bc_solicitudbeca_solicitudid_idx" columns="SolicitudId"/>
+      <index name="bc_padresotutores_escolaridad_escolaridadid_idx" columns="EscolaridadId"/>
+      <index name="bc_padresotutores_situacionconyugal_situacionconyugalid_idx" columns="SituacionConyugalId"/>
+      <index name="bc_padresotutores_parentesco_parentescoid_idx" columns="TutorId"/>
+      <index name="bc_padresotutores_parentesco_ParentescoId_fk" columns="ParentescoId"/>
+    </indexes>
+    <id name="padresotutoresid" type="integer" column="PadresOTutoresId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nivelestudioid" type="integer" column="NivelEstudioId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="ocupacion" type="string" column="Ocupacion" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tiposanguineoid" type="integer" column="TipoSanguineoId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="generacionid" type="integer" column="GeneracionId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nacionalidadid" type="integer" column="NacionalidadId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidopaterno" type="string" column="ApellidoPaterno" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellidomaterno" type="string" column="ApellidoMaterno" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono" type="string" column="Telefono" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="celular" type="string" column="Celular" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lugartrabajo" type="string" column="LugarTrabajo" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="capturadordatos" type="boolean" column="CapturadorDatos" nullable="true"/>
+    <field name="autoriza" type="boolean" column="Autoriza" nullable="true"/>
+    <field name="tutor" type="boolean" column="Tutor" nullable="true"/>
+    <field name="foto" type="blob" column="Foto" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="curp" type="string" column="CURP" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="vive" type="boolean" column="Vive" nullable="true"/>
+    <field name="fechanacimiento" type="date" column="FechaNacimiento" nullable="true"/>
+    <field name="especificacionocupacion" type="string" column="EspecificacionOcupacion" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="empresa" type="string" column="Empresa" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correo" type="string" column="Correo" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telempresa" type="string" column="TelEmpresa" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="extensionempresa" type="string" column="ExtensionEmpresa" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="horariotrabajo" type="string" column="HorarioTrabajo" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="exlux" type="boolean" column="ExLux" nullable="true"/>
+    <field name="ramo" type="string" column="Ramo" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="alumnoinstituto" type="boolean" column="AlumnoInstituto" nullable="true"/>
+    <field name="especificaralumno" type="string" column="EspecificarAlumno" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="custodia" type="boolean" column="Custodia" nullable="true"/>
+    <field name="antiguedad" type="string" column="Antiguedad" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombrejefeinmediato" type="string" column="NombreJefeInmediato" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="domicilioempresa" type="string" column="DomicilioEmpresa" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clavefamiliarid" type="integer" column="ClaveFamiliarId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="ingresosluxid" target-entity="BcIngresoslux" fetch="LAZY">
+      <join-columns>
+        <join-column name="IngresosLuxId" referenced-column-name="IngresosLuxId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="escolaridadid" target-entity="Escolaridad" fetch="LAZY">
+      <join-columns>
+        <join-column name="EscolaridadId" referenced-column-name="EscolaridadId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="parentescoid" target-entity="Parentesco" fetch="LAZY">
+      <join-columns>
+        <join-column name="ParentescoId" referenced-column-name="ParentescoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="situacionconyugalid" target-entity="Situacionconyugal" fetch="LAZY">
+      <join-columns>
+        <join-column name="SituacionConyugalId" referenced-column-name="SituacionConyugalId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tutorid" target-entity="Tutor" fetch="LAZY">
+      <join-columns>
+        <join-column name="TutorId" referenced-column-name="TutorId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

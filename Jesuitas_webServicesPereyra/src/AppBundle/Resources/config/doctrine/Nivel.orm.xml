@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Nivel" table="nivel">
+    <indexes>
+      <index name="ConfiguracionNivelId" columns="ConfiguracionNivelId"/>
+    </indexes>
+    <id name="nivelid" type="integer" column="NivelId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombrecorto" type="string" column="NombreCorto" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="letra" type="string" column="Letra" length="2" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="claverevoe" type="string" column="ClaveRevoe" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="requieresemestre" type="boolean" column="RequiereSemestre" nullable="true"/>
+    <many-to-one field="configuracionnivelid" target-entity="CeConfiguracionnivel" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConfiguracionNivelId" referenced-column-name="ConfiguracionNivelid"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

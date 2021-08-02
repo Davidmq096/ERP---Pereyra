@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeConjuntocriteriosportaller" table="ce_conjuntocriteriosportaller">
+    <indexes>
+      <index name="ce_conjuntocriteriosportaller_ce_conjuntocriterioevaluacion__fk" columns="ConjuntoCriterioEvaluacionId"/>
+      <index name="ce_conjuntocriteriosportaller_ce_tallercurricular_fk" columns="MateriaPorPlanEstudioId"/>
+    </indexes>
+    <id name="conjuntocriteriosportallerid" type="integer" column="ConjuntoCriteriosPorTallerId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="conjuntocriterioevaluacionid" target-entity="CeConjuntocriterioevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConjuntoCriterioEvaluacionId" referenced-column-name="ConjuntoCriterioEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiaporplanestudioid" target-entity="CeMateriaporplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPorPlanEstudioId" referenced-column-name="MateriaPorPlanEstudioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

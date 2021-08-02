@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Mediosporencuesta" table="mediosporencuesta">
+    <indexes>
+      <index name="MediosPorEncuestaEncuesta_idx" columns="EncuestaId"/>
+      <index name="MediosPorEncuestaMedios_idx" columns="MediosId"/>
+    </indexes>
+    <id name="idmediosporencuesta" type="integer" column="idMediosPorEncuesta">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="encuestaid" target-entity="Encuesta" fetch="LAZY">
+      <join-columns>
+        <join-column name="EncuestaId" referenced-column-name="EncuestaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="mediosid" target-entity="Medios" fetch="LAZY">
+      <join-columns>
+        <join-column name="MediosId" referenced-column-name="MediosId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

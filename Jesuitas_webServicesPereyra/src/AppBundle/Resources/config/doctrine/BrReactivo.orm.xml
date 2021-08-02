@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrReactivo" table="br_reactivo">
+    <indexes>
+      <index name="FK_br_reactivo_BloqueUnidadId" columns="BloqueUnidadId"/>
+      <index name="FK_br_reactivo_GradoDificultad" columns="GradoDificultadId"/>
+      <index name="FK_br_reactivo_GradoId" columns="GradoId"/>
+      <index name="FK_br_reactivo_NivelTaxonomico" columns="NivelTaxonomicoId"/>
+      <index name="FK_br_reactivo_SubtemaId" columns="SubtemaId"/>
+      <index name="FK_br_reactivo_TipoExamenId" columns="TipoExamenId"/>
+      <index name="FK_br_reactivo_TipoReactivoId" columns="TipoReactivoId"/>
+      <index name="FK_br_reactivo_ContenidoTemati" columns="AmbitosEje"/>
+      <index name="FK_br_reactivo_CampoFormacionI" columns="CampoFormacionId"/>
+      <index name="FK_br_reactivo_EstatusReactiv" columns="EstatusReactivoId"/>
+    </indexes>
+    <id name="reactivoid" type="integer" column="ReactivoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="valor" type="float" column="Valor" precision="10" scale="0" nullable="false"/>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="descripcion" type="text" column="Descripcion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="bibliografia" type="text" column="Bibliografia" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clave" type="string" column="Clave" length="40" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ambitoseje" type="string" column="AmbitosEje" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="bloqueunidadid" target-entity="BrBloqueunidad" fetch="LAZY">
+      <join-columns>
+        <join-column name="BloqueUnidadId" referenced-column-name="BloqueUnidadId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="campoformacionid" target-entity="BrCampoformacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="CampoFormacionId" referenced-column-name="CampoFormacionId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatusreactivoid" target-entity="BrEstatusreactivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusReactivoId" referenced-column-name="EstatusReactivoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradodificultadid" target-entity="BrGradodificultad" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoDificultadId" referenced-column-name="GradoDificultadId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="niveltaxonomicoid" target-entity="BrNiveltaxonomico" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelTaxonomicoId" referenced-column-name="NivelTaxonomicoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="subtemaid" target-entity="BrSubtema" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubtemaId" referenced-column-name="SubtemaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoexamenid" target-entity="BrTipoexamen" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoExamenId" referenced-column-name="TipoExamenId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tiporeactivoid" target-entity="BrTiporeactivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoReactivoId" referenced-column-name="TipoReactivoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

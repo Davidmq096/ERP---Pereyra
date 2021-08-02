@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\AdContactodatomedico" table="ad_contactodatomedico">
+    <indexes>
+      <index name="ad_contactodatomedico_datomedico_DatoMedicoId_fk" columns="DatomedicoId"/>
+    </indexes>
+    <id name="contactodatomedicoid" type="integer" column="ContactoDatomedicoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="contactoemergencianombre" type="string" column="ContactoEmergenciaNombre" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactoemergenciatelefono" type="string" column="ContactoEmergenciaTelefono" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactoemergenciaemail" type="string" column="ContactoEmergenciaEmail" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactoemergenciaparentesco" type="integer" column="ContactoEmergenciaParentesco" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="datomedicoid" target-entity="Datomedico" fetch="LAZY">
+      <join-columns>
+        <join-column name="DatomedicoId" referenced-column-name="DatoMedicoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpRutaexcepcion" table="tp_rutaexcepcion">
+    <indexes>
+      <index name="RutaId" columns="RutaId"/>
+    </indexes>
+    <id name="rutaexcepcionid" type="integer" column="RutaExcepcionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="false"/>
+    <field name="fechafin" type="date" column="FechaFin" nullable="false"/>
+    <field name="horainicio" type="time" column="HoraInicio" nullable="true"/>
+    <field name="horafin" type="time" column="HoraFin" nullable="true"/>
+    <field name="suspender" type="boolean" column="Suspender" nullable="false"/>
+    <many-to-one field="rutaid" target-entity="TpRuta" fetch="LAZY">
+      <join-columns>
+        <join-column name="RutaId" referenced-column-name="RutaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

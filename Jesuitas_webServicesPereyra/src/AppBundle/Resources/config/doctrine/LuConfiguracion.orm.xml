@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\LuConfiguracion" table="lu_configuracion">
+    <indexes>
+      <index name="fk_configuracionludoteca_nivel_idx" columns="NivelId"/>
+      <index name="lu_configuracion_lu_tipo_TipoId_fk" columns="TipoId"/>
+    </indexes>
+    <id name="configuracionid" type="integer" column="ConfiguracionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechainicio" type="date" column="FechaInicio" nullable="false"/>
+    <field name="fechafin" type="date" column="FechaFin" nullable="false"/>
+    <many-to-one field="nivelid" target-entity="Nivel" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelId" referenced-column-name="NivelId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoid" target-entity="LuTipo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoId" referenced-column-name="TipoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

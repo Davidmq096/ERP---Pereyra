@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjCodigoconsmov" table="cj_codigoconsmov">
+    <indexes>
+      <index name="FK_CODIGOCONSMOV_FORMAPAGO_idx" columns="FormaPagoId"/>
+    </indexes>
+    <id name="codigoconsmovid" type="integer" column="CodigoConsMovId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="codigoconsmov" type="integer" column="CodigoConsMov" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Campo CodigoConsMov del Catálogo NumOper ConsMov</option>
+      </options>
+    </field>
+    <field name="transaccion" type="string" column="Transaccion" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Campo Transaccion del Catálogo NumOper ConsMov</option>
+      </options>
+    </field>
+    <field name="descripcion" type="string" column="Descripcion" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Campo Descripción del Catálogo NumOper ConsMov</option>
+      </options>
+    </field>
+    <field name="origen" type="string" column="Origen" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Campo Origen del Catálogo NumOper ConsMov</option>
+      </options>
+    </field>
+    <field name="tipo" type="string" column="Tipo" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Campo Tipo del Catálogo NumOper ConsMov</option>
+      </options>
+    </field>
+    <field name="tipoconciliacion" type="integer" column="TipoConciliacion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Indica el tipo de conciliacion (1 - Saldar documento por pagar, 2 - Marcar como conciliado un pago).</option>
+      </options>
+    </field>
+    <many-to-one field="formapagoid" target-entity="CjFormapago" fetch="LAZY">
+      <join-columns>
+        <join-column name="FormaPagoId" referenced-column-name="FormaPagoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

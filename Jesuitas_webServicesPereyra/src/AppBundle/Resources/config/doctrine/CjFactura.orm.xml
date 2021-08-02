@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjFactura" table="cj_factura">
+    <indexes>
+      <index name="FK_FACTURA_CAJA_idx" columns="CajaId"/>
+      <index name="FK_FACTURA_ESTATUS_idx" columns="FacturaEstatusId"/>
+      <index name="FK_FACTURA_PADREOTUTOR_idx" columns="PadresOTutoresId"/>
+      <index name="FK_FACTURA_PAGO_idx" columns="PagoId"/>
+      <index name="FK_FACTURA_USUARIO_idx" columns="UsuarioId"/>
+      <index name="usocfdiidfactura" columns="UsoCfdiId"/>
+    </indexes>
+    <id name="facturaid" type="integer" column="FacturaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="serie" type="string" column="Serie" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="folio" type="string" column="Folio" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Folio de la factura.</option>
+      </options>
+    </field>
+    <field name="rfc" type="string" column="RFC" length="14" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">RFC al que se le factura.</option>
+      </options>
+    </field>
+    <field name="razonsocial" type="string" column="RazonSocial" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Razón social a la que se factura.</option>
+      </options>
+    </field>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Importe total de la factura.</option>
+      </options>
+    </field>
+    <field name="fechaemision" type="datetime" column="FechaEmision" nullable="false">
+      <options>
+        <option name="comment">Fecha de emisión de la factura.</option>
+      </options>
+    </field>
+    <field name="correo" type="string" column="Correo" length="300" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Correo al que se le envía la factura.</option>
+      </options>
+    </field>
+    <field name="calle" type="string" column="Calle" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Calle del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="numeroexterior" type="string" column="NumeroExterior" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Número exterior del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="numerointerior" type="string" column="NumeroInterior" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Número Interior del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="colonia" type="string" column="Colonia" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Colonia del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="ciudad" type="string" column="Ciudad" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Ciudad del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="codigopostal" type="string" column="CodigoPostal" length="5" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Código Postal del domicilio fiscal.</option>
+      </options>
+    </field>
+    <field name="tipofactura" type="integer" column="TipoFactura" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Tipo de Factura (0 = Factura por colegiatura, 1 = Factura por inscripción, 2 = factura por pagos diversos).</option>
+      </options>
+    </field>
+    <many-to-one field="cajaid" target-entity="CjCaja" fetch="LAZY">
+      <join-columns>
+        <join-column name="CajaId" referenced-column-name="CajaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="facturaestatusid" target-entity="CjFacturaestatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="FacturaEstatusId" referenced-column-name="FacturaEstatusId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pagoid" target-entity="CjPago" fetch="LAZY">
+      <join-columns>
+        <join-column name="PagoId" referenced-column-name="PagoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usocfdiid" target-entity="CjUsocfdi" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsoCfdiId" referenced-column-name="UsoCfdiId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

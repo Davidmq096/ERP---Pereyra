@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BrExamenporcalendario" table="br_examenporcalendario">
+    <indexes>
+      <index name="FK_br_examenporcalendario_Cale" columns="CalendarioExamenId"/>
+      <index name="FK_br_examenporcalendario_Exam" columns="ExamenId"/>
+      <index name="FK_br_examenporcalendario_Crit" columns="CriterioEvaluacionGrupoId"/>
+    </indexes>
+    <id name="examenporcalendarioid" type="integer" column="ExamenPorCalendarioId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="orden" type="integer" column="Orden" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dependeanterior" type="boolean" column="DependeAnterior" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="puntajeminimo" type="float" column="PuntajeMinimo" precision="10" scale="0" nullable="true"/>
+    <field name="intentospermitidos" type="integer" column="IntentosPermitidos" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="limitartiempo" type="boolean" column="LimitarTiempo" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="tiempo" type="time" column="Tiempo" nullable="true"/>
+    <field name="mostrartiempo" type="boolean" column="MostrarTiempo" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="numerocaptura" type="integer" column="NumeroCaptura" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="calendarioexamenid" target-entity="BrCalendarioexamen" fetch="LAZY">
+      <join-columns>
+        <join-column name="CalendarioExamenId" referenced-column-name="CalendarioExamenId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="examenid" target-entity="BrExamen" fetch="LAZY">
+      <join-columns>
+        <join-column name="ExamenId" referenced-column-name="ExamenId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="criterioevaluaciongrupoid" target-entity="CeCriterioevaluaciongrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="CriterioEvaluacionGrupoId" referenced-column-name="CriterioEvaluacionGrupoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

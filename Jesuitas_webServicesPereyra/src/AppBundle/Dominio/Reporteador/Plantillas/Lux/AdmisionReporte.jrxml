@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_4" pageWidth="5000" pageHeight="842" columnWidth="4960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="9da343db-f699-4e33-b9c0-e8d2cd2633e4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Jesuitas"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="3c75f934-9c7b-426e-8b10-184f83e0d47e">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Jesuitas"/>
+		<parameter name="solicitudid" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT t.Descripcion AS parentesco, d.Nombre, d.ApellidoPaterno, d.ApellidoMaterno, d.Celular,
+CASE WHEN  d.ExLux = 1 then 'SI' ELSE 'NO' end as ExLux, 
+g.Nombre AS generacion FROM padresotutores  d
+  INNER JOIN tutor t ON t.TutorId = d.TutorId
+  LEFT JOIN generacion g ON g.GeneracionId = d.GeneracionId
+   WHERE d.SolicitudAdmisionId = $P{solicitudid};]]>
+		</queryString>
+		<field name="parentesco" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="ApellidoPaterno" class="java.lang.String"/>
+		<field name="ApellidoMaterno" class="java.lang.String"/>
+		<field name="Celular" class="java.lang.String"/>
+		<field name="exlux" class="java.lang.String"/>
+		<field name="Generacion" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="713959ec-bc1b-486a-8621-f57b8f123e1e">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Jesuitas"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="cicloid" class="java.lang.String"/>
+	<parameter name="nivelid" class="java.lang.String"/>
+	<parameter name="gradoid" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="inscrito" class="java.lang.String"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="apellidopaterno" class="java.lang.String"/>
+	<parameter name="apellidomaterno" class="java.lang.String"/>
+	<parameter name="matricula" class="java.lang.String"/>
+	<parameter name="folio" class="java.lang.String"/>
+	<parameter name="clavesolicitud" class="java.lang.String"/>
+	<parameter name="clavefamiliarid" class="java.lang.String"/>
+	<parameter name="estatussolicitud" class="java.lang.String"/>
+	<parameter name="solicitudpagada" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+  s.SolicitudAdmisionId,
+  s.ClaveSolicitud,
+  cs.Nombre AS ciclo,
+  ns.Nombre AS nivel,
+  gs.Grado,
+  es.Estatus,
+  CASE WHEN s.solicitudpagada = 1 THEN 'SI' ELSE 'NO' END AS pagado,
+  CONCAT_WS(' ', p.ApellidoPaterno, p.ApellidoMaterno, p.Nombre) AS validadopor,
+    CONCAT_WS(' ', d.edadanos, ' Año(s)', d.edadmes, 'Mes(es)') as edad,
+  d.ApellidoPaterno,
+  d.ApellidoMaterno,
+  d.Nombre as nombrealumno,
+  d.Sexo,
+  d.CURP,
+  DATE_FORMAT(d.FechaNacimiento, '%d/%m/%Y') FechaNacimiento,
+  d.PromedioActual AS promedio,
+  GROUP_CONCAT(DISTINCT n1.Nombre SEPARATOR '\n') AS nacionalidad,
+  c.nombre AS contactonombre,
+  c.Correo AS contactocorreo,
+  c.telefono AS contactotelefono,
+  c.Celular AS contactocelular,
+  i.EstadoSalud,
+  CASE WHEN i.NecesidadEspecial = 1 THEN 'SI' ELSE 'NO' END AS necesidadespecial,
+  i.DescripcionNecesidad,
+  CASE WHEN i.AlumnoInstituto = 1 THEN 'SI' ELSE 'NO' END AS alumnoescuela,
+  CASE WHEN i.HijoPersonal = 1 THEN 'SI' ELSE 'NO' END AS hijopersonal,
+  CASE WHEN e.EscuelaJesuitaId = 1 THEN 'SI' ELSE 'NO' END AS escuelajesuita,
+  e.Nombre AS escuela,
+  e.CausaSeparacion,
+  e.Municipio,
+  GROUP_CONCAT(DISTINCT CONCAT_WS(' ', ni.Nombre, '-', g.Grado, '-', gr.Causa)) AS gradosrepetidos,
+  cc.Clave,
+  CONCAT_WS(' ', cc.ApellidoPaterno, cc.ApellidoMaterno) AS familia,
+  c.Nombre AS nombrecaptura,
+  c.Correo AS capturacorreo,
+  e1.Parentesco AS capturaparentesco,
+  e1.Eleccion AS capturamotivo,
+  case when m1.nombre is not null then GROUP_CONCAT(DISTINCT CONCAT_WS(' ', t1.Nombre, '-', m1.Nombre) SEPARATOR '\n') else e1.otromedio  end AS medios
+  
+  FROM solicitudadmision s
+  LEFT JOIN contacto c ON c.ContactoId = s.ContactoId
+  INNER JOIN estatussolicitud es ON es.EstatusSolicitudId = s.EstatusSolicitudId
+  INNER JOIN grado gs ON gs.GradoId = s.GradoId
+  INNER JOIN nivel ns ON ns.NivelId = gs.NivelId
+  INNER JOIN solicitudadmisionporciclo sc ON sc.SolicitudAdmisionId = s.SolicitudAdmisionId
+  INNER JOIN ciclo cs ON cs.CicloId = sc.CicloId
+  LEFT JOIN datoaspirante d ON d.DatoAspiranteId = s.DatoAspiranteId
+  LEFT JOIN nacionalidadpordatoaspirante n ON n.DatoAspiranteId = d.DatoAspiranteId
+  LEFT JOIN nacionalidad n1 ON n1.NacionalidadId = n.Nacionalidad
+  LEFT JOIN datomedico dm ON dm.DatosAspiranteId = d.DatoAspiranteId
+  LEFT JOIN infoadicional i ON i.InfoAdicionalId = s.InfoAdicionalId
+  LEFT JOIN escuelaprocedencia e ON d.DatoAspiranteId = e.DatoAspiranteId
+  LEFT JOIN gradorepetido gr ON gr.DatoAspiranteId = d.DatoAspiranteId
+  LEFT JOIN grado g ON g.GradoId = gr.GradoId
+  LEFT JOIN nivel ni ON ni.NivelId = g.NivelId
+  LEFT JOIN usuario u ON u.UsuarioId = s.ValidadoPor
+  LEFT JOIN persona p ON u.PersonaId = p.PersonaId
+  LEFT JOIN ce_clavefamiliar cc ON cc.Clave = s.ClaveFamiliar
+  LEFT JOIN encuesta e1 ON e1.EncuestaId = s.EncuestaId
+  LEFT JOIN mediosporencuesta m ON m.EncuestaId = e1.EncuestaId
+  LEFT JOIN medios m1 ON m1.MediosId = m.MediosId
+  LEFT JOIN tipomedios t1 ON t1.TipoMediosId = m1.TipoMedioId
+  LEFT JOIN ce_alumno a ON a.AlumnoId = s.AlumnoId
+  WHERE sc.CicloId = $P{cicloid} AND es.dictaminacion = 0 AND es.aceptado = 0
+  
+  	AND IF($P{nivelid} > 0, ns.NivelId = $P{nivelid}, true)
+  	AND IF($P{gradoid} > 0, gs.GradoId IN ($P!{gradoid}), true)
+  	AND IF($P{nombre} != '', d.Nombre like '%' $P{nombre} '%', true)
+  	AND IF($P{inscrito} > 0, a.alumnoid is not null, true)
+    AND IF($P{inscrito} = '0', a.alumnoid is  null, true)
+  	AND IF($P{apellidopaterno} != '', d.apellidopaterno like '%' $P{apellidopaterno} '%', true)
+    AND IF($P{apellidomaterno} != '', d.apellidomaterno like '%' $P{apellidomaterno} '%', true)
+    AND IF($P{matricula} != '', a.matricula like '%' $P{matricula} '%', true)
+    AND IF($P{folio} != '', s.folio like '%' $P{folio} '%', true)
+    AND IF($P{clavesolicitud} != '', s.clavesolicitud like '%' $P{clavesolicitud} '%', true)
+    AND IF($P{clavefamiliarid} != '', cc.Clave like '%' $P{clavefamiliarid} '%', true)
+    AND IF($P{estatussolicitud} > 0, s.estatussolicitudid IN ($P!{estatussolicitud}), true)
+     AND IF($P{solicitudpagada} > 0, s.solicitudpagada = $P{solicitudpagada} , true)
+     AND IF($P{solicitudpagada} = '0', s.solicitudpagada is null or s.solicitudpagada = $P{solicitudpagada} , true)
+     
+  GROUP BY s.SolicitudAdmisionId;]]>
+	</queryString>
+	<field name="solicitudadmisionid" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellidopaterno" class="java.lang.String"/>
+	<field name="clavesolicitud" class="java.lang.String"/>
+	<field name="ciclo" class="java.lang.String"/>
+	<field name="nivel" class="java.lang.String"/>
+	<field name="estatus" class="java.lang.String"/>
+	<field name="pagado" class="java.lang.String"/>
+	<field name="validadopor" class="java.lang.String"/>
+	<field name="apellidomaterno" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="curp" class="java.lang.String"/>
+	<field name="fechanacimiento" class="java.lang.String"/>
+	<field name="contactocorreo" class="java.lang.String"/>
+	<field name="edad" class="java.lang.String"/>
+	<field name="promedio" class="java.lang.String"/>
+	<field name="nacionalidad" class="java.lang.String"/>
+	<field name="contactonombre" class="java.lang.String"/>
+	<field name="contactotelefono" class="java.lang.String"/>
+	<field name="contactocelular" class="java.lang.String"/>
+	<field name="estadosalud" class="java.lang.String"/>
+	<field name="necesidadespecial" class="java.lang.String"/>
+	<field name="descripcionnecesidad" class="java.lang.String"/>
+	<field name="alumnoescuela" class="java.lang.String"/>
+	<field name="hijopersonal" class="java.lang.String"/>
+	<field name="escuelajesuita" class="java.lang.String"/>
+	<field name="escuela" class="java.lang.String"/>
+	<field name="causaseparacion" class="java.lang.String"/>
+	<field name="gradosrepetidos" class="java.lang.String"/>
+	<field name="grado" class="java.lang.String"/>
+	<field name="clave" class="java.lang.String"/>
+	<field name="familia" class="java.lang.String"/>
+	<field name="nombrecaptura" class="java.lang.String"/>
+	<field name="capturacorreo" class="java.lang.String"/>
+	<field name="capturaparentesco" class="java.lang.String"/>
+	<field name="capturamotivo" class="java.lang.String"/>
+	<field name="medios" class="java.lang.String"/>
+	<field name="municipio" class="java.lang.String"/>
+	<field name="nombrealumno" class="java.lang.String"/>
+	<title>
+		<band height="201" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="156" width="80" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="37be1ac1-c979-476c-bf81-997200a9f006"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="750" y="156" width="130" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="796c8b70-ee7f-492a-9f67-97f36e1ee019"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1000" y="156" width="120" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="74940bf5-4115-4cd8-bb8a-262762b9f7db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido materno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="80" y="156" width="80" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="b783f590-609e-41f9-909c-b8f17ed1d016"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clave ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="160" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="bd291524-4341-4c24-b374-65969a4845fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciclo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="260" y="156" width="120" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="0f4974eb-8782-4102-90fb-cfd354eacfd7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="380" y="156" width="80" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="fd9ff58d-8681-4e67-a57b-3cc648b7411d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="460" y="156" width="80" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="65971646-7583-4a44-82cc-e8566688b776"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatus]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="540" y="156" width="50" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="7109b5bd-f72e-4451-b284-a792cefe1840"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pagada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="590" y="156" width="160" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="1a1ac3a7-871c-42f5-950d-b3ab21e561ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Validado por]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="880" y="156" width="120" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="80940670-9448-4067-9132-02a75085e504"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido paterno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1120" y="156" width="90" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="395038ec-a15a-45e3-b85e-505984a4b9b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Genero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1210" y="156" width="150" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="ef3d11d0-1264-4529-97a5-0b252e77dcbd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CURP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1360" y="156" width="110" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="b274669e-6f4e-4a4f-b824-dd11307b91c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha nacimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1470" y="156" width="110" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="921ad6e7-4ae6-4d5a-a45b-f36da83c9b96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3840" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="9bc170fb-feb5-44e5-aff1-6add4bc855cf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parentesco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3940" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="bbd27813-db92-49b2-84da-810fd7a81f80"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="80" height="80" uuid="04f3e712-4c0b-480c-8967-8218e4b9fe03"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="90" y="30" width="170" height="30" uuid="32debd07-b71f-48e8-b05f-02b40820998b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instituto lux]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="390" height="30" uuid="eb3aaa53-7f65-4a9c-93f2-ff7de0bc089d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de admisiones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1580" y="156" width="60" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="ed38f2f4-f9ab-4e03-84d5-0a22b933daa3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Promedio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1640" y="156" width="120" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="4b4640ec-cb37-4bb2-ac02-e83454068132"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nacionalidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1760" y="156" width="170" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="f9ef467a-4e54-4c12-8fa6-cc1074d41024"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1930" y="156" width="170" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="f4063db5-8938-4d7a-aaa1-5867812a3185"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2100" y="156" width="170" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="d2fb13fc-cb95-49b7-8363-59c2701ab87d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Celular contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2270" y="156" width="170" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="63f37b7a-723c-43df-b7f4-2737d688d4d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2440" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="5711da54-ab94-450b-ba1c-6bba1a5687e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Estado de salud?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2540" y="156" width="130" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="ab512384-1483-4986-b088-cfbdbb6fbf6f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿El aspirante tiene una necesidad educativa especial?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2670" y="156" width="160" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="50539118-974c-4dd8-a02c-6c01e0a6b77b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especificar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2830" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="2fc0f7fa-a4b6-46d7-b69a-f6bc83536953"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Ha sido alumno del ciencias?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2930" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="ebbfa5f8-8f71-4b63-b106-1fc940582d19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿El aspirante es hijo de personal?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3030" y="156" width="120" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="c7ea6e42-8be1-4f15-9d1f-3c0cd19ece71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Escuela de procedencia ¿Es una institución jesuita?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3150" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="2c269617-74c8-4908-857f-b7c9f7bb8cbf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Escuela jesuita?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3350" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="13455369-797d-47b8-9aec-4ed35f00aa54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Ciudad de la escuela?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3250" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="9dc20aec-d85f-42ba-9bf4-f82f05c098c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Escuela jesuita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3450" y="156" width="200" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="d68ce32a-4503-4372-b3b2-73d1d12d0ab4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motivo de cambio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3650" y="156" width="190" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="f2b3eee6-66ba-407d-97ba-b708fc204e59"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grados repetidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4040" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="deb940ab-e91a-417f-a0e7-36f714cc1013"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ap. Paterno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4140" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="e8da4d57-d16b-45a3-b88b-fd95186482f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ap. Materno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4240" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="aa69efe2-83ce-4292-9847-9cc472b475f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4340" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="f1416a41-58cf-4d03-b290-467888630115"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exalumno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4440" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="f95ccfa8-b6c4-4c0b-ad6f-3b3ccc4a89b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Generación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4540" y="156" width="80" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="e9262ed7-e1bd-4429-b47b-231eaa712b5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clave familiar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4620" y="156" width="160" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="3ce20102-e15b-4df0-a4b5-7eba2a3c8513"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Familia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4780" y="156" width="120" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="9b14c8e8-5f75-449e-a57a-388644495dca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre de quien captura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4900" y="156" width="100" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="1d5dd24e-ace8-41a7-a0cd-eb6b2eb1a545"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5000" y="156" width="80" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="b34a3c14-403f-4100-bbef-bd1b9643de6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parentesco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5080" y="156" width="290" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="9b09b70a-6165-445e-bd35-65334230c1dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motivo por el cual eligio la institución]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="130" width="590" height="26" forecolor="#000000" backcolor="#F2F2F2" uuid="ef14aa1a-3680-4875-878d-70f8d4a62b51"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="590" y="130" width="1850" height="26" forecolor="#000000" backcolor="#EDEDED" uuid="5e9cec12-619b-42be-8f84-f22d0e60b906"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos del aspirante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2440" y="130" width="1400" height="26" forecolor="#000000" backcolor="#E0E0E0" uuid="94b75a6d-6aa0-4bbb-932a-7bcbc720264f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Expediente del aspirante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3840" y="130" width="940" height="26" forecolor="#000000" backcolor="#CFCFCF" uuid="72a87373-02a4-4ff8-bd4f-049c175f2187"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos familiares]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4780" y="130" width="810" height="26" forecolor="#000000" backcolor="#B3B3B3" uuid="02309f37-dca8-4f4f-b6f9-a24781e6bd5b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Encuesta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5370" y="156" width="220" height="45" forecolor="#FFFFFF" backcolor="#FF0400" uuid="fd217c96-e133-49a7-8153-c7f1e5496ba7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Como se enteró del proceso de admisión?]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="31">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="0" y="0" width="80" height="30" uuid="97eff2ad-db64-4628-a5ef-5c6a93023c9f"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{solicitudadmisionid}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="750" y="0" width="130" height="30" uuid="d5267ed2-1e7c-4dd6-938e-d94bc421e20e"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombrealumno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="80" y="0" width="80" height="30" uuid="579e3044-448d-4073-ad03-3a7c421f05cb"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{clavesolicitud}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="160" y="0" width="100" height="30" uuid="0de261cd-f245-41c2-b297-ffcbaac790b2"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ciclo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="260" y="0" width="120" height="30" uuid="652fe0c0-a808-4502-8e0e-cd89e870cf3f"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="380" y="0" width="80" height="30" uuid="984030dc-e485-46c9-ad25-408cf811403e"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{grado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="460" y="0" width="80" height="30" uuid="3ebab380-bb88-46fd-858e-56519b3cef93"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="540" y="0" width="50" height="30" uuid="b187649d-6042-469a-af6c-11e871843a1e"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pagado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="590" y="0" width="160" height="30" uuid="eb0fc856-6b22-4c82-b7c7-65a4d7245fdd"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{validadopor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="880" y="0" width="120" height="30" uuid="781478d8-3a1f-4011-8b30-22f0cc49fd4c"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apellidopaterno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1120" y="0" width="90" height="30" uuid="be8efd55-34ac-41ee-9f42-394c6aa8c107"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1210" y="0" width="150" height="30" uuid="33de7a9a-7fe8-4e9d-ac79-a45bedac55a3"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{curp}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1360" y="0" width="110" height="30" uuid="46133c65-a8c3-4d7e-a9d3-f81f52e3a1e7"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechanacimiento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1470" y="0" width="110" height="30" uuid="ebecc48a-0093-4fd0-ae80-29d2ebbeaf39"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement stretchType="ContainerHeight" x="3840" y="0" width="700" height="30" uuid="715851dc-db39-4fbe-a7c3-1ad9b9736675">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="f93c72f0-78b9-493c-be69-48beeece0054">
+						<datasetParameter name="solicitudid">
+							<datasetParameterExpression><![CDATA[$F{solicitudadmisionid}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="100" uuid="30e9bebc-45a4-491f-96a8-6a7c0a44e500">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement stretchType="ContainerHeight" x="0" y="0" width="100" height="30" uuid="e71367b5-f77f-42cb-b3c2-97c5947baac7"/>
+								<box>
+									<pen lineWidth="0.25"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{parentesco}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="e0293c7e-f05a-4eaa-a441-a6888f0e1d2c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement stretchType="ContainerHeight" x="0" y="0" width="100" height="30" uuid="644cd17e-43d0-4453-9959-66884ea660d3"/>
+								<box>
+									<pen lineWidth="0.25"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="eb9ff237-579c-40be-84d5-3854f0d9f65b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement stretchType="ContainerHeight" x="0" y="0" width="100" height="30" uuid="42bbfa94-faf6-4915-8501-33535676d181"/>
+								<box>
+									<pen lineWidth="0.25"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ApellidoPaterno}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="8e1f10af-5060-4e0d-a6ad-352bdf7f9972">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement stretchType="ContainerHeight" x="0" y="0" width="100" height="30" uuid="04335777-5f62-4250-adfc-fcc9be7bc8f1"/>
+								<box>
+									<pen lineWidth="0.25"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ApellidoMaterno}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="4a23ff11-bcae-440c-938c-86828cd127a9">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement stretchType="ContainerHeight" x="0" y="0" width="100" height="30" uuid="be47f588-4345-434c-b716-a98aed62e72c"/>
+								<box>
+									<pen lineWidth="0.25"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Celular}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="e167eed8-76ff-46b6-a953-3a63e72f4001">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement stretchType="ContainerHeight" x="0" y="0" width="100" height="30" uuid="b38caf8f-6db3-4ca8-8268-f9fd58ff3c9e"/>
+								<box>
+									<pen lineWidth="0.25"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{exlux}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="75e46832-faca-4673-9d28-b33ee73008d6">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement stretchType="ContainerHeight" x="0" y="0" width="100" height="30" uuid="d682cec0-f686-41e1-9c5f-6dc7c0c8f349"/>
+								<box>
+									<pen lineWidth="0.25"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Generacion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1580" y="0" width="60" height="30" uuid="666bf111-fb1c-4338-8d85-ede8f5214bcd"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{promedio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1640" y="0" width="120" height="30" uuid="125fb1ab-54db-48e8-9b6f-44f8a40c2947"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nacionalidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1760" y="0" width="170" height="30" uuid="9d1a6826-b8fc-499c-aef8-db1e286ad001"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{contactonombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1930" y="0" width="170" height="30" uuid="26789662-fa6c-46bf-93e0-20e4508c60dc"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{contactocorreo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="2100" y="0" width="170" height="30" uuid="3802aced-fa43-4f8c-985a-207d90ecc6d1"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{contactocelular}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="2270" y="0" width="170" height="30" uuid="bdb5fae2-76f6-42ba-aa99-7a3a6ca80108"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{contactotelefono}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="2440" y="0" width="100" height="30" uuid="affd9213-a23f-4220-83d8-d21f203cfc20"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estadosalud}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="2540" y="0" width="130" height="30" uuid="bcfbcf0c-1fe2-4f6f-baf1-a68d9852a8c5"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{necesidadespecial}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="2670" y="0" width="160" height="30" uuid="c87920c5-bb88-49b7-9d8f-576d3d475b10"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descripcionnecesidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="2830" y="0" width="100" height="30" uuid="134415a9-8755-4c5c-a309-4e49f63de139"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{alumnoescuela}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="2930" y="0" width="100" height="30" uuid="8389e46e-deca-4f3b-842e-4a8f145815fa"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{hijopersonal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="3030" y="0" width="120" height="30" uuid="269743c7-7e95-4872-8656-c7ef70984cd9"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{escuelajesuita}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="3150" y="0" width="100" height="30" uuid="518665b2-6715-46b1-a27f-073275407553"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{escuelajesuita}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="3250" y="0" width="100" height="30" uuid="4cc65fe5-79a9-4c75-a140-08d58ce43aca"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{escuela}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="3450" y="0" width="200" height="30" uuid="22c17494-b44c-4e0f-9bef-6ad7297805a3"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{causaseparacion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="3350" y="0" width="100" height="30" uuid="ac373f34-9678-4d8c-9698-a305ceae9802"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{municipio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="4540" y="0" width="80" height="30" uuid="32d3da8b-1d32-4889-b511-6b8968332ca3"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{clave}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="4620" y="0" width="160" height="30" uuid="59f88c9f-d218-45e4-ae71-0324d994c1c3"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{familia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="4780" y="0" width="120" height="30" uuid="c0fb5424-da60-46f1-80bb-5ef930d755c3"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombrecaptura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="4900" y="0" width="100" height="30" uuid="c6b0155a-ccb2-4d43-b663-09ca855a59a1"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{capturacorreo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="5370" y="0" width="220" height="30" uuid="030d5ef4-4cef-4871-9bd6-1b029cd121c0"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{medios}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="3650" y="0" width="190" height="30" uuid="4cb16a20-e394-4a24-8dc5-5f079702f6f7"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gradosrepetidos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="5000" y="0" width="80" height="30" uuid="42bb3a1d-6fe9-45e3-ab7f-3f4c6e4b1cec"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{capturaparentesco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="5080" y="0" width="290" height="30" uuid="e88180fe-b0ec-4609-83f6-1780ba4f2d8f"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{capturamotivo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="1000" y="0" width="120" height="30" uuid="ee286864-3a1e-47dc-abcf-3bd812ba70b8"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apellidomaterno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

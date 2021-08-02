@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeMaterialportallerextracurricular" table="ce_materialportallerextracurricular">
+    <indexes>
+      <index name="ce_materialportallerextracurricular_ce_tallerextracurricular_fk" columns="TallerExtraCurricularId"/>
+      <index name="ce_materialportallerextracurricular_ce_tallermaterial_fk" columns="TallerMaterialId"/>
+    </indexes>
+    <id name="materialportallerextracurricularid" type="integer" column="MaterialPorTallerExtraCurricularId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="tallerextracurricularid" target-entity="CeTallerextracurricular" fetch="LAZY">
+      <join-columns>
+        <join-column name="TallerExtraCurricularId" referenced-column-name="TallerExtracurricularId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tallermaterialid" target-entity="CeTallermaterial" fetch="LAZY">
+      <join-columns>
+        <join-column name="TallerMaterialId" referenced-column-name="TallerMaterialId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Complemento" table="complemento">
+    <indexes>
+      <index name="ComplementoTipoComplemento_idx" columns="TipoComplementoId"/>
+    </indexes>
+    <id name="complementoid" type="integer" column="ComplementoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="complemento" type="blob" column="Complemento" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="complementosize" type="string" column="ComplementoSize" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="complementotipo" type="string" column="ComplementoTipo" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="tipocomplementoid" target-entity="Tipocomplemento" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoComplementoId" referenced-column-name="TipoComplementoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

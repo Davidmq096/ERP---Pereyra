@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcPeriodobecaporformato" table="bc_periodobecaporformato">
+    <indexes>
+      <index name="FK_bc_periodobecaporformato_Fo" columns="FormatoBecaID"/>
+      <index name="FK_bc_periodobecaporformato_Pe" columns="PeriodoBecaId"/>
+    </indexes>
+    <id name="periodobecaporformatosid" type="integer" column="PeriodoBecaporFormatosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <many-to-one field="formatobecaid" target-entity="BcFormatobeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="FormatoBecaID" referenced-column-name="FormatoBecaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="periodobecaid" target-entity="BcPeriodobeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="PeriodoBecaId" referenced-column-name="PeriodoBecaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

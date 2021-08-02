@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjPolizacontable" table="cj_polizacontable">
+    <indexes>
+      <index name="PK_POLIZACONTABLE_USUARIO_idx" columns="UsuarioId"/>
+    </indexes>
+    <id name="polizacontableid" type="integer" column="PolizaContableId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="datetime" column="Fecha" nullable="false">
+      <options>
+        <option name="comment">Fecha de la póliza.</option>
+      </options>
+    </field>
+    <field name="contpaqid" type="integer" column="ContpaqId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">ID de la póliza en contpaq i.</option>
+      </options>
+    </field>
+    <field name="observaciones" type="string" column="Observaciones" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Comentarios sobre la exportación.</option>
+      </options>
+    </field>
+    <field name="tipopoliza" type="boolean" column="TipoPoliza" nullable="false">
+      <options>
+        <option name="comment">Tipo de Póliza 1 = Diario, 2 = Ingresos, 3 = Egresos.</option>
+      </options>
+    </field>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\AdSeccion" table="ad_seccion">
+    <indexes>
+      <index name="configuracionid_idx" columns="ConfiguracionId"/>
+    </indexes>
+    <id name="seccionid" type="integer" column="SeccionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="configuracion" type="text" column="Configuracion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="query" type="text" column="Query" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="propiedades" type="text" column="Propiedades" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="configuracionid" target-entity="AdConfiguracion" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConfiguracionId" referenced-column-name="ConfiguracionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

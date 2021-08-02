@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeConftallercurricular" table="ce_conftallercurricular">
+    <id name="conftallercurricularid" type="integer" column="ConfTallerCurricularId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechaarmadogrupoinicio" type="date" column="FechaArmadoGrupoInicio" nullable="false"/>
+    <field name="fechaarmadogrupofin" type="date" column="FechaArmadoGrupoFin" nullable="false"/>
+    <field name="fechapreregistroinicio" type="date" column="FechaPreregistroInicio" nullable="false"/>
+    <field name="fechapreregistrofin" type="date" column="FechaPreregistroFin" nullable="false"/>
+  </entity>
+</doctrine-mapping>

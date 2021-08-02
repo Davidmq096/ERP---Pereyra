@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpAlumnoporcontrato" table="tp_alumnoporcontrato">
+    <indexes>
+      <index name="AlumnoId" columns="AlumnoId"/>
+      <index name="ContratoEstatusId" columns="ContratoEstatusId"/>
+      <index name="ContratoId" columns="ContratoId"/>
+    </indexes>
+    <id name="alumnoporcontratoid" type="integer" column="AlumnoPorContratoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="motivo" type="text" column="Motivo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="suspenderinicio" type="date" column="SuspenderInicio" nullable="true"/>
+    <field name="suspenderfin" type="date" column="SuspenderFin" nullable="true"/>
+    <field name="fechacancelacion" type="date" column="FechaCancelacion" nullable="true"/>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="contratoid" target-entity="TpContrato" fetch="LAZY">
+      <join-columns>
+        <join-column name="ContratoId" referenced-column-name="ContratoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="contratoestatusid" target-entity="TpContratoestatus" fetch="LAZY">
+      <join-columns>
+        <join-column name="ContratoEstatusId" referenced-column-name="ContratoEstatusId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

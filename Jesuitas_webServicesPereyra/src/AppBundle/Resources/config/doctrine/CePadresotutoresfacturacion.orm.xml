@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CePadresotutoresfacturacion" table="ce_padresotutoresfacturacion">
+    <indexes>
+      <index name="PadresOTutoresDomicilioIdFacturaciontabla" columns="PadresOTutoresDomicilioId"/>
+      <index name="PadresOTutoresFacturacionIdFacturacionFK" columns="PadresOTutoresId"/>
+    </indexes>
+    <id name="padresotutoresfacturacionid" type="integer" column="PadresOTutoresFacturacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tipopersonaid" type="integer" column="TipoPersonaId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="rfc" type="string" column="RFC" length="14" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="razonsocial" type="string" column="RazonSocial" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correo" type="string" column="Correo" length="300" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="esautomaticacolegiatura" type="integer" column="EsAutomaticaColegiatura" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="esautomaticaotros" type="integer" column="EsAutomaticaOtros" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <many-to-one field="padresotutoresdomicilioid" target-entity="CePadresotutoresdomicilio" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresDomicilioId" referenced-column-name="PadresOTutoresDomicilioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

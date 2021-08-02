@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeBitacoraarmadogrupo" table="ce_bitacoraarmadogrupo">
+    <indexes>
+      <index name="ce_bitacoraarmadogrupo_ce_alumno_AlumnoId_fk" columns="alumnoid"/>
+      <index name="ce_bitacoraarmadogrupo_ce_grupo_GrupoId_fk" columns="grupoorigenid"/>
+      <index name="ce_bitacoraarmadogrupo_ce_grupoo_GrupoId_fk" columns="grupodestinoid"/>
+      <index name="ce_bitacoraarmadogrupo_ce_tipomovimientobitacora_fk" columns="tipobitacoramovimientoid"/>
+      <index name="ce_bitacoraarmadogrupo_ciclo_CicloId_fk" columns="cicloid"/>
+      <index name="ce_bitacoraarmadogrupo_grado_GradoId_fk" columns="gradoid"/>
+    </indexes>
+    <id name="bitacoraarmadogrupoid" type="integer" column="bitacoraarmadogrupoid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="alumno" type="string" column="alumno" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="grupoanterior" type="string" column="grupoanterior" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="gruponuevo" type="string" column="gruponuevo" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usuario" type="string" column="usuario" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fecha" type="datetime" column="fecha" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="alumnoid" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="grupoorigenid" target-entity="CeGrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="grupoorigenid" referenced-column-name="GrupoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="grupodestinoid" target-entity="CeGrupo" fetch="LAZY">
+      <join-columns>
+        <join-column name="grupodestinoid" referenced-column-name="GrupoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipobitacoramovimientoid" target-entity="CeTipomovimientobitacora" fetch="LAZY">
+      <join-columns>
+        <join-column name="tipobitacoramovimientoid" referenced-column-name="tipomovimientobitacoraid"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cicloid" target-entity="Ciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="cicloid" referenced-column-name="CicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="gradoid" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

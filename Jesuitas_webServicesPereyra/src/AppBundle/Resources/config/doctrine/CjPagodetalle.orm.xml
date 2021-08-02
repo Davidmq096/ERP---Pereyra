@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjPagodetalle" table="cj_pagodetalle">
+    <indexes>
+      <index name="FK_PAGODETALLE_SUBCONCEPTO_idx" columns="SubConceptoId"/>
+      <index name="FK_PAGODETALLE_PAGOFORMAPAGO_idx" columns="PagoFormaPagoId"/>
+      <index name="FK_PAGODETALLE_PAGO_idx" columns="PagoId"/>
+      <index name="FK_PAGODETALLE_DOCUMENTOPORPAGAR_idx" columns="DocumentoPorPagarId"/>
+    </indexes>
+    <id name="pagodetalleid" type="integer" column="PagoDetalleId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Importe Pagado.</option>
+      </options>
+    </field>
+    <field name="iva" type="decimal" column="IVA" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="default">0.00</option>
+      </options>
+    </field>
+    <field name="leyenda" type="string" column="Leyenda" length="400" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Captura de la leyenda del sub concepto de pago.</option>
+        <option name="default"/>
+      </options>
+    </field>
+    <many-to-one field="documentoporpagarid" target-entity="CjDocumentoporpagar" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoPorPagarId" referenced-column-name="DocumentoPorPagarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pagoid" target-entity="CjPago" fetch="LAZY">
+      <join-columns>
+        <join-column name="PagoId" referenced-column-name="PagoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pagoformapagoid" target-entity="CjPagoformapago" fetch="LAZY">
+      <join-columns>
+        <join-column name="PagoFormaPagoId" referenced-column-name="PagoFormaPagoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="subconceptoid" target-entity="CjSubconcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubConceptoId" referenced-column-name="SubConceptoId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

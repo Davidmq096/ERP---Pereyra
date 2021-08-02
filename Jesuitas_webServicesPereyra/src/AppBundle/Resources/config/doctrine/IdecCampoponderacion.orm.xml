@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IdecCampoponderacion" table="idec_campoponderacion">
+    <indexes>
+      <index name="FK_idec_campoponderacion_Tabl2" columns="TablaPonderacionId"/>
+    </indexes>
+    <id name="campoponderacionid" type="integer" column="CampoPonderacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true"/>
+    <many-to-one field="tablaponderacionid" target-entity="IdecTablaponderacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="TablaPonderacionId" referenced-column-name="TablaPonderacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

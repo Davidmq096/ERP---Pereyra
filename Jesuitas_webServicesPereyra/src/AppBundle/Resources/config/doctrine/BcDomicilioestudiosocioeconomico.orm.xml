@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcDomicilioestudiosocioeconomico" table="bc_domicilioestudiosocioeconomico">
+    <indexes>
+      <index name="EstadoId" columns="EstadoId"/>
+      <index name="MunicipioId" columns="MunicipioId"/>
+      <index name="PaisId" columns="PaisId"/>
+      <index name="SolicitudId" columns="SolicitudId"/>
+      <index name="bc_domicilioestudiosocioeconomico_ibfk_4" columns="ColoniaId"/>
+    </indexes>
+    <id name="domicilioestudiosocioeconomicoid" type="integer" column="DomicilioEstudioSocioeconomicoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="codigopostal" type="string" column="CodigoPostal" length="11" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="calle" type="string" column="Calle" length="80" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numeroexterior" type="string" column="NumeroExterior" length="10" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numerointerior" type="string" column="NumeroInterior" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="otracolonia" type="string" column="OtraColonia" length="80" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="entrecalles" type="string" column="EntreCalles" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefonocasa" type="string" column="TelefonoCasa" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="estadoid" target-entity="Estado" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstadoId" referenced-column-name="EstadoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="municipioid" target-entity="Municipio" fetch="LAZY">
+      <join-columns>
+        <join-column name="MunicipioId" referenced-column-name="MunicipioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="coloniaid" target-entity="Colonia" fetch="LAZY">
+      <join-columns>
+        <join-column name="ColoniaId" referenced-column-name="ColoniaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="paisid" target-entity="Pais" fetch="LAZY">
+      <join-columns>
+        <join-column name="PaisId" referenced-column-name="PaisId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

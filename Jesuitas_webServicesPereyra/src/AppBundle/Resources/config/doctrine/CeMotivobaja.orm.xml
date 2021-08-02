@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeMotivobaja" table="ce_motivobaja">
+    <indexes>
+      <index name="FK_ce_motivobaja_TipoBajaId" columns="TipoBajaId"/>
+    </indexes>
+    <id name="motivobajaid" type="integer" column="MotivoBajaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clavesegdgb" type="string" column="ClaveSegDgb" length="80" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <field name="permitereingreso" type="boolean" column="PermiteReingreso" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <many-to-one field="tipobajaid" target-entity="CeTipobaja" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoBajaId" referenced-column-name="TipoBajaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

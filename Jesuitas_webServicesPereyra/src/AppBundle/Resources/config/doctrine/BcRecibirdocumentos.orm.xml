@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcRecibirdocumentos" table="bc_recibirdocumentos">
+    <indexes>
+      <index name="bc_recibirdocumentos_bc_documentos_documentoid_idx" columns="DocumentoId"/>
+      <index name="bc_recibirdocumentos_bc_solicitudbeca_solicitudid_idx" columns="SolicitudId"/>
+    </indexes>
+    <id name="recibirdocumentosid" type="integer" column="RecibirDocumentosId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="documentoid" target-entity="BcDocumentos" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoId" referenced-column-name="DocumentoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

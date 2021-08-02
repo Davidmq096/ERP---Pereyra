@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Lugarportipoevaluacion" table="lugarportipoevaluacion">
+    <indexes>
+      <index name="LugarId_idx" columns="LugarId"/>
+      <index name="TipoEvaluacionId_idx" columns="TipoEvaluacionId"/>
+    </indexes>
+    <id name="lugarportipoevaluacionid" type="integer" column="LugarPorTipoEvaluacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="lugarid" target-entity="Lugar" fetch="LAZY">
+      <join-columns>
+        <join-column name="LugarId" referenced-column-name="LugarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoevaluacionid" target-entity="Tipoevaluacion" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoEvaluacionId" referenced-column-name="TipoEvaluacionId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

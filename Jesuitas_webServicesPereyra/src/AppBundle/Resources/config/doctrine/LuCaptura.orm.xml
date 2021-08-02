@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\LuCaptura" table="lu_captura">
+    <indexes>
+      <index name="ce_capturaludoteca_ce_alumnoporciclo_AlumnoPorCicloId_fk" columns="AlumnoPorCicloId"/>
+      <index name="lu_captura_lu_tipo_TipoId_fk" columns="TipoId"/>
+      <index name="lu_captura_usuario_UsuarioId_fk" columns="UsuarioId"/>
+      <index name="lu_captura_lu_estatuscaptura_EstatusCapturaId_fk" columns="EstatusCapturaId"/>
+      <index name="fk_dp" columns="DocumentoPorPagarId"/>
+      <index name="FK_lu_captura_UsuarioIdCancela" columns="UsuarioIdCancelacion"/>
+    </indexes>
+    <id name="capturaid" type="integer" column="CapturaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="Fecha" nullable="false"/>
+    <field name="hora" type="time" column="Hora" nullable="false"/>
+    <field name="tienecontrato" type="boolean" column="TieneContrato" nullable="false"/>
+    <field name="diasvencidos" type="integer" column="DiasVencidos" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="adeudo" type="float" column="Adeudo" precision="10" scale="0" nullable="false"/>
+    <field name="personarecoge" type="text" column="PersonaRecoge" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="motivocancelacion" type="text" column="MotivoCancelacion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="usuarioidcancelacion" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioIdCancelacion" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="alumnoporcicloid" target-entity="CeAlumnoporciclo" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoPorCicloId" referenced-column-name="AlumnoPorCicloId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="documentoporpagarid" target-entity="CjDocumentoporpagar" fetch="LAZY">
+      <join-columns>
+        <join-column name="DocumentoPorPagarId" referenced-column-name="DocumentoPorPagarId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatuscapturaid" target-entity="LuEstatuscaptura" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusCapturaId" referenced-column-name="EstatusCapturaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoid" target-entity="LuTipo" fetch="LAZY">
+      <join-columns>
+        <join-column name="TipoId" referenced-column-name="TipoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

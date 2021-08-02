@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeAlumnoporclavefamiliar" table="ce_alumnoporclavefamiliar">
+    <indexes>
+      <index name="AlumnoporclavefamiliarAlumno_idx" columns="AlumnoId"/>
+      <index name="AlumnoporclavefamiliarClavefamiliar_idx" columns="ClaveFamiliarId"/>
+    </indexes>
+    <id name="alumnoporclavefamiliar" type="integer" column="AlumnoPorClaveFamiliar">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="clavefamiliarid" target-entity="CeClavefamiliar" fetch="LAZY">
+      <join-columns>
+        <join-column name="ClaveFamiliarId" referenced-column-name="ClaveFamiliarId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

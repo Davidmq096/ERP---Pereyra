@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CePersonaautorizadarecogerporalumno" table="ce_personaautorizadarecogerporalumno">
+    <indexes>
+      <index name="AlumnoIdPersonaAutorizadaParaRecoger_idx" columns="AlumnoId"/>
+      <index name="ParentecoIdPersonaAutorizadaParaRecoger_idx" columns="PersonaAutorizadaRecogerId"/>
+    </indexes>
+    <id name="personaautorizadarecogerporalumnoid" type="integer" column="PersonaAutorizadaRecogerPorAlumnoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="alumnoid" target-entity="CeAlumno" fetch="LAZY">
+      <join-columns>
+        <join-column name="AlumnoId" referenced-column-name="AlumnoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="personaautorizadarecogerid" target-entity="CePersonaautorizadarecoger" fetch="LAZY">
+      <join-columns>
+        <join-column name="PersonaAutorizadaRecogerId" referenced-column-name="PersonaAutorizadaRecogerId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

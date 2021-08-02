@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Gradorepetido" table="gradorepetido">
+    <indexes>
+      <index name="GradoRepetidoDatoAspirante_idx" columns="DatoAspiranteId"/>
+      <index name="GradoRepetidoGrado_idx" columns="GradoId"/>
+    </indexes>
+    <id name="gradorepetidoid" type="integer" column="GradoRepetidoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="causa" type="string" column="Causa" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="gradoid" target-entity="Grado" fetch="LAZY">
+      <join-columns>
+        <join-column name="GradoId" referenced-column-name="GradoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="datoaspiranteid" target-entity="Datoaspirante" fetch="LAZY">
+      <join-columns>
+        <join-column name="DatoAspiranteId" referenced-column-name="DatoAspiranteId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

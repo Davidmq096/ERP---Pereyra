@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjConceptoplantillacontable" table="cj_conceptoplantillacontable">
+    <indexes>
+      <index name="FK_PLANTILLA_CENTRO_idx" columns="CentroCostoId"/>
+      <index name="FK_PLANTILLA_CONCEPTO_idx" columns="ConceptoId"/>
+      <index name="FK_PLANTILLA_CUENTA_idx" columns="CuentaContableId"/>
+    </indexes>
+    <id name="conceptoplantillacontableid" type="integer" column="ConceptoPlantillaContableId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tipomovimientoid" type="boolean" column="TipoMovimientoId" nullable="false">
+      <options>
+        <option name="comment">0 = Abono, 1 = Cargo.</option>
+      </options>
+    </field>
+    <field name="porcentaje" type="decimal" column="Porcentaje" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Porcentaje del cargo o abono a esa cuenta.</option>
+      </options>
+    </field>
+    <field name="tipoplantilla" type="integer" column="TipoPlantilla" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Tipo de plantilla contable (0 = Pago Normal, 1 = Anticipo, 2 = Amortización, 4 = Generación)</option>
+      </options>
+    </field>
+    <many-to-one field="centrocostoid" target-entity="CjCentrocosto" fetch="LAZY">
+      <join-columns>
+        <join-column name="CentroCostoId" referenced-column-name="CentroCostoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="conceptoid" target-entity="CjConcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="ConceptoId" referenced-column-name="ConceptoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cuentacontableid" target-entity="CjCuentacontable" fetch="LAZY">
+      <join-columns>
+        <join-column name="CuentaContableId" referenced-column-name="CuentaContableId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

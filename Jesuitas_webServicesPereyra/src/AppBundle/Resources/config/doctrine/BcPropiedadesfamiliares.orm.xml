@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BcPropiedadesfamiliares" table="bc_propiedadesfamiliares">
+    <indexes>
+      <index name="EstatusId" columns="EstatusId"/>
+      <index name="SolicitudId" columns="SolicitudId"/>
+    </indexes>
+    <id name="propiedadfamiliaid" type="integer" column="PropiedadFamiliaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tipopropiedad" type="string" column="TipoPropiedad" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="valoraproximado" type="string" column="ValorAproximado" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="creditoanombrede" type="string" column="CreditoAnombreDe" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="propiedadanombrede" type="string" column="PropiedadAnombreDe" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="domicilioactual" type="boolean" column="DomicilioActual" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="mtsterreno" type="string" column="mtsterreno" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mtsconstruccion" type="string" column="mtsconstruccion" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ubicacion" type="string" column="ubicacion" length="70" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="portal" type="integer" column="portal" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="solicitudid" target-entity="BcSolicitudbeca" fetch="LAZY">
+      <join-columns>
+        <join-column name="SolicitudId" referenced-column-name="SolicitudId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estatusid" target-entity="BcEstatuspropiedad" fetch="LAZY">
+      <join-columns>
+        <join-column name="EstatusId" referenced-column-name="EstatusId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

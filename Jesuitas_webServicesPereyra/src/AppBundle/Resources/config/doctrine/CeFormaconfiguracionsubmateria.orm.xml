@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CeFormaconfiguracionsubmateria" table="ce_formaconfiguracionsubmateria">
+    <indexes>
+      <index name="ce_formaconfiguracionsubmateria_ibfk_1" columns="MateriaPorPlanEstudioId"/>
+    </indexes>
+    <id name="formaconfiguracionsubmateriaid" type="integer" column="FormaConfiguracionSubMateriaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="formacalificar" type="integer" column="FormaCalificar" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="formacaptura" type="integer" column="FormaCaptura" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="materiaporplanestudioid" target-entity="CeMateriaporplanestudios" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPorPlanEstudioId" referenced-column-name="MateriaPorPlanEstudioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

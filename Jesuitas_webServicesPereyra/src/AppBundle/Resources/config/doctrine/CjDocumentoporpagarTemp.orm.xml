@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjDocumentoporpagarTemp" table="cj_documentoporpagar_temp">
+    <id name="documentoporpagarid" type="integer" column="DocumentoPorPagarId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="documentoid" type="integer" column="DocumentoId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Documento a pagar.</option>
+      </options>
+    </field>
+    <field name="subconceptoid" type="integer" column="SubConceptoId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Sub concepto del documento a pagar.</option>
+      </options>
+    </field>
+    <field name="pagoestatusid" type="integer" column="PagoEstatusId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Estatus del pago.</option>
+      </options>
+    </field>
+    <field name="alumnoid" type="integer" column="AlumnoId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">ID del alumno al que se le asigna el documento.</option>
+      </options>
+    </field>
+    <field name="solicitudadmisionid" type="integer" column="SolicitudAdmisionId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">FK de la solicitud de admisión.</option>
+      </options>
+    </field>
+    <field name="cicloid" type="integer" column="CicloId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Ciclo al que pertenece el documento por pagar.</option>
+      </options>
+    </field>
+    <field name="gradoid" type="integer" column="GradoId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Grado del documento.</option>
+      </options>
+    </field>
+    <field name="mediopagoid" type="integer" column="MedioPagoId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="importe" type="decimal" column="Importe" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Importe del sub concepto.</option>
+      </options>
+    </field>
+    <field name="saldo" type="decimal" column="Saldo" precision="12" scale="2" nullable="false">
+      <options>
+        <option name="comment">Saldo o adeudo restante del sub concepto.</option>
+      </options>
+    </field>
+    <field name="fechalimitepago" type="datetime" column="FechaLimitePago" nullable="false">
+      <options>
+        <option name="comment">Fecha límite para realizar el pago a partir de la cual se realizarán los recargos.</option>
+      </options>
+    </field>
+    <field name="fechacreacion" type="datetime" column="FechaCreacion" nullable="false">
+      <options>
+        <option name="comment">Fecha en la que se creó el documento.</option>
+      </options>
+    </field>
+    <field name="fechaprontopago" type="datetime" column="FechaProntoPago" nullable="false">
+      <options>
+        <option name="comment">Fecha de pronto pago. Algunos conceptos ofrecen descuento si se paga antes de esta fecha.</option>
+      </options>
+    </field>
+    <field name="referencia" type="string" column="Referencia" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Referencia bancaria de pago.</option>
+      </options>
+    </field>
+    <field name="documento" type="string" column="Documento" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Numero de pago (año + consecutivo de pago + letra nivel = 201800S</option>
+      </options>
+    </field>
+    <field name="idnomina" type="string" column="IdNomina" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Si el papa trabaja en el instituto, Id de nómina del padre o tutor (solo inscripción).</option>
+      </options>
+    </field>
+    <field name="hermanos" type="boolean" column="Hermanos" nullable="true">
+      <options>
+        <option name="comment">Cuenta con hermanos en el instituto (solo inscripción).</option>
+      </options>
+    </field>
+    <field name="reingreso" type="boolean" column="Reingreso" nullable="true">
+      <options>
+        <option name="comment">Es reingreso (solo inscripción).</option>
+      </options>
+    </field>
+    <field name="padreexalumno" type="boolean" column="PadreExAlumno" nullable="true">
+      <options>
+        <option name="comment">El padre es ex alumno (solo inscripción).</option>
+      </options>
+    </field>
+    <field name="concepto" type="string" column="Concepto" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Descripción del concepto a pagar (opcional).</option>
+      </options>
+    </field>
+    <field name="acuerdoid" type="integer" column="AcuerdoId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="tipoacuerdoid" type="integer" column="TipoAcuerdoId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="porcentaje" type="integer" column="Porcentaje" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="iva" type="decimal" column="IVA" precision="12" scale="2" nullable="true">
+      <options>
+        <option name="default">0.00</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjDomiciliacion" table="cj_domiciliacion">
+    <indexes>
+      <index name="FK_CJ_DOMICILIACION_BANCO_idx" columns="BancoId"/>
+      <index name="FK_CJ_DOMICILIACION_PADRESOTURORES_idx" columns="PadresOTutoresId"/>
+    </indexes>
+    <id name="domiciliacionid" type="integer" column="DomiciliacionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tiporegistro" type="boolean" column="TipoRegistro" nullable="false">
+      <options>
+        <option name="comment">Indica si el registro es de Domiciliacion (0) o cargo automático (1).</option>
+      </options>
+    </field>
+    <field name="nombretitularcuenta" type="string" column="NombreTitularCuenta" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Nombre del titular de la cuenta (bancaria o td) a la que se realiza la domiciliación.</option>
+      </options>
+    </field>
+    <field name="tipocuenta" type="integer" column="TipoCuenta" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Tipo de cuenta (1 = Tarjeta de Débito, 2 = Cuenta bancaria y requiere CLABE, 3 = Tarjeta de Crédito).</option>
+      </options>
+    </field>
+    <field name="cuenta" type="string" column="Cuenta" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Número de cuenta bancaria, si el tipo de cuenta es = 0, entonces es el no. de tarjeta de débito. Si el tipo de cuenta = 1, la cuenta es una CLABE de 20 dígitos.</option>
+      </options>
+    </field>
+    <field name="referencia" type="string" column="Referencia" length="40" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Referencia bancaria.</option>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="false"/>
+    <many-to-one field="bancoid" target-entity="CjBanco" fetch="LAZY">
+      <join-columns>
+        <join-column name="BancoId" referenced-column-name="BancoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="padresotutoresid" target-entity="CePadresotutores" fetch="LAZY">
+      <join-columns>
+        <join-column name="PadresOTutoresId" referenced-column-name="PadresOTutoresId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

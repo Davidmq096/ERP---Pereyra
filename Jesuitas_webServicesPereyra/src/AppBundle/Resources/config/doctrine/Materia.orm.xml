@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Materia" table="materia">
+    <indexes>
+      <index name="materia_ibfk_3" columns="MateriaPadreId"/>
+      <index name="materia_ibfk_4" columns="NivelId"/>
+      <index name="FK_materia_AreaAcademicaId" columns="AreaAcademicaId"/>
+      <index name="materia_ibfk_5_idx" columns="ClasificadorParaEscolaresId"/>
+      <index name="materia_ibfk_6_idx" columns="MateriaPredecesoraId"/>
+    </indexes>
+    <id name="materiaid" type="integer" column="MateriaId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clave" type="string" column="Clave" length="25" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombre" type="text" column="Nombre" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="alias" type="string" column="Alias" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombreingles" type="string" column="NombreIngles" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombrecortoingles" type="string" column="NombreCortoIngles" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nombreexterno" type="string" column="NombreExterno" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="essubmateria" type="integer" column="EsSubmateria" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="colorsubmaterias" type="string" column="ColorSubMaterias" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="activo" type="boolean" column="Activo" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <many-to-one field="areaacademicaid" target-entity="CeAreaacademica" fetch="LAZY">
+      <join-columns>
+        <join-column name="AreaAcademicaId" referenced-column-name="AreaAcademicaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiapadreid" target-entity="Materia" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPadreId" referenced-column-name="MateriaId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="nivelid" target-entity="Nivel" fetch="LAZY">
+      <join-columns>
+        <join-column name="NivelId" referenced-column-name="NivelId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="clasificadorparaescolaresid" target-entity="CeClasificadorparaescolares" fetch="LAZY">
+      <join-columns>
+        <join-column name="ClasificadorParaEscolaresId" referenced-column-name="ClasificadorParaEscolaresId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="materiapredecesoraid" target-entity="Materia" fetch="LAZY">
+      <join-columns>
+        <join-column name="MateriaPredecesoraId" referenced-column-name="MateriaId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

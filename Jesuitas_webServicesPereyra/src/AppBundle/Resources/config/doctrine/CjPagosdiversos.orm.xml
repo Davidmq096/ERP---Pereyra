@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CjPagosdiversos" table="cj_pagosdiversos">
+    <indexes>
+      <index name="cj_pagosdiversos_cj_subconcepto_SubConceptoId_fk" columns="SubconceptoId"/>
+      <index name="cj_pagosdiversos_usuario_UsuarioId_fk" columns="UsuarioId"/>
+    </indexes>
+    <id name="pagodiversoid" type="integer" column="PagoDiversoId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fechahora" type="datetime" column="FechaHora" nullable="false"/>
+    <field name="descripcion" type="text" column="Descripcion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="subconceptoid" target-entity="CjSubconcepto" fetch="LAZY">
+      <join-columns>
+        <join-column name="SubconceptoId" referenced-column-name="SubConceptoId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuarioid" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="UsuarioId" referenced-column-name="UsuarioId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
