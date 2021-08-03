@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boleta" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="d3781f9e-26a8-4b0a-b011-2b68b888ee30">
+	<property name="net.sf.jasperreports.json.source" value="Dynamic.json"/>
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="65"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Boleta_secundaria"/>
+	<style name="general" isDefault="true" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="Arial" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="head" style="general" isBold="true"/>
+	<style name="headGeneral" style="general" fontSize="9" isBold="true"/>
+	<style name="headNBold" style="headGeneral" isBold="false"/>
+	<style name="headTitle" style="headGeneral" fontSize="10"/>
+	<style name="headSubtitle" style="headGeneral" fontSize="8" isBold="true"/>
+	<style name="headStudent" style="headNBold" fontSize="8"/>
+	<style name="scoreTHead" style="general" forecolor="#999999" hTextAlign="Left" hImageAlign="Left" vTextAlign="Bottom" vImageAlign="Bottom" fontSize="11" isBold="true"/>
+	<style name="scoreGeneral" style="general" fontSize="7">
+		<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+			<pen lineWidth="1.0" lineColor="#999999"/>
+			<topPen lineWidth="1.0" lineColor="#999999"/>
+			<leftPen lineWidth="1.0" lineColor="#999999"/>
+			<bottomPen lineWidth="1.0" lineColor="#999999"/>
+			<rightPen lineWidth="1.0" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="scoreCol" style="scoreGeneral" mode="Opaque" backcolor="#CCCCCC" isBold="true"/>
+	<style name="scoreColTitle" style="scoreCol"/>
+	<style name="scoreRow" style="scoreGeneral" hTextAlign="Left" hImageAlign="Left" isBold="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="scoreVal" style="scoreGeneral"/>
+	<style name="scoreTotalRow" style="scoreCol" hTextAlign="Right" hImageAlign="Right">
+		<box rightPadding="5"/>
+	</style>
+	<style name="resumenGeneral" style="general" hTextAlign="Left" hImageAlign="Left" fontSize="7"/>
+	<style name="resumenHead" style="resumenGeneral" isBold="true"/>
+	<style name="resumenCaption" style="resumenGeneral" fontSize="6"/>
+	<style name="escalaGeneral" style="general" hTextAlign="Justified" fontSize="8"/>
+	<style name="escalaHead" style="escalaGeneral" hTextAlign="Center" hImageAlign="Center" fontSize="9" isBold="true"/>
+	<style name="obsGeneral" style="general" fontSize="8"/>
+	<style name="obsHead" style="obsGeneral" rotation="Left" fontSize="9" isBold="true"/>
+	<style name="footerGeneral" style="general" fontSize="9"/>
+	<subDataset name="Header" uuid="ff216311-eaf1-4035-9a73-eba1c97fdca8">
+		<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+		<field name="cyclename" class="java.lang.String"/>
+		<field name="apaterno" class="java.lang.String"/>
+		<field name="amaterno" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="grado" class="java.lang.String"/>
+		<field name="grupo" class="java.lang.String"/>
+		<field name="matricula" class="java.lang.String"/>
+		<field name="nivel" class="java.lang.String"/>
+		<field name="ponderacion" class="java.lang.String"/>
+		<field name="photo" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="photo"/>
+			<fieldDescription><![CDATA[photo]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="Config" uuid="7e85148a-e820-4e06-94e0-4376650c7c89">
+		<parameter name="periodo" class="java.lang.String" isForPrompting="false"/>
+		<field name="directorname" class="java.lang.String"/>
+		<field name="profesorname" class="java.lang.String"/>
+		<field name="periodoeval" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="CalTData" uuid="7e578d31-a7ee-425e-8b23-3d53cf825595">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="ord" class="java.lang.Integer"/>
+		<field name="key" class="java.lang.String"/>
+		<field name="row" class="java.lang.String"/>
+		<field name="rowf" class="java.lang.String"/>
+		<field name="col" class="java.lang.String"/>
+		<field name="pcol" class="java.lang.String"/>
+		<field name="val" class="java.lang.String"/>
+		<field name="kind" class="java.lang.String"/>
+		<field name="curr" class="java.lang.Boolean"/>
+		<field name="ordy" class="java.lang.Integer"/>
+		<variable name="isNumber" class="java.lang.Boolean">
+			<variableExpression><![CDATA[$F{val}.matches("-?\\d+(\\.\\d+)?")]]></variableExpression>
+		</variable>
+		<variable name="val" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{val}=="" || !$V{isNumber} ? 0.0 : Double.valueOf($F{val}))]]></variableExpression>
+		</variable>
+		<variable name="val_reprobadas" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{kind}!="C" || $F{val}=="" || !$V{isNumber} ? 0 : (Double.valueOf($F{val})<6 ? 1 : 0))]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="CalTResume" uuid="18f5d832-ddc3-4109-a428-696a41af9ff3">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="pfinal" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Observaciones" uuid="78657c97-9b76-49d1-ba90-4554b45c2f6e">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="name" class="java.lang.String"/>
+		<field name="obs" class="java.lang.String"/>
+		<variable name="show" class="java.lang.Boolean">
+			<variableExpression><![CDATA[$F{obs}.length()>1]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Boletas\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="jsonql">
+		<![CDATA[]]>
+	</queryString>
+	<field name="student.ponderacion" class="java.lang.Boolean"/>
+	<field name="student.periodolatest.descripcion" class="java.lang.String"/>
+	<background>
+		<band height="500" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="31" y="62" width="495" height="375" forecolor="#CCCCCC" uuid="f5e3c52c-aa6b-4ba0-9894-455872d5e1cc"/>
+				<textElement>
+					<font size="44" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENTO NO OFICIAL]]></text>
+			</staticText>
+		</band>
+	</background>
+	<title>
+		<band height="125" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="125" uuid="6a9e90a3-a657-47a0-ae79-3accbca6397a"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Header" uuid="c4191f25-cdcc-4f7d-b2ec-b6b9fd6cbbd1">
+						<datasetParameter name="logo">
+							<datasetParameterExpression><![CDATA[$P{logo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("student")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="125" width="555">
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement mode="Transparent" x="0" y="0" width="80" height="80" uuid="b934e94a-fe12-45cc-bfff-9b7c7a756f17"/>
+							<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+						</image>
+						<staticText>
+							<reportElement style="headTitle" x="85" y="7" width="385" height="14" uuid="130b5d20-cf83-4899-982f-ec03d790a32f"/>
+							<text><![CDATA[INSTITUTO LUX]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headSubtitle" x="85" y="22" width="385" height="12" uuid="96805e25-ebbc-4082-9300-1ba4350d7a72"/>
+							<text><![CDATA[Institución Educativa Incorporada según Acuerdo Secretarial 038/2015, 16062015]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headNBold" x="85" y="32" width="385" height="13" uuid="c02b7fc7-5a84-48b1-96ed-446c905dd51c"/>
+							<text><![CDATA[CCT 11PES0079N]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="85" y="42" width="385" height="13" uuid="6e075cf4-2dc7-4d26-9cec-f476782180a3"/>
+							<text><![CDATA[REPORTE TRIMESTRAL DE EVALUACIÓN]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="85" y="52" width="385" height="13" uuid="1fadc091-6202-4aa9-b272-5ebfdc765d00"/>
+							<textFieldExpression><![CDATA['SECCION '+$F{nivel}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="85" y="62" width="385" height="13" uuid="3c460d0c-f2f4-43fb-b2df-34f01f95c61c"/>
+							<textFieldExpression><![CDATA['CICLO ESCOLAR '+$F{cyclename}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement style="headStudent" x="0" y="102" width="555" height="1" uuid="ac89c4e4-d44e-4434-babe-13ee2297f741"/>
+						</line>
+						<textField>
+							<reportElement style="headStudent" x="0" y="90" width="90" height="13" uuid="72170c9a-8e6b-4292-a63d-68e8d260f363"/>
+							<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="0" y="102" width="90" height="13" uuid="30b1df71-9f6e-4807-b83d-e8d1c61be653"/>
+							<text><![CDATA[MATRICULA]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudent" x="90" y="90" width="125" height="13" uuid="9e78ed5f-9924-4364-9960-8c4c61fda2eb"/>
+							<textFieldExpression><![CDATA[$F{apaterno}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="90" y="102" width="125" height="13" uuid="68108d30-ce2e-4479-87da-c70beead68d0"/>
+							<text><![CDATA[APELLIDO PATERNO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudent" x="215" y="90" width="125" height="13" uuid="7252da01-2ea5-4b98-a0a9-772b677a5d59"/>
+							<textFieldExpression><![CDATA[$F{amaterno}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="215" y="102" width="125" height="13" uuid="e9b7a0ed-8bc4-4976-bcb8-3c83766c3c89"/>
+							<text><![CDATA[APELLIDO MATERNO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudent" x="340" y="90" width="125" height="13" uuid="f35dd605-091c-41ec-a106-b29887187b95"/>
+							<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="340" y="102" width="125" height="13" uuid="f40adf95-6486-44d4-a02f-173c30f07386"/>
+							<text><![CDATA[NOMBRE]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudent" x="465" y="90" width="90" height="13" uuid="cb08dad3-5100-468d-8f74-0a271c13ae23"/>
+							<textFieldExpression><![CDATA[$F{grado}+' / '+$F{grupo}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="465" y="102" width="90" height="13" uuid="b9e5a9f4-907c-4b6b-8d6d-55be28b93627"/>
+							<text><![CDATA[GRADO/GRUPO]]></text>
+						</staticText>
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement x="475" y="0" width="80" height="80" uuid="9c87596a-36a7-47e4-ba7c-894f6b51b6ee"/>
+							<graphicElement>
+								<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+							</graphicElement>
+							<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64($F{photo}.getBytes()))]]></imageExpression>
+						</image>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="65" splitType="Stretch">
+			<crosstab ignoreWidth="false">
+				<reportElement x="0" y="25" width="555" height="36" uuid="90ac0997-2d54-4724-b50d-cd601ebff55a"/>
+				<crosstabParameter name="ponderacion" class="java.lang.Boolean">
+					<parameterValueExpression><![CDATA[$F{student.ponderacion}]]></parameterValueExpression>
+				</crosstabParameter>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="CalTData" uuid="25eb87e9-3835-4d42-b2ba-cd215c539cb4">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.d.*(kind!="N" && kind!="O")')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="rowf" width="155">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[($F{curr} || $F{ordy}==999999?'':'* ')+$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="155" height="12" uuid="29aadfff-a1f9-4bdd-bd8f-19009a9027e3"/>
+								<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="pcol" height="12" headerPosition="Stretch">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isBlankWhenNull="true">
+								<reportElement style="scoreCol" x="0" y="0" width="50" height="12" uuid="f4aa2894-19fc-44cd-9ab0-c687c643b8d3"/>
+								<textFieldExpression><![CDATA[$V{pcol}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<columnGroup name="col" height="12">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{col}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isBlankWhenNull="true">
+								<reportElement style="scoreCol" x="0" y="0" width="50" height="12" uuid="f25be6ef-243a-4acb-9657-f2623ff784a0"/>
+								<textFieldExpression><![CDATA[$V{col}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.String">
+					<measureExpression><![CDATA[$F{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="50" height="12">
+					<cellContents>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="50" height="12" uuid="faff850f-1789-4a91-9475-d4d6670af8ca"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="rowf">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement style="scoreTHead" x="0" y="10" width="555" height="15" uuid="4e8976ba-a79e-47a4-9262-931e39af0947"/>
+				<text><![CDATA[FORMACIÓN ACADÉMICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="scoreColTitle" x="0" y="25" width="155" height="24" uuid="5b2d2c5d-f7b8-4f82-ae62-082e7f007ad3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Materias]]></text>
+			</staticText>
+		</band>
+		<band height="28">
+			<componentElement>
+				<reportElement x="0" y="10" width="555" height="18" uuid="a6d6ec71-cae6-4c13-acf5-6c3905eb605e"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="CalTResume" uuid="a5e07844-87ef-46a3-b5c8-14b4cc2ebb39">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("calis.r")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="18" width="555">
+						<staticText>
+							<reportElement style="resumenHead" x="0" y="0" width="315" height="10" uuid="3c9ce9b7-eacc-424b-918e-3fadcc4e3ab7"/>
+							<text><![CDATA[PROMEDIO GENERAL]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="resumenCaption" x="0" y="10" width="555" height="8" uuid="9976edc0-7e33-404f-bdd8-2426fbebf549"/>
+							<text><![CDATA[Por indicaciones de la SEP las materias marcadas con un * no se contemplan en el promedio general del alumno en la boleta oficial.]]></text>
+						</staticText>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
+							<reportElement x="315" y="0" width="240" height="10" uuid="fa913a4b-8323-4bd1-b847-3742a055cf1b"/>
+							<textFieldExpression><![CDATA[$F{pfinal}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="133">
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="10" width="555" height="13" uuid="77da3aa7-4c13-4dfe-8beb-09e3da636e03"/>
+				<text><![CDATA[ESCALA DE EVALUACIÓN CUALITATIVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="98" width="60" height="25" uuid="30086d78-228f-4640-a70d-e29e6d8a6f74"/>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="73" width="60" height="25" uuid="5a43d0aa-1444-4e5d-93ce-f1afa7291a02"/>
+				<text><![CDATA[C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="48" width="60" height="25" uuid="a71e1b62-6091-4dac-8929-1e42e4814ffb"/>
+				<text><![CDATA[B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="23" width="60" height="25" uuid="0be66f1e-370c-4e1c-8fe5-7b5fb1f19059"/>
+				<text><![CDATA[A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="98" width="495" height="25" uuid="61f97e35-7eec-4b71-bc9e-e807d3a08687"/>
+				<text><![CDATA[- Indica dominio insuficiente de los aprendizajes clave.
+- El estudiante tiene carencias fundamentales en los conocimientos, habilidades, actitudes y valores requeridos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="73" width="495" height="25" uuid="720ecc5d-326d-4491-8507-f88bdd94cd5f"/>
+				<text><![CDATA[- Indica dominio básico de los aprendizajes clave.
+- El estudiante tiene dificultad para demostrar los conocimientos, habilidades, actitudes y valores requeridos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="23" width="495" height="25" uuid="904c75d2-3057-404b-a133-0ec3a74b4b0c"/>
+				<text><![CDATA[- Indica dominio sobresaliente de los aprendizajes clave.
+- El estudiante ha demostrado los conocimientos habilidades actitudes y valores requeridos con un alto grado de efectividad.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="48" width="495" height="25" uuid="b7030844-924d-4f87-b186-f83b8b52dfe9"/>
+				<text><![CDATA[- Indica dominio satisfactorio de los aprendizajes clave.
+- El estudiante ha demostrado los conocimientos, habilidades, actitudes y valores requeridos con efectividad.]]></text>
+			</staticText>
+		</band>
+		<band height="70">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="70" uuid="7f218518-b617-4eaa-a7e3-9d1d79fd36a9"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Observaciones" uuid="8a283c5b-8a8e-487f-8948-33c55239c59e">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("observaciones")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="70" width="555">
+						<textField isStretchWithOverflow="true">
+							<reportElement style="obsHead" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="100" height="70" isPrintWhenDetailOverflows="true" uuid="5f35df8f-63b5-41eb-a9fe-b74e57c3f073"/>
+							<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement style="obsGeneral" positionType="Float" stretchType="RelativeToTallestObject" x="100" y="0" width="455" height="70" isPrintWhenDetailOverflows="true" uuid="edd3023f-262a-4119-9fe8-4bff52b38692"/>
+							<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="110">
+			<componentElement>
+				<reportElement x="0" y="70" width="555" height="40" uuid="606d05ab-a663-4884-9e51-12eef65e11b0"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Config" uuid="da71a8de-4464-4b8e-aaed-cbf195429f61">
+						<datasetParameter name="periodo">
+							<datasetParameterExpression><![CDATA[$F{student.periodolatest.descripcion}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("config")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="40" width="555">
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="280" height="13" uuid="ff0931e0-f55e-4602-a716-ba6f86d9229e"/>
+							<textFieldExpression><![CDATA[$F{directorname}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="0" y="11" width="280" height="13" uuid="a5b315a8-7f9f-409a-8318-c31ba69cd4f2"/>
+							<text><![CDATA[Nombre y firma del director]]></text>
+						</staticText>
+						<line>
+							<reportElement x="0" y="12" width="280" height="1" uuid="0c56212b-7e6e-4fd5-b994-14f11e8a3868"/>
+						</line>
+						<textField isBlankWhenNull="true">
+							<reportElement x="280" y="0" width="275" height="13" uuid="ca9ec0f9-bd95-4c25-9c53-e809c0913e54"/>
+							<textFieldExpression><![CDATA[$F{profesorname}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="0" y="29" width="90" height="10" uuid="d63401ee-46ac-4737-98c8-e6f8cbbc3ef4"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[Trimestre evaluado:]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="90" y="30" width="190" height="10" uuid="f18198ac-7021-4473-baa0-0274d64a4e09"/>
+							<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="280" y="30" width="275" height="10" uuid="dd3c8e09-869e-4a52-abab-9a0d78a0c16f"/>
+							<text><![CDATA[León, Guanajuato ,México]]></text>
+						</staticText>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

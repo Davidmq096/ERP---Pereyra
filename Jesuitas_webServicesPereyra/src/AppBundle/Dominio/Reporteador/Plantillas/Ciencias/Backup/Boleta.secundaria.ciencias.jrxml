@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boleta" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="585" leftMargin="5" rightMargin="5" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="d3781f9e-26a8-4b0a-b011-2b68b888ee30">
+	<property name="net.sf.jasperreports.json.source" value="Dynamic.json"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Boleta_secundaria.xml"/>
+	<style name="general" isDefault="true" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="Arial" fontSize="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="head" style="general" isBold="true"/>
+	<style name="headGeneral" style="general" isBlankWhenNull="true" fontSize="6"/>
+	<style name="headTitle" style="headGeneral" fontSize="9" isBold="true"/>
+	<style name="headTHead" style="headGeneral" mode="Opaque" backcolor="#CCCCCC" isBold="true"/>
+	<style name="headTData" style="headGeneral">
+		<box>
+			<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+			<topPen lineWidth="0.5" lineColor="#CCCCCC"/>
+			<leftPen lineWidth="0.5" lineColor="#CCCCCC"/>
+			<bottomPen lineWidth="0.5" lineColor="#CCCCCC"/>
+			<rightPen lineWidth="0.5" lineColor="#CCCCCC"/>
+		</box>
+	</style>
+	<style name="scoreGeneral" style="general">
+		<box>
+			<pen lineWidth="1.0" lineColor="#999999"/>
+			<topPen lineWidth="1.0" lineColor="#999999"/>
+			<leftPen lineWidth="1.0" lineColor="#999999"/>
+			<bottomPen lineWidth="1.0" lineColor="#999999"/>
+			<rightPen lineWidth="1.0" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="scoreCol" style="scoreGeneral" mode="Opaque" backcolor="#CCCCCC" isBold="true"/>
+	<style name="scoreColTitle" style="scoreCol"/>
+	<style name="scoreRow" style="scoreGeneral" hTextAlign="Left" hImageAlign="Left" isBold="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="scoreVal" style="scoreGeneral"/>
+	<style name="scoreTotalRow" style="scoreCol" hTextAlign="Right" hImageAlign="Right">
+		<box rightPadding="5"/>
+	</style>
+	<style name="scoreTotalVal" style="general" hTextAlign="Right" hImageAlign="Right">
+		<box leftPadding="5"/>
+	</style>
+	<style name="cuthere">
+		<pen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+	</style>
+	<style name="footerGeneral" style="general" fontSize="6"/>
+	<style name="footerSign" style="footerGeneral" isBold="true"/>
+	<style name="footerLabel" style="footerGeneral"/>
+	<style name="notofficial" style="general" isBold="true"/>
+	<subDataset name="Header" uuid="ff216311-eaf1-4035-9a73-eba1c97fdca8">
+		<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="cyclename" class="java.lang.String"/>
+		<field name="apaterno" class="java.lang.String"/>
+		<field name="amaterno" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="grado" class="java.lang.String"/>
+		<field name="grupo" class="java.lang.String"/>
+		<field name="matricula" class="java.lang.String"/>
+		<field name="nivel" class="java.lang.String"/>
+		<field name="semestre" class="java.lang.String"/>
+		<field name="fechahoy" class="java.lang.String"/>
+		<field name="numerolista" class="java.lang.String"/>
+		<field name="periodolatest.descripcioncorta" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Config" uuid="7e85148a-e820-4e06-94e0-4376650c7c89">
+		<field name="directorname" class="java.lang.String"/>
+		<field name="profesorname" class="java.lang.String"/>
+		<field name="periodoeval" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="CalTData" uuid="7e578d31-a7ee-425e-8b23-3d53cf825595">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="ord" class="java.lang.Integer"/>
+		<field name="key" class="java.lang.String"/>
+		<field name="row" class="java.lang.String"/>
+		<field name="col" class="java.lang.String"/>
+		<field name="pcol" class="java.lang.String"/>
+		<field name="val" class="java.lang.String"/>
+		<field name="kind" class="java.lang.String"/>
+		<field name="rowf" class="java.lang.String"/>
+		<variable name="isNumber" class="java.lang.Boolean">
+			<variableExpression><![CDATA[$F{val}.matches("-?\\d+(\\.\\d+)?")]]></variableExpression>
+		</variable>
+		<variable name="val" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{val}=="" || !$V{isNumber} ? 0.0 : Double.valueOf($F{val}))]]></variableExpression>
+		</variable>
+		<variable name="val_reprobadas" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{kind}!="C" || $F{val}=="" || !$V{isNumber} ? 0 : (Double.valueOf($F{val})<6 ? 1 : 0))]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="CalTResume" uuid="18f5d832-ddc3-4109-a428-696a41af9ff3">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="pfinal" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Observaciones" uuid="78657c97-9b76-49d1-ba90-4554b45c2f6e">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="name" class="java.lang.String"/>
+		<field name="obs" class="java.lang.String"/>
+		<variable name="show" class="java.lang.Boolean">
+			<variableExpression><![CDATA[$F{obs}.length()>1]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Boletas\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="jsonql">
+		<![CDATA[]]>
+	</queryString>
+	<field name="student.ponderacion" class="java.lang.String"/>
+	<field name="student.periodolatest.id" class="java.lang.String"/>
+	<field name="student.periodolatest.descripcioncorta" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="80" splitType="Stretch">
+			<line>
+				<reportElement style="cuthere" stretchType="RelativeToBandHeight" x="390" y="0" width="1" height="80" uuid="0c465cae-41b5-43bb-8880-de5cc3704d68"/>
+			</line>
+			<componentElement>
+				<reportElement x="0" y="0" width="385" height="75" uuid="6a9e90a3-a657-47a0-ae79-3accbca6397a"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Header" uuid="a54559fa-a8c6-4566-8363-50ae637d18c2">
+						<datasetParameter name="logo">
+							<datasetParameterExpression><![CDATA[$P{logo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("student")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="75" width="385">
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement mode="Transparent" x="0" y="0" width="50" height="50" uuid="b934e94a-fe12-45cc-bfff-9b7c7a756f17"/>
+							<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+						</image>
+						<staticText>
+							<reportElement style="headTitle" x="52" y="0" width="333" height="12" uuid="130b5d20-cf83-4899-982f-ec03d790a32f"/>
+							<text><![CDATA[INSTITUTO DE CIENCIAS]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headTData" x="275" y="45" width="109" height="9" uuid="72170c9a-8e6b-4292-a63d-68e8d260f363"/>
+							<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headTHead" x="52" y="14" width="333" height="10" uuid="30b1df71-9f6e-4807-b83d-e8d1c61be653"/>
+							<text><![CDATA[NOMBRE DEL ALUMNO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headTData" x="53" y="24" width="331" height="9" uuid="9e78ed5f-9924-4364-9960-8c4c61fda2eb"/>
+							<textFieldExpression><![CDATA[$F{apaterno}+' '+$F{amaterno}+' '+$F{nombre}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headTHead" x="274" y="56" width="55" height="10" uuid="b9e5a9f4-907c-4b6b-8d6d-55be28b93627"/>
+							<text><![CDATA[GRADO]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headTHead" x="274" y="35" width="111" height="10" uuid="42d0339d-6047-4b6b-8ffa-9644ff2f09b3"/>
+							<text><![CDATA[MATRÍCULA]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headTHead" x="330" y="56" width="55" height="10" uuid="d6e191ec-51ff-4a51-9169-c55eb086fd34"/>
+							<text><![CDATA[GRUPO]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headTHead" x="52" y="35" width="110" height="10" uuid="c0114005-255e-4dce-b7f9-86ba94a35a3b"/>
+							<text><![CDATA[NÚMERO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headTData" x="275" y="66" width="53" height="9" uuid="c7a76199-fe4d-41a4-bea9-feb06616e6c5"/>
+							<textFieldExpression><![CDATA[$F{grado}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="headTData" x="331" y="66" width="53" height="9" uuid="0b68b5a6-84d0-4387-b169-d33d69a34560"/>
+							<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="headTData" x="53" y="45" width="108" height="9" uuid="6755be44-f8bc-4b7a-aadb-2727786abfd1"/>
+							<textFieldExpression><![CDATA[$F{numerolista}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headTHead" x="52" y="56" width="110" height="10" uuid="4eafd56a-419a-4984-80cf-cc748ace163a"/>
+							<text><![CDATA[FECHA]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headTHead" x="163" y="56" width="110" height="10" uuid="a965a8af-e924-42b3-90a4-43aa975a02a9"/>
+							<text><![CDATA[CURSO ESCOLAR]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headTHead" x="163" y="35" width="110" height="10" uuid="d948fb6b-d3a2-4d94-840b-ede1ddaf49af"/>
+							<text><![CDATA[PERIODO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headTData" x="53" y="66" width="108" height="9" uuid="08c8cd6a-ba46-4199-9f8f-b7b72d3cf60b"/>
+							<textFieldExpression><![CDATA[$F{fechahoy}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="headTData" x="164" y="66" width="108" height="9" uuid="bb57633d-1d8d-4268-82d1-a66abd9339e5"/>
+							<textFieldExpression><![CDATA[$F{cyclename}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="headTData" x="164" y="45" width="108" height="9" uuid="079f9778-2dd3-4116-baac-a936a80bf323"/>
+							<textFieldExpression><![CDATA[$F{periodolatest.descripcioncorta}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="395" y="0" width="190" height="75" uuid="5798d1a7-e336-4654-a757-8b918ecdd043"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Header" uuid="750c3d47-5577-43ac-8373-2afd223c2b39">
+						<datasetParameter name="logo">
+							<datasetParameterExpression><![CDATA[$P{logo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("student")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="75" width="190">
+						<staticText>
+							<reportElement style="headTitle" x="0" y="0" width="190" height="12" uuid="3bf1706f-9b5b-4a3e-9b12-3cc61d8ccb74"/>
+							<text><![CDATA[INSTITUTO DE CIENCIAS]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headTData" x="65" y="45" width="60" height="9" uuid="ccb86826-467f-48ef-b48a-8f6a8c945d18"/>
+							<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headTHead" x="0" y="14" width="190" height="10" uuid="e884c7d2-833d-4604-b5ec-a12d0a662898"/>
+							<text><![CDATA[NOMBRE DEL ALUMNO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headTData" x="1" y="24" width="188" height="9" uuid="886b6c39-0021-4530-8663-f2cdd05b0ade"/>
+							<textFieldExpression><![CDATA[$F{apaterno}+' '+$F{amaterno}+' '+$F{nombre}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headTHead" x="0" y="35" width="63" height="10" uuid="9b170d86-faab-45da-b97b-5afcf1410ac5"/>
+							<text><![CDATA[GRADO / GRUPO]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headTHead" x="64" y="35" width="62" height="10" uuid="74b9d643-70fd-4341-8f5b-034435434030"/>
+							<text><![CDATA[MATRICULA]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headTHead" x="96" y="56" width="94" height="10" uuid="e72b6f86-d7d4-4279-850b-c98c2c6b3a14"/>
+							<text><![CDATA[PERIODO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headTData" x="1" y="45" width="61" height="9" uuid="07c18bfd-ae83-4c39-9501-1a42db2ad3e3"/>
+							<textFieldExpression><![CDATA[$F{grado}+' / '+$F{grupo}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="headTData" x="97" y="66" width="92" height="9" uuid="5cc458fd-6ca5-4664-8c5b-951bb2913ce3"/>
+							<textFieldExpression><![CDATA[$F{periodolatest.descripcioncorta}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headTHead" x="0" y="56" width="95" height="10" uuid="b12a45ed-5742-4513-9a6c-415d2abb50ce"/>
+							<text><![CDATA[FECHA]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headTHead" x="127" y="35" width="63" height="10" uuid="3330e427-53c6-44db-a18b-762a4e381d22"/>
+							<text><![CDATA[C. E.]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headTData" x="1" y="66" width="93" height="9" uuid="986d4d40-2cf1-4f4b-906d-ee8086d6e4de"/>
+							<textFieldExpression><![CDATA[$F{fechahoy}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="headTData" x="128" y="45" width="61" height="9" uuid="7a3dad58-1818-48b5-828b-44f4e577c7e2"/>
+							<textFieldExpression><![CDATA[$F{cyclename}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="40">
+			<line>
+				<reportElement style="cuthere" stretchType="RelativeToBandHeight" x="390" y="0" width="1" height="40" uuid="52ac1f78-76b4-405b-8179-eb46fd56025f"/>
+			</line>
+			<crosstab ignoreWidth="false">
+				<reportElement x="0" y="0" width="385" height="40" uuid="90ac0997-2d54-4724-b50d-cd601ebff55a"/>
+				<crosstabParameter name="ponderacion" class="java.lang.Boolean">
+					<parameterValueExpression><![CDATA[$F{student.ponderacion}]]></parameterValueExpression>
+				</crosstabParameter>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="CalTData" uuid="82f284e1-1a1f-4a52-96cd-6952886f3511">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.d.*(kind!="N" && kind!="O")')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="rowf" width="110" totalPosition="End">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="RelativeToBandHeight" x="0" y="0" width="110" height="9" uuid="29aadfff-a1f9-4bdd-bd8f-19009a9027e3"/>
+								<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="pcol" height="10" headerPosition="Stretch">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="25" height="10" uuid="0181cdf2-2857-4d29-a06d-8944fe3034b5"/>
+								<textFieldExpression><![CDATA[$V{pcol}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<columnGroup name="col" height="10">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{col}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="25" height="10" uuid="d2eddf37-bc61-4a61-b583-28d1995b46d8"/>
+								<textFieldExpression><![CDATA[$V{col}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.String">
+					<measureExpression><![CDATA[$F{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="25" height="9">
+					<cellContents>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="RelativeToBandHeight" x="0" y="0" width="25" height="9" uuid="a7a3e6c6-8f57-4f5a-8462-75c1462316e9"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="25" height="0" rowTotalGroup="rowf">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement style="scoreColTitle" x="0" y="0" width="110" height="20" uuid="480f6805-1546-4cdd-9592-f85b57cd1ae5"/>
+				<text><![CDATA[Materias]]></text>
+			</staticText>
+			<crosstab ignoreWidth="false">
+				<reportElement x="395" y="0" width="190" height="40" uuid="f017efa3-b51d-437f-bc5d-fd1bb618d21a"/>
+				<crosstabParameter name="ponderacion" class="java.lang.Boolean">
+					<parameterValueExpression><![CDATA[$F{student.ponderacion}]]></parameterValueExpression>
+				</crosstabParameter>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="CalTData" uuid="4f2b0970-b6b2-42ce-a389-a64c7ad29b71">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.d.*(kind!="N" && kind!="O" && idp=='+$F{student.periodolatest.id}+')')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="rowf" width="110" totalPosition="End">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="RelativeToBandHeight" x="0" y="0" width="110" height="9" uuid="29aadfff-a1f9-4bdd-bd8f-19009a9027e3"/>
+								<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="pcol" height="10" headerPosition="Stretch">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="25" height="10" uuid="0181cdf2-2857-4d29-a06d-8944fe3034b5"/>
+								<textFieldExpression><![CDATA[$V{pcol}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<columnGroup name="col" height="10">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{col}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField>
+								<reportElement style="scoreCol" x="0" y="0" width="25" height="10" uuid="9a0f9e72-96cc-43b7-a59f-2ac7c7dc578b"/>
+								<textFieldExpression><![CDATA[$V{col}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.String">
+					<measureExpression><![CDATA[$F{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="25" height="9">
+					<cellContents>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="RelativeToBandHeight" x="0" y="0" width="25" height="9" uuid="a7a3e6c6-8f57-4f5a-8462-75c1462316e9"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="25" height="0" rowTotalGroup="rowf">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement style="scoreColTitle" x="395" y="0" width="110" height="20" uuid="31744df2-2499-48de-9ea2-5ab3feeca111"/>
+				<text><![CDATA[Materias]]></text>
+			</staticText>
+		</band>
+		<band height="22">
+			<line>
+				<reportElement style="cuthere" stretchType="RelativeToBandHeight" x="390" y="0" width="1" height="22" uuid="9838aa7d-f6a3-4ef8-8c0d-489580155e78"/>
+			</line>
+			<componentElement>
+				<reportElement x="0" y="0" width="385" height="12" uuid="1e5adfa2-2ee9-493c-a9e0-ac08c5477a76"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="CalTResume" uuid="29228197-aa01-4a41-93f3-8ed658e76bcd">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("calis.r")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="12" width="385">
+						<staticText>
+							<reportElement style="scoreTotalRow" x="0" y="0" width="100" height="12" uuid="93f03c94-ca35-4568-829a-1d94409fd16b"/>
+							<text><![CDATA[Promedio final alumno:]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="scoreTotalVal" x="100" y="0" width="285" height="12" uuid="0818676a-01bd-4b40-81cc-af0021bea93d"/>
+							<textElement textAlignment="Left"/>
+							<textFieldExpression><![CDATA[$F{pfinal}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="395" y="0" width="190" height="12" uuid="89dcba2d-b8ab-47bd-b490-801b1d2acefc"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="CalTResume" uuid="7dadf7fb-78cc-4a7b-bd11-19a8251bcd03">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("calis.r")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="12" width="190"/>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="62">
+			<line>
+				<reportElement style="cuthere" stretchType="RelativeToBandHeight" x="390" y="0" width="1" height="62" uuid="f544d3f9-a9c2-40a3-892c-81ee553a97f9"/>
+			</line>
+			<staticText>
+				<reportElement style="notofficial" x="0" y="0" width="385" height="10" uuid="404302b2-8eaa-49d3-ace7-587cae79f7f7"/>
+				<text><![CDATA[RELACIÓN DE TAREAS DEJADAS (T) Y TAREAS NO ENTREGADAS (F)]]></text>
+			</staticText>
+			<crosstab ignoreWidth="false">
+				<reportElement x="0" y="10" width="385" height="40" uuid="4744db97-5db0-42df-b2fb-ca4949330b22"/>
+				<crosstabParameter name="ponderacion" class="java.lang.Boolean">
+					<parameterValueExpression><![CDATA[$F{student.ponderacion}]]></parameterValueExpression>
+				</crosstabParameter>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="CalTData" uuid="81a47056-da38-453a-be58-51445ed62585">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.t.*(kind!="TE")')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="rowf" width="110" totalPosition="End">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="RelativeToBandHeight" x="0" y="0" width="110" height="9" uuid="8a63bc66-3654-44c1-b81e-bfc3ba2264ba"/>
+								<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="110" height="9" uuid="88ecf16d-5339-4263-8528-511f979e652d"/>
+								<textFieldExpression><![CDATA['TOTALES DEJADAS/FALTANTES']]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="pcol" height="10" headerPosition="Stretch">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="25" height="10" uuid="cd0fdb20-7e51-4cbd-b552-0cb2c26c4f78"/>
+								<textFieldExpression><![CDATA[$V{pcol}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<columnGroup name="col" height="10">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{col}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="25" height="10" uuid="3f481581-7f3b-4845-b61f-51b507b89f32"/>
+								<textFieldExpression><![CDATA[$V{col}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.Integer" calculation="Sum">
+					<measureExpression><![CDATA[$V{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="25" height="9">
+					<cellContents>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="RelativeToBandHeight" x="0" y="0" width="25" height="9" uuid="488066fb-b099-45c6-a259-6461499324d7"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="25" height="9" rowTotalGroup="rowf">
+					<cellContents>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="RelativeToBandHeight" x="0" y="0" width="25" height="9" uuid="f1405da6-dc53-40cb-aaae-d4a219accc80"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement style="scoreColTitle" x="0" y="10" width="110" height="20" uuid="930f1fb3-8359-4234-9104-d5c7374dda8a"/>
+				<text><![CDATA[Materias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="notofficial" x="395" y="0" width="190" height="10" uuid="ea05e882-c351-4b3d-a62a-7e80cc56fc1f"/>
+				<text><![CDATA[R. DE TAREAS DEJADAS (T) Y TAREAS NO ENTREGADAS (F)]]></text>
+			</staticText>
+			<crosstab ignoreWidth="false">
+				<reportElement x="395" y="10" width="190" height="40" uuid="31332e57-27ba-4fe2-8056-8dd17af5b2e2"/>
+				<crosstabParameter name="ponderacion" class="java.lang.Boolean">
+					<parameterValueExpression><![CDATA[$F{student.ponderacion}]]></parameterValueExpression>
+				</crosstabParameter>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="CalTData" uuid="064a451f-dcd0-41fb-92a6-9738ebc6f908">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.t.*(kind!="TE" && idp=='+$F{student.periodolatest.id}+')')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="rowf" width="110" totalPosition="End">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="RelativeToBandHeight" x="0" y="0" width="110" height="9" uuid="98794538-18f2-4450-9293-252b5030e5e1"/>
+								<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="110" height="9" uuid="77d7d727-81f8-4a2b-96b5-13ae5ab64c46"/>
+								<textFieldExpression><![CDATA['TOTALES DEJADAS/FALTANTES']]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="pcol" height="10" headerPosition="Stretch">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="25" height="10" uuid="c95aba98-cdcf-44d7-9924-b10b8fe194ec"/>
+								<textFieldExpression><![CDATA[$V{pcol}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<columnGroup name="col" height="10">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{col}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="25" height="10" uuid="8e635792-4e19-4ebe-890a-8660b62241bb"/>
+								<textFieldExpression><![CDATA[$V{col}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.Integer" calculation="Sum">
+					<measureExpression><![CDATA[$V{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="25" height="9">
+					<cellContents>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="RelativeToBandHeight" x="0" y="0" width="25" height="9" uuid="0100b0a6-a653-4fff-8db5-5afbef17d1bc"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="25" height="9" rowTotalGroup="rowf">
+					<cellContents>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="RelativeToBandHeight" x="0" y="0" width="25" height="9" uuid="8278314b-09f7-439a-9174-d42e17f167db"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf" columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement style="scoreColTitle" x="395" y="10" width="110" height="20" uuid="6c0fb1d0-d08d-4774-89dd-a344b45ec4cf"/>
+				<text><![CDATA[Materias]]></text>
+			</staticText>
+		</band>
+		<band height="25">
+			<line>
+				<reportElement style="cuthere" stretchType="RelativeToBandHeight" x="390" y="0" width="1" height="25" uuid="7a95873b-f392-4033-b6d0-01e7df7748df"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="415" y="10" width="150" height="1" uuid="65dff125-f1e8-48d2-b3c3-1aa532cbfe16"/>
+			</line>
+			<staticText>
+				<reportElement style="footerSign" x="415" y="10" width="150" height="10" uuid="a0f7058e-26b3-4c3e-a2d2-3a54bf9d9929"/>
+				<text><![CDATA[Regresar firmado al Asesor(a)]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Prevent">
+			<staticText>
+				<reportElement style="notofficial" x="395" y="0" width="190" height="10" uuid="f27b8840-f9a4-47f8-bf08-572f0239e981"/>
+				<text><![CDATA[DOCUMENTO INTERNO NO OFICIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="notofficial" x="0" y="0" width="384" height="10" uuid="b50e2982-89ca-466c-b100-4f2ca7d7143a"/>
+				<text><![CDATA[DOCUMENTO INTERNO NO OFICIAL]]></text>
+			</staticText>
+			<line>
+				<reportElement style="cuthere" stretchType="RelativeToBandHeight" x="390" y="0" width="1" height="20" uuid="25235812-a948-4791-aa02-dbf6a8c17862">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

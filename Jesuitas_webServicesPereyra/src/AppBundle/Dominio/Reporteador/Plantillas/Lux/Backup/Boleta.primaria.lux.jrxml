@@ -1,0 +1,1438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boleta" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="d3781f9e-26a8-4b0a-b011-2b68b888ee30">
+	<property name="net.sf.jasperreports.json.source" value="Dynamic.json"/>
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="65"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Boleta_primaria"/>
+	<style name="general" isDefault="true" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="Arial" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="head" style="general" isBold="true"/>
+	<style name="headGeneral" style="general" fontSize="9" isBold="true"/>
+	<style name="headNBold" style="headGeneral" isBold="false"/>
+	<style name="headTitle" style="headGeneral" fontSize="10"/>
+	<style name="headSubtitle" style="headGeneral" fontSize="8" isBold="true"/>
+	<style name="headStudent" style="headNBold" fontSize="7"/>
+	<style name="scoreTHead" style="general" forecolor="#999999" hTextAlign="Left" hImageAlign="Left" vTextAlign="Bottom" vImageAlign="Bottom" fontSize="11" isBold="true"/>
+	<style name="scoreGeneral" style="general" fontSize="6">
+		<box>
+			<pen lineWidth="1.0" lineColor="#999999"/>
+			<topPen lineWidth="1.0" lineColor="#999999"/>
+			<leftPen lineWidth="1.0" lineColor="#999999"/>
+			<bottomPen lineWidth="1.0" lineColor="#999999"/>
+			<rightPen lineWidth="1.0" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="scoreCol" style="scoreGeneral" mode="Opaque" backcolor="#CCCCCC" isBold="true"/>
+	<style name="scoreColTitle" style="scoreCol"/>
+	<style name="scoreRow" style="scoreGeneral" hTextAlign="Left" hImageAlign="Left" isBold="true">
+		<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+	</style>
+	<style name="scoreRow_t" style="scoreRow" forecolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="scoreVal" style="scoreGeneral"/>
+	<style name="scoreTotalRow" style="scoreCol" hTextAlign="Right" hImageAlign="Right">
+		<box rightPadding="5"/>
+	</style>
+	<style name="resumenGeneral" style="general" hTextAlign="Left" hImageAlign="Left" fontSize="7"/>
+	<style name="resumenHead" style="resumenGeneral" isBold="true"/>
+	<style name="resumenCaption" style="resumenGeneral" fontSize="6"/>
+	<style name="escalaGeneral" style="general" hTextAlign="Justified" fontSize="8">
+		<pen lineColor="#FFFFFF"/>
+		<box leftPadding="10">
+			<pen lineWidth="0.5"/>
+		</box>
+	</style>
+	<style name="escalaHead" style="escalaGeneral" hTextAlign="Center" hImageAlign="Center" fontSize="9" isBold="true"/>
+	<style name="obsGeneral" style="general" fontSize="8"/>
+	<style name="obsHead" style="obsGeneral" rotation="Left" fontSize="9" isBold="true"/>
+	<style name="footerGeneral" style="general" fontSize="9"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Header" uuid="ff216311-eaf1-4035-9a73-eba1c97fdca8">
+		<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+		<field name="cyclename" class="java.lang.String"/>
+		<field name="apaterno" class="java.lang.String"/>
+		<field name="amaterno" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="grado" class="java.lang.String"/>
+		<field name="grupo" class="java.lang.String"/>
+		<field name="matricula" class="java.lang.String"/>
+		<field name="nivel" class="java.lang.String"/>
+		<field name="ponderacion" class="java.lang.String"/>
+		<field name="photo" class="java.lang.String"/>
+		<field name="curp" class="java.lang.String"/>
+		<field name="Field_1" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Config" uuid="7e85148a-e820-4e06-94e0-4376650c7c89">
+		<parameter name="periodo" class="java.lang.String" isForPrompting="false"/>
+		<parameter name="dirsign" class="java.lang.String">
+			<defaultValueExpression><![CDATA['/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/4QOBaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0NSA3OS4xNjM0OTksIDIwMTgvMDgvMTMtMTY6NDA6MjIgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9Ijg4MjJBQjgyMDg2REYzOUFEM0MzRDQ5MENGRjQ4MzBCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkRFMzcxOEZFMDU4QTExRUE5OUQxRjIzOEYzQzQwNzQyIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkRFMzcxOEZEMDU4QTExRUE5OUQxRjIzOEYzQzQwNzQyIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg3MTc2Y2Y5LTVmOGYtNGY0Mi05NDYwLTliNDM3MmU4ZDdiOSIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjQ1MjBmMTEwLWM4YjQtMDk0Ni05YzFiLTc5YmI1MmFhODdkNiIvPiA8L3JkZjpEZXNjcmlwdGlv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']]></defaultValueExpression>
+		</parameter>
+		<field name="directorname" class="java.lang.String">
+			<fieldDescription><![CDATA[NombreDirectorPrimaria]]></fieldDescription>
+		</field>
+		<field name="profesor" class="java.lang.String">
+			<fieldDescription><![CDATA[^{1}.student.profesor]]></fieldDescription>
+		</field>
+		<field name="periodoeval" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="CalTData" uuid="7e578d31-a7ee-425e-8b23-3d53cf825595">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="ord" class="java.lang.Integer"/>
+		<field name="key" class="java.lang.String"/>
+		<field name="row" class="java.lang.String"/>
+		<field name="rowf" class="java.lang.String"/>
+		<field name="col" class="java.lang.String"/>
+		<field name="colf" class="java.lang.String"/>
+		<field name="pcol" class="java.lang.String"/>
+		<field name="val" class="java.lang.String"/>
+		<field name="kind" class="java.lang.String"/>
+		<field name="idp" class="java.lang.Integer"/>
+		<field name="curr" class="java.lang.Boolean"/>
+		<variable name="isNumber" class="java.lang.Boolean">
+			<variableExpression><![CDATA[$F{val}.matches("-?\\d+(\\.\\d+)?")]]></variableExpression>
+		</variable>
+		<variable name="val" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{val}=="" || !$V{isNumber} ? 0.0 : Double.valueOf($F{val}))]]></variableExpression>
+		</variable>
+		<variable name="val_reprobadas" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{kind}!="C" || $F{val}=="" || !$V{isNumber} ? 0 : (Double.valueOf($F{val})<6 ? 1 : 0))]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="CalTResume" uuid="18f5d832-ddc3-4109-a428-696a41af9ff3">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="pfinal" class="java.lang.String"/>
+		<field name="periodolatestid" class="java.lang.Integer">
+			<fieldDescription><![CDATA[^{3}.student.periodolatest.id]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="CComponent" uuid="778c3bb4-6ff6-47e4-a48c-907f9550afb6">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Boleta_primaria"/>
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="id" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="id"/>
+			<fieldDescription><![CDATA[id]]></fieldDescription>
+		</field>
+		<field name="name" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="name"/>
+			<fieldDescription><![CDATA[name]]></fieldDescription>
+		</field>
+		<field name="tipocalificacion" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="tipocalificacion"/>
+			<fieldDescription><![CDATA[tipocalificacion]]></fieldDescription>
+		</field>
+		<field name="calificacion" class="java.lang.Boolean">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="calificacion"/>
+			<fieldDescription><![CDATA[calificacion]]></fieldDescription>
+		</field>
+		<field name="ponderacion" class="java.lang.Boolean">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="ponderacion"/>
+			<fieldDescription><![CDATA[ponderacion]]></fieldDescription>
+		</field>
+		<field name="periodolatestid" class="java.lang.Integer">
+			<fieldDescription><![CDATA[^{3}.student.periodolatest.id]]></fieldDescription>
+		</field>
+		<field name="periodotargetid" class="java.lang.Integer">
+			<fieldDescription><![CDATA[^{3}.student.periodotarget.id]]></fieldDescription>
+		</field>
+		<variable name="calificacion" class="java.lang.String">
+			<variableExpression><![CDATA[($F{calificacion} ? "C" : "NO")]]></variableExpression>
+		</variable>
+		<variable name="ponderacion" class="java.lang.String">
+			<variableExpression><![CDATA[($F{ponderacion} ? "N" : "NO")]]></variableExpression>
+		</variable>
+		<variable name="kperiodotarget" class="java.lang.Integer">
+			<variableExpression><![CDATA[($F{periodolatestid}<1 ? 999999 : $F{periodolatestid})]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="Observaciones" uuid="e985dc46-c260-4eca-876e-a2ca0eb05ba0">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="idp" class="java.lang.Integer"/>
+		<field name="row" class="java.lang.String"/>
+		<field name="rowf" class="java.lang.String"/>
+		<field name="cap" class="java.lang.String"/>
+		<field name="can" class="java.lang.String"/>
+		<field name="cal" class="java.lang.String"/>
+		<field name="val" class="java.lang.String">
+			<fieldDescription><![CDATA[cap]]></fieldDescription>
+		</field>
+		<variable name="isNumber" class="java.lang.Boolean">
+			<variableExpression><![CDATA[$F{val}.matches("-?\\d+(\\.\\d+)?")]]></variableExpression>
+		</variable>
+		<variable name="val" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{val}=="" || !$V{isNumber} ? 0.0 : Double.valueOf($F{val}))]]></variableExpression>
+		</variable>
+		<variable name="val_reprobadas" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{cap}!="C" || $F{val}=="" || !$V{isNumber} ? 0 : (Double.valueOf($F{val})<6 ? 1 : 0))]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Boletas\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="jsonql">
+		<![CDATA[]]>
+	</queryString>
+	<field name="student.ponderacion" class="java.lang.Boolean"/>
+	<field name="student.periodolatest.descripcion" class="java.lang.String"/>
+	<field name="student.periodolatest.id" class="java.lang.Integer"/>
+	<variable name="kperiodotarget" class="java.lang.Integer">
+		<variableExpression><![CDATA[($F{student.periodolatest.id}<1 ? 999999 : $F{student.periodolatest.id})]]></variableExpression>
+	</variable>
+	<background>
+		<band height="500" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="31" y="62" width="495" height="375" forecolor="#CCCCCC" uuid="cbe7661b-bc62-463b-9d12-f395a92dbd8d"/>
+				<textElement>
+					<font size="44" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENTO NO OFICIAL]]></text>
+			</staticText>
+		</band>
+	</background>
+	<title>
+		<band height="115" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="115" uuid="6a9e90a3-a657-47a0-ae79-3accbca6397a"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Header" uuid="c4191f25-cdcc-4f7d-b2ec-b6b9fd6cbbd1">
+						<datasetParameter name="logo">
+							<datasetParameterExpression><![CDATA[$P{logo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("student")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="115" width="555">
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement mode="Transparent" x="0" y="0" width="80" height="80" uuid="b934e94a-fe12-45cc-bfff-9b7c7a756f17"/>
+							<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+						</image>
+						<staticText>
+							<reportElement style="headTitle" x="85" y="7" width="385" height="14" uuid="130b5d20-cf83-4899-982f-ec03d790a32f"/>
+							<text><![CDATA[INSTITUTO LUX, A.C.]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headNBold" x="85" y="32" width="385" height="13" uuid="c02b7fc7-5a84-48b1-96ed-446c905dd51c"/>
+							<text><![CDATA[CCT 11PPR0175X]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="85" y="42" width="385" height="13" uuid="6e075cf4-2dc7-4d26-9cec-f476782180a3"/>
+							<text><![CDATA[REPORTE DE EVALUACIÓN]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="85" y="52" width="385" height="13" uuid="1fadc091-6202-4aa9-b272-5ebfdc765d00"/>
+							<textFieldExpression><![CDATA['SECCION '+$F{nivel}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="85" y="62" width="385" height="13" uuid="3c460d0c-f2f4-43fb-b2df-34f01f95c61c"/>
+							<textFieldExpression><![CDATA['CICLO ESCOLAR '+$F{cyclename}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="headStudent" x="190" y="90" width="110" height="10" uuid="7252da01-2ea5-4b98-a0a9-772b677a5d59">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{amaterno}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="190" y="101" width="110" height="10" uuid="e9b7a0ed-8bc4-4976-bcb8-3c83766c3c89">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<text><![CDATA[APELLIDO MATERNO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudent" x="300" y="90" width="110" height="10" uuid="f35dd605-091c-41ec-a106-b29887187b95">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="300" y="101" width="110" height="10" uuid="f40adf95-6486-44d4-a02f-173c30f07386">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<text><![CDATA[NOMBRE]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudent" x="500" y="90" width="55" height="10" uuid="cb08dad3-5100-468d-8f74-0a271c13ae23">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{grado}+' / '+$F{grupo}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="500" y="101" width="55" height="10" uuid="b9e5a9f4-907c-4b6b-8d6d-55be28b93627">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<text><![CDATA[GRADO/GRUPO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudent" x="80" y="90" width="110" height="10" uuid="9e78ed5f-9924-4364-9960-8c4c61fda2eb">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{apaterno}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="80" y="101" width="110" height="10" uuid="68108d30-ce2e-4479-87da-c70beead68d0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<text><![CDATA[APELLIDO PATERNO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudent" x="410" y="90" width="90" height="10" uuid="72170c9a-8e6b-4292-a63d-68e8d260f363">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{curp}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="410" y="101" width="90" height="10" uuid="30b1df71-9f6e-4807-b83d-e8d1c61be653">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<text><![CDATA[CURP]]></text>
+						</staticText>
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement x="475" y="0" width="80" height="80" uuid="9cf3665e-0a7e-4983-b6e1-32bdc1209bdb"/>
+							<graphicElement>
+								<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+							</graphicElement>
+							<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64($F{photo}.getBytes()))]]></imageExpression>
+						</image>
+						<line>
+							<reportElement style="headStudent" x="81" y="100" width="328" height="1" uuid="ac89c4e4-d44e-4434-babe-13ee2297f741">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+							</reportElement>
+						</line>
+						<line>
+							<reportElement style="headStudent" x="411" y="100" width="88" height="1" uuid="f1d0553e-8ce1-4cad-9dcc-2ba0924ffa95">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.y" value="px"/>
+							</reportElement>
+						</line>
+						<line>
+							<reportElement style="headStudent" x="501" y="100" width="54" height="1" uuid="6a7c0d55-588d-494d-989d-e84d04321b5a">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.y" value="px"/>
+							</reportElement>
+						</line>
+						<textField>
+							<reportElement style="headStudent" x="0" y="90" width="80" height="10" uuid="515d6ece-3477-4561-9abb-fa87c1b65abe">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="0" y="101" width="80" height="10" uuid="2ebe015c-1bde-4466-aebe-e4691de00025">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<text><![CDATA[MATRICULA]]></text>
+						</staticText>
+						<line>
+							<reportElement style="headStudent" x="0" y="100" width="79" height="1" uuid="f1fca1b5-6e48-4bf8-8aed-7a6fe9651d88">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.y" value="px"/>
+							</reportElement>
+						</line>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement stretchType="ContainerHeight" x="0" y="5" width="555" height="40" isPrintWhenDetailOverflows="true" uuid="eb0d7453-3d95-4388-b34b-8d842434cb42">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="CComponent" uuid="3c8d0df9-de4c-4cd0-8c33-2dd76cc473c0">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.u.*(tipocalificacion!=1)')]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="40" width="555">
+						<frame>
+							<reportElement x="0" y="15" width="555" height="25" uuid="301fd91a-6569-4a10-90f7-a978ebe8d56c">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<crosstab ignoreWidth="false">
+								<reportElement x="0" y="0" width="555" height="25" isPrintWhenDetailOverflows="true" uuid="78801f6c-1c8b-4db4-acdf-8390be51960d">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								</reportElement>
+								<crosstabDataset>
+									<dataset resetType="Report">
+										<datasetRun subDataset="CalTData" uuid="fa6a6736-57ac-40fa-9a77-390350c5a4ec">
+											<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('^{2}.d.*(kcom=='+$F{id}+' && kind=="C")')]]></dataSourceExpression>
+										</datasetRun>
+									</dataset>
+								</crosstabDataset>
+								<rowGroup name="rowf" width="350" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[($F{curr}?'':'* ')+$F{rowf}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<box rightPadding="240"/>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow_t" stretchType="ContainerHeight" x="0" y="0" width="110" height="9" uuid="9f5f727d-d902-45a4-8378-a656d93f3e3a"/>
+												<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents/>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<columnGroup name="periodo" height="16" totalPosition="End">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+									</bucket>
+									<crosstabColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<textField isBlankWhenNull="true">
+												<reportElement style="scoreCol" x="0" y="0" width="50" height="16" uuid="2d64160e-b267-4c8f-ba2d-47e8ab75d618">
+													<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+													<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+												</reportElement>
+												<textFieldExpression><![CDATA[$V{periodo}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabColumnHeader>
+									<crosstabTotalColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</cellContents>
+									</crosstabTotalColumnHeader>
+								</columnGroup>
+								<measure name="val" class="java.lang.String">
+									<measureExpression><![CDATA[$F{val}]]></measureExpression>
+								</measure>
+								<crosstabCell width="50" height="9">
+									<cellContents>
+										<textField isBlankWhenNull="true">
+											<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="50" height="9" uuid="966e2b0f-d01b-4293-ab15-8f604e01230f"/>
+											<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+										</textField>
+									</cellContents>
+								</crosstabCell>
+								<crosstabCell rowTotalGroup="rowf">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell width="0" columnTotalGroup="periodo">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell width="0" rowTotalGroup="rowf" columnTotalGroup="periodo">
+									<cellContents/>
+								</crosstabCell>
+							</crosstab>
+							<crosstab ignoreWidth="false">
+								<reportElement x="0" y="0" width="350" height="25" isPrintWhenDetailOverflows="true" uuid="d36d9ae8-aaf0-4b50-b601-1225bd273a62">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								</reportElement>
+								<crosstabDataset>
+									<dataset resetType="Report">
+										<datasetRun subDataset="CalTData" uuid="f9b1a7e0-12ea-4af0-96e8-1f86b1677738">
+											<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('^{2}.ci.*(kcom=='+$F{id}+' && col!="TAREAS" && idp=='+$F{periodotargetid}+')')]]></dataSourceExpression>
+										</datasetRun>
+									</dataset>
+								</crosstabDataset>
+								<rowGroup name="rowf" width="150" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[($F{curr}?'':'* ')+$F{rowf}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<box rightPadding="40"/>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow_t" stretchType="ContainerHeight" x="0" y="0" width="110" height="9" uuid="d187f986-3d97-4638-acf9-1f60c6660e80"/>
+												<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents/>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<columnGroup name="criterio" height="16" totalPosition="End">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{col}]]></bucketExpression>
+									</bucket>
+									<crosstabColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<textField isBlankWhenNull="true">
+												<reportElement style="scoreCol" x="0" y="0" width="50" height="16" uuid="a39be465-b1a9-41c7-92a0-e10b4cff66cd">
+													<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+													<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+												</reportElement>
+												<textFieldExpression><![CDATA[$V{criterio}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabColumnHeader>
+									<crosstabTotalColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</cellContents>
+									</crosstabTotalColumnHeader>
+								</columnGroup>
+								<measure name="val" class="java.lang.String">
+									<measureExpression><![CDATA[$F{val}]]></measureExpression>
+								</measure>
+								<crosstabCell width="50" height="9">
+									<cellContents>
+										<textField isBlankWhenNull="true">
+											<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="50" height="9" uuid="1f84a6d9-eb66-4366-bf27-31e4a86d59ae"/>
+											<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+										</textField>
+									</cellContents>
+								</crosstabCell>
+								<crosstabCell rowTotalGroup="rowf">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell width="0" columnTotalGroup="criterio">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell width="0" rowTotalGroup="rowf" columnTotalGroup="criterio">
+									<cellContents/>
+								</crosstabCell>
+							</crosstab>
+							<crosstab ignoreWidth="false">
+								<reportElement x="0" y="0" width="150" height="25" isPrintWhenDetailOverflows="true" uuid="90ac0997-2d54-4724-b50d-cd601ebff55a">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+								</reportElement>
+								<crosstabDataset>
+									<dataset resetType="Report">
+										<datasetRun subDataset="CalTData" uuid="8eec7739-fc39-4384-9deb-8d2bf24d05bd">
+											<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('^{2}.t.*(kcom=='+$F{id}+' && kind!="TE" && idp=='+$F{periodotargetid}+')')]]></dataSourceExpression>
+										</datasetRun>
+									</dataset>
+								</crosstabDataset>
+								<rowGroup name="rowf" width="110" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[($F{curr}?'':'* ')+$F{rowf}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="110" height="9" uuid="29aadfff-a1f9-4bdd-bd8f-19009a9027e3"/>
+												<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents/>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<columnGroup name="kind" height="16" totalPosition="End">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{kind}]]></bucketExpression>
+									</bucket>
+									<crosstabColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<textField isBlankWhenNull="true">
+												<reportElement style="scoreCol" x="0" y="0" width="20" height="16" uuid="cd50c64e-2f1f-4fa2-850e-263987d37c58">
+													<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+												</reportElement>
+												<textFieldExpression><![CDATA[$V{kind}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabColumnHeader>
+									<crosstabTotalColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</cellContents>
+									</crosstabTotalColumnHeader>
+								</columnGroup>
+								<measure name="val" class="java.lang.String">
+									<measureExpression><![CDATA[$F{val}]]></measureExpression>
+								</measure>
+								<crosstabCell width="20" height="9">
+									<cellContents>
+										<textField isBlankWhenNull="true">
+											<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="20" height="9" uuid="faff850f-1789-4a91-9475-d4d6670af8ca"/>
+											<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+										</textField>
+									</cellContents>
+								</crosstabCell>
+								<crosstabCell rowTotalGroup="rowf">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell width="0" columnTotalGroup="kind">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell width="0" rowTotalGroup="rowf" columnTotalGroup="kind">
+									<cellContents/>
+								</crosstabCell>
+							</crosstab>
+							<staticText>
+								<reportElement style="scoreColTitle" x="0" y="0" width="110" height="16" uuid="dcffb274-e9d2-44ca-8e40-4655df7d9735">
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								</reportElement>
+								<text><![CDATA[Materias]]></text>
+							</staticText>
+						</frame>
+						<textField>
+							<reportElement style="scoreTHead" x="0" y="0" width="555" height="15" uuid="0eca24f5-7cdf-441f-9eb8-4234d6dfbeee">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="9">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<crosstab ignoreWidth="false">
+				<reportElement x="0" y="0" width="555" height="9" isPrintWhenDetailOverflows="true" uuid="e65869b0-5aee-4263-bc01-6930b2ba4e1a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<crosstabDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="CalTData" uuid="5b919954-3672-4028-9d00-5584caf60f69">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.d.*(ordy==999999 && kind=="C")')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="rowf" width="350" headerPosition="Stretch" mergeHeaderCells="true">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box leftPadding="240"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="110" height="9" uuid="1a7d0a55-015a-46a9-ac6a-661a96068282"/>
+								<textFieldExpression><![CDATA['PROMEDIO']]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="periodo" height="0" totalPosition="End">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="0" uuid="335108a1-aa08-40d5-af39-4423141e3b7c">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA['']]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.String">
+					<measureExpression><![CDATA[$F{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="50" height="9">
+					<cellContents>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="50" height="9" uuid="44662839-eef2-4605-b399-9d23519affd5"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="rowf">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="0" columnTotalGroup="periodo">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="0" rowTotalGroup="rowf" columnTotalGroup="periodo">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+		</band>
+		<band height="65">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement stretchType="ContainerHeight" x="0" y="5" width="555" height="60" isPrintWhenDetailOverflows="true" uuid="e7749484-1b5a-404d-bd91-51921c31e12f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="CComponent" uuid="4cfad5ec-7758-4349-b7e1-803b81c17a5f">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.u.*(tipocalificacion==1)')]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="60" width="555">
+						<frame>
+							<reportElement x="0" y="15" width="555" height="45" uuid="9dc54894-c190-48af-b473-8965635bae6a">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<crosstab ignoreWidth="false">
+								<reportElement x="0" y="0" width="555" height="45" isPrintWhenDetailOverflows="true" uuid="abd320d7-f822-4ef2-a22e-ffb767ea0fcc">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								</reportElement>
+								<crosstabDataset>
+									<dataset resetType="Report">
+										<datasetRun subDataset="CalTData" uuid="59be2139-d6fe-4d21-ae59-fcd61e7fdbfe">
+											<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('^{2}.t.*(kcom=='+$F{id}+' && idp<='+$F{periodotargetid}+' && idp!=-1 && kind!="TE")')]]></dataSourceExpression>
+										</datasetRun>
+									</dataset>
+								</crosstabDataset>
+								<rowGroup name="periodo" width="50" totalPosition="End" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.Object">
+										<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow_t" stretchType="ContainerHeight" x="0" y="0" width="50" height="29" uuid="20a7d1b7-2c9b-4e3a-a807-318b89d021a0"/>
+												<textElement textAlignment="Center"/>
+												<textFieldExpression><![CDATA[$V{periodo}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										</cellContents>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<rowGroup name="rowf" width="465" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[($F{curr}?'':'* ')+$F{rowf}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<box rightPadding="355"/>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow_t" stretchType="ContainerHeight" x="0" y="0" width="110" height="29" uuid="6bd8fd2e-c4d6-42f0-b0a9-515aba040cf6"/>
+												<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents/>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<columnGroup name="kind" height="16">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{kind}]]></bucketExpression>
+									</bucket>
+									<crosstabColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<textField isBlankWhenNull="true">
+												<reportElement style="scoreCol" x="0" y="0" width="20" height="16" uuid="ae702b19-6819-4a42-a853-2f45dbf83df9"/>
+												<textFieldExpression><![CDATA[$V{kind}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabColumnHeader>
+									<crosstabTotalColumnHeader>
+										<cellContents/>
+									</crosstabTotalColumnHeader>
+								</columnGroup>
+								<measure name="val" class="java.lang.String">
+									<measureExpression><![CDATA[$F{val}]]></measureExpression>
+								</measure>
+								<crosstabCell width="20" height="29">
+									<cellContents>
+										<textField isBlankWhenNull="true">
+											<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="20" height="29" uuid="1f873b2e-fe69-4acf-9652-65c2fc438907"/>
+											<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+										</textField>
+									</cellContents>
+								</crosstabCell>
+								<crosstabCell columnTotalGroup="kind">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell height="25" rowTotalGroup="rowf">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell height="0" rowTotalGroup="periodo">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell rowTotalGroup="rowf" columnTotalGroup="kind">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell height="0" rowTotalGroup="periodo" columnTotalGroup="kind">
+									<cellContents/>
+								</crosstabCell>
+							</crosstab>
+							<crosstab ignoreWidth="false">
+								<reportElement x="0" y="0" width="515" height="45" isPrintWhenDetailOverflows="true" uuid="8f6d87f3-e4f0-4f8c-8108-204c34869983">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								</reportElement>
+								<crosstabDataset>
+									<dataset resetType="Report">
+										<datasetRun subDataset="CalTData" uuid="24f3352d-6fd5-41df-b047-128070a4e241">
+											<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('^{2}.d.*(kcom=='+$F{id}+' && idp<='+$F{periodotargetid}+' && idp!=-1 && kind=="O")')]]></dataSourceExpression>
+										</datasetRun>
+									</dataset>
+								</crosstabDataset>
+								<rowGroup name="periodo" width="50" totalPosition="End" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.Object">
+										<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow_t" stretchType="ContainerHeight" x="0" y="0" width="50" height="29" uuid="bec0d4f6-bc86-4fa2-8297-b3286a034fa9"/>
+												<textElement textAlignment="Center"/>
+												<textFieldExpression><![CDATA[$V{periodo}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										</cellContents>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<rowGroup name="rowf" width="145" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[($F{curr}?'':'* ')+$F{rowf}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<box rightPadding="35"/>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow_t" stretchType="ContainerHeight" x="0" y="0" width="110" height="29" uuid="ea48b27c-70e1-48e0-8608-f8675f5d5376">
+													<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+												</reportElement>
+												<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents/>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<columnGroup name="col" height="16">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{colf}]]></bucketExpression>
+									</bucket>
+									<crosstabColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<textField isBlankWhenNull="true">
+												<reportElement style="scoreCol" x="0" y="0" width="320" height="16" uuid="b6fa635e-770d-488c-a78e-3622e85df36a"/>
+												<textFieldExpression><![CDATA[$V{col}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabColumnHeader>
+									<crosstabTotalColumnHeader>
+										<cellContents/>
+									</crosstabTotalColumnHeader>
+								</columnGroup>
+								<measure name="val" class="java.lang.String">
+									<measureExpression><![CDATA[$F{val}]]></measureExpression>
+								</measure>
+								<crosstabCell width="320" height="29">
+									<cellContents>
+										<textField isBlankWhenNull="true">
+											<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="320" height="29" uuid="76dbdbc1-bd94-46c5-8fc9-1813b74ab7c2"/>
+											<textElement>
+												<font size="5"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+										</textField>
+									</cellContents>
+								</crosstabCell>
+								<crosstabCell height="25" rowTotalGroup="rowf">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell columnTotalGroup="col">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell rowTotalGroup="rowf" columnTotalGroup="col">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell width="320" height="0" rowTotalGroup="periodo">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell height="0" rowTotalGroup="periodo" columnTotalGroup="col">
+									<cellContents/>
+								</crosstabCell>
+							</crosstab>
+							<crosstab ignoreWidth="false">
+								<reportElement x="0" y="0" width="195" height="45" isPrintWhenDetailOverflows="true" uuid="eabf8da2-3695-4169-bb2e-e5663ec14a90">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</reportElement>
+								<crosstabDataset>
+									<dataset resetType="Report">
+										<datasetRun subDataset="CalTData" uuid="0fc13309-118a-46c5-b8b5-82fbaa35a37b">
+											<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('^{2}.d.*(kcom=='+$F{id}+' && idp<='+$F{periodotargetid}+' && idp!=-1 && kind=="N")')]]></dataSourceExpression>
+										</datasetRun>
+									</dataset>
+								</crosstabDataset>
+								<rowGroup name="periodo" width="50" totalPosition="End" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.Object">
+										<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="50" height="29" uuid="e20911b7-5bca-45aa-9e97-608c47d67c81"/>
+												<textElement textAlignment="Center"/>
+												<textFieldExpression><![CDATA[$V{periodo}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										</cellContents>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<rowGroup name="rowf" width="110" headerPosition="Stretch" mergeHeaderCells="true">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[($F{curr}?'':'* ')+$F{rowf}]]></bucketExpression>
+									</bucket>
+									<crosstabRowHeader>
+										<cellContents>
+											<textField isStretchWithOverflow="true">
+												<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="110" height="29" uuid="265e6e36-6172-4697-9d4c-aa2d1546b229"/>
+												<textFieldExpression><![CDATA[$V{rowf}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabRowHeader>
+									<crosstabTotalRowHeader>
+										<cellContents/>
+									</crosstabTotalRowHeader>
+								</rowGroup>
+								<columnGroup name="col" height="16">
+									<bucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{colf}]]></bucketExpression>
+									</bucket>
+									<crosstabColumnHeader>
+										<cellContents>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<textField isBlankWhenNull="true">
+												<reportElement style="scoreCol" x="0" y="0" width="35" height="16" uuid="45bee031-ca10-46da-8b77-50fac39002c1"/>
+												<textFieldExpression><![CDATA[$V{col}]]></textFieldExpression>
+											</textField>
+										</cellContents>
+									</crosstabColumnHeader>
+									<crosstabTotalColumnHeader>
+										<cellContents/>
+									</crosstabTotalColumnHeader>
+								</columnGroup>
+								<measure name="val" class="java.lang.String">
+									<measureExpression><![CDATA[$F{val}]]></measureExpression>
+								</measure>
+								<crosstabCell width="35" height="29">
+									<cellContents>
+										<textField isBlankWhenNull="true">
+											<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="35" height="29" uuid="1bacdffd-7c10-40f7-8d7e-dc329e64a224"/>
+											<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+										</textField>
+									</cellContents>
+								</crosstabCell>
+								<crosstabCell height="25" rowTotalGroup="rowf">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell columnTotalGroup="col">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell rowTotalGroup="rowf" columnTotalGroup="col">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell width="35" height="0" rowTotalGroup="periodo">
+									<cellContents/>
+								</crosstabCell>
+								<crosstabCell height="0" rowTotalGroup="periodo" columnTotalGroup="col">
+									<cellContents/>
+								</crosstabCell>
+							</crosstab>
+							<staticText>
+								<reportElement style="scoreColTitle" x="50" y="0" width="110" height="16" uuid="0662e0ed-e045-4c29-9df5-b7e4e6f0693b">
+									<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</reportElement>
+								<text><![CDATA[Materias]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="scoreColTitle" x="0" y="0" width="50" height="16" uuid="0be134e3-5db4-4a89-bdf3-3ad1889e3f3b">
+									<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</reportElement>
+								<text><![CDATA[Periodos]]></text>
+							</staticText>
+						</frame>
+						<textField>
+							<reportElement style="scoreTHead" x="0" y="0" width="555" height="15" uuid="5326a382-ef12-4da9-8549-2fda6ecba456">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<crosstab ignoreWidth="false">
+				<reportElement x="0" y="20" width="555" height="30" isPrintWhenDetailOverflows="true" uuid="d5906455-5f27-4696-b8b7-8b0408b1c5b4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<crosstabDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="CalTData" uuid="c236a1c8-7bdb-4b04-833a-f57f7ebdc419">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.c.*(kind=="FD")')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="periodo" width="50" totalPosition="End" headerPosition="Stretch" mergeHeaderCells="true">
+					<bucket order="None" class="java.lang.Object">
+						<bucketExpression><![CDATA[$F{pcol}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" stretchType="ContainerHeight" x="0" y="0" width="50" height="15" uuid="19e2c248-3a33-49fa-8909-c2be5f437530"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$V{periodo}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="col" height="15">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{col}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isBlankWhenNull="true">
+								<reportElement style="scoreCol" x="0" y="0" width="30" height="15" uuid="34317aa2-b281-4af0-975a-d4dda91ee779"/>
+								<textFieldExpression><![CDATA[$V{col}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.Integer">
+					<measureExpression><![CDATA[$V{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="30" height="15">
+					<cellContents>
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<textField isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="30" height="15" uuid="56856a5a-4cfd-4a44-bcdb-01b0f0b275f8"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="30" height="0" rowTotalGroup="periodo">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="periodo" columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement style="scoreColTitle" x="0" y="20" width="50" height="16" uuid="b5216d8b-e44d-4a1a-ab98-322f4a97bbdf">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Periodos]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="scoreTHead" x="0" y="5" width="555" height="15" uuid="827cc85e-9bbd-44b6-b1a3-8b95e28c4b69">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA['Faltas']]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="40">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement style="scoreTHead" x="0" y="5" width="555" height="15" uuid="820c63fe-984d-4caf-aece-76d7945c9283">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA['Observaciones y/o recomendaciones']]></textFieldExpression>
+			</textField>
+			<crosstab ignoreWidth="false">
+				<reportElement x="0" y="20" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="1bf2db2c-e145-4dcc-9466-52d1447b28c3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<crosstabDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Observaciones" uuid="06285544-9969-4388-97c5-d8cbf5ae2998">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.o.*(idp<='+$V{kperiodotarget}+')')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="periodo" width="120" totalPosition="End" headerPosition="Stretch" mergeHeaderCells="true">
+					<bucket order="None" class="java.lang.Object">
+						<bucketExpression><![CDATA[$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="120" height="10" uuid="e02c4ed2-9271-4a17-b6a2-f58fd1e5e6ee"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$V{periodo}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="col" height="10">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[""]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement style="scoreCol" x="0" y="0" width="435" height="10" uuid="351ff4a9-578b-46e0-8e64-4ac7605ec050"/>
+								<text><![CDATA[Observaciones]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.String">
+					<measureExpression><![CDATA[($F{can}=="" ? $F{cap} : ($F{cap}=="-" ? "" : $F{cap}+"\n")+$F{can})]]></measureExpression>
+				</measure>
+				<crosstabCell width="435" height="10">
+					<cellContents>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="435" height="10" uuid="83373bc1-d2aa-4d2c-8eb9-e3a2915f8b0b"/>
+							<box padding="4"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="435" height="0" rowTotalGroup="periodo">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="periodo" columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement style="scoreColTitle" x="0" y="20" width="120" height="10" uuid="c72e5592-9aed-4bdd-bd9f-5ec3b2260ae8">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Periodos]]></text>
+			</staticText>
+		</band>
+		<band height="23">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement x="0" y="13" width="555" height="10" uuid="a6d6ec71-cae6-4c13-acf5-6c3905eb605e">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$F{student.periodolatest.id}==-1]]></printWhenExpression>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="CalTResume" uuid="a5e07844-87ef-46a3-b5c8-14b4cc2ebb39">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("calis.r")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="10" width="555">
+						<staticText>
+							<reportElement style="resumenHead" x="0" y="0" width="315" height="10" uuid="3c9ce9b7-eacc-424b-918e-3fadcc4e3ab7"/>
+							<text><![CDATA[PROMEDIO GENERAL]]></text>
+						</staticText>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
+							<reportElement x="315" y="0" width="240" height="10" uuid="fa913a4b-8323-4bd1-b847-3742a055cf1b"/>
+							<textFieldExpression><![CDATA[$F{pfinal}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement style="resumenCaption" x="0" y="5" width="555" height="8" uuid="e85a3186-7978-4cdb-a211-10d0ed578ef8">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[Por indicaciones de la SEP las materias marcadas con un * no se contemplan en el promedio general del alumno en la boleta oficial.]]></text>
+			</staticText>
+		</band>
+		<band height="133">
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="10" width="555" height="13" uuid="77da3aa7-4c13-4dfe-8beb-09e3da636e03"/>
+				<text><![CDATA[SIGNIFICADO DE LA ESCALA DE EVALUACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="98" width="60" height="25" uuid="30086d78-228f-4640-a70d-e29e6d8a6f74"/>
+				<box leftPadding="0"/>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="73" width="60" height="25" uuid="5a43d0aa-1444-4e5d-93ce-f1afa7291a02"/>
+				<box leftPadding="0"/>
+				<text><![CDATA[C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="48" width="60" height="25" uuid="a71e1b62-6091-4dac-8929-1e42e4814ffb"/>
+				<box leftPadding="0"/>
+				<text><![CDATA[B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="23" width="60" height="25" uuid="0be66f1e-370c-4e1c-8fe5-7b5fb1f19059"/>
+				<box leftPadding="0"/>
+				<text><![CDATA[A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="98" width="495" height="25" uuid="61f97e35-7eec-4b71-bc9e-e807d3a08687"/>
+				<text><![CDATA[- Indica dominio insuficiente de los aprendizajes clave.
+- El estudiante tiene carencias fundamentales en los conocimientos, habilidades, actitudes y valores requeridos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="73" width="495" height="25" uuid="720ecc5d-326d-4491-8507-f88bdd94cd5f"/>
+				<text><![CDATA[- Indica dominio básico de los aprendizajes clave.
+- El estudiante tiene dificultad para demostrar los conocimientos, habilidades, actitudes y valores requeridos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="23" width="495" height="25" uuid="904c75d2-3057-404b-a133-0ec3a74b4b0c"/>
+				<text><![CDATA[- Indica dominio sobresaliente de los aprendizajes clave.
+- El estudiante ha demostrado los conocimientos habilidades actitudes y valores requeridos con un alto grado de efectividad.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="48" width="495" height="25" uuid="b7030844-924d-4f87-b186-f83b8b52dfe9"/>
+				<text><![CDATA[- Indica dominio satisfactorio de los aprendizajes clave.
+- El estudiante ha demostrado los conocimientos, habilidades, actitudes y valores requeridos con efectividad.]]></text>
+			</staticText>
+		</band>
+		<band height="89">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement x="1" y="0" width="555" height="89" uuid="606d05ab-a663-4884-9e51-12eef65e11b0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Config" uuid="3e6d4cbd-e4bc-49be-a833-879fb9e47ed1">
+						<datasetParameter name="periodo">
+							<datasetParameterExpression><![CDATA[$F{student.periodolatest.descripcion}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("config")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="89" width="555">
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement x="92" y="0" width="96" height="50" uuid="92fedc0f-ad1f-49fa-a941-b5eff9b6546f">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64($P{dirsign}.getBytes()))]]></imageExpression>
+						</image>
+						<textField>
+							<reportElement x="0" y="50" width="280" height="13" uuid="ff0931e0-f55e-4602-a716-ba6f86d9229e"/>
+							<textFieldExpression><![CDATA[$F{directorname}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="0" y="61" width="280" height="13" uuid="a5b315a8-7f9f-409a-8318-c31ba69cd4f2"/>
+							<text><![CDATA[Nombre y firma del director]]></text>
+						</staticText>
+						<line>
+							<reportElement x="0" y="62" width="280" height="1" uuid="0c56212b-7e6e-4fd5-b994-14f11e8a3868"/>
+						</line>
+						<textField>
+							<reportElement x="305" y="50" width="250" height="13" uuid="ca9ec0f9-bd95-4c25-9c53-e809c0913e54"/>
+							<textFieldExpression><![CDATA[$F{profesor}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="0" y="79" width="90" height="10" uuid="d63401ee-46ac-4737-98c8-e6f8cbbc3ef4"/>
+							<textElement textAlignment="Left"/>
+							<text><![CDATA[Trimestre evaluado:]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="90" y="79" width="190" height="10" uuid="f18198ac-7021-4473-baa0-0274d64a4e09"/>
+							<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="280" y="79" width="275" height="10" uuid="dd3c8e09-869e-4a52-abab-9a0d78a0c16f"/>
+							<text><![CDATA[León, Guanajuato ,México]]></text>
+						</staticText>
+						<line>
+							<reportElement x="305" y="62" width="250" height="1" uuid="394184b6-290d-4235-9631-7a29d2d05340">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+						</line>
+						<staticText>
+							<reportElement x="305" y="61" width="250" height="13" uuid="a66d3d7b-4457-438b-ab44-9714f5421e46"/>
+							<text><![CDATA[Nombre y firma del profesor]]></text>
+						</staticText>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

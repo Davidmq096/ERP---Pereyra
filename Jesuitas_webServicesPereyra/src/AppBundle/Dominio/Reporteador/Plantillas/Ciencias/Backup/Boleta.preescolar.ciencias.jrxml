@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Boleta" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="d3781f9e-26a8-4b0a-b011-2b68b888ee30">
+	<property name="net.sf.jasperreports.json.source" value="Dynamic.json"/>
+	<property name="ireport.zoom" value="2.3579476910000117"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Boleta_preescolar"/>
+	<style name="general" isDefault="true" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="Arial" fontSize="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="headGeneral" style="general" isBold="true"/>
+	<style name="headTitle" style="headGeneral" fontSize="9"/>
+	<style name="headSubtitle" style="headGeneral" fontSize="8"/>
+	<style name="headStudent" style="headGeneral"/>
+	<style name="headStudentDetail" style="headGeneral" hTextAlign="Left" isBold="false"/>
+	<style name="scoreGeneral" style="general" fontSize="6">
+		<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+			<pen lineWidth="1.0" lineColor="#999999"/>
+			<topPen lineWidth="1.0" lineColor="#999999"/>
+			<leftPen lineWidth="1.0" lineColor="#999999"/>
+			<bottomPen lineWidth="1.0" lineColor="#999999"/>
+			<rightPen lineWidth="1.0" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="scoreCol" style="scoreGeneral" mode="Opaque" backcolor="#CCCCCC" isBold="true"/>
+	<style name="scoreRow" style="scoreGeneral" hTextAlign="Left" hImageAlign="Left" isBold="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="scoreRow2" style="scoreGeneral" mode="Opaque" backcolor="#E8E8E8" hTextAlign="Center" hImageAlign="Left" isBold="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="scoreVal" style="scoreGeneral"/>
+	<style name="scoreTHead" style="general" forecolor="#000000" hTextAlign="Center" hImageAlign="Center" vTextAlign="Bottom" vImageAlign="Bottom" fontSize="11" isBold="true"/>
+	<style name="escalaGeneral" style="general" hTextAlign="Left" fontSize="7"/>
+	<style name="escalaHead" style="escalaGeneral" hTextAlign="Center" hImageAlign="Center" fontSize="8" isBold="true"/>
+	<style name="notofficial" style="general" isBold="true"/>
+	<subDataset name="Header" uuid="ff216311-eaf1-4035-9a73-eba1c97fdca8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Boleta_preescolar.xml"/>
+		<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+		<queryString language="jsonql">
+			<![CDATA[student]]>
+		</queryString>
+		<field name="cyclename" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="cyclename"/>
+			<fieldDescription><![CDATA[cyclename]]></fieldDescription>
+		</field>
+		<field name="semestre" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="semestre"/>
+			<fieldDescription><![CDATA[semestre]]></fieldDescription>
+		</field>
+		<field name="grado" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="grado"/>
+			<fieldDescription><![CDATA[grado]]></fieldDescription>
+		</field>
+		<field name="grupo" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="grupo"/>
+			<fieldDescription><![CDATA[grupo]]></fieldDescription>
+		</field>
+		<field name="nivel" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="nivel"/>
+			<fieldDescription><![CDATA[nivel]]></fieldDescription>
+		</field>
+		<field name="areaespecializacion" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="areaespecializacion"/>
+			<fieldDescription><![CDATA[areaespecializacion]]></fieldDescription>
+		</field>
+		<field name="numerolista" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="numerolista"/>
+			<fieldDescription><![CDATA[numerolista]]></fieldDescription>
+		</field>
+		<field name="curp" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="curp"/>
+			<fieldDescription><![CDATA[curp]]></fieldDescription>
+		</field>
+		<field name="matricula" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="matricula"/>
+			<fieldDescription><![CDATA[matricula]]></fieldDescription>
+		</field>
+		<field name="primernombre" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="primernombre"/>
+			<fieldDescription><![CDATA[primernombre]]></fieldDescription>
+		</field>
+		<field name="segundonombre" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="segundonombre"/>
+			<fieldDescription><![CDATA[segundonombre]]></fieldDescription>
+		</field>
+		<field name="apaterno" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="apaterno"/>
+			<fieldDescription><![CDATA[apaterno]]></fieldDescription>
+		</field>
+		<field name="amaterno" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="amaterno"/>
+			<fieldDescription><![CDATA[amaterno]]></fieldDescription>
+		</field>
+		<field name="photo" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="photo"/>
+			<fieldDescription><![CDATA[photo]]></fieldDescription>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="nombre"/>
+			<fieldDescription><![CDATA[nombre]]></fieldDescription>
+		</field>
+		<field name="fechahoy" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="fechahoy"/>
+			<fieldDescription><![CDATA[fechahoy]]></fieldDescription>
+		</field>
+		<field name="ponderacion" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="ponderacion"/>
+			<fieldDescription><![CDATA[ponderacion]]></fieldDescription>
+		</field>
+		<field name="periodolast" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="periodolast"/>
+			<fieldDescription><![CDATA[periodolast]]></fieldDescription>
+		</field>
+		<field name="periodolatest" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="periodolatest"/>
+			<fieldDescription><![CDATA[periodolatest]]></fieldDescription>
+		</field>
+		<field name="profesor" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Config" uuid="7e85148a-e820-4e06-94e0-4376650c7c89">
+		<field name="directorname" class="java.lang.String"/>
+		<field name="profesorname" class="java.lang.String"/>
+		<field name="periodoeval" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="CalTData" uuid="7e578d31-a7ee-425e-8b23-3d53cf825595">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Boleta_preescolar.xml"/>
+		<queryString language="jsonql">
+			<![CDATA[calis.d]]>
+		</queryString>
+		<field name="ordy" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="ordy"/>
+			<fieldDescription><![CDATA[ordy]]></fieldDescription>
+		</field>
+		<field name="ord" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="ord"/>
+			<fieldDescription><![CDATA[ord]]></fieldDescription>
+		</field>
+		<field name="idp" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="idp"/>
+			<fieldDescription><![CDATA[idp]]></fieldDescription>
+		</field>
+		<field name="kind" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="kind"/>
+			<fieldDescription><![CDATA[kind]]></fieldDescription>
+		</field>
+		<field name="kindv" class="java.lang.Integer">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="kindv"/>
+			<fieldDescription><![CDATA[kindv]]></fieldDescription>
+		</field>
+		<field name="row" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="row"/>
+			<fieldDescription><![CDATA[row]]></fieldDescription>
+		</field>
+		<field name="rowf" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="rowf"/>
+			<fieldDescription><![CDATA[rowf]]></fieldDescription>
+		</field>
+		<field name="col" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="col"/>
+			<fieldDescription><![CDATA[col]]></fieldDescription>
+		</field>
+		<field name="colf" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="colf"/>
+			<fieldDescription><![CDATA[colf]]></fieldDescription>
+		</field>
+		<field name="pcol" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="pcol"/>
+			<fieldDescription><![CDATA[pcol]]></fieldDescription>
+		</field>
+		<field name="pcolf" class="java.lang.String">
+			<property name="net.sf.jasperreports.jsonql.field.expression" value="pcolf"/>
+			<fieldDescription><![CDATA[pcolf]]></fieldDescription>
+		</field>
+		<field name="pmat" class="java.lang.String"/>
+		<field name="pmatf" class="java.lang.String"/>
+		<field name="val" class="java.lang.String"/>
+		<field name="com" class="java.lang.String"/>
+		<sortField name="ordy"/>
+		<sortField name="ord"/>
+		<variable name="isNumber" class="java.lang.Boolean">
+			<variableExpression><![CDATA[$F{val}.matches("-?\\d+(\\.\\d+)?")]]></variableExpression>
+		</variable>
+		<variable name="val" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{val}=="" || !$V{isNumber} ? 0.0 : Double.valueOf($F{val}))]]></variableExpression>
+		</variable>
+		<variable name="val_reprobadas" class="java.lang.Number">
+			<variableExpression><![CDATA[($F{kind}!="C" || $F{val}=="" || !$V{isNumber} ? 0 : (Double.valueOf($F{val})<6 ? 1 : 0))]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="CalTResume" uuid="18f5d832-ddc3-4109-a428-696a41af9ff3">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="pfinal" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Observaciones" uuid="78657c97-9b76-49d1-ba90-4554b45c2f6e">
+		<queryString language="jsonql">
+			<![CDATA[]]>
+		</queryString>
+		<field name="name" class="java.lang.String"/>
+		<field name="obs" class="java.lang.String"/>
+		<variable name="show" class="java.lang.Boolean">
+			<variableExpression><![CDATA[$F{obs}.length()>1]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\JASPER\\LD\\Boletas\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="jsonql">
+		<![CDATA[]]>
+	</queryString>
+	<field name="student.ponderacion" class="java.lang.String"/>
+	<field name="student.periodolatest.id" class="java.lang.Integer"/>
+	<field name="student.periodolatest.descripcioncorta" class="java.lang.String"/>
+	<variable name="SpecialDescription" class="java.lang.String">
+		<variableExpression><![CDATA['DOCUMENTO NO OFICIAL']]></variableExpression>
+		<initialValueExpression><![CDATA['DOCUMENTO NO OFICIAL']]></initialValueExpression>
+	</variable>
+	<variable name="kperiodotarget" class="java.lang.Integer">
+		<variableExpression><![CDATA[($F{student.periodolatest.id}<1 ? 999999 : $F{student.periodolatest.id})]]></variableExpression>
+	</variable>
+	<background>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="80" uuid="6a9e90a3-a657-47a0-ae79-3accbca6397a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Header" uuid="b8dd83d9-7764-40cb-b291-d10dd333b178">
+						<datasetParameter name="logo">
+							<datasetParameterExpression><![CDATA[$P{logo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("student")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="80" width="555">
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement mode="Transparent" x="0" y="0" width="80" height="80" uuid="b934e94a-fe12-45cc-bfff-9b7c7a756f17"/>
+							<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+						</image>
+						<image scaleImage="RetainShape" hAlign="Center" vAlign="Bottom" onErrorType="Blank">
+							<reportElement x="475" y="0" width="80" height="80" uuid="da3f3eb1-4a94-4930-8567-f5122d7c542c"/>
+							<graphicElement>
+								<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+							</graphicElement>
+							<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64($F{photo}.getBytes()))]]></imageExpression>
+						</image>
+						<textField>
+							<reportElement style="headSubtitle" x="85" y="12" width="385" height="10" uuid="4f21f279-8ce4-4c92-a344-5ef256ba3acf">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{nivel}+" "+$F{cyclename}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headTitle" x="85" y="0" width="385" height="12" uuid="01390bff-932d-4ae2-9418-1f3edbf121e7">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<text><![CDATA[INSTITUTO DE CIENCIAS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headStudent" x="85" y="49" width="55" height="10" uuid="5c6698ea-d728-422a-bbd0-939611975e7b">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<text><![CDATA[ALUMNO:]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudentDetail" x="140" y="50" width="330" height="8" uuid="bb40559f-fd38-4312-a74d-ed6df10b3d72">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{apaterno}+' '+$F{amaterno}+' '+$F{nombre}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="headStudentDetail" x="140" y="61" width="330" height="8" uuid="c60fff97-9d76-4d70-bb8e-89e5cefa45b9">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{profesor}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="85" y="60" width="55" height="10" uuid="513b73cf-5010-42b1-aa7d-e0b4541d7139">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</reportElement>
+							<text><![CDATA[PROFESOR:]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudentDetail" x="140" y="39" width="330" height="8" uuid="280e75f4-0bb8-42a4-bdd8-4a3e29b0a498">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{numerolista}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement style="headStudent" x="85" y="38" width="55" height="10" uuid="c8b50b90-0909-48e2-8f77-eb259b972834">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+							</reportElement>
+							<text><![CDATA[# LISTA:]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="headStudent" x="85" y="27" width="55" height="10" uuid="42ccf3f3-115b-4e1d-a419-097a6a69040c">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+							</reportElement>
+							<text><![CDATA[GRUPO:]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="headStudentDetail" x="140" y="28" width="330" height="8" uuid="e4f5293d-7e5b-4dbd-8daf-3ef6804d9c26">
+								<property name="com.jaspersoft.studio.unit.x" value="px"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textFieldExpression><![CDATA[$F{grado}+' '+$F{grupo}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="56">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="0" width="555" height="13" uuid="fc5c173d-0089-4fb0-b9c3-1b9a079b72e1"/>
+				<text><![CDATA[INDICADORES DE LOGRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="46" width="60" height="10" uuid="950fc5a6-0958-4fc2-93bb-523a380ddd4e">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[*]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="35" width="60" height="10" uuid="14268eec-4ee2-4fad-bca0-63384a770a00">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="24" width="60" height="10" uuid="65288f1c-dde7-47f3-a171-8679187ba492"/>
+				<text><![CDATA[B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaHead" x="0" y="13" width="60" height="10" uuid="b698bf3a-177d-4bba-9d73-4f0580b4c7ea"/>
+				<text><![CDATA[A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="46" width="495" height="10" uuid="80b61847-3999-4258-b81b-64a054bc80ba">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[El aprendizaje descrito no se trabajó en este bloque.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="35" width="495" height="10" uuid="6f7f2699-9b1e-40b8-81cc-fd483f713e79"/>
+				<text><![CDATA[Requiere apoyo permanente para lograr un desempeño satisfactorio.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="13" width="495" height="10" uuid="de853866-710d-4cf1-9482-c0881008ee1b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Muestra un desempeño satisfactorio en el aprendizaje descrito.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="escalaGeneral" x="60" y="24" width="495" height="10" uuid="1f89f15b-e7cf-40ba-9418-a6401ff51def"/>
+				<text><![CDATA[Logra el aprendizaje esperado con ayuda del docente.]]></text>
+			</staticText>
+		</band>
+		<band height="35">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<crosstab ignoreWidth="false">
+				<reportElement mode="Opaque" x="0" y="5" width="555" height="30" backcolor="#FFFFFF" uuid="af64f58b-de4f-42e0-b739-5ab841998c8b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="CalTData" uuid="4e4ceb3a-65bf-4c54-bc91-0082932960a6">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.d.*(idp>-1 && ordy!=999999 && kind=="N")')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="pmat" width="100" totalPosition="End">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pmatf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow2" stretchType="ContainerHeight" x="0" y="0" width="100" height="10" uuid="ee90c35e-f591-4693-92d9-2bb4d68ce53e">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$V{pmat}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="row" width="305">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="ContainerHeight" mode="Transparent" x="0" y="0" width="305" height="10" uuid="a4153030-2cb5-4796-89d7-4710bd67f3c6"/>
+								<textFieldExpression><![CDATA[$V{row}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="pcol" height="20">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pcolf}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="50" height="20" uuid="75b18e3a-59d9-4d69-ae0d-0dd742ee4d7f"/>
+								<textFieldExpression><![CDATA[$V{pcol}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.String">
+					<measureExpression><![CDATA[$F{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="50" height="10">
+					<cellContents>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="50" height="10" uuid="daf5097f-b2ad-4383-b7b6-d3870f96a89a"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="row">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="pmat">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="row" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="pmat" columnTotalGroup="pcol">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement style="scoreCol" x="100" y="5" width="305" height="20" uuid="97d23542-ec1a-4a95-816d-de74d9d92a8c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Aspecto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="scoreCol" x="0" y="5" width="100" height="20" uuid="1870a12b-32ed-49bf-bdaf-a2644e0ab6e2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Campo de Formación Académica / Área de Desarrollo]]></text>
+			</staticText>
+		</band>
+		<band height="25">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<crosstab ignoreWidth="false">
+				<reportElement x="0" y="5" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="810e0cad-ba58-4349-9959-99dbda5f942b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="CalTData" uuid="cea08dd1-feca-4c26-9775-8ddbbb5da748">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.c.*(kind=="O" && idp<='+$V{kperiodotarget}+')')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="periodo" width="200" totalPosition="End" headerPosition="Stretch" mergeHeaderCells="true">
+					<bucket order="None" class="java.lang.Object">
+						<bucketExpression><![CDATA[$F{pcolf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="200" height="10" uuid="1138c8bb-272f-456c-86fd-4276e7395cac"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$V{periodo}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="col" height="10">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{colf}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isBlankWhenNull="true">
+								<reportElement style="scoreCol" x="0" y="0" width="355" height="10" uuid="be0f8b4a-014e-4659-b261-1ae082382ffb"/>
+								<textFieldExpression><![CDATA['Observaciones Generales']]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.String">
+					<measureExpression><![CDATA[$F{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="355" height="10">
+					<cellContents>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="355" height="10" uuid="d50eb331-2ee7-42a2-b063-6daa815f5ea6"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="355" height="0" rowTotalGroup="periodo">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="periodo" columnTotalGroup="col">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+		</band>
+		<band height="25">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<crosstab ignoreWidth="false">
+				<reportElement mode="Opaque" x="0" y="5" width="555" height="20" backcolor="#FFFFFF" uuid="11bf461c-0295-4c88-a2ed-37f66968bd93">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="CalTData" uuid="f5d66ad4-d448-4a50-aadb-dfbe7ec9f691">
+							<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource('calis.d.*(idp!=-1 && idp<='+$V{kperiodotarget}+' && ordy!=999999 && kind=="O" && val!="-")')]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="periodo" width="30" totalPosition="End">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pcolf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="30" height="10" uuid="dafa6717-1ab9-4f24-b363-bd0716e27f47">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$V{periodo}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="materiap" width="50" totalPosition="End">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{pmatf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="50" height="10" uuid="ce0fe29c-198c-4a2a-b467-f894201e2a75"/>
+								<textFieldExpression><![CDATA[$V{materiap}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="row" width="120">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{rowf}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreRow" stretchType="ContainerHeight" x="0" y="0" width="120" height="10" uuid="a11f942c-8515-436d-9ff4-b8cb1f0af37c"/>
+								<textFieldExpression><![CDATA[$V{row}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="criterio" height="10">
+					<bucket order="None" class="java.lang.String">
+						<bucketExpression><![CDATA[$F{colf}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="scoreCol" x="0" y="0" width="355" height="10" uuid="c29db1d9-c88e-400f-b72f-587c3f1c4a03"/>
+								<textFieldExpression><![CDATA['Observaciones Especiales']]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="val" class="java.lang.String">
+					<measureExpression><![CDATA[$F{val}]]></measureExpression>
+				</measure>
+				<crosstabCell width="355" height="10">
+					<cellContents>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement style="scoreVal" stretchType="ContainerHeight" x="0" y="0" width="355" height="10" uuid="5d6dbc51-8fea-4224-a492-2f774dca5042"/>
+							<textFieldExpression><![CDATA[$V{val}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell columnTotalGroup="criterio">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="row">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="355" height="0" rowTotalGroup="periodo">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="row" columnTotalGroup="criterio">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="periodo" columnTotalGroup="criterio">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="0" rowTotalGroup="materiap">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell height="20" rowTotalGroup="materiap" columnTotalGroup="criterio">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+		</band>
+		<band height="15">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement style="notofficial" x="0" y="5" width="555" height="10" uuid="ca7c7c44-6293-4482-a3c6-97a13d53fc4f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Si requiere la boleta oficial favor de solicitarla en la secretaría de preescolar.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
