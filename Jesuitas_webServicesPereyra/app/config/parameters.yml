@@ -1,0 +1,28 @@
+# This file is auto-generated during the composer install
+parameters:
+    #database_host: 18.216.81.32
+    database_host: 134.209.1.0
+    #database_host: 18.222.34.197
+    #database_host: 192.168.0.24
+    #database_host: 10.100.2.132
+    database_port: 8099
+    database_name: testCiencias
+    #database_name: ciencias
+    #Local
+    #database_user: root
+    #database_password: root
+    #Lux    
+    #database_user: sistemas
+    #database_password: 12345        
+    #Ciencias
+    database_user: Mpair_658R
+    database_password: 2UtQzfLmYL^XNX6n25z3wmPB*hTne5!Jg_PQ*+w5NZ
+    #database_password: inceptio114
+    mailer_transport: gmail
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_host: smtp.gmail.com        
+    mailer_user: erpjesuitas@gmail.com
+    mailer_password: 0114#1nc3pT10
+    mailer_sender_address: erpjesuitas@gmail.com
+    secret: 5071660db4ba7978cf01f41e3151efd392bb61a7
